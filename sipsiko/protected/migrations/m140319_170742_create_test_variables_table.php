@@ -7,7 +7,7 @@ class m140319_170742_create_test_variables_table extends CDbMigration {
         'id' => 'pk',
         'value' => 'integer NOT NULL',
         'user_test_id' => 'integer NOT NULL',
-        'variable_id' => 'interger NOT NULL',
+        'variable_id' => 'integer NOT NULL',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ));
