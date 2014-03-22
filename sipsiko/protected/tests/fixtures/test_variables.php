@@ -1,7 +1,6 @@
 <?php
 
-return array(
-    /*
+return array(/*
       'sample1'=>array(
       'value' => '',
       'user_test_id' => '',

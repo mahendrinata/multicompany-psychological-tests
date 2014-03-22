@@ -1,13 +1,15 @@
 <?php
 
-class UserRoleTest extends CDbTestCase {
+class UserRoleTest extends CDbTestCase
+{
 
-  public $fixtures = array(
-      'userRoles' => 'UserRole',
-  );
+    public $fixtures = array(
+        'userRoles' => 'UserRole',
+    );
 
-  public function testCreate() {
-    
-  }
+    public function testCreate()
+    {
+
+    }
 
 }

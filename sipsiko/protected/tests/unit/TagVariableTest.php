@@ -1,13 +1,15 @@
 <?php
 
-class TagVariableTest extends CDbTestCase {
+class TagVariableTest extends CDbTestCase
+{
 
-  public $fixtures = array(
-      'tagVariables' => 'TagVariable',
-  );
+    public $fixtures = array(
+        'tagVariables' => 'TagVariable',
+    );
 
-  public function testCreate() {
-    
-  }
+    public function testCreate()
+    {
+
+    }
 
 }
