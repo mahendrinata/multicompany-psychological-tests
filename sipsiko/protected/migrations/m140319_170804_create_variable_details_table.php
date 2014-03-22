@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170804_create_variable_details_table extends CDbMigration
-{
+class m140319_170804_create_variable_details_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('variable_details', array(
             'id' => 'pk',
             'description' => 'text',
@@ -20,8 +18,7 @@ class m140319_170804_create_variable_details_table extends CDbMigration
         $this->createIndex('variable_id_variable_details_index', 'variable_details', 'variable_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('variable_details');
     }
 

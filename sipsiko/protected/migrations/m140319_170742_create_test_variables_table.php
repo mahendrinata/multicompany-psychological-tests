@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170742_create_test_variables_table extends CDbMigration
-{
+class m140319_170742_create_test_variables_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('test_variables', array(
             'id' => 'pk',
             'value' => 'integer NOT NULL',
@@ -18,8 +16,7 @@ class m140319_170742_create_test_variables_table extends CDbMigration
         $this->createIndex('variable_id_test_variables_index', 'test_variables', 'variable_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('test_variables');
     }
 

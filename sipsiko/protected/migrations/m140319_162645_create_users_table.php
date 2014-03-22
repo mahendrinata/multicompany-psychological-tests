@@ -1,10 +1,8 @@
 <?php
 
-class m140319_162645_create_users_table extends CDbMigration
-{
+class m140319_162645_create_users_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('users', array(
             'id' => 'pk',
             'username' => 'string NOT NULL',
@@ -26,8 +24,7 @@ class m140319_162645_create_users_table extends CDbMigration
         $this->createIndex('parent_id_users_index', 'users', 'parent_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('users');
     }
 

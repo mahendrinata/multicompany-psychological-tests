@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170724_create_test_answers_table extends CDbMigration
-{
+class m140319_170724_create_test_answers_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('test_answers', array(
             'id' => 'pk',
             'user_test_id' => 'integer NOT NULL',
@@ -17,8 +15,7 @@ class m140319_170724_create_test_answers_table extends CDbMigration
         $this->createIndex('answer_id_test_answers_index', 'test_answers', 'answer_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('test_answers');
     }
 

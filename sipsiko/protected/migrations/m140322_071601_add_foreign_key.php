@@ -1,9 +1,8 @@
 <?php
 
-class m140322_071601_add_foreign_key extends CDbMigration
-{
-    public function up()
-    {
+class m140322_071601_add_foreign_key extends CDbMigration {
+
+    public function up() {
         $this->addForeignKey('fk_parent_id_users', 'users', 'parent_id', 'users', 'id', 'CASCADE', 'CASCADE');
 
         $this->addForeignKey('fk_user_id_user_profiles', 'user_profiles', 'user_id', 'users', 'id', 'CASCADE', 'CASCADE');
@@ -44,8 +43,7 @@ class m140322_071601_add_foreign_key extends CDbMigration
         $this->addForeignKey('fk_variable_id_variable_details', 'variable_details', 'variable_id', 'variables', 'id', 'CASCADE', 'CASCADE');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropForeignKey('fk_parent_id_users', 'users');
 
         $this->dropForeignKey('fk_user_id_user_profiles', 'user_profiles');
@@ -85,4 +83,5 @@ class m140322_071601_add_foreign_key extends CDbMigration
         $this->dropForeignKey('fk_user_profile_id_variable_details', 'variable_details');
         $this->dropForeignKey('fk_variable_id_variable_details', 'variable_details');
     }
+
 }

@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170754_create_variables_table extends CDbMigration
-{
+class m140319_170754_create_variables_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('variables', array(
             'id' => 'pk',
             'name' => 'string NOT NULL',
@@ -19,8 +17,7 @@ class m140319_170754_create_variables_table extends CDbMigration
         $this->createIndex('user_profiles_id_variables_index', 'variables', 'user_profile_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('variables');
     }
 

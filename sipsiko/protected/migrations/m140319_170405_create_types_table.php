@@ -1,9 +1,8 @@
 <?php
 
-class m140319_170405_create_types_table extends CDbMigration
-{
-    public function up()
-    {
+class m140319_170405_create_types_table extends CDbMigration {
+
+    public function up() {
         $this->createTable('types', array(
             'id' => 'pk',
             'slug' => 'string NOT NULL',
@@ -20,8 +19,8 @@ class m140319_170405_create_types_table extends CDbMigration
         $this->createIndex('user_profile_id_types_index', 'types', 'user_profile_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('types');
     }
+
 }

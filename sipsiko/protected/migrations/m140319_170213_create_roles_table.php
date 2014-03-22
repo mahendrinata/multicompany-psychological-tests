@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170213_create_roles_table extends CDbMigration
-{
+class m140319_170213_create_roles_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('roles', array(
             'id' => 'pk',
             'slug' => 'string NOT NULL',
@@ -19,8 +17,7 @@ class m140319_170213_create_roles_table extends CDbMigration
         $this->createIndex('status_roles_index', 'roles', 'status');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('roles');
     }
 

@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170325_create_tags_table extends CDbMigration
-{
+class m140319_170325_create_tags_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('tags', array(
             'id' => 'pk',
             'slug' => 'string NOT NULL',
@@ -22,8 +20,7 @@ class m140319_170325_create_tags_table extends CDbMigration
         $this->createIndex('user_profile_id_tags_index', 'tags', 'user_profile_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('tags');
     }
 

@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170357_create_tests_table extends CDbMigration
-{
+class m140319_170357_create_tests_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('tests', array(
             'id' => 'pk',
             'slug' => 'string NOT NULL',
@@ -29,8 +27,7 @@ class m140319_170357_create_tests_table extends CDbMigration
         $this->createIndex('parent_id_tests_index', 'tests', 'parent_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('tests');
     }
 

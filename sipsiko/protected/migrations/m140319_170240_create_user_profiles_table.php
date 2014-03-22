@@ -1,10 +1,8 @@
 <?php
 
-class m140319_170240_create_user_profiles_table extends CDbMigration
-{
+class m140319_170240_create_user_profiles_table extends CDbMigration {
 
-    public function up()
-    {
+    public function up() {
         $this->createTable('user_profiles', array(
             'id' => 'pk',
             'first_name' => 'string NOT NULL',
@@ -24,8 +22,7 @@ class m140319_170240_create_user_profiles_table extends CDbMigration
         $this->createIndex('role_id_user_profiles_index', 'user_profiles', 'role_id');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('user_profiles');
     }
 
