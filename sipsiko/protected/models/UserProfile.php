@@ -16,7 +16,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class UserProfile extends CActiveRecord {
+class UserProfile extends AppActiveRecord {
 
     /**
      * @return string the associated database table name

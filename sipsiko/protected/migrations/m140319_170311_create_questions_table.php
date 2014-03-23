@@ -6,7 +6,7 @@ class m140319_170311_create_questions_table extends CDbMigration {
         $this->createTable('questions', array(
             'id' => 'pk',
             'description' => 'text NOT NULL',
-            'status' => 'string NOT NULL',
+            'status' => 'string',
             'test_id' => 'integer NOT NULL',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

@@ -10,7 +10,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class TagVariable extends CActiveRecord {
+class TagVariable extends AppActiveRecord {
 
     /**
      * @return string the associated database table name

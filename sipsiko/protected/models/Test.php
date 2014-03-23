@@ -19,7 +19,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class Test extends CActiveRecord {
+class Test extends AppActiveRecord {
 
     /**
      * @return string the associated database table name

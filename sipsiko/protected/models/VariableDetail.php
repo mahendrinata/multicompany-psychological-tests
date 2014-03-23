@@ -11,7 +11,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class VariableDetail extends CActiveRecord {
+class VariableDetail extends AppActiveRecord {
 
     /**
      * @return string the associated database table name

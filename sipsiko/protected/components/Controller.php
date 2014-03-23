@@ -6,6 +6,9 @@
  */
 class Controller extends CController {
 
+    protected $postData;
+    protected $getData;
+
     /**
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
@@ -23,5 +26,25 @@ class Controller extends CController {
      * for more details on how to specify this property.
      */
     public $breadcrumbs = array();
+
+    public function init() {
+        parent::init();
+
+        $this->postData = $_POST;
+        $this->getData = $_GET;
+    }
+
+    public function filters() {
+        return array(
+            'accessControl',
+        );
+    }
+
+    protected function performAjaxValidation($model, $formId = null) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === $formId) {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
 
 }

@@ -13,7 +13,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class Tag extends CActiveRecord {
+class Tag extends AppActiveRecord {
 
     /**
      * @return string the associated database table name

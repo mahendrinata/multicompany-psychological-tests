@@ -16,7 +16,7 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class User extends CActiveRecord {
+class User extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
@@ -32,7 +32,8 @@ class User extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, email, status', 'required'),
+            array('username, email, password', 'required'),
+            array('username, email', 'unique'),
             array('parent_id', 'numerical', 'integerOnly' => true),
             array('username, email, password, status, last_login_ip, token', 'length', 'max' => 255),
             array('last_login, created_at, updated_at', 'safe'),
@@ -142,6 +143,21 @@ class User extends CActiveRecord {
      */
     public function hashPassword($password) {
         return CPasswordHelper::hashPassword($password);
+    }
+
+    public function beforeSave() {
+        switch ($this->scenario) {
+            case 'insert':
+                $this->status = Status::ACTIVE;
+                $this->password = $this->hashPassword($this->password);
+                break;
+            case 'update':
+                $this->password = $this->hashPassword($this->password);
+                break;
+            default:
+                break;
+        }
+        return parent::beforeSave();
     }
 
 }
