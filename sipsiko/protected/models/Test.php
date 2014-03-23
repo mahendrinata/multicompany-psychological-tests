@@ -52,12 +52,12 @@ class Test extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'questions' => array(self::HAS_MANY, 'Questions', 'test_id'),
+            'questions' => array(self::HAS_MANY, 'Question', 'test_id'),
             'parent' => array(self::BELONGS_TO, 'Test', 'parent_id'),
             'tests' => array(self::HAS_MANY, 'Test', 'parent_id'),
-            'type' => array(self::BELONGS_TO, 'Types', 'type_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
-            'user_tests' => array(self::HAS_MANY, 'UserTests', 'test_id'),
+            'type' => array(self::BELONGS_TO, 'Type', 'type_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
+            'user_tests' => array(self::HAS_MANY, 'UserTest', 'test_id'),
         );
     }
 

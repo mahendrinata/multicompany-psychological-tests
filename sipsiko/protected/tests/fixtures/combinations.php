@@ -3,14 +3,14 @@
 return array(
 	/*
 	'sample1'=>array(
-		'user_test_id' => '',
-		'answer_id' => '',
+		'variable_id' => '',
+		'variable_detail_id' => '',
 		'created_at' => '',
 		'updated_at' => '',
 	),
 	'sample2'=>array(
-		'user_test_id' => '',
-		'answer_id' => '',
+		'variable_id' => '',
+		'variable_detail_id' => '',
 		'created_at' => '',
 		'updated_at' => '',
 	),

@@ -44,7 +44,7 @@ class Role extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_profiles' => array(self::HAS_MANY, 'UserProfiles', 'role_id'),
+            'user_profiles' => array(self::HAS_MANY, 'UserProfile', 'role_id'),
         );
     }
 

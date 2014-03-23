@@ -42,8 +42,8 @@ class TagVariable extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tag' => array(self::BELONGS_TO, 'Tags', 'tag_id'),
-            'variable' => array(self::BELONGS_TO, 'Variables', 'variable_id'),
+            'tag' => array(self::BELONGS_TO, 'Tag', 'tag_id'),
+            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
         );
     }
 

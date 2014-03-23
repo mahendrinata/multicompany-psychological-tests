@@ -8,7 +8,6 @@
  * @property string $description
  * @property string $status
  * @property integer $user_profile_id
- * @property integer $variable_id
  * @property string $created_at
  * @property string $updated_at
  */
@@ -28,13 +27,13 @@ class VariableDetail extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('status, user_profile_id, variable_id', 'required'),
-            array('user_profile_id, variable_id', 'numerical', 'integerOnly' => true),
+            array('status, user_profile_id', 'required'),
+            array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, description, status, user_profile_id, variable_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -45,8 +44,8 @@ class VariableDetail extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
-            'variable' => array(self::BELONGS_TO, 'Variables', 'variable_id'),
+            'combinations' => array(self::HAS_MANY, 'Combination', 'variable_detail_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
 
@@ -59,7 +58,6 @@ class VariableDetail extends CActiveRecord {
             'description' => 'Description',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
-            'variable_id' => 'Variable',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -89,8 +87,6 @@ class VariableDetail extends CActiveRecord {
         $criteria->compare('status', $this->status, true);
 
         $criteria->compare('user_profile_id', $this->user_profile_id);
-
-        $criteria->compare('variable_id', $this->variable_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 

@@ -49,7 +49,7 @@ class User extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_profiles' => array(self::HAS_MANY, 'UserProfiles', 'user_id'),
+            'user_profiles' => array(self::HAS_MANY, 'UserProfile', 'user_id'),
             'parent' => array(self::BELONGS_TO, 'User', 'parent_id'),
             'users' => array(self::HAS_MANY, 'User', 'parent_id'),
         );
@@ -124,6 +124,24 @@ class User extends CActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * Checks if the given password is correct.
+     * @param string the password to be validated
+     * @return boolean whether the password is valid
+     */
+    public function validatePassword($password) {
+        return CPasswordHelper::verifyPassword($password, $this->password);
+    }
+
+    /**
+     * Generates the password hash.
+     * @param string password
+     * @return string hash
+     */
+    public function hashPassword($password) {
+        return CPasswordHelper::hashPassword($password);
     }
 
 }

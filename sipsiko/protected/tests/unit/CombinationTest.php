@@ -1,9 +1,9 @@
 <?php
 
-class VariableTest extends CDbTestCase
+class CombinationTest extends CDbTestCase
 {
 	public $fixtures=array(
-		'variables'=>'Variable',
+		'combinations'=>'Combination',
 	);
 
 	public function testCreate()

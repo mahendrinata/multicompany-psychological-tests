@@ -46,9 +46,9 @@ class UserTest extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'test_variables' => array(self::HAS_MANY, 'TestVariables', 'user_test_id'),
-            'test' => array(self::BELONGS_TO, 'Tests', 'test_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
+            'test_variables' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
+            'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
 

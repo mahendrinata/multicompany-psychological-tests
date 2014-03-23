@@ -8,7 +8,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'SIPSIKO - Sistem Pakar Tes Psikologi Online',
     // preloading 'log' component
-    'preload' => array('log'),
+//    'preload' => array('log'),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
@@ -72,10 +72,10 @@ return array(
             ),
         ),
         'session' => array(
-            'autoStart' => true,
-            'class' => 'CCacheHttpSession',
-            'cacheID' => 'sessionCache',
-        ),
+            'class' => 'system.web.CDbHttpSession',
+            'connectionID' => 'db',
+            'sessionTableName' => 'sessions',
+        ), 
         'sessionCache' => array(
             'class' => 'CDummyCache',
         ),

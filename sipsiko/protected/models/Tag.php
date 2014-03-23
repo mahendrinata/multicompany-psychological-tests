@@ -46,10 +46,10 @@ class Tag extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tag_variables' => array(self::HAS_MANY, 'TagVariables', 'tag_id'),
+            'tag_variables' => array(self::HAS_MANY, 'TagVariable', 'tag_id'),
             'parent' => array(self::BELONGS_TO, 'Tag', 'parent_id'),
             'tags' => array(self::HAS_MANY, 'Tag', 'parent_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
 

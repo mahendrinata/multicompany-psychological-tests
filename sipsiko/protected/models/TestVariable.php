@@ -43,8 +43,8 @@ class TestVariable extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_test' => array(self::BELONGS_TO, 'UserTests', 'user_test_id'),
-            'variable' => array(self::BELONGS_TO, 'Variables', 'variable_id'),
+            'user_test' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
+            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
         );
     }
 

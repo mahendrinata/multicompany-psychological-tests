@@ -46,8 +46,8 @@ class Answer extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'question' => array(self::BELONGS_TO, 'Questions', 'question_id'),
-            'variable' => array(self::BELONGS_TO, 'Variables', 'variable_id'),
+            'question' => array(self::BELONGS_TO, 'Question', 'question_id'),
+            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
         );
     }
 

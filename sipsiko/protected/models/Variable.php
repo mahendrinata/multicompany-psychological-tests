@@ -45,12 +45,12 @@ class Variable extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'answers' => array(self::HAS_MANY, 'Answers', 'variable_id'),
-            'tag_variables' => array(self::HAS_MANY, 'TagVariables', 'variable_id'),
-            'test_variables' => array(self::HAS_MANY, 'TestVariables', 'variable_id'),
-            'type_variables' => array(self::HAS_MANY, 'TypeVariables', 'variable_id'),
-            'variable_details' => array(self::HAS_MANY, 'VariableDetails', 'variable_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
+            'answers' => array(self::HAS_MANY, 'Answer', 'variable_id'),
+            'combinations' => array(self::HAS_MANY, 'Combination', 'variable_id'),
+            'tag_variables' => array(self::HAS_MANY, 'TagVariable', 'variable_id'),
+            'test_variables' => array(self::HAS_MANY, 'TestVariable', 'variable_id'),
+            'type_variables' => array(self::HAS_MANY, 'TypeVariable', 'variable_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
 

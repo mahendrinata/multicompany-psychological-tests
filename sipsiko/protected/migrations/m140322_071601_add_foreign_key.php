@@ -31,16 +31,18 @@ class m140322_071601_add_foreign_key extends CDbMigration {
         $this->addForeignKey('fk_user_profile_id_user_tests', 'user_tests', 'user_profile_id', 'user_profiles', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_test_id_user_tests', 'user_tests', 'test_id', 'tests', 'id', 'CASCADE', 'CASCADE');
 
-        $this->addForeignKey('fk_user_test_id_test_answers', 'test_answers', 'user_test_id', 'test_answers', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fk_answer_id_test_answers', 'test_answers', 'answer_id', 'test_answers', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_user_test_id_test_answers', 'test_answers', 'user_test_id', 'user_tests', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_answer_id_test_answers', 'test_answers', 'answer_id', 'answers', 'id', 'CASCADE', 'CASCADE');
 
         $this->addForeignKey('fk_user_test_id_test_variables', 'test_variables', 'user_test_id', 'user_tests', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_variable_id_test_variables', 'test_variables', 'variable_id', 'variables', 'id', 'CASCADE', 'CASCADE');
 
         $this->addForeignKey('fk_user_profile_id_variables', 'variables', 'user_profile_id', 'user_profiles', 'id', 'CASCADE', 'CASCADE');
 
+        $this->addForeignKey('fk_variable_id_combinations', 'combinations', 'variable_id', 'variables', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_variable_detail_id_combinations', 'combinations', 'variable_detail_id', 'variable_details', 'id', 'CASCADE', 'CASCADE');
+        
         $this->addForeignKey('fk_user_profile_id_variable_details', 'variable_details', 'user_profile_id', 'user_profiles', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fk_variable_id_variable_details', 'variable_details', 'variable_id', 'variables', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down() {

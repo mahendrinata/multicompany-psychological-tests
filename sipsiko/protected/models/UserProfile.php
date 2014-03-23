@@ -49,14 +49,14 @@ class UserProfile extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tags' => array(self::HAS_MANY, 'Tags', 'user_profile_id'),
-            'tests' => array(self::HAS_MANY, 'Tests', 'user_profile_id'),
-            'types' => array(self::HAS_MANY, 'Types', 'user_profile_id'),
-            'role' => array(self::BELONGS_TO, 'Roles', 'role_id'),
-            'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-            'user_tests' => array(self::HAS_MANY, 'UserTests', 'user_profile_id'),
-            'variable_details' => array(self::HAS_MANY, 'VariableDetails', 'user_profile_id'),
-            'variables' => array(self::HAS_MANY, 'Variables', 'user_profile_id'),
+            'tags' => array(self::HAS_MANY, 'Tag', 'user_profile_id'),
+            'tests' => array(self::HAS_MANY, 'Test', 'user_profile_id'),
+            'types' => array(self::HAS_MANY, 'Type', 'user_profile_id'),
+            'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'user_tests' => array(self::HAS_MANY, 'UserTest', 'user_profile_id'),
+            'variable_details' => array(self::HAS_MANY, 'VariableDetail', 'user_profile_id'),
+            'variables' => array(self::HAS_MANY, 'Variable', 'user_profile_id'),
         );
     }
 

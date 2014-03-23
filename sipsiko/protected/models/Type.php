@@ -46,9 +46,9 @@ class Type extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tests' => array(self::HAS_MANY, 'Tests', 'type_id'),
-            'type_variables' => array(self::HAS_MANY, 'TypeVariables', 'type_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfiles', 'user_profile_id'),
+            'tests' => array(self::HAS_MANY, 'Test', 'type_id'),
+            'type_variables' => array(self::HAS_MANY, 'TypeVariable', 'type_id'),
+            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
 

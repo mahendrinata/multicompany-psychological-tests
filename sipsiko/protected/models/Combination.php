@@ -1,22 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "type_variables".
+ * This is the model class for table "combinations".
  *
- * The followings are the available columns in table 'type_variables':
+ * The followings are the available columns in table 'combinations':
  * @property integer $id
- * @property integer $type_id
  * @property integer $variable_id
+ * @property integer $variable_detail_id
  * @property string $created_at
  * @property string $updated_at
  */
-class TypeVariable extends CActiveRecord {
+class Combination extends CActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'type_variables';
+        return 'combinations';
     }
 
     /**
@@ -26,12 +26,12 @@ class TypeVariable extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('type_id, variable_id', 'required'),
-            array('type_id, variable_id', 'numerical', 'integerOnly' => true),
+            array('variable_id, variable_detail_id', 'required'),
+            array('variable_id, variable_detail_id', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, type_id, variable_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, variable_id, variable_detail_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -42,7 +42,7 @@ class TypeVariable extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'type' => array(self::BELONGS_TO, 'Type', 'type_id'),
+            'variable_detail' => array(self::BELONGS_TO, 'VariableDetail', 'variable_detail_id'),
             'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
         );
     }
@@ -53,8 +53,8 @@ class TypeVariable extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
-            'type_id' => 'Type',
             'variable_id' => 'Variable',
+            'variable_detail_id' => 'Variable Detail',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -79,22 +79,22 @@ class TypeVariable extends CActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('type_id', $this->type_id);
-
         $criteria->compare('variable_id', $this->variable_id);
+
+        $criteria->compare('variable_detail_id', $this->variable_detail_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('TypeVariable', array(
+        return new CActiveDataProvider('Combination', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return TypeVariable the static model class
+     * @return Combination the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
