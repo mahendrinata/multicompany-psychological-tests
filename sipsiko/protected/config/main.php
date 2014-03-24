@@ -7,6 +7,8 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
+        'application.helpers.*',
+        'ext.ExtendedClientScript.jsmin.JSMin',
     ),
     'modules' => array(
         'gii' => array(
@@ -70,8 +72,21 @@ return array(
 //            'combineJs' => true,
 //            'compressJs' => true,
 //        ),
+        'image' => array(
+            'class' => 'application.extensions.image.CImageComponent',
+            // GD or ImageMagick
+            'driver' => 'GD',
+            // ImageMagick setup path
+            'params' => array('directory' => '/opt/local/bin'),
+        ),
     ),
     'params' => array(
         'adminEmail' => 'mahen.0112@gmail.com',
+    ),
+    'aliases' => array(
+        //If you used composer your path should be
+        'xupload' => 'ext.vendor.asgaroth.xupload',
+        //If you manually installed it
+        'xupload' => 'ext.xupload'
     ),
 );
