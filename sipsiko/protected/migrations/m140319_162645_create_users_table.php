@@ -11,6 +11,7 @@ class m140319_162645_create_users_table extends CDbMigration {
             'status' => 'string',
             'last_login' => 'datetime',
             'last_login_ip' => 'string',
+            'login_count' => 'integer NOT NULL',
             'token' => 'string',
             'parent_id' => 'integer',
             'created_at' => 'datetime',

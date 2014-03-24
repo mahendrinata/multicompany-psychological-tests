@@ -11,6 +11,7 @@
  * @property string $status
  * @property string $last_login
  * @property string $last_login_ip
+ * @property integer $login_count
  * @property string $token
  * @property integer $parent_id
  * @property string $created_at
@@ -51,6 +52,7 @@ class User extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'user_profiles' => array(self::HAS_MANY, 'UserProfile', 'user_id'),
+            'roles' => array(self::HAS_MANY, 'Role', array('role_id' => 'id'), 'through' => 'user_profiles'),
             'parent' => array(self::BELONGS_TO, 'User', 'parent_id'),
             'users' => array(self::HAS_MANY, 'User', 'parent_id'),
         );
@@ -152,12 +154,30 @@ class User extends AppActiveRecord {
                 $this->password = $this->hashPassword($this->password);
                 break;
             case 'update':
-                $this->password = $this->hashPassword($this->password);
+                if (strlen($this->password) < 60) {
+                    $this->password = $this->hashPassword($this->password);
+                }
                 break;
             default:
                 break;
         }
         return parent::beforeSave();
+    }
+
+    public function getActiveUserByUsername($username = NULL) {
+        return $this->with('roles')
+                ->findByAttributes(array(
+                    'username' => $username,
+                    'status' => Status::ACTIVE));
+    }
+
+    public function afterLogin($user) {
+        $user->last_login = Yii::app()->Date->now(false);
+        $httpRequest = new CHttpRequest;
+        $user->last_login_ip = $httpRequest->getUserHostAddress();
+        $user->login_count = $user->login_count + 1;
+
+        $user->save();
     }
 
 }

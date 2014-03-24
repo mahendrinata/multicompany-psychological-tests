@@ -3,7 +3,7 @@
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'role-form',
-        'enableAjaxValidation' => false,
+        'enableAjaxValidation' => true,
     ));
     ?>
 
@@ -33,18 +33,6 @@
         <?php echo $form->labelEx($model, 'status'); ?>
         <?php echo $form->textField($model, 'status', array('size' => 60, 'maxlength' => 255)); ?>
         <?php echo $form->error($model, 'status'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'created_at'); ?>
-        <?php echo $form->textField($model, 'created_at'); ?>
-        <?php echo $form->error($model, 'created_at'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'updated_at'); ?>
-        <?php echo $form->textField($model, 'updated_at'); ?>
-        <?php echo $form->error($model, 'updated_at'); ?>
     </div>
 
     <div class="row buttons">

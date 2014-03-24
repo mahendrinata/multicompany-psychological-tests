@@ -1,6 +1,6 @@
 <?php
 
-abstract class Role extends Basic_Enum {
+abstract class RolePrivilege {
 
     const ADMIN = 'ADMIN';
     const EXPERT = 'EXPERT';
@@ -10,16 +10,16 @@ abstract class Role extends Basic_Enum {
 
     public static function get_list() {
         return array(
-            Role::ADMIN,
-            Role::EXPERT,
-            Role::COMPANY,
-            Role::MEMBER,
-            Role::GUEST
+            RolePrivilege::ADMIN,
+            RolePrivilege::EXPERT,
+            RolePrivilege::COMPANY,
+            RolePrivilege::MEMBER,
+            RolePrivilege::GUEST
         );
     }
 
     public static function get_priority() {
-        $roles = Role::get_list();
+        $roles = RolePrivilege::get_list();
         foreach ($roles as $key => $value) {
             $priorities[$value] = $key;
         }
@@ -35,7 +35,7 @@ abstract class Role extends Basic_Enum {
     }
 
     public static function get_access($role = NULL) {
-        $priorities = Role::get_priority();
+        $priorities = RolePrivilege::get_priority();
         $accesses = array();
         foreach ($priorities as $key => $value) {
             if ($priorities[$role] >= $value) {

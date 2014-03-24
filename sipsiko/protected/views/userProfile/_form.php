@@ -3,7 +3,7 @@
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'user-profile-form',
-        'enableAjaxValidation' => false,
+        'enableAjaxValidation' => true,
     ));
     ?>
 
@@ -58,19 +58,7 @@
         <?php echo $form->textField($model, 'role_id'); ?>
         <?php echo $form->error($model, 'role_id'); ?>
     </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'created_at'); ?>
-        <?php echo $form->textField($model, 'created_at'); ?>
-        <?php echo $form->error($model, 'created_at'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'updated_at'); ?>
-        <?php echo $form->textField($model, 'updated_at'); ?>
-        <?php echo $form->error($model, 'updated_at'); ?>
-    </div>
-
+    
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
     </div>

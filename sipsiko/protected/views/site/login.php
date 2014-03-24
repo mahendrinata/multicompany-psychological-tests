@@ -1,55 +1,52 @@
-<?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm */
-
-$this->pageTitle = Yii::app()->name . ' - Login';
-$this->breadcrumbs = array(
-    'Login',
-);
-?>
-
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
-
-<div class="form">
-    <?php
-    $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'login-form',
-        'enableClientValidation' => true,
-        'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
-    ));
-    ?>
-
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'username'); ?>
-        <?php echo $form->textField($model, 'username'); ?>
-        <?php echo $form->error($model, 'username'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'password'); ?>
-        <?php echo $form->passwordField($model, 'password'); ?>
-        <?php echo $form->error($model, 'password'); ?>
-        <p class="hint">
-            Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-        </p>
-    </div>
-
-    <div class="row rememberMe">
-        <?php echo $form->checkBox($model, 'rememberMe'); ?>
-        <?php echo $form->label($model, 'rememberMe'); ?>
-        <?php echo $form->error($model, 'rememberMe'); ?>
-    </div>
-
-    <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
-    </div>
-
-    <?php $this->endWidget(); ?>
-</div><!-- form -->
+<div id="content" class="container clearfix">
+    <nav id="page-title" >
+        <h1>Login</h1>
+    </nav>
+</div>
+</div>
+<div id="contact-map" style="height: 500px;">
+    <div id="contact-info" style="top: 250px;">
+        <div class="one-fourth">
+            <div id="contact-details">
+                <h4>Syarat dan ketentuan</h4>
+                <p>Masukkan username dan password yang sesuai.</p>
+                <p>
+                    <?php echo CHtml::link('<h4>Lupa Password</h4>', 'reset-password', array('style' => 'color:#428BCA')) ?>
+                </p>
+            </div>
+        </div>
+        <div class="three-fourth last">
+            <div id="contact-form">
+                <div id="message"></div>
+                <?php
+                $form = $this->beginWidget('CActiveForm', array(
+                    'id' => 'login-form',
+                    'enableClientValidation' => true,
+                    'clientOptions' => array(
+                        'validateOnSubmit' => true,
+                    ),
+                ));
+                echo $form->labelEx($model, 'username');
+                echo $form->textField($model, 'username', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Username'));
+                echo $form->error($model, 'username');
+                ?>
+                <div class="clearfix"></div>
+                <br/>
+                <?php
+                echo $form->labelEx($model, 'password');
+                echo $form->passwordField($model, 'password', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Password'));
+                echo $form->error($model, 'password');
+                ?>
+                <div class="clearfix"></div>
+                <br/>
+                <?php
+                echo $form->checkBox($model, 'rememberMe');
+                echo $form->label($model, 'rememberMe');
+                echo $form->error($model, 'rememberMe');
+                echo CHtml::submitButton('Login');
+                $this->endWidget();
+                ?>
+            </div>
+        </div>
+    </div>		
+</div>

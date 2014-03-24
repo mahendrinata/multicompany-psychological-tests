@@ -8,6 +8,7 @@ class Controller extends CController {
 
     protected $postData;
     protected $getData;
+    protected $data;
 
     /**
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',
