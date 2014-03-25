@@ -18,3 +18,4 @@
       <li class="gallery"><a href="gallery.html"><span></span> Gallery </a></li>
     </ul>
   </div>
+</div>

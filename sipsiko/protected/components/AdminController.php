@@ -2,7 +2,7 @@
 
 class AdminController extends Controller {
 
-    public $layout = '//layouts/column2';
+    public $layout = '//layouts/default';
     protected $_model;
 
     public function init() {
