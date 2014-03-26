@@ -21,31 +21,34 @@
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'login-form',
-                    'enableClientValidation' => true,
-                    'clientOptions' => array(
-                        'validateOnSubmit' => true,
-                    ),
+                    'enableAjaxValidation' => true,
+//                    'clientOptions' => array(
+//                        'validateOnSubmit' => true,
+//                    ),
                 ));
-                echo $form->labelEx($model, 'username');
                 echo $form->textField($model, 'username', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Username'));
-                echo $form->error($model, 'username');
+                echo $form->error($model, 'username', array('class' => 'label label-danger'));
                 ?>
                 <div class="clearfix"></div>
                 <br/>
                 <?php
-                echo $form->labelEx($model, 'password');
                 echo $form->passwordField($model, 'password', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Password'));
-                echo $form->error($model, 'password');
+                echo $form->error($model, 'password', array('class' => 'label label-danger'));
                 ?>
                 <div class="clearfix"></div>
                 <br/>
                 <?php
-                echo $form->checkBox($model, 'rememberMe');
+                echo $form->checkBox($model, 'rememberMe', array('style' => 'width:auto'));
                 echo $form->label($model, 'rememberMe');
                 echo $form->error($model, 'rememberMe');
-                echo CHtml::submitButton('Login');
+                ?>
+                <div class="clearfix"></div>
+                <br/>
+                <?php
+                echo CHtml::submitButton('Login', array('class' => 'btn-image'));
                 $this->endWidget();
                 ?>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>		

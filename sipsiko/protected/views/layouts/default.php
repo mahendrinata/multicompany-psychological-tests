@@ -25,9 +25,17 @@ foreach ($css as $style) {
     $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
 }
 
-$js = array(
+
+$core = array(
     'jquery-1.10.1.min',
     'jquery-ui',
+);
+
+foreach ($core as $coreScript) {
+    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js');
+}
+
+$js = array(
     'modernizr.custom',
     'bootstrap.min',
     'jquery.mousewheel',

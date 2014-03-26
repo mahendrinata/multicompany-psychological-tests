@@ -4,15 +4,24 @@ $cs = Yii::app()->getClientScript();
 $css = array(
     'style',
     'fullwidth',
-    'revolution-settings'
+    'revolution-settings',
+    'customize',
 );
 
 foreach ($css as $style) {
     $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
 }
 
+
+$core = array(
+    'jquery.min'
+);
+
+foreach ($core as $coreScript) {
+    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js');
+}
+
 $js = array(
-    'jquery.min',
     'styleswitch',
     'selectnav.min',
     'rs-plugin/jquery.themepunch.plugins.min',
