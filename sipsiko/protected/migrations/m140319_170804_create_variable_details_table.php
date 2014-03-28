@@ -7,7 +7,7 @@ class m140319_170804_create_variable_details_table extends CDbMigration {
             'id' => 'pk',
             'description' => 'text',
             'status' => 'string',
-            'user_profile_id' => 'integer NOT NULL',
+            'user_profile_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

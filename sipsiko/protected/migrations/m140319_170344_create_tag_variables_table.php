@@ -6,7 +6,7 @@ class m140319_170344_create_tag_variables_table extends CDbMigration {
         $this->createTable('tag_variables', array(
             'id' => 'pk',
             'tag_id' => 'integer NOT NULL',
-            'variable_detail_id' => 'integer NOT NULL',
+            'variable_detail_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

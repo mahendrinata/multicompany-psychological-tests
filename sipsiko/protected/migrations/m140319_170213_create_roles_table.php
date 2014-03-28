@@ -8,7 +8,7 @@ class m140319_170213_create_roles_table extends CDbMigration {
             'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
             'description' => 'text',
-            'status' => 'string',
+            'status' => 'string NOT NULL',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

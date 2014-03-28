@@ -7,7 +7,7 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
             'id' => 'pk',
             'spent_time' => 'string NOT NULL',
             'note' => 'text',
-            'status' => 'string',
+            'status' => 'string NOT NULL',
             'user_profile_id' => 'integer NOT NULL',
             'test_id' => 'integer NOT NULL',
             'created_at' => 'datetime',

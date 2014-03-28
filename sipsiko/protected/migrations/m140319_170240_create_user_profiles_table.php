@@ -10,7 +10,7 @@ class m140319_170240_create_user_profiles_table extends CDbMigration {
             'address' => 'text',
             'phone' => 'string',
             'photo' => 'text',
-            'status' => 'string',
+            'status' => 'string NOT NULL',
             'user_id' => 'integer NOT NULL',
             'role_id' => 'integer NOT NULL',
             'created_at' => 'datetime',
