@@ -71,7 +71,7 @@ foreach ($js as $script) {
         <meta content="width=device-width, initial-scale=1.0" charset="utf-8" name="viewport"/>
     </head>
     <body>
-        <?php $this->renderPartial('../element/navigation/navigation'); ?>
+        <?php $this->renderPartial('../../element/navigation/navigation'); ?>
         <div class="container-fluid" id="wrapper-header">
             <?php echo $content; ?>
         </div>

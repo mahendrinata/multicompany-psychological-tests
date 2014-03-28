@@ -22,10 +22,9 @@
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'login-form',
                     'enableAjaxValidation' => true,
-//                    'clientOptions' => array(
-//                        'validateOnSubmit' => true,
-//                    ),
                 ));
+                ?>
+                <?php
                 echo $form->textField($model, 'username', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Username'));
                 echo $form->error($model, 'username', array('class' => 'label label-danger'));
                 ?>
