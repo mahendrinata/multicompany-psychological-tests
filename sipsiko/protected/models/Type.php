@@ -29,7 +29,7 @@ class Type extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, status, user_profile_id', 'required'),
+            array('slug, name, status', 'required'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),

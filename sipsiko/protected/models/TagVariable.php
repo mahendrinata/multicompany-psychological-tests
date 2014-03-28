@@ -43,7 +43,7 @@ class TagVariable extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'tag' => array(self::BELONGS_TO, 'Tag', 'tag_id'),
-            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
+            'variable_detail' => array(self::BELONGS_TO, 'VariableDetail', 'variable_detail_id'),
         );
     }
 

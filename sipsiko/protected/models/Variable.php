@@ -47,7 +47,6 @@ class Variable extends AppActiveRecord {
         return array(
             'answers' => array(self::HAS_MANY, 'Answer', 'variable_id'),
             'combinations' => array(self::HAS_MANY, 'Combination', 'variable_id'),
-            'tag_variables' => array(self::HAS_MANY, 'TagVariable', 'variable_id'),
             'test_variables' => array(self::HAS_MANY, 'TestVariable', 'variable_id'),
             'type_variables' => array(self::HAS_MANY, 'TypeVariable', 'variable_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
