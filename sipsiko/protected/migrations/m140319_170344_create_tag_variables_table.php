@@ -12,7 +12,7 @@ class m140319_170344_create_tag_variables_table extends CDbMigration {
         ));
 
         $this->createIndex('tag_id_tag_variables_index', 'tag_variables', 'tag_id');
-        $this->createIndex('variable_variable_id_tag_variables_index', 'tag_variables', 'variable_id');
+        $this->createIndex('variable_detail_id_tag_variables_index', 'tag_variables', 'variable_detail_id');
     }
 
     public function down() {

@@ -3,7 +3,6 @@
 class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
 
     public function up() {
-        $this->truncateTable('user_profiles');
         $row = array(
             array(
                 'first_name' => 'Administrator',
@@ -12,8 +11,8 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'phone' => '',
                 'photo' => '',
                 'status' => Status::ACTIVE,
-                'user_id' => 0,
-                'role_id' => 0,
+                'user_id' => 1,
+                'role_id' => 1,
             ),
             array(
                 'first_name' => 'PT. Psikolog Nasional',
@@ -22,8 +21,8 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'phone' => '085721821555',
                 'photo' => '',
                 'status' => Status::ACTIVE,
-                'user_id' => 1,
-                'role_id' => 1,
+                'user_id' => 2,
+                'role_id' => 2,
             ),
             array(
                 'first_name' => 'CV. Madain',
@@ -32,8 +31,8 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'phone' => '085721821555',
                 'photo' => '',
                 'status' => Status::ACTIVE,
-                'user_id' => 1,
-                'role_id' => 2,
+                'user_id' => 2,
+                'role_id' => 3,
             ),
             array(
                 'first_name' => 'Mahendri',
@@ -42,21 +41,11 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'phone' => '085721821555',
                 'photo' => '',
                 'status' => Status::ACTIVE,
-                'user_id' => 1,
-                'role_id' => 3,
+                'user_id' => 2,
+                'role_id' => 4,
             ),
             array(
                 'first_name' => 'Expert',
-                'last_name' => '',
-                'address' => '',
-                'phone' => '',
-                'photo' => '',
-                'status' => Status::ACTIVE,
-                'user_id' => 2,
-                'role_id' => 1,
-            ),
-            array(
-                'first_name' => 'Company',
                 'last_name' => '',
                 'address' => '',
                 'phone' => '',
@@ -66,7 +55,7 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'role_id' => 2,
             ),
             array(
-                'first_name' => 'Member',
+                'first_name' => 'Company',
                 'last_name' => '',
                 'address' => '',
                 'phone' => '',
@@ -75,6 +64,16 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'user_id' => 4,
                 'role_id' => 3,
             ),
+            array(
+                'first_name' => 'Member',
+                'last_name' => '',
+                'address' => '',
+                'phone' => '',
+                'photo' => '',
+                'status' => Status::ACTIVE,
+                'user_id' => 5,
+                'role_id' => 4,
+            ),
         );
         foreach ($row as $column) {
             $this->insert('user_profiles', $column);
@@ -82,7 +81,6 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
     }
 
     public function down() {
-        $this->truncateTable('user_profiles');
     }
 
 }
