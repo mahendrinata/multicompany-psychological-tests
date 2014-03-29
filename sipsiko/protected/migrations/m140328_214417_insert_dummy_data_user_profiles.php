@@ -64,23 +64,32 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
                 'user_id' => 4,
                 'role_id' => 3,
             ),
-            array(
-                'first_name' => 'Member',
+        );
+        $user = array('member', 'risky', 'hendra', 'winata', 'ade', 'naufal', 'dio', 'rio', 'rudi', 'atang', 'dian', 'adrian', 'adi', 'alfian', 'nicky', 'ricky', 'reza', 'aldi', 'eka', 'hermawan', 'nana', 'doris', 'bagus', 'agus', 'ifan', 'adam', 'adit', 'agung', 'akbar');
+        $i = 0;
+        foreach ($user as $username) {
+            $row[] = array(
+                'first_name' => ucwords($username),
                 'last_name' => '',
                 'address' => '',
                 'phone' => '',
                 'photo' => '',
                 'status' => Status::ACTIVE,
-                'user_id' => 5,
+                'user_id' => 5 + $i,
                 'role_id' => 4,
-            ),
-        );
+            );
+            $i++;
+        }
         foreach ($row as $column) {
+            $column['created_at'] = date('Y-m-d H:i:s');
+            $column['updated_at'] = date('Y-m-d H:i:s');
+            
             $this->insert('user_profiles', $column);
         }
     }
 
     public function down() {
+        
     }
 
 }

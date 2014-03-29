@@ -8,6 +8,7 @@
  * @property string $name
  * @property string $description
  * @property string $status
+ * @property integer $type_id
  * @property integer $user_profile_id
  * @property string $created_at
  * @property string $updated_at
@@ -28,8 +29,8 @@ class Variable extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, status, user_profile_id', 'required'),
-            array('user_profile_id', 'numerical', 'integerOnly' => true),
+            array('name, status, type_id', 'required'),
+            array('type_id, user_profile_id', 'numerical', 'integerOnly' => true),
             array('name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
@@ -48,7 +49,7 @@ class Variable extends AppActiveRecord {
             'answers' => array(self::HAS_MANY, 'Answer', 'variable_id'),
             'combinations' => array(self::HAS_MANY, 'Combination', 'variable_id'),
             'test_variables' => array(self::HAS_MANY, 'TestVariable', 'variable_id'),
-            'type_variables' => array(self::HAS_MANY, 'TypeVariable', 'variable_id'),
+            'type' => array(self::BELONGS_TO, 'Type', 'type_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }

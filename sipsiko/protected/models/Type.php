@@ -30,6 +30,7 @@ class Type extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, status', 'required'),
+            array('slug', 'unique'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
@@ -47,7 +48,7 @@ class Type extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'tests' => array(self::HAS_MANY, 'Test', 'type_id'),
-            'type_variables' => array(self::HAS_MANY, 'TypeVariable', 'type_id'),
+            'variables' => array(self::HAS_MANY, 'Variable', 'type_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }

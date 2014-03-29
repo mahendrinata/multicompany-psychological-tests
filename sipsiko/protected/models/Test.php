@@ -36,6 +36,7 @@ class Test extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, duration, status, user_profile_id, type_id', 'required'),
+            array('slug', 'unique'),
             array('duration, is_public, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, start_date, end_date, created_at, updated_at', 'safe'),

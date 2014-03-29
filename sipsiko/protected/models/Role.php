@@ -29,6 +29,7 @@ class Role extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, status', 'required'),
+            array('slug', 'unique'),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().

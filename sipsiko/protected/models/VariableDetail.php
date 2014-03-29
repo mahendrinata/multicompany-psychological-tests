@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'variable_details':
  * @property integer $id
+ * @property string $slug
  * @property string $description
  * @property string $status
  * @property integer $user_profile_id
@@ -27,7 +28,8 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('status, user_profile_id', 'required'),
+            array('slug, status, user_profile_id', 'required'),
+            array('slug', 'unique'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
