@@ -12,7 +12,8 @@ class UserController extends GuestController {
             if ($model->validate() && $model->login())
                 $this->redirect(Yii::app()->user->returnUrl);
         }
-        $this->render('login', array('model' => $model));
+        $this->data['model'] = $model;
+        $this->render('login', $this->data);
     }
 
     public function actionLogout() {
@@ -21,6 +22,19 @@ class UserController extends GuestController {
     }
     
     public function actionRegister(){
+        $model = new User;
+
+        $this->performAjaxValidation($model, 'user-form', array('User' => array('status' => Status::ACTIVE)));
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            $model->status = Status::ACTIVE;
+            if ($model->save())
+                $this->redirect(array('user/login'));
+        }
+
+        $this->data['model'] = $model;
+        $this->render('register', $this->data);
         
     }
 

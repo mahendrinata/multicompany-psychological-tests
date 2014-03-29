@@ -33,6 +33,7 @@ class Controller extends CController {
 
         $this->postData = $_POST;
         $this->getData = $_GET;
+        $this->data['baseUrl'] = Yii::app()->request->baseUrl;
     }
 
     public function filters() {
@@ -41,8 +42,15 @@ class Controller extends CController {
         );
     }
 
-    protected function performAjaxValidation($model, $formId = null) {
+    protected function performAjaxValidation($model, $formId = null, $setValue = null) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === $formId) {
+            if (!empty($setValue)) {
+                foreach ($setValue as $mod => $val) {
+                    foreach ($val as $k => $v) {
+                        $_POST[$mod][$k] = $v;
+                    }
+                }
+            }
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

@@ -2203,7 +2203,7 @@ input:focus.btn-image {
 
 .error_message { 
     display: block; 
-    height: 22px; 
+    /*height: 22px;*/ 
     line-height: 22px; 
     background: #FBE3E4; 
     padding: 3px 10px 3px 8px; 

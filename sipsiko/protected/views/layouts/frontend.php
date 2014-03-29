@@ -41,7 +41,7 @@ foreach ($js as $script) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php echo CHtml::encode(Yii::app()->name); ?></title>
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <?php // echo link_tag('assets/favicon.gif', 'shortcut icon', 'image/ico');  ?>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -56,12 +56,11 @@ foreach ($js as $script) {
     <body>
         <div id="header-bg"></div>
         <?php $this->renderPartial('../element/navigation/frontend_nav'); ?>
-        <div class="container-fluid" id="wrapper-header">
-            <?php echo $content; ?>
-        </div>
-        <?php
-        $this->renderPartial('../element/general/frontend_footer');
-        $this->renderPartial('../element/general/frontend_back_top');
-        ?>
-    </body>
+        <?php echo $content; ?>
+    </div>
+    <?php
+    $this->renderPartial('../element/general/frontend_footer');
+    $this->renderPartial('../element/general/frontend_back_top');
+    ?>
+</body>
 </html>

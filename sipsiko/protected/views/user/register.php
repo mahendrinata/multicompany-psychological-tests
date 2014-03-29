@@ -5,32 +5,35 @@
         </nav>
     </div>
 </div>
-<div id="contact-map" style="height: 500px;">
+<div id="contact-map" style="height: 600px;">
     <div id="contact-info" style="top: 250px;">
         <div class="one-fourth">
             <div id="contact-details">
                 <h4>Syarat dan ketentuan</h4>
-                <p>Masukkan username dan password yang sesuai.</p>
-                <p>
-                    <?php echo CHtml::link('<h4>Register</h4>', Yii::app()->request->baseUrl . '/user/register', array('style' => 'color:#428BCA')) ?>
-                </p>
-                <p>
-                    <?php echo CHtml::link('<h4>Lupa Password</h4>', Yii::app()->request->baseUrl . '/user/resetPassword', array('style' => 'color:#428BCA')) ?>
-                </p>
+                <p>Pengguna hanya dapat mendaftar sebagai Perusahaan atau Anggota.</p>
             </div>
         </div>
         <div class="three-fourth last">
             <div id="contact-form">
-                <div id="message"></div>
+                <h4>Daftarkan Dirimu Sekarang</h4>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'login-form',
+                    'id' => 'user-form',
                     'enableAjaxValidation' => true,
                 ));
                 ?>
+                <div id="message">
+                    <?php // echo $form->errorSummary($model, '', '', array('class' => 'error_message')); ?>
+                </div> 
                 <?php
                 echo $form->textField($model, 'username', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Username'));
                 echo $form->error($model, 'username', array('class' => 'error_message error_message_label'));
+                ?>
+                <div class="clearfix"></div>
+                <br/>
+                <?php
+                echo $form->textField($model, 'email', array('style' => 'width: 85%;max-width: 400px;', 'placeholder' => 'Email'));
+                echo $form->error($model, 'email', array('class' => 'error_message error_message_label'));
                 ?>
                 <div class="clearfix"></div>
                 <br/>
@@ -41,14 +44,7 @@
                 <div class="clearfix"></div>
                 <br/>
                 <?php
-                echo $form->checkBox($model, 'rememberMe', array('style' => 'width:auto'));
-                echo $form->label($model, 'rememberMe');
-                echo $form->error($model, 'rememberMe', array('class' => 'error_message error_message_label'));
-                ?>
-                <div class="clearfix"></div>
-                <br/>
-                <?php
-                echo CHtml::submitButton('Login', array('class' => 'btn-image'));
+                echo CHtml::submitButton('Register', array('class' => 'btn-image'));
                 $this->endWidget();
                 ?>
                 <div class="clearfix"></div>

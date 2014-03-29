@@ -48,3 +48,9 @@ body{
 .label-danger{
     background-color: #D9534F;
 }
+
+.error_message_label{
+    display: inline-block;
+    width: 100%;
+    max-width: 220px;
+}

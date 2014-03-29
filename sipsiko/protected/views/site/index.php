@@ -1,3 +1,4 @@
+<div class="container-fluid" id="wrapper-header">
 <div id="slider">
     <div class="fullwidthbanner-container">
         <div class="fullwidthbanner">
@@ -75,4 +76,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

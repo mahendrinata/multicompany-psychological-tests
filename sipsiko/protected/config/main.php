@@ -2,7 +2,7 @@
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'SIPSIKO - Sistem Pakar Tes Psikologi Online',
+    'name' => 'SIPSIKO',
     'preload' => array('log'),
     'import' => array(
         'application.models.*',
