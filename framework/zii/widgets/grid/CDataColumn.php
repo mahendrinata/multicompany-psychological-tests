@@ -71,8 +71,11 @@ class CDataColumn extends CGridColumn
 	 * @since 1.1.1
 	 */
 	public $filter;
+    
+    public $dropDownHtmlOption = array('id'=>false,'prompt'=>'');
 
-	/**
+    public $textFieldHtmlOption = array('id'=>false);
+    /**
 	 * Initializes the column.
 	 */
 	public function init()
@@ -98,9 +101,9 @@ class CDataColumn extends CGridColumn
 		elseif($this->filter!==false && $this->grid->filter!==null && $this->name!==null && strpos($this->name,'.')===false)
 		{
 			if(is_array($this->filter))
-				echo CHtml::activeDropDownList($this->grid->filter, $this->name, $this->filter, array('id'=>false,'prompt'=>''));
+				echo CHtml::activeDropDownList($this->grid->filter, $this->name, $this->filter, $this->dropDownHtmlOption);
 			elseif($this->filter===null)
-				echo CHtml::activeTextField($this->grid->filter, $this->name, array('id'=>false));
+				echo CHtml::activeTextField($this->grid->filter, $this->name, $this->textFieldHtmlOption);
 		}
 		else
 			parent::renderFilterCellContent();

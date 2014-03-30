@@ -2,8 +2,8 @@
 
 class AnswerController extends AdminController {
 
-    public $layout = '//layouts/column2';
-    private $_model;
+//    public $layout = '//layouts/column2';
+//    private $_model;
 
     public function filters() {
         return array(
@@ -111,11 +111,11 @@ class AnswerController extends AdminController {
         return $this->_model;
     }
 
-    protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'answer-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
+//    protected function performAjaxValidation($model) {
+//        if (isset($_POST['ajax']) && $_POST['ajax'] === 'answer-form') {
+//            echo CActiveForm::validate($model);
+//            Yii::app()->end();
+//        }
+//    }
 
 }

@@ -10,7 +10,7 @@ class UserController extends GuestController {
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             if ($model->validate() && $model->login())
-                $this->redirect(Yii::app()->user->returnUrl);
+                $this->redirect(array('admin/user/index'));
         }
         $this->data['model'] = $model;
         $this->render('login', $this->data);

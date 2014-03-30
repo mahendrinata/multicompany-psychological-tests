@@ -6,6 +6,7 @@ return array(
     'preload' => array('log'),
     'import' => array(
         'application.models.*',
+        'application.models.forms.*',
         'application.components.*',
         'application.helpers.*',
         'ext.ExtendedClientScript.jsmin.JSMin',

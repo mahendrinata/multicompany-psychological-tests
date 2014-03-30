@@ -41,8 +41,8 @@ $js = array(
     'jquery.mousewheel',
     'jquery.classyscroll',
     'jquery.classyscroll',
-    'jquery.vmap.min',
-    'jquery.vmap.sampledata',
+//    'jquery.vmap.min',
+//    'jquery.vmap.sampledata',
     'fullcalendar.min',
     'gcal',
     'prettify',
@@ -54,7 +54,7 @@ $js = array(
     'jquery.isotope.min',
     'select2',
     'styleswitcher',
-    'main'
+//    'main'
 );
 
 foreach ($js as $script) {
@@ -73,6 +73,25 @@ foreach ($js as $script) {
     <body>
         <?php $this->renderPartial('../../element/navigation/navigation'); ?>
         <div class="container-fluid" id="wrapper-header">
+            <div class="page-title">
+                <h1><?php echo $this->pageTitle; ?></h1>
+            </div>
+            <?php if (isset($this->breadcrumbs)): ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?php
+                        $this->widget('zii.widgets.CBreadcrumbs', array(
+                            'links' => $this->breadcrumbs,
+                            'tagName'=> 'ul',
+                            'htmlOptions' => array('class' => 'breadcrumb'),
+                            'activeLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
+                            'inactiveLinkTemplate' => '<li class="active">{label}</li>',
+//                            'separator' => ''
+                        ));
+                        ?><!-- breadcrumbs -->
+                    </div>
+                </div>
+            <?php endif ?>
             <?php echo $content; ?>
         </div>
     </body>

@@ -61,19 +61,12 @@ class UserController extends AdminController {
     }
 
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('User');
-        $this->render('index', array(
-            'dataProvider' => $dataProvider,
-        ));
-    }
-
-    public function actionAdmin() {
         $model = new User('search');
         $model->unsetAttributes();
         if (isset($_GET['User']))
             $model->attributes = $_GET['User'];
 
-        $this->render('admin', array(
+        $this->render('index', array(
             'model' => $model,
         ));
     }
