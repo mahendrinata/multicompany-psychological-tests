@@ -89,7 +89,7 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
     }
 
     public function down() {
-        
+        UserProfile::model()->deleteAll();
     }
 
 }

@@ -60,6 +60,7 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
     }
 
     public function down() {
+        Type::model()->deleteAll();
     }
 
 

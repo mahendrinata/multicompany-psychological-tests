@@ -260,7 +260,7 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
     }
 
     public function down() {
-        
+        Variable::model()->deleteAll();
     }
 
 }
