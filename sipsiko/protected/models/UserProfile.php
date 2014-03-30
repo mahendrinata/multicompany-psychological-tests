@@ -7,6 +7,9 @@
  * @property integer $id
  * @property string $first_name
  * @property string $last_name
+ * @property boolean $gender
+ * @property string $birth_place
+ * @property date $birth_date
  * @property string $address
  * @property string $phone
  * @property string $photo
@@ -17,6 +20,9 @@
  * @property string $updated_at
  */
 class UserProfile extends AppActiveRecord {
+
+    const MALE = 'Male';
+    const FEMALE = 'Female';
 
     /**
      * @return string the associated database table name
@@ -129,6 +135,13 @@ class UserProfile extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function get_gender() {
+        return array(
+            self::MALE,
+            self::FEMALE
+        );
     }
 
 }
