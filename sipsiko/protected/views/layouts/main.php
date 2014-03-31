@@ -1,71 +1,87 @@
-<?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<?php
+$themeBaseUrl = Yii::app()->theme->baseUrl;
+$cs = Yii::app()->getClientScript();
+$css = array(
+    'bootstrap.min',
+    'plugins',
+    'main',
+    'themes'
+);
+
+foreach ($css as $style) {
+    $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
+}
+
+
+$core = array(
+    'vendor/modernizr-2.7.1-respond-1.4.2.min',
+    'vendor/jquery-1.11.0.min',
+    'vendor/bootstrap.min',
+);
+
+foreach ($core as $coreScript) {
+    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js');
+}
+
+$js = array(
+    'plugins',
+    'app'
+);
+
+foreach ($js as $script) {
+    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js');
+}
+?>
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9"> </html><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="language" content="en"/>
-
-        <!-- blueprint CSS framework -->
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css"
-              media="screen, projection"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css"
-              media="print"/>
-        <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css"
-              media="screen, projection"/>
-        <![endif]-->
-
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
-
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <meta charset="utf-8" />
+        <title><?php echo CHtml::encode(Yii::app()->name); ?></title>
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0" />
+        <link rel="shortcut icon" href="<?php echo $themeBaseUrl; ?>/img/favicon.ico" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon57.png" sizes="57x57" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon72.png" sizes="72x72" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon76.png" sizes="76x76" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon114.png" sizes="114x114" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon120.png" sizes="120x120" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon144.png" sizes="144x144" />
+        <link rel="apple-touch-icon" href="<?php echo $themeBaseUrl; ?>/img/icon152.png" sizes="152x152" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
-
     <body>
-
-        <div class="container" id="page">
-
-            <div id="header">
-                <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+        <div id="page-container" class="sidebar-full">
+            <?php $this->renderPartial('../../element/navigation/sidebar'); ?>
+            <div id="main-container">
+                <?php // $this->renderPartial('../../element/navigation/header'); ?>
+                <div id="page-content">
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-charts"></i>SIPSIKO - Sistem Pakar Tes Psikologi Online<br />
+                                <small>Psychology Online Test Multiple and Custom Variable Test.</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <?php if (isset($this->breadcrumbs)): ?>
+                        <?php
+                        $this->widget('zii.widgets.CBreadcrumbs', array(
+                            'links' => $this->breadcrumbs,
+                            'tagName' => 'ul',
+                            'htmlOptions' => array('class' => 'breadcrumb breadcrumb-top'),
+                            'activeLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
+                            'inactiveLinkTemplate' => '<li class="active">{label}</li>',
+                            'separator' => ''
+                        ));
+                        ?>
+                    <?php endif ?>
+                    <?php echo $content; ?>
+                </div>
             </div>
-            <!-- header -->
-
-            <div id="mainmenu">
-                <?php
-                $this->widget('zii.widgets.CMenu', array(
-                    'items' => array(
-                        array('label' => 'Home', 'url' => array('/site/index')),
-                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-                        array('label' => 'Contact', 'url' => array('/site/contact')),
-                        array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                        array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-                    ),
-                ));
-                ?>
-            </div>
-            <!-- mainmenu -->
-            <?php if (isset($this->breadcrumbs)): ?>
-                <?php
-                $this->widget('zii.widgets.CBreadcrumbs', array(
-                    'links' => $this->breadcrumbs,
-                ));
-                ?><!-- breadcrumbs -->
-            <?php endif ?>
-
-            <?php echo $content; ?>
-
-            <div class="clear"></div>
-
-            <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-                All Rights Reserved.<br/>
-                <?php echo Yii::powered(); ?>
-            </div>
-            <!-- footer -->
-
         </div>
-        <!-- page -->
-
     </body>
 </html>

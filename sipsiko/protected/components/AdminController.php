@@ -2,13 +2,13 @@
 
 class AdminController extends Controller {
 
-    public $layout = '//layouts/default';
+    public $layout = '//layouts/main';
     protected $_model;
 
     public function init() {
         parent::init();
 
-        Yii::app()->theme = 'backend';
+        Yii::app()->theme = 'proui';
     }
 
     public function filters() {

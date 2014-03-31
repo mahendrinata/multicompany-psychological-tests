@@ -15,10 +15,11 @@ $css = array(
     'bootstrap.min',
     'fontawesome',
     'style',
-    'color/green',
-    'color/orange',
-    'color/magenta',
-    'color/gray'
+//    'color/green',
+//    'color/orange',
+//    'color/magenta',
+//    'color/gray',
+    'bootstrap-datetimepicker.min'
 );
 
 foreach ($css as $style) {
@@ -54,7 +55,8 @@ $js = array(
     'jquery.isotope.min',
     'select2',
     'styleswitcher',
-//    'main'
+    'bootstrap-datetimepicker.min',
+    'main'
 );
 
 foreach ($js as $script) {
@@ -86,7 +88,7 @@ foreach ($js as $script) {
                             'htmlOptions' => array('class' => 'breadcrumb'),
                             'activeLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
                             'inactiveLinkTemplate' => '<li class="active">{label}</li>',
-//                            'separator' => ''
+                            'separator' => ''
                         ));
                         ?><!-- breadcrumbs -->
                     </div>

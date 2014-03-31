@@ -3,13 +3,10 @@ $this->breadcrumbs = array(
     'Users' => array('index'),
     'Create',
 );
-
-$this->menu = array(
-    array('label' => 'List User', 'url' => array('index')),
-    array('label' => 'Manage User', 'url' => array('admin')),
-);
 ?>
-
-<h1>Create User</h1>
-
-<?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+<div class="block">
+    <div class="block-title">
+        <h2><strong>User</strong> Create</h2>
+    </div>
+    <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+</div>
