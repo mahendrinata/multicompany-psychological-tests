@@ -25,6 +25,7 @@ return array(
         ),
         'user' => array(
             'allowAutoLogin' => true,
+            'loginUrl' => 'user/login'
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
