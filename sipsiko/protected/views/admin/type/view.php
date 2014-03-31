@@ -3,30 +3,26 @@ $this->breadcrumbs = array(
     'Types' => array('index'),
     $model->name,
 );
-
-$this->menu = array(
-    array('label' => 'List Type', 'url' => array('index')),
-    array('label' => 'Create Type', 'url' => array('create')),
-    array('label' => 'Update Type', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Type', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Type', 'url' => array('admin')),
-);
 ?>
 
-<h1>View Type #<?php echo $model->id; ?></h1>
-
-<?php
-$this->widget('zii.widgets.CDetailView', array(
-    'data' => $model,
-    'attributes' => array(
-        'id',
-        'slug',
-        'name',
-        'description',
-        'status',
-        'user_profile_id',
-        'created_at',
-        'updated_at',
-    ),
-));
-?>
+<div class="block">
+    <div class="block-title">
+        <h2>View Type #<strong><?php echo $model->id; ?></strong></h2>
+    </div>
+    <?php
+    $this->widget('zii.widgets.CDetailView', array(
+        'data' => $model,
+        'attributes' => array(
+            'id',
+            'slug',
+            'name',
+            'description',
+            'status',
+            'created_at',
+            'updated_at',
+        ),
+        'htmlOptions' => array('class' => 'table table-borderless table-striped'),
+    ));
+    ?>
+    <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/type'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
+</div>

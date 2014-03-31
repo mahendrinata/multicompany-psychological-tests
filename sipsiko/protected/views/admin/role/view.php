@@ -24,5 +24,5 @@ $this->breadcrumbs = array(
         'htmlOptions' => array('class' => 'table table-borderless table-striped'),
     ));
     ?>
-    <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/user'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
+    <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/role'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
 </div>

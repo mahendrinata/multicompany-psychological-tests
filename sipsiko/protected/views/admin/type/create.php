@@ -3,13 +3,10 @@ $this->breadcrumbs = array(
     'Types' => array('index'),
     'Create',
 );
-
-$this->menu = array(
-    array('label' => 'List Type', 'url' => array('index')),
-    array('label' => 'Manage Type', 'url' => array('admin')),
-);
 ?>
-
-<h1>Create Type</h1>
-
-<?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+<div class="block">
+    <div class="block-title">
+        <h2><strong>Type</strong> Create</h2>
+    </div>
+    <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+</div>

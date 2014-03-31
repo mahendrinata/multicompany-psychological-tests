@@ -4,15 +4,10 @@ $this->breadcrumbs = array(
     $model->name => array('view', 'id' => $model->id),
     'Update',
 );
-
-$this->menu = array(
-    array('label' => 'List Type', 'url' => array('index')),
-    array('label' => 'Create Type', 'url' => array('create')),
-    array('label' => 'View Type', 'url' => array('view', 'id' => $model->id)),
-    array('label' => 'Manage Type', 'url' => array('admin')),
-);
 ?>
-
-<h1>Update Type <?php echo $model->id; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+<div class="block">
+    <div class="block-title">
+        <h2><strong>Type</strong> Update <?php echo $model->id; ?></h2>
+    </div>
+    <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+</div>
