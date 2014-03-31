@@ -61,19 +61,12 @@ class RoleController extends AdminController {
     }
 
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Role');
-        $this->render('index', array(
-            'dataProvider' => $dataProvider,
-        ));
-    }
-
-    public function actionAdmin() {
         $model = new Role('search');
         $model->unsetAttributes();
         if (isset($_GET['Role']))
             $model->attributes = $_GET['Role'];
 
-        $this->render('admin', array(
+        $this->render('index', array(
             'model' => $model,
         ));
     }
