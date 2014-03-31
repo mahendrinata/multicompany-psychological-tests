@@ -42,7 +42,7 @@ $form = $this->beginWidget('CActiveForm', array(
     <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-5 col-xs-12">
         <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control')); ?>
-        <?php echo $form->error($model, 'description', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 

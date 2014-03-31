@@ -9,7 +9,7 @@ class m140319_170325_create_tags_table extends CDbMigration {
             'name' => 'string NOT NULL',
             'status' => 'string NOT NULL',
             'parent_id' => 'integer',
-            'user_profile_id' => 'integer NOT NULL',
+            'user_profile_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

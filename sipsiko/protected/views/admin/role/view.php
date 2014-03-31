@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 
 <div class="block">
     <div class="block-title">
-        <h2>View User #<strong><?php echo $model->id; ?></strong></h2>
+        <h2>View Role #<strong><?php echo $model->id; ?></strong></h2>
     </div>
     <?php
     $this->widget('zii.widgets.CDetailView', array(

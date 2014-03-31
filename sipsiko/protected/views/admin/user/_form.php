@@ -39,6 +39,14 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <div class="form-group">
+    <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<div class="form-group">
     <label class="col-lg-2 col-sm-2 control-label"></label>
     <div class="col-lg-9 col-xs-12">
         <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> ' . ($model->isNewRecord ? 'Create' : 'Save'), array('class' => 'btn btn-success', 'type' => 'submit')); ?>

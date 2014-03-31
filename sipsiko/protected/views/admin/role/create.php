@@ -3,11 +3,6 @@ $this->breadcrumbs = array(
     'Roles' => array('index'),
     'Create',
 );
-
-$this->menu = array(
-    array('label' => 'List Role', 'url' => array('index')),
-    array('label' => 'Manage Role', 'url' => array('admin')),
-);
 ?>
 <div class="block">
     <div class="block-title">
