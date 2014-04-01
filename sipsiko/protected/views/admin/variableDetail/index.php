@@ -61,30 +61,33 @@ $('.search-form form').submit(function(){
             'columns' => array(
                 array(
                     'name' => 'id',
-                    'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'align' => 'right'),
-                    'htmlOptions' => array('style' => 'max-width: 50px;', 'align' => 'right'),
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control')
+                    'header' => 'ID',
+                    'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control text-right')
                 ),
                 array(
                     'name' => 'slug',
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control')
+                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'description',
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control')
+                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'status',
-                    'filter' => Status::get_map(),
-                    'dropDownHtmlOption' => array('id' => false, 'prompt' => '', 'class' => 'form-control'),
+                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control')),
+                    'type' => 'raw',
+                    'value' => 'Status::get_tag_label($data->status)',
+                    'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
                     'name' => 'created_at',
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control input-datepicker')
+                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'updated_at',
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control input-datepicker')
+                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'class' => 'CButtonColumn',

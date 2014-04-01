@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Variables' => array('index'),
+    'User Profiles' => array('index'),
     'Manage',
 );
 
@@ -10,7 +10,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#variable-grid').yiiGridView('update', {
+	$('#user-profile-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -20,14 +20,14 @@ $('.search-form form').submit(function(){
 
 <div class="block">
     <div class="block-title">
-        <h2><strong>Variables</strong> Management</h2>
+        <h2><strong>Expert</strong> Management</h2>
     </div>
     <div class="table-options clearfix">
         <div class="btn-group btn-group-sm pull-right">
             <button class="btn btn-primary search-button">
                 <i class="icon-search"></i> Advanced Search
             </button>
-            <?php echo CHtml::link('<i class="icon-plus"></i> New Variable', array('admin/variable/create'), array('class' => 'btn btn-success')); ?>
+            <?php echo CHtml::link('<i class="icon-plus"></i> New Member', array('admin/userprofile/createmember'), array('class' => 'btn btn-success')); ?>
         </div>
     </div>
     <div class="search-form" style="display:none">
@@ -42,7 +42,7 @@ $('.search-form form').submit(function(){
         $this->widget('zii.widgets.grid.CGridView', array(
             'itemsCssClass' => 'table table-bordered table-striped table-vcenter',
             'rowCssClass' => array(),
-            'id' => 'variable-grid',
+            'id' => 'user-profile-grid',
             'dataProvider' => $model->search(),
             'filter' => $model,
             'ajaxUpdate' => true,
@@ -67,12 +67,18 @@ $('.search-form form').submit(function(){
                     'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control text-right')
                 ),
                 array(
-                    'name' => 'name',
-                    'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control'))
+                    'name' => 'first_name',
+                    'filter' => CHtml::activeTelField($model, 'first_name', array('id' => false, 'class' => 'form-control')),
+                    'header' => 'Name'
                 ),
                 array(
-                    'name' => 'description',
-                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
+                    'name' => 'address',
+                    'filter' => CHtml::activeTelField($model, 'address', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'user.username',
+                    'value' => '$data->user->username',
+                    'filter' => CHtml::activeDropDownList($model, 'user_id', CHtml::listData(User::model()->findAll(), 'id', 'username'), array('id' => false, 'prompt' => '', 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'status',
@@ -80,12 +86,6 @@ $('.search-form form').submit(function(){
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
-                ),
-                array(
-                    'name' => 'type_id',
-                    'filter' => CHtml::activeDropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'form-control')),
-                    'header' => 'Type',
-                    'value' => '$data->type->name'
                 ),
                 array(
                     'name' => 'created_at',

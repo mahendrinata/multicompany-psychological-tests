@@ -1,9 +1,9 @@
 <div id="sidebar">
     <div class="sidebar-scroll">
         <div class="sidebar-content">
-            <a href="./index.php.html" class="sidebar-brand">
+<!--            <a href="./index.php.html" class="sidebar-brand">
                 <i class="gi gi-flash"></i><strong>Pro</strong>UI
-            </a>
+            </a>-->
             <div class="sidebar-section sidebar-user clearfix">
                 <div class="sidebar-user-avatar">
                     <a href="./page_ready_user_profile.php.html">

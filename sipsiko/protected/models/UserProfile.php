@@ -24,6 +24,8 @@ class UserProfile extends AppActiveRecord {
     const MALE = 'Male';
     const FEMALE = 'Female';
 
+    private $_alias = 'Variable';
+
     /**
      * @return string the associated database table name
      */
@@ -44,7 +46,7 @@ class UserProfile extends AppActiveRecord {
             array('address, photo, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, first_name, last_name, address, phone, photo, status, user_id, role_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, birth_place, birth_date, address, phone, photo, status, user_id, role_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -101,28 +103,35 @@ class UserProfile extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
+        $criteria->alias = $this->_alias;
 
-        $criteria->compare('id', $this->id);
+        $criteria->compare($this->_alias . '.id', $this->id);
 
-        $criteria->compare('first_name', $this->first_name, true);
+        $criteria->compare($this->_alias . '.first_name', $this->first_name, true);
 
-        $criteria->compare('last_name', $this->last_name, true);
+        $criteria->compare($this->_alias . '.last_name', $this->last_name, true);
 
-        $criteria->compare('address', $this->address, true);
+        $criteria->compare($this->_alias . '.gender', $this->gender, true);
 
-        $criteria->compare('phone', $this->phone, true);
+        $criteria->compare($this->_alias . '.birth_place', $this->birth_place, true);
 
-        $criteria->compare('photo', $this->photo, true);
+        $criteria->compare($this->_alias . '.birth_date', $this->birth_date, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare($this->_alias . '.address', $this->address, true);
 
-        $criteria->compare('user_id', $this->user_id);
+        $criteria->compare($this->_alias . '.phone', $this->phone, true);
 
-        $criteria->compare('role_id', $this->role_id);
+        $criteria->compare($this->_alias . '.photo', $this->photo, true);
 
-        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare($this->_alias . '.status', $this->status, true);
 
-        $criteria->compare('updated_at', $this->updated_at, true);
+        $criteria->compare($this->_alias . '.user_id', $this->user_id);
+
+        $criteria->compare($this->_alias . '.role_id', $this->role_id);
+
+        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
+
+        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
 
         $criteria->with = array('user');
         $criteria->together = true;

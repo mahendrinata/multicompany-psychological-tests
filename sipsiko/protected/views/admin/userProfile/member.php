@@ -32,7 +32,7 @@ $('.search-form form').submit(function(){
     </div>
     <div class="search-form" style="display:none">
         <?php
-        $this->renderPartial('_search', array(
+        $this->renderPartial('_search_member', array(
             'model' => $model,
         ));
         ?>
@@ -61,9 +61,10 @@ $('.search-form form').submit(function(){
             'columns' => array(
                 array(
                     'name' => 'id',
-                    'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'align' => 'right'),
-                    'htmlOptions' => array('style' => 'max-width: 50px;', 'align' => 'right'),
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control')
+                    'header' => 'ID',
+                    'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control text-right')
                 ),
                 array(
                     'name' => 'first_name',
@@ -72,6 +73,18 @@ $('.search-form form').submit(function(){
                 array(
                     'name' => 'last_name',
                     'filter' => CHtml::activeTelField($model, 'last_name', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'gender',
+                    'filter' => CHtml::activeDropDownList($model, 'gender', array(UserProfile::MALE, UserProfile::FEMALE), array('id' => false, 'prompt' => '', 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'birth_place',
+                    'filter' => CHtml::activeTelField($model, 'birth_place', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'birth_date',
+                    'filter' => CHtml::activeTelField($model, 'birth_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'address',
@@ -84,8 +97,10 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'status',
-                    'filter' => Status::get_map(),
-                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control'))
+                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control')),
+                    'type' => 'raw',
+                    'value' => 'Status::get_tag_label($data->status)',
+                    'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
                     'name' => 'created_at',

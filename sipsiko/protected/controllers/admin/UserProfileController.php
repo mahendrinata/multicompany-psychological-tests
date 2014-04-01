@@ -78,4 +78,40 @@ class UserProfileController extends AdminController {
         ));
     }
 
+    public function actionExpert() {
+        $model = new UserProfile('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['UserProfile']))
+            $model->attributes = $_GET['UserProfile'];
+        
+        $role = Role::model()->find(array(
+            'select' => 'id',
+            'condition' => 'slug=:slug',
+            'params' => array(':slug' => RolePrivilege::EXPERT),
+        ));
+        $model->role_id = $role->id;
+
+        $this->render('expert', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionCompany() {
+        $model = new UserProfile('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['UserProfile']))
+            $model->attributes = $_GET['UserProfile'];
+        
+        $role = Role::model()->find(array(
+            'select' => 'id',
+            'condition' => 'slug=:slug',
+            'params' => array(':slug' => RolePrivilege::COMPANY),
+        ));
+        $model->role_id = $role->id;
+
+        $this->render('company', array(
+            'model' => $model,
+        ));
+    }
+
 }

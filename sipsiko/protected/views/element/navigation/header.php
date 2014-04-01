@@ -24,33 +24,7 @@
 <ul class="nav navbar-nav-custom pull-right">
     <li class="dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="gi gi-settings"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-custom dropdown-options dropdown-menu-right">
-            <li class="dropdown-header text-center">Header Style</li>
-            <li>
-                <div class="btn-group btn-group-justified btn-group-sm">
-                    <a href="javascript:void(0)" class="btn btn-primary" id="options-header-default">Light</a>
-                    <a href="javascript:void(0)" class="btn btn-primary" id="options-header-inverse">Dark</a>
-                </div>
-            </li>
-            <li class="dropdown-header text-center">Page Style</li>
-            <li>
-                <div class="btn-group btn-group-justified btn-group-sm">
-                    <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style">Default</a>
-                    <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style-alt">Alternative</a>
-                </div>
-            </li>
-            <li class="dropdown-header text-center">Main Layout</li>
-            <li>
-                <button class="btn btn-sm btn-block btn-primary" id="options-header-top">Fixed Side/Header (Top)</button>
-                <button class="btn btn-sm btn-block btn-primary" id="options-header-bottom">Fixed Side/Header (Bottom)</button>
-            </li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="./img/placeholders/avatars/avatar2.jpg" alt="avatar" /> <i class="fa fa-angle-down"></i>
+            <img src="<?php echo $themeBaseUrl; ?>/img/placeholders/avatars/avatar2.jpg" alt="avatar" /> <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
             <li class="dropdown-header text-center">Account</li>

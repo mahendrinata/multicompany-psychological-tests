@@ -57,7 +57,7 @@ foreach ($js as $script) {
         <div id="page-container" class="sidebar-full">
             <?php $this->renderPartial('../../element/navigation/sidebar', array('themeBaseUrl' => $themeBaseUrl)); ?>
             <div id="main-container">
-                <?php // $this->renderPartial('../../element/navigation/header'); ?>
+                <?php // $this->renderPartial('../../element/navigation/header', array('themeBaseUrl' => $themeBaseUrl)); ?>
                 <div id="page-content">
                     <div class="content-header">
                         <div class="header-section">

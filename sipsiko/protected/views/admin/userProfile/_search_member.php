@@ -19,7 +19,35 @@
     <div class="form-group">
         <?php echo $form->label($model, 'first_name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
         <div class="col-lg-3 col-sm-6 col-xs-12">
-            <?php echo $form->textField($model, 'first_name', array('placeholder' => 'Name', 'class' => 'form-control')); ?>
+            <?php echo $form->textField($model, 'first_name', array('placeholder' => 'First Name', 'class' => 'form-control')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label($model, 'last_name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <?php echo $form->textField($model, 'last_name', array('placeholder' => 'Last Name', 'class' => 'form-control')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label($model, 'gender', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-2 col-sm-4 col-xs-12">
+            <?php echo $form->dropDownList($model, 'gender', array(UserProfile::MALE, UserProfile::FEMALE), array('id' => false, 'prompt' => '', 'class' => 'form-control')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label($model, 'birth_place', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <?php echo $form->textField($model, 'birth_place', array('placeholder' => 'Birth Place', 'class' => 'form-control')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label($model, 'birth_date', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-1 col-sm-2 col-xs-12">
+            <?php echo $form->textField($model, 'birth_date', array('placeholder' => 'Birth Date', 'class' => 'form-control input-datepicker')); ?>
         </div>
     </div>
 

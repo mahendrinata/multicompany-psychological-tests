@@ -15,6 +15,8 @@
  */
 class Variable extends AppActiveRecord {
 
+    private $_alias = 'Variable';
+
     /**
      * @return string the associated database table name
      */
@@ -35,7 +37,7 @@ class Variable extends AppActiveRecord {
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, name, description, status, type_id, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -85,20 +87,26 @@ class Variable extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
+        $criteria->alias = $this->_alias;
 
-        $criteria->compare('id', $this->id);
+        $criteria->compare($this->_alias . '.id', $this->id);
 
-        $criteria->compare('name', $this->name, true);
+        $criteria->compare($this->_alias . '.name', $this->name, true);
 
-        $criteria->compare('description', $this->description, true);
+        $criteria->compare($this->_alias . '.description', $this->description, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status, true);
 
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare($this->_alias . '.type_id', $this->type_id);
 
-        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare($this->_alias . '.user_profile_id', $this->user_profile_id);
 
-        $criteria->compare('updated_at', $this->updated_at, true);
+        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
+
+        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
+
+        $criteria->with = array('type');
+        $criteria->together = true;
 
         return new CActiveDataProvider('Variable', array(
             'criteria' => $criteria,
