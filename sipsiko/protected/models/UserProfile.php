@@ -124,6 +124,9 @@ class UserProfile extends AppActiveRecord {
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
+        $criteria->with = array('user');
+        $criteria->together = true;
+
         return new CActiveDataProvider('UserProfile', array(
             'criteria' => $criteria,
         ));

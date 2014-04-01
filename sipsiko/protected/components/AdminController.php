@@ -11,22 +11,22 @@ class AdminController extends Controller {
         Yii::app()->theme = 'proui';
     }
 
-    public function filters() {
-        return array(
-            'accessControl',
-        );
-    }
+//    public function filters() {
+//        return array(
+//            'accessControl',
+//        );
+//    }
 
-    public function accessRules() {
-        return array(
-            array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
-                'users' => array('@'),
-            ),
-            array('deny',
-                'users' => array('*'),
-            ),
-        );
-    }
+//    public function accessRules() {
+//        return array(
+//            array('allow',
+//                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
+//                'users' => array('@'),
+//            ),
+//            array('deny',
+//                'users' => array('*'),
+//            ),
+//        );
+//    }
 
 }

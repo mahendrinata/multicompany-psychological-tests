@@ -60,20 +60,20 @@ class UserProfileController extends AdminController {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
-    public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('UserProfile');
-        $this->render('index', array(
-            'dataProvider' => $dataProvider,
-        ));
-    }
-
-    public function actionAdmin() {
+    public function actionMember() {
         $model = new UserProfile('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['UserProfile']))
             $model->attributes = $_GET['UserProfile'];
+        
+        $role = Role::model()->find(array(
+            'select' => 'id',
+            'condition' => 'slug=:slug',
+            'params' => array(':slug' => RolePrivilege::MEMBER),
+        ));
+        $model->role_id = $role->id;
 
-        $this->render('admin', array(
+        $this->render('member', array(
             'model' => $model,
         ));
     }

@@ -46,9 +46,11 @@
                 <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/type'));?></li>
 
                 <li class="sidebar-header"><span class="sidebar-header-title">Master Data</span></li>
-                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Users Management</a>', array('admin/user'));?></li>
-                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> User Profiles</a>', array('admin/userprofile'));?></li>
                 <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Roles Management</a>', array('admin/type'));?></li>
+                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Users Management</a>', array('admin/user'));?></li>
+                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member Management</a>', array('admin/userprofile/member'));?></li>
+                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Company Management</a>', array('admin/userprofile/company'));?></li>
+                <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Expert Management</a>', array('admin/userprofile/expert'));?></li>
             </ul>
         </div>
     </div>
