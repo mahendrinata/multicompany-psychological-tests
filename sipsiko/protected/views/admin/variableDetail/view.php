@@ -15,9 +15,9 @@ $this->breadcrumbs = array(
         'attributes' => array(
             'id',
             'slug',
-            'description',
+            'description:html',
             'status',
-        'user_profile_id',
+            'user_profile.first_name',
             'created_at',
             'updated_at',
         ),

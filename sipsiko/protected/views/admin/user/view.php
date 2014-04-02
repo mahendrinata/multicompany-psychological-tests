@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
             'last_login',
             'last_login_ip',
             'token',
-            'parent_id',
+            'parent.username',
             'created_at',
             'updated_at',
         ),

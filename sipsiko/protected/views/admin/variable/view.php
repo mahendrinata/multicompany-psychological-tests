@@ -14,11 +14,10 @@ $this->breadcrumbs = array(
         'data' => $model,
         'attributes' => array(
             'id',
-            'slug',
             'name',
             'description',
             'status',
-            'type_id',
+            'type.name',
             'created_at',
             'updated_at',
         ),

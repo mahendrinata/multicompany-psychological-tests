@@ -20,7 +20,7 @@ $core = array(
 );
 
 foreach ($core as $coreScript) {
-    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js');
+    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js', CClientScript::POS_END);
 }
 
 $js = array(
@@ -29,7 +29,7 @@ $js = array(
 );
 
 foreach ($js as $script) {
-    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js');
+    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js', CClientScript::POS_END);
 }
 ?>
 

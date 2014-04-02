@@ -74,7 +74,7 @@ $('.search-form form').submit(function(){
                 array(
                     'name' => 'description',
                     'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control')),
-                    'type' => 'raw'
+                    'type' => 'html'
                 ),
                 array(
                     'name' => 'status',
