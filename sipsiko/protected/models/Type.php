@@ -115,4 +115,17 @@ class Type extends AppActiveRecord {
         return parent::model($className);
     }
 
+    public function getTypeVariableList() {
+        $types = $this->with('variables')->findAll();
+        $output = array();
+        $iterator = 0;
+        foreach ($types as $type) {
+            foreach ($type->variables as $variable) {
+                $output[$iterator][$type->name][$variable->id] = $variable->name;
+            }
+            $iterator++;
+        }
+        return $output;
+    }
+
 }

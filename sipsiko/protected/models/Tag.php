@@ -46,9 +46,10 @@ class Tag extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tag_variables' => array(self::HAS_MANY, 'TagVariable', 'tag_id'),
+            'tag_variables' => array(self::MANY_MANY, 'VariableDetail', 'tag_variables(tag_id, variable_detail_id)'),
             'parent' => array(self::BELONGS_TO, 'Tag', 'parent_id'),
             'tags' => array(self::HAS_MANY, 'Tag', 'parent_id'),
+            'tag_childs' => array(self::HAS_MANY, 'Tag', array('parent_id' => 'id'), 'through' => 'parent'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
         );
     }
@@ -113,6 +114,20 @@ class Tag extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function getTagList() {
+        $tags = $this->findAll('parent_id IS NULL');
+        $output = array();
+        $iterator = 0;
+        foreach ($tags as $tag) {
+            $childs = $this->findAllByAttributes(array('parent_id' => $tag->id));
+            foreach ($childs as $child) {
+                $output[$iterator][$tag->name][$child->id] = $child->name;
+            }
+            $iterator++;
+        }
+        return $output;
     }
 
 }

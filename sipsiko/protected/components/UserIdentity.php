@@ -3,6 +3,8 @@
 class UserIdentity extends CUserIdentity {
 
     private $_id;
+    private $_roles;
+    private $_profiles;
 
     public function authenticate() {
         $user = User::model()->getActiveUserByUsername($this->username);
@@ -27,11 +29,14 @@ class UserIdentity extends CUserIdentity {
         $this->_id = $user->id;
         $this->setState('username', $user->username);
         $this->setState('email', $user->email);
-        $roles = array();
-        foreach ($user->roles as $role) {
-            $roles[] = $role->slug;
+
+        $this->_roles = CHtml::listData($user->roles, 'id', 'slug');
+        $this->setState('roles', $this->_roles);
+        $this->_profiles = array();
+        foreach (CHtml::listData($user->user_profiles, 'role_id', 'id') as $key => $val) {
+            $this->_profiles[$this->_roles[$key]] = $val;
         }
-        $this->setState('roles', $roles);
+        $this->setState('user_profiles', $this->_profiles);
         $this->errorCode = self::ERROR_NONE;
     }
 

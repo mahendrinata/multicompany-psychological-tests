@@ -156,4 +156,8 @@ class UserProfile extends AppActiveRecord {
         );
     }
 
+    public function getUserProfile($user_id = NULL, $role = NULL) {
+        return $this->with('role')->findByAttributes(array('user_id' => $user_id, 'role.slug' => $role));
+    }
+
 }

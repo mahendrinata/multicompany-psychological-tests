@@ -4,12 +4,14 @@ abstract class AppActiveRecord extends CActiveRecord {
 
     public function behaviors() {
         return CMap::mergeArray(
-            parent::behaviors(), array(
-            'CTimestampBehavior' => array(
-                'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'created_at',
-                'updateAttribute' => 'updated_at',
-            ),
+                parent::behaviors(), array(
+                'CTimestampBehavior' => array(
+                    'class' => 'zii.behaviors.CTimestampBehavior',
+                    'createAttribute' => 'created_at',
+                    'updateAttribute' => 'updated_at',
+                ),
+                'CAdvancedArBehavior' => array(
+                    'class' => 'application.extensions.CAdvancedArBehavior'),
         ));
     }
 

@@ -10,6 +10,7 @@ return array(
         'application.components.*',
         'application.helpers.*',
         'ext.ExtendedClientScript.jsmin.JSMin',
+        'application.extensions.CAdvancedArBehavior',
     ),
     'modules' => array(
         'gii' => array(
@@ -48,12 +49,12 @@ return array(
         ),
         'log' => array(
             'class' => 'CLogRouter',
-            'routes' => array(
-                array(
-                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => array('127.0.0.1', '::1'),
-                ),
-            ),
+//            'routes' => array(
+//                array(
+//                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'ipFilters' => array('127.0.0.1', '::1'),
+//                ),
+//            ),
         ),
         'session' => array(
             'class' => 'system.web.CDbHttpSession',

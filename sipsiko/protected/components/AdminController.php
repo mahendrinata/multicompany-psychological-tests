@@ -4,11 +4,30 @@ class AdminController extends Controller {
 
     public $layout = '//layouts/main';
     protected $_model;
+    protected $_roles;
+    protected $_profiles;
 
     public function init() {
         parent::init();
+        
+        if(empty(Yii::app()->user->getId())){
+            $this->redirect(array('site/index'));
+        }
 
         Yii::app()->theme = 'proui';
+        $this->_roles = Yii::app()->user->getState('roles');
+        $this->_profiles = Yii::app()->user->getState('user_profiles');
+    }
+
+    public function getRolePrivilegeStatus($role) {
+        return in_array($role, $this->_roles);
+    }
+
+    public function getUserProfileId($role) {
+        if ($this->getRolePrivilegeStatus($role)) {
+            return $this->_profiles[$role];
+        }
+        return null;
     }
 
 //    public function filters() {
@@ -16,7 +35,6 @@ class AdminController extends Controller {
 //            'accessControl',
 //        );
 //    }
-
 //    public function accessRules() {
 //        return array(
 //            array('allow',
@@ -28,5 +46,4 @@ class AdminController extends Controller {
 //            ),
 //        );
 //    }
-
 }

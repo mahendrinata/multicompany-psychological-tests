@@ -69,11 +69,12 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'slug',
-                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control')),
                 ),
                 array(
                     'name' => 'description',
-                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control')),
+                    'type' => 'raw'
                 ),
                 array(
                     'name' => 'status',
