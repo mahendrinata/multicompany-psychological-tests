@@ -18,7 +18,7 @@ class UserProfileController extends AdminController {
         ));
     }
 
-    public function actionCreate() {
+    public function actionCreateMember() {
         $model = new UserProfile;
 
         $this->performAjaxValidation($model, 'user-profile-form');
@@ -29,12 +29,12 @@ class UserProfileController extends AdminController {
                 $this->redirect(array('admin/userprofile/index'));
         }
 
-        $this->render('create', array(
+        $this->render('create_member', array(
             'model' => $model,
         ));
     }
 
-    public function actionUpdate() {
+    public function actionUpdateMember() {
         $model = $this->loadModel();
 
         $this->performAjaxValidation($model, 'user-profile-form');
@@ -45,7 +45,7 @@ class UserProfileController extends AdminController {
                 $this->redirect(array('admin/userprofile/index'));
         }
 
-        $this->render('update', array(
+        $this->render('update_member', array(
             'model' => $model,
         ));
     }

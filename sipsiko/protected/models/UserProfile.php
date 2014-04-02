@@ -43,6 +43,7 @@ class UserProfile extends AppActiveRecord {
             array('first_name, status, user_id, role_id', 'required'),
             array('user_id, role_id', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, phone, status', 'length', 'max' => 255),
+            array('photo', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true),
             array('address, photo, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
