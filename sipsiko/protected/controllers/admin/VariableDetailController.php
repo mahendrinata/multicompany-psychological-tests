@@ -45,7 +45,7 @@ class VariableDetailController extends AdminController {
         if (isset($_POST['VariableDetail'])) {
             $model->attributes = $_POST['VariableDetail'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin/variabledetail/index'));
         }
 
         $this->render('update', array(
@@ -58,7 +58,7 @@ class VariableDetailController extends AdminController {
             $this->loadModel()->delete();
 
             if (!isset($_GET['ajax']))
-                $this->redirect(array('index'));
+                $this->redirect(array('admin/variabledetail/index'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

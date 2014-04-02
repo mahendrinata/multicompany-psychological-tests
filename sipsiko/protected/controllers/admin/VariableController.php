@@ -26,7 +26,7 @@ class VariableController extends AdminController {
         if (isset($_POST['Variable'])) {
             $model->attributes = $_POST['Variable'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin/variable/index'));
         }
 
         $this->render('create', array(
@@ -42,7 +42,7 @@ class VariableController extends AdminController {
         if (isset($_POST['Variable'])) {
             $model->attributes = $_POST['Variable'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin/variable/index'));
         }
 
         $this->render('update', array(
@@ -55,7 +55,7 @@ class VariableController extends AdminController {
             $this->loadModel()->delete();
 
             if (!isset($_GET['ajax']))
-                $this->redirect(array('index'));
+                $this->redirect(array('admin/variable/index'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

@@ -26,7 +26,7 @@ class TagController extends AdminController {
         if (isset($_POST['Tag'])) {
             $model->attributes = $_POST['Tag'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin/tag/index'));
         }
 
         $this->render('create', array(
@@ -42,7 +42,7 @@ class TagController extends AdminController {
         if (isset($_POST['Tag'])) {
             $model->attributes = $_POST['Tag'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin/tag/index'));
         }
 
         $this->render('update', array(
@@ -55,7 +55,7 @@ class TagController extends AdminController {
             $this->loadModel()->delete();
 
             if (!isset($_GET['ajax']))
-                $this->redirect(array('index'));
+                $this->redirect(array('admin/tag/index'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
