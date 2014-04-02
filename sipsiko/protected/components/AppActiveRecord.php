@@ -10,8 +10,8 @@ abstract class AppActiveRecord extends CActiveRecord {
                     'createAttribute' => 'created_at',
                     'updateAttribute' => 'updated_at',
                 ),
-                'CAdvancedArBehavior' => array(
-                    'class' => 'application.extensions.CAdvancedArBehavior'),
+                'activerecord-relation' => array(
+                    'class' => 'ext.EActiveRecordRelationBehavior'),
         ));
     }
 
