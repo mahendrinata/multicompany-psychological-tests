@@ -46,6 +46,7 @@ $('.search-form form').submit(function(){
             'dataProvider' => $model->search(),
             'filter' => $model,
             'ajaxUpdate' => true,
+            'afterAjaxUpdate' => 'function(id, data){$(".select-chosen").chosen({width: "100%",allow_single_deselect: true});$(".input-datepicker").datepicker({format: "yyyy-mm-dd"});}',
             'pager' => array(
                 'firstPageLabel' => '<<',
                 'prevPageLabel' => '<',
@@ -64,7 +65,7 @@ $('.search-form form').submit(function(){
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
-                    'textFieldHtmlOption' => array('id' => false, 'class' => 'form-control text-right')
+                    'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
                     'name' => 'slug',
@@ -76,7 +77,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'status',
-                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control')),
+                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),

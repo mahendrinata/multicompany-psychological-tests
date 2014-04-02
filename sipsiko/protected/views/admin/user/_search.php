@@ -33,7 +33,7 @@
     <div class="form-group">
         <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
         <div class="col-lg-2 col-sm-4 col-xs-12">
-            <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'form-control'));?>
+            <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
         </div>
     </div>
 
@@ -51,12 +51,12 @@
         </div>
     </div>
 
-<!--    <div class="form-group">
-        <?php // echo $form->label($model, 'parent_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="form-group">
+        <?php echo $form->label($model, 'parent_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
         <div class="col-lg-2 col-sm-4 col-xs-12">
-            <?php // echo $form->dropDownList($model, 'status', CHtml::listData(User::model()->findByAttributes(array('parent_id' => 'IS NULL')), 'id', 'username'), array('id' => false, 'prompt' => '', 'class' => 'form-control'));?>
+            <?php echo $form->dropDownList($model, 'status', CHtml::listData(User::model()->findAll('parent_id IS NULL'), 'id', 'username'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Created By'));?>
         </div>
-    </div>-->
+    </div>
 
     <div class="form-group">
         <?php echo $form->label($model, 'created_at', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
