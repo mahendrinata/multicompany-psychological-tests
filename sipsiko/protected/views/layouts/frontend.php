@@ -12,14 +12,7 @@ foreach ($css as $style) {
     $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
 }
 
-
-$core = array(
-    'jquery.min'
-);
-
-foreach ($core as $coreScript) {
-    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js');
-}
+$cs->registerCoreScript('jquery');
 
 $js = array(
     'styleswitch',

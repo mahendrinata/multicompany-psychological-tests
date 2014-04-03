@@ -12,24 +12,18 @@ foreach ($css as $style) {
     $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
 }
 
-
-$core = array(
-    'vendor/modernizr-2.7.1-respond-1.4.2.min',
-    'vendor/jquery-1.11.0.min',
-    'vendor/bootstrap.min',
-);
-
-foreach ($core as $coreScript) {
-    $cs->registerCoreScript($themeBaseUrl . '/js/' . $coreScript . '.js', CClientScript::POS_END);
-}
+Yii::app()->clientScript->registerCoreScript('jquery');
 
 $js = array(
+    'vendor/modernizr-2.7.1-respond-1.4.2.min',
+//    'vendor/jquery-1.11.0.min',
+    'vendor/bootstrap.min',
     'plugins',
     'app'
 );
 
 foreach ($js as $script) {
-    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js', CClientScript::POS_END);
+    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js', CClientScript::POS_HEAD);
 }
 ?>
 
