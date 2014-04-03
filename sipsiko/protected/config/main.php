@@ -80,7 +80,7 @@ return array(
             // GD or ImageMagick
             'driver' => 'GD',
             // ImageMagick setup path
-            'params' => array('directory' => '/opt/local/bin'),
+//            'params' => array('directory' => '/opt/local/bin'),
         ),
     ),
     'params' => array(

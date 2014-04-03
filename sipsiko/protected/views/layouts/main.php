@@ -12,11 +12,13 @@ foreach ($css as $style) {
     $cs->registerCssFile($themeBaseUrl . '/css/' . $style . '.css');
 }
 
-Yii::app()->clientScript->registerCoreScript('jquery');
+$cs->scriptMap = array(
+    'jquery.js' => $themeBaseUrl . '/js/vendor/jquery-1.11.0.min.js',
+);
 
+$cs->registerCoreScript('jquery');
 $js = array(
     'vendor/modernizr-2.7.1-respond-1.4.2.min',
-//    'vendor/jquery-1.11.0.min',
     'vendor/bootstrap.min',
     'plugins',
     'app'

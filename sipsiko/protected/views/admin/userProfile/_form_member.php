@@ -32,14 +32,6 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'last_name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->textField($model, 'last_name', array('placeholder' => 'Last Name', 'class' => 'form-control')); ?>
-        <?php echo $form->error($model, 'last_name', array('class' => 'help-block alert-danger')); ?>
-    </div>
-</div>
-
-<div class="form-group">
     <?php echo $form->label($model, 'gender', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-4 col-xs-12">
         <?php echo $form->dropDownList($model, 'gender', array(UserProfile::MALE, UserProfile::FEMALE), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Gender')); ?>
@@ -74,7 +66,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'photo', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->fileField($model, 'photo', array('placeholder' => 'Photo')); ?>
+        <?php echo $form->fileField($model, 'photo'); ?>
         <?php echo $form->error($model, 'photo', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>

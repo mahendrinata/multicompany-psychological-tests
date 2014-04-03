@@ -25,6 +25,22 @@ class UserProfileController extends AdminController {
 
         if (isset($_POST['UserProfile'])) {
             $model->attributes = $_POST['UserProfile'];
+            $model->photo = CUploadedFile::getInstance($model, 'photo');
+//            print_r($model->photo);die;
+            if (is_object($model->photo)) {
+                $user = User::model()->findByPk($model->user_id);
+                $path = Yii::app()->basePath . '/../images/users/' . $user->username . '/';
+                if (!is_dir($path))
+                    mkdir($path, 0775, true);
+                
+                $name = $path . $model->photo->getName();
+                $model->photo->saveAs($name);
+
+                $image = Yii::app()->image->load($name);
+                $image->resize(64, 64);
+                $image->save();
+            }
+
             if ($model->save())
                 $this->redirect(array('admin/userprofile/index'));
         }
@@ -65,7 +81,7 @@ class UserProfileController extends AdminController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['UserProfile']))
             $model->attributes = $_GET['UserProfile'];
-        
+
         $role = Role::model()->find(array(
             'select' => 'id',
             'condition' => 'slug=:slug',
@@ -83,7 +99,7 @@ class UserProfileController extends AdminController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['UserProfile']))
             $model->attributes = $_GET['UserProfile'];
-        
+
         $role = Role::model()->find(array(
             'select' => 'id',
             'condition' => 'slug=:slug',
@@ -101,7 +117,7 @@ class UserProfileController extends AdminController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['UserProfile']))
             $model->attributes = $_GET['UserProfile'];
-        
+
         $role = Role::model()->find(array(
             'select' => 'id',
             'condition' => 'slug=:slug',
