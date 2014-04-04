@@ -4,7 +4,6 @@ class AdminController extends Controller {
 
     public $layout = '//layouts/main';
     protected $_model;
-    protected $_roles;
     protected $_profiles;
 
     public function init() {
@@ -15,7 +14,6 @@ class AdminController extends Controller {
         }
 
         Yii::app()->theme = 'proui';
-        $this->_roles = Yii::app()->user->getState('roles');
         $this->_profiles = Yii::app()->user->getState('user_profiles');
     }
 

@@ -165,7 +165,7 @@ class User extends AppActiveRecord {
     }
 
     public function getActiveUserByUsername($username = NULL) {
-        return $this->with(array('user_profiles', 'roles'))
+        return $this->with(array('user_profiles', 'user_profiles.role'))
                 ->findByAttributes(array(
                     'username' => $username,
                     'status' => Status::ACTIVE));

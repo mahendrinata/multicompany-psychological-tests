@@ -63,7 +63,7 @@ class Tag extends AppActiveRecord {
             'slug' => 'Slug',
             'name' => 'Name',
             'status' => 'Status',
-            'parent_id' => 'Parent',
+            'parent_id' => 'Created By',
             'user_profile_id' => 'User Profile',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

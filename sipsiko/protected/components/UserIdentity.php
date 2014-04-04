@@ -30,13 +30,11 @@ class UserIdentity extends CUserIdentity {
         $this->setState('username', $user->username);
         $this->setState('email', $user->email);
 
-        $this->_roles = CHtml::listData($user->roles, 'id', 'slug');
-        $this->setState('roles', $this->_roles);
-        $this->_profiles = array();
-        foreach (CHtml::listData($user->user_profiles, 'role_id', 'id') as $key => $val) {
-            $this->_profiles[$this->_roles[$key]] = $val;
+        foreach ($user->user_profiles as $profile){
+            $this->_profiles[$profile->role->slug] = $profile->id;
         }
         $this->setState('user_profiles', $this->_profiles);
+        
         $this->errorCode = self::ERROR_NONE;
     }
 

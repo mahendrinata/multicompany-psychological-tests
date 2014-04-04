@@ -34,7 +34,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'gender', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-4 col-xs-12">
-        <?php echo $form->dropDownList($model, 'gender', array(UserProfile::MALE, UserProfile::FEMALE), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Gender')); ?>
+        <?php echo $form->dropDownList($model, 'gender', UserProfile::model()->getGender(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Gender')); ?>
         <?php echo $form->error($model, 'gender', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>

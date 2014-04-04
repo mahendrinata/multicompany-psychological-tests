@@ -17,7 +17,12 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'slug', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->textField($model, 'slug', array('placeholder' => 'Slug', 'class' => 'form-control')); ?>
+        <div class="input-group">
+            <?php echo $form->textField($model, 'slug', array('placeholder' => 'Slug', 'class' => 'form-control slugify', 'readonly' => 'readonly')); ?>
+            <span class="input-group-btn">
+                <button class="btn btn-warning" type="button" onClick="removeReadOnly('.slugify')"><i class="fa fa-edit"></i></button>
+            </span>
+        </div>
         <?php echo $form->error($model, 'slug', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>

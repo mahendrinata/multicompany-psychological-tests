@@ -150,7 +150,7 @@ class UserProfile extends AppActiveRecord {
         return parent::model($className);
     }
 
-    public function get_gender() {
+    public function getGender() {
         return array(
             self::MALE,
             self::FEMALE

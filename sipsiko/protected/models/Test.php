@@ -21,6 +21,11 @@
  */
 class Test extends AppActiveRecord {
 
+    const IS_PRIVATE = 'PRIVATE';
+    const IS_PUBLIC = 'PUBLIC';
+
+    private $_alias = 'Test';
+    
     /**
      * @return string the associated database table name
      */
@@ -74,11 +79,11 @@ class Test extends AppActiveRecord {
             'duration' => 'Duration',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
-            'is_public' => 'Is Public',
+            'is_public' => 'Publication',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
             'type_id' => 'Type',
-            'parent_id' => 'Parent',
+            'parent_id' => 'Created By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -100,34 +105,38 @@ class Test extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
+        $criteria->alias = $this->_alias;
 
-        $criteria->compare('id', $this->id);
+        $criteria->compare($this->_alias . '.id', $this->id);
 
-        $criteria->compare('slug', $this->slug, true);
+        $criteria->compare($this->_alias . '.slug', $this->slug, true);
 
-        $criteria->compare('name', $this->name, true);
+        $criteria->compare($this->_alias . '.name', $this->name, true);
 
-        $criteria->compare('description', $this->description, true);
+        $criteria->compare($this->_alias . '.description', $this->description, true);
 
-        $criteria->compare('duration', $this->duration);
+        $criteria->compare($this->_alias . '.duration', $this->duration);
 
-        $criteria->compare('start_date', $this->start_date, true);
+        $criteria->compare($this->_alias . '.start_date', $this->start_date, true);
 
-        $criteria->compare('end_date', $this->end_date, true);
+        $criteria->compare($this->_alias . '.end_date', $this->end_date, true);
 
-        $criteria->compare('is_public', $this->is_public);
+        $criteria->compare($this->_alias . '.is_public', $this->is_public);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status, true);
 
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare($this->_alias . '.user_profile_id', $this->user_profile_id);
 
-        $criteria->compare('type_id', $this->type_id);
+        $criteria->compare($this->_alias . '.type_id', $this->type_id);
 
-        $criteria->compare('parent_id', $this->parent_id);
+        $criteria->compare($this->_alias . '.parent_id', $this->parent_id);
 
-        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
 
-        $criteria->compare('updated_at', $this->updated_at, true);
+        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
+
+        $criteria->with= array('type');
+        $criteria->together = true;
 
         return new CActiveDataProvider('Test', array(
             'criteria' => $criteria,
@@ -140,6 +149,12 @@ class Test extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function getPublicationStatus() {
+        return array(
+            self::IS_PRIVATE, 
+            self::IS_PUBLIC);
     }
 
 }

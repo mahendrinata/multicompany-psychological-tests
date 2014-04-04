@@ -77,7 +77,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'gender',
-                    'filter' => CHtml::activeDropDownList($model, 'gender', array(UserProfile::MALE, UserProfile::FEMALE), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Gender'))
+                    'filter' => CHtml::activeDropDownList($model, 'gender', UserProfile::model()->getGender(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Gender'))
                 ),
                 array(
                     'name' => 'birth_place',
