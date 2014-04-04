@@ -7,18 +7,18 @@
         <br><br>
         <div class="row" style="margin-bottom: 15px;">
             <div class="col-lg-12">
-                <?php echo CHtml::textArea('Question[' . $id . '][description]', null, array('placeholder' => 'Description', 'class' => 'form-control', 'cols' => 6)); ?>
+                <?php echo CHtml::textArea('Question[answers][' . $id . '][description]', null, array('placeholder' => 'Answer ' . $id, 'class' => 'form-control', 'cols' => 6)); ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3">
-                <?php echo CHtml::textField('Question[' . $id . '][value]', null, array('placeholder' => 'Value', 'class' => 'form-control')); ?>
+                <?php echo CHtml::textField('Question[answers][' . $id . '][value]', 1, array('placeholder' => 'Value', 'class' => 'form-control')); ?>
             </div>
             <div class="col-lg-3">
-                <?php echo CHtml::dropDownList('Question[' . $id . '][status]', null, Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
+                <?php echo CHtml::dropDownList('Question[answers][' . $id . '][status]', Status::ACTIVE, Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
             </div>
             <div class="col-lg-6">
-                <?php echo CHtml::dropDownList('Question[' . $id . '][variable_id]', null, Type::model()->getTypeVariableList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
+                <?php echo CHtml::dropDownList('Question[answers][' . $id . '][variable_id]', null, Type::model()->getTypeVariableList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
             </div>
         </div>
     </div>
