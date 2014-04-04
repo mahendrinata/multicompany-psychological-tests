@@ -4,15 +4,10 @@ $this->breadcrumbs = array(
     $model->name => array('view', 'id' => $model->id),
     'Update',
 );
-
-$this->menu = array(
-    array('label' => 'List Test', 'url' => array('index')),
-    array('label' => 'Create Test', 'url' => array('create')),
-    array('label' => 'View Test', 'url' => array('view', 'id' => $model->id)),
-    array('label' => 'Manage Test', 'url' => array('admin')),
-);
 ?>
-
-<h1>Update Test <?php echo $model->id; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+<div class="block">
+    <div class="block-title">
+        <h2><strong>Test</strong> Update <?php echo $model->id; ?></h2>
+    </div>
+    <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+</div>

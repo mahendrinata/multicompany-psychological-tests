@@ -4,12 +4,10 @@ $this->breadcrumbs = array(
     'Create',
 );
 
-$this->menu = array(
-    array('label' => 'List Test', 'url' => array('index')),
-    array('label' => 'Manage Test', 'url' => array('admin')),
-);
 ?>
-
-<h1>Create Test</h1>
-
-<?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+<div class="block">
+    <div class="block-title">
+        <h2><strong>Test</strong> Create</h2>
+    </div>
+    <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+</div>

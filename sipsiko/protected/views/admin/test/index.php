@@ -115,7 +115,7 @@ $('.search-form form').submit(function(){
                         'question' => array(
                             'label' => 'Add Question',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
-                            'url' => 'Yii::app()->createUrl("question/create", array("id"=>$data->id, "slug" => $data->slug))',
+                            'url' => 'Yii::app()->createUrl("admin/question/create", array("id"=>$data->slug))',
                         ),
                     ),)
             ),
