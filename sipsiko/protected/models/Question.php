@@ -105,4 +105,22 @@ class Question extends AppActiveRecord {
         return parent::model($className);
     }
 
+    public function saveData($data = array()) {
+        $questionModel = new Question;
+        $questionModel->attributes = $data['Question'];
+        $questionModel->test_id = $this->data['test']->id;
+
+        if (isset($data['Question']['answers']) && !empty($data['Question']['answers'])) {
+            $answerList = array();
+            foreach ($data['Question']['answers'] as $answer) {
+                $answerModel = new Answer;
+                $answerModel->attributes = $answer;
+                $answerList[] = $answerModel;
+            }
+        }
+        $questionModel->answers = $answerList;
+
+        return $questionModel->saveWithRelated('answers');
+    }
+
 }

@@ -14,23 +14,20 @@ class QuestionController extends AdminController {
 
     public function actionCreate() {
         $this->data['test'] = Test::model()->findBySlug($_GET['id']);
-        
-        $model = new Question;
 
-        $this->performAjaxValidation($model, 'question-form');
+        $questionModel = new Question;
+
+        $this->performAjaxValidation($questionModel, 'question-form');
 
         if (isset($_POST['Question'])) {
-            $model->attributes = $_POST['Question'];
-            $model->test_id = $this->data['test']->id;
-            
-            if (isset($_POST['Question']['answers']) && !empty($_POST['Question']['answers']))
-                $model->answers = $_POST['Question']['answers'];
-            
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            $saveData = $_POST['Question'];
+            $saveData['test_id'] = $this->data['test']->id;
+
+            if ($questionModel->saveData($saveData))
+                $this->redirect(array('admin/test/index'));
         }
 
-        $this->data['model'] = $model;
+        $this->data['model'] = $questionModel;
         $this->render('create', $this->data);
     }
 

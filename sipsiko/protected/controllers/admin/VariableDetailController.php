@@ -34,7 +34,7 @@ class VariableDetailController extends AdminController {
             if (isset($_POST['VariableDetail']['tag_variables']) && !empty($_POST['VariableDetail']['tag_variables']))
                 $model->tag_variables = $_POST['VariableDetail']['tag_variables'];
 
-            if ($model->save())
+            if ($model->saveWithRelated(array('combinations', 'tag_variables')))
                 $this->redirect(array('admin/variabledetail/index'));
         }
 

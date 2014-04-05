@@ -17,15 +17,8 @@ class AdminController extends Controller {
         $this->_profiles = Yii::app()->user->getState('user_profiles');
     }
 
-    public function getRolePrivilegeStatus($role) {
-        return in_array($role, $this->_roles);
-    }
-
     public function getUserProfileId($role) {
-        if ($this->getRolePrivilegeStatus($role)) {
-            return $this->_profiles[$role];
-        }
-        return null;
+        return $this->_profiles[$role];
     }
 
 //    public function filters() {
