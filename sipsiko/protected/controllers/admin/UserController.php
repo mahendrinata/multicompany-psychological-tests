@@ -70,5 +70,5 @@ class UserController extends AdminController {
             'model' => $model,
         ));
     }
-
+    
 }

@@ -32,7 +32,7 @@ class UserProfileController extends AdminController {
                 $path = Yii::app()->basePath . '/../images/users/' . $user->username . '/';
                 if (!is_dir($path))
                     mkdir($path, 0775, true);
-                
+
                 $name = $path . $model->photo->getName();
                 $model->photo->saveAs($name);
 
@@ -128,6 +128,28 @@ class UserProfileController extends AdminController {
         $this->render('company', array(
             'model' => $model,
         ));
+    }
+
+    public function actionChoose() {
+        if (isset($_POST['UserProfile'])) {
+            foreach ($_POST['UserProfile']['roles'] as $role) {
+                $roleModel = Role::model()->findBySlug($role);
+
+                if (empty(UserProfile::model()->findByAttributes(array('role_id' => $roleModel->id, 'user_id' => Yii::app()->user->id)))) {
+                    $userProfileModel = new UserProfile;
+                    $userProfileModel->role_id = $roleModel->id;
+                    $userProfileModel->user_id = Yii::app()->user->id;
+                    $userProfileModel->save(false);
+                }
+            }
+
+            $this->redirect(array('user/login'));
+
+//            $this->redirect(('admin/userprofile/register' . strtolower($_POST['UserProfile']['roles'][0])));
+        }
+
+
+        $this->render('choose');
     }
 
 }

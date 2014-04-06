@@ -5,6 +5,7 @@ class UserIdentity extends CUserIdentity {
     private $_id;
     private $_roles;
     private $_profiles;
+    private $_unregisters;
 
     public function authenticate() {
         $user = User::model()->getActiveUserByUsername($this->username);
@@ -30,11 +31,18 @@ class UserIdentity extends CUserIdentity {
         $this->setState('username', $user->username);
         $this->setState('email', $user->email);
 
-        foreach ($user->user_profiles as $profile){
+        foreach ($user->user_profiles as $profile) {
+            $this->_roles[$profile->role->id] = $profile->role->slug;
             $this->_profiles[$profile->role->slug] = $profile->id;
+            if (empty($profile->first_name)) {
+                $this->_unregisters[$profile->role->slug] = $profile->id;
+            }
         }
-        $this->setState('user_profiles', $this->_profiles);
         
+        $this->setState('roles', $this->_roles);
+        $this->setState('user_profiles', $this->_profiles);
+        $this->setState('unregisters', $this->_unregisters);
+
         $this->errorCode = self::ERROR_NONE;
     }
 

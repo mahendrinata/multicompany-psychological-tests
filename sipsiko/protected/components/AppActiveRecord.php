@@ -45,8 +45,12 @@ abstract class AppActiveRecord extends CActiveRecord {
         return $text;
     }
 
-    function findBySlug($slug = null) {
+    public function findBySlug($slug = null) {
         return $this->findByAttributes(array('slug' => $slug));
+    }
+
+    public function findAllActive() {
+        return $this->findAllByAttributes(array('status' => Status::ACTIVE));
     }
 
 }

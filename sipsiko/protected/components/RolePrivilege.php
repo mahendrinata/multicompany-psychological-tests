@@ -45,6 +45,14 @@ abstract class RolePrivilege {
         return $accesses;
     }
 
+    public static function get_user_profiles_role() {
+        return array(
+            self::EXPERT => self::EXPERT,
+            self::COMPANY => self::COMPANY,
+            self::MEMBER => self::MEMBER
+        );
+    }
+
 }
 
 ?>
