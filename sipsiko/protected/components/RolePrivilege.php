@@ -10,16 +10,16 @@ abstract class RolePrivilege {
 
     public static function get_list() {
         return array(
-            RolePrivilege::ADMIN,
-            RolePrivilege::EXPERT,
-            RolePrivilege::COMPANY,
-            RolePrivilege::MEMBER,
-            RolePrivilege::GUEST
+            self::ADMIN,
+            self::EXPERT,
+            self::COMPANY,
+            self::MEMBER,
+            self::GUEST
         );
     }
 
     public static function get_priority() {
-        $roles = RolePrivilege::get_list();
+        $roles = self::get_list();
         foreach ($roles as $key => $value) {
             $priorities[$value] = $key;
         }
@@ -28,14 +28,14 @@ abstract class RolePrivilege {
 
     public static function get_map() {
         $map = array();
-        foreach (Status::get_list() as $status) {
-            $map[$status] = $status;
+        foreach (self::get_list() as $role) {
+            $map[$role] = $role;
         }
         return $map;
     }
 
     public static function get_access($role = NULL) {
-        $priorities = RolePrivilege::get_priority();
+        $priorities = self::get_priority();
         $accesses = array();
         foreach ($priorities as $key => $value) {
             if ($priorities[$role] >= $value) {

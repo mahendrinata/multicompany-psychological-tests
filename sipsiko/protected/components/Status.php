@@ -9,16 +9,16 @@ abstract class Status {
 
     public static function get_list() {
         return array(
-            Status::DRAFT,
-            Status::ACTIVE,
-            Status::INACTIVE,
-            Status::VOID
+            self::DRAFT,
+            self::ACTIVE,
+            self::INACTIVE,
+            self::VOID
         );
     }
 
     public static function get_map() {
         $map = array();
-        foreach (Status::get_list() as $status) {
+        foreach (self::get_list() as $status) {
             $map[$status] = $status;
         }
         return $map;
@@ -26,16 +26,20 @@ abstract class Status {
 
     public static function get_label($status) {
         $label = array(
-            Status::DRAFT => 'label-default',
-            Status::ACTIVE => 'label-success',
-            Status::INACTIVE => 'label-warning',
-            Status::VOID => 'label-danger',
+            self::DRAFT => 'label-default',
+            self::ACTIVE => 'label-success',
+            self::INACTIVE => 'label-warning',
+            self::VOID => 'label-danger',
         );
-        return $label[$status];
+        if (in_array($status, self::get_list())) {
+            return $label[$status];
+        } else {
+            return null;
+        }
     }
 
     public static function get_tag_label($status) {
-        return CHtml::tag("span", array("class" => "label " . Status::get_label($status)), $status);
+        return CHtml::tag("span", array("class" => "label " . self::get_label($status)), $status);
     }
 
 }
