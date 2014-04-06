@@ -61,7 +61,14 @@ class TestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
+            $model = Test::model()->with('questions', 'questions.answers')->findByPk($_GET['id']);
             $this->loadModel()->delete();
+            foreach ($model->questions as  $question){
+                $question->delete();
+                foreach ($question->answers as $answer){
+                    $answer->delete();
+                }
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('index'));

@@ -2,12 +2,14 @@
 
 abstract class Status {
 
+    const DRAFT = 'DRAFT';
     const ACTIVE = 'ACTIVE';
     const INACTIVE = 'INACTIVE';
     const VOID = 'VOID';
 
     public static function get_list() {
         return array(
+            Status::DRAFT,
             Status::ACTIVE,
             Status::INACTIVE,
             Status::VOID
@@ -24,6 +26,7 @@ abstract class Status {
 
     public static function get_label($status) {
         $label = array(
+            Status::DRAFT => 'label-default',
             Status::ACTIVE => 'label-success',
             Status::INACTIVE => 'label-warning',
             Status::VOID => 'label-danger',

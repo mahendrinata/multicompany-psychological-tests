@@ -24,7 +24,7 @@ class QuestionController extends AdminController {
             $saveData['Question']['test_id'] = $this->data['test']->id;
 
             if ($questionModel->saveData($saveData))
-                $this->redirect(array('admin/test/index'));
+                $this->redirect(array('admin/test/view', 'id' => $this->data['test']->id));
         }
 
         $this->data['model'] = $questionModel;
@@ -52,6 +52,9 @@ class QuestionController extends AdminController {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel();
             $this->loadModel()->delete();
+            foreach ($model->answers as $answer){
+                $answer->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/test/view', 'id' => $model->test_id));

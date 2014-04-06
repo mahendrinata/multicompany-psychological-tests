@@ -9,8 +9,8 @@
         });
         $('#answers').attr('data-id', (parseInt(answer) + 1));
     }
-    
-    function deleteAnswer(el){
+
+    function deleteAnswer(el) {
         $(el).remove();
     }
 </script>
@@ -66,7 +66,7 @@ $this->breadcrumbs = array(
         <div class="col-lg-9 col-xs-12">
             <?php echo CHtml::htmlButton('<i class="fa fa-plus"></i> Add Question', array('class' => 'btn btn-primary', 'onclick' => 'renderAnswer("#answers")')); ?>
             <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> ' . ($model->isNewRecord ? 'Create' : 'Save'), array('class' => 'btn btn-success', 'type' => 'submit')); ?>
-            <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/role'), array('class' => 'btn btn-warning')); ?>
+            <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test/view', 'id' => $test->id), array('class' => 'btn btn-warning')); ?>
         </div>
     </div>
 
