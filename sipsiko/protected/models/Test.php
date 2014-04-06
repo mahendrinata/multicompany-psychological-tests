@@ -25,7 +25,7 @@ class Test extends AppActiveRecord {
     const IS_PUBLIC = 'PUBLIC';
 
     private $_alias = 'Test';
-    
+
     /**
      * @return string the associated database table name
      */
@@ -135,7 +135,7 @@ class Test extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
 
-        $criteria->with= array('type');
+        $criteria->with = array('type', 'questions');
         $criteria->together = true;
 
         return new CActiveDataProvider('Test', array(
@@ -153,7 +153,7 @@ class Test extends AppActiveRecord {
 
     public function getPublicationStatus() {
         return array(
-            self::IS_PRIVATE, 
+            self::IS_PRIVATE,
             self::IS_PUBLIC);
     }
 

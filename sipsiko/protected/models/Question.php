@@ -13,6 +13,8 @@
  */
 class Question extends AppActiveRecord {
 
+    private $_alias = 'Question';
+
     /**
      * @return string the associated database table name
      */
@@ -79,18 +81,22 @@ class Question extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
+        $criteria->alias = $this->_alias;
 
-        $criteria->compare('id', $this->id);
+        $criteria->compare($this->_alias . '.id', $this->id);
 
-        $criteria->compare('description', $this->description, true);
+        $criteria->compare($this->_alias . '.description', $this->description, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status, true);
 
-        $criteria->compare('test_id', $this->test_id);
+        $criteria->compare($this->_alias . '.test_id', $this->test_id);
 
-        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
 
-        $criteria->compare('updated_at', $this->updated_at, true);
+        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
+
+        $criteria->with = array('answers');
+        $criteria->together = true;
 
         return new CActiveDataProvider('Question', array(
             'criteria' => $criteria,
@@ -106,21 +112,30 @@ class Question extends AppActiveRecord {
     }
 
     public function saveData($data = array()) {
-        $questionModel = new Question;
+        if (!isset($data['Question']['id']) || empty($data['Question']['id'])) {
+            $questionModel = new Question;
+        } else {
+            $questionModel = $this->findByPk($data['Question']['id']);
+            unset($data['Question']['id']);
+        }
         $questionModel->attributes = $data['Question'];
-        $questionModel->test_id = $this->data['test']->id;
 
         if (isset($data['Question']['answers']) && !empty($data['Question']['answers'])) {
             $answerList = array();
             foreach ($data['Question']['answers'] as $answer) {
-                $answerModel = new Answer;
+                if (!isset($answer['id']) || empty($answer['id'])) {
+                    $answerModel = new Answer;
+                } else {
+                    $answerModel =  Answer::model()->findByPk($answer['id']);
+                    unset($answer['id']);
+                }
                 $answerModel->attributes = $answer;
                 $answerList[] = $answerModel;
             }
         }
         $questionModel->answers = $answerList;
-
-        return $questionModel->saveWithRelated('answers');
+        
+        return $questionModel->withRelated->save(false, array('answers'));
     }
 
 }

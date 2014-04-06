@@ -5,7 +5,7 @@ class QuestionController extends AdminController {
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id']))
-                $this->_model = Question::model()->findbyPk($_GET['id']);
+                $this->_model = Question::model()->with('answers')->findbyPk($_GET['id']);
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -20,8 +20,8 @@ class QuestionController extends AdminController {
         $this->performAjaxValidation($questionModel, 'question-form');
 
         if (isset($_POST['Question'])) {
-            $saveData = $_POST['Question'];
-            $saveData['test_id'] = $this->data['test']->id;
+            $saveData = $_POST;
+            $saveData['Question']['test_id'] = $this->data['test']->id;
 
             if ($questionModel->saveData($saveData))
                 $this->redirect(array('admin/test/index'));
@@ -37,9 +37,10 @@ class QuestionController extends AdminController {
         $this->performAjaxValidation($model, 'question-form');
 
         if (isset($_POST['Question'])) {
-            $model->attributes = $_POST['Question'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            $saveData = $_POST;
+            $saveData['Question']['id'] = $model->id;
+            if ($model->saveData($saveData))
+                $this->redirect(array('admin/test/view', 'id' => $model->test_id));
         }
 
         $this->render('update', array(
@@ -49,10 +50,11 @@ class QuestionController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
+            $model = $this->loadModel();
             $this->loadModel()->delete();
 
             if (!isset($_GET['ajax']))
-                $this->redirect(array('index'));
+                $this->redirect(array('admin/test/view', 'id' => $model->test_id));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

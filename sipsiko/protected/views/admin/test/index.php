@@ -97,7 +97,14 @@ $('.search-form form').submit(function(){
                     'name' => 'type_id',
                     'filter' => CHtml::activeDropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'header' => 'Type Test',
-//                    'value' => 'type.name'
+                    'value' => '$data->type->name'
+                ),
+                array(
+                    'filter' => '',
+                    'header' => 'Question',
+                    'value' => 'count($data->questions)',
+                    'type' => 'raw',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'created_at',
@@ -115,7 +122,7 @@ $('.search-form form').submit(function(){
                         'question' => array(
                             'label' => 'Add Question',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
-                            'url' => 'Yii::app()->createUrl("admin/question/create", array("id"=>$data->slug))',
+                            'url' => 'Yii::app()->controller->createUrl("admin/question/create", array("id"=>$data->slug))',
                         ),
                     ),)
             ),

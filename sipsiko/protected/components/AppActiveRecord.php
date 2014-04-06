@@ -12,6 +12,8 @@ abstract class AppActiveRecord extends CActiveRecord {
                 ),
                 'ESaveRelatedBehavior' => array(
                     'class' => 'application.components.ESaveRelatedBehavior'),
+                'withRelated' => array(
+                    'class' => 'ext.WithRelatedBehavior'),
         ));
     }
 

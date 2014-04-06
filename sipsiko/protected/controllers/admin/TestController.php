@@ -5,7 +5,7 @@ class TestController extends AdminController {
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id']))
-                $this->_model = Test::model()->findbyPk($_GET['id']);
+                $this->_model = Test::model()->with('type')->findbyPk($_GET['id']);
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -13,9 +13,18 @@ class TestController extends AdminController {
     }
 
     public function actionView() {
-        $this->render('view', array(
-            'model' => $this->loadModel(),
-        ));
+        $this->data['testModel'] = $this->loadModel();
+        
+        $questionModel = new Question('search');
+        $questionModel->unsetAttributes();
+        if (isset($_GET['Question']))
+            $questionModel->attributes = $_GET['Question'];
+        
+        $questionModel->test_id = $this->data['testModel']->id;
+        
+        $this->data['questionModel'] = $questionModel;
+        
+        $this->render('view', $this->data);
     }
 
     public function actionCreate() {
@@ -62,8 +71,6 @@ class TestController extends AdminController {
 
     public function actionIndex() {
         $model = new Test('search');
-//        $test = $model->search();
-//        print_r($test);die;
         $model->unsetAttributes();
         if (isset($_GET['Test']))
             $model->attributes = $_GET['Test'];
