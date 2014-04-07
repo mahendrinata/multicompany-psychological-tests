@@ -11,8 +11,10 @@
  * @property integer $duration
  * @property string $start_date
  * @property string $end_date
+ * @property integer $is_expert 
  * @property integer $is_public
  * @property string $status
+ * @property integer $combination_variable 
  * @property integer $user_profile_id
  * @property integer $type_id
  * @property integer $parent_id
@@ -44,7 +46,7 @@ class Test extends AppActiveRecord {
             array('slug', 'unique'),
             array('duration, is_public, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
-            array('description, start_date, end_date, created_at, updated_at', 'safe'),
+            array('description, start_date, end_date, is_expert, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, slug, name, description, duration, start_date, end_date, is_public, combination_variable, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -122,6 +124,10 @@ class Test extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.end_date', $this->end_date, true);
 
+        $criteria->compare($this->_alias . '.is_expert', $this->is_expert);
+
+        $criteria->compare($this->_alias . '.combination_variable', $this->combination_variable);
+
         $criteria->compare($this->_alias . '.is_public', $this->is_public);
 
         $criteria->compare($this->_alias . '.status', $this->status, true);
@@ -138,7 +144,7 @@ class Test extends AppActiveRecord {
 
         $criteria->with = array('type');
         $criteria->together = true;
-
+        
         return new CActiveDataProvider('Test', array(
             'criteria' => $criteria,
         ));
@@ -156,6 +162,47 @@ class Test extends AppActiveRecord {
         return array(
             self::IS_PRIVATE,
             self::IS_PUBLIC);
+    }
+
+    public function generate($id, $user_profile_id) {
+        $model = $this->with('questions', 'questions.answers')->findBySlug($id);
+   
+        if(!empty($this->findBySlug($model->slug . '-' . $user_profile_id))){
+            return false;
+        }
+        
+        $testModel = new Test;
+        $testModel->slug = $model->slug . '-' . $user_profile_id;
+        $testModel->name = $model->name;
+        $testModel->description = $model->description;
+        $testModel->is_public = false;
+        $testModel->combination_variable = $model->combination_variable;
+        $testModel->status = Status::ACTIVE;
+        $testModel->type_id = $model->type_id;
+        $testModel->user_profile_id = $user_profile_id;
+        $testModel->parent_id = $model->id;
+
+        $questionList = array();
+        foreach ($model->questions as $question) {
+            $questionModel = new Question;
+            $questionModel->description = $question->description;
+            $questionModel->status = $question->status;
+            
+            $answerList = array();
+            foreach ($question->answers as $answer) {
+                $answerModel = new Answer;
+                $answerModel->description = $answer->description;
+                $answerModel->status = $answer->status;
+                $answerModel->value = $answer->value;
+                $answerModel->variable_id = $answer->variable_id;
+                $answerList[] = $answerModel;
+            }
+            $questionModel->answers = $answerList;
+            $questionList[] = $questionModel;
+        }
+        $testModel->questions = $questionList;
+        
+        return $testModel->withRelated->save(false, array('questions', 'questions.answers'));;
     }
 
 }

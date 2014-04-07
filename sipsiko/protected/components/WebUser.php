@@ -14,6 +14,7 @@ class WebUser extends CWebUser {
             return false;
         }
         $roles = $this->getState("roles");
+        $roles = ($roles == null) ? array() : $roles;
         return (in_array($operation, $roles));
     }
 

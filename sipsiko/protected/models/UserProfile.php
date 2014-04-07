@@ -161,4 +161,9 @@ class UserProfile extends AppActiveRecord {
         return $this->with('role')->findByAttributes(array('user_id' => $user_id, 'role.slug' => $role));
     }
 
+    function getUserProfilesByRole($slug) {
+        $role = Role::model()->findBySlug($slug);
+        return $this->with('role')->findAllByAttributes(array('role_id' => $role->id));
+    }
+
 }

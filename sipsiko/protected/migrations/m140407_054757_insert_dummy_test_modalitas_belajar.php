@@ -12,7 +12,9 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
             array(
                 'slug' => Test::model()->slugify('Modalitas Belajar'),
                 'name' => 'Modalitas Belajar',
+                'is_expert' => true,
                 'is_public' => true,
+                'combination_variable' => 1,
                 'user_profile_id' => 2,
                 'type_id' => 5,
                 'questions' => array(

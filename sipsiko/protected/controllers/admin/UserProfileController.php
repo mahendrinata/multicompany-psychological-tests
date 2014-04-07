@@ -9,8 +9,21 @@ class UserProfileController extends AdminController {
                 'roles' => array(RolePrivilege::ADMIN),
             ),
             array('allow',
-                'actions' => array('registerCompany', 'registerExpert', 'registerMember'),
-                'roles' => array(RolePrivilege::COMPANY, RolePrivilege::EXPERT, RolePrivilege::MEMBER)),
+                'actions' => array('registerCompany'),
+                'roles' => array(RolePrivilege::COMPANY)
+            ),
+            array('allow',
+                'actions' => array('registerExpert'),
+                'roles' => array(RolePrivilege::EXPERT)
+            ),
+            array('allow',
+                'actions' => array('registerMember'),
+                'roles' => array(RolePrivilege::MEMBER)
+            ),
+            array('allow',
+                'actions' => array('choose'),
+                'users' => array('@')
+            ),
             array('deny',
                 'users' => array('*'),
             ),

@@ -12,6 +12,7 @@ class m140319_170357_create_tests_table extends CDbMigration {
             'start_date' => 'date',
             'end_date' => 'date',
             'is_public' => 'boolean NOT NULL',
+            'is_expert' => 'boolean NOT NULL',
             'combination_variable' => 'integer NOT NULL',
             'status' => 'string',
             'user_profile_id' => 'integer',

@@ -8,6 +8,10 @@ class TestController extends AdminController {
                 'actions' => array('index', 'view', 'create', 'update', 'delete'),
                 'roles' => array(RolePrivilege::EXPERT),
             ),
+            array('allow',
+                'actions' => array('company', 'active', 'generate'),
+                'roles' => array(RolePrivilege::COMPANY)
+            ),
             array('deny',
                 'users' => array('*'),
             ),
@@ -46,6 +50,8 @@ class TestController extends AdminController {
 
         if (isset($_POST['Test'])) {
             $model->attributes = $_POST['Test'];
+            $model->is_expert = true;
+            $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
             if ($model->save())
                 $this->redirect(array('admin/test/index'));
         }
@@ -91,14 +97,52 @@ class TestController extends AdminController {
     public function actionIndex() {
         $model = new Test('search');
         $model->unsetAttributes();
-        if (isset($_GET['Test'])) {
+        if (isset($_GET['Test']))
             $model->attributes = $_GET['Test'];
-            $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
-        }
+
+        $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
 
         $this->render('index', array(
             'model' => $model,
         ));
+    }
+
+    public function actionCompany() {
+        $model = new Test('search');
+        $model->unsetAttributes();
+        if (isset($_GET['Test']))
+            $model->attributes = $_GET['Test'];
+
+        $model->user_profile_id = $this->_profiles[RolePrivilege::COMPANY];
+
+        $this->render('company', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionActive() {
+        $model = new Test('search');
+        $model->unsetAttributes();
+        if (isset($_GET['Test']))
+            $model->attributes = $_GET['Test'];
+
+        $model->status = Status::ACTIVE;
+        $model->is_expert = true;
+        
+        $this->render('active', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionGenerate() {
+        if (Yii::app()->request->isPostRequest) {
+
+            $save = Test::model()->generate($_GET['id'], $this->_profiles[RolePrivilege::COMPANY]);
+
+            if (!isset($_GET['ajax']))
+                $this->redirect(array('admin/test/company'));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
 }
