@@ -40,14 +40,14 @@ class Test extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, is_public', 'required'),
+            array('slug, name, is_public, combination_variable', 'required'),
             array('slug', 'unique'),
-            array('duration, is_public, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
+            array('duration, is_public, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, start_date, end_date, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, description, duration, start_date, end_date, is_public, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, duration, start_date, end_date, is_public, combination_variable, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -80,6 +80,7 @@ class Test extends AppActiveRecord {
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'is_public' => 'Publication',
+            'combination_variable' => 'Combination Variable',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
             'type_id' => 'Type',

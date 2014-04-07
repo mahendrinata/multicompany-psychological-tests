@@ -66,6 +66,13 @@
     </div>
 
     <div class="form-group">
+        <?php echo $form->label($model, 'combination_variable', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-2 col-sm-4 col-xs-12">
+            <?php echo $form->textField($model, 'combination_variable', array('placeholder' => 'Combianation Variable', 'class' => 'form-control')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
         <?php echo $form->label($model, 'type_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
         <div class="col-lg-2 col-sm-4 col-xs-12">
             <?php echo $form->dropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type')); ?>

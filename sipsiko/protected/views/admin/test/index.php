@@ -94,6 +94,10 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
+                    'name' => 'combination_variable',
+                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
                     'name' => 'type_id',
                     'filter' => CHtml::activeDropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'header' => 'Type Test',

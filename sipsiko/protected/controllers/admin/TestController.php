@@ -91,8 +91,10 @@ class TestController extends AdminController {
     public function actionIndex() {
         $model = new Test('search');
         $model->unsetAttributes();
-        if (isset($_GET['Test']))
+        if (isset($_GET['Test'])) {
             $model->attributes = $_GET['Test'];
+            $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
+        }
 
         $this->render('index', array(
             'model' => $model,

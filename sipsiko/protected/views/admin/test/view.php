@@ -19,6 +19,7 @@ $this->breadcrumbs = array(
             'description',
             'status',
             'is_public',
+            'combination_variable',
             'type.name',
             'created_at',
             'updated_at',
