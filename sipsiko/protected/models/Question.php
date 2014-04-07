@@ -95,9 +95,6 @@ class Question extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
 
-        $criteria->with = array('answers');
-        $criteria->together = true;
-
         return new CActiveDataProvider('Question', array(
             'criteria' => $criteria,
             'pagination' => false

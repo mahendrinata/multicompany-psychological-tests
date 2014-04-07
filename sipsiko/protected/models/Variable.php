@@ -105,9 +105,6 @@ class Variable extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
 
-        $criteria->with = array('type');
-        $criteria->together = true;
-
         return new CActiveDataProvider('Variable', array(
             'criteria' => $criteria,
         ));

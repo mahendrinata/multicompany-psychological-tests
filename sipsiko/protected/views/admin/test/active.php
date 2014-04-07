@@ -80,7 +80,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'status',
-                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
+                    'filter' => '',
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),

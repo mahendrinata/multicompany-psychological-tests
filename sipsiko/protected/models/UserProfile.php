@@ -64,6 +64,7 @@ class UserProfile extends AppActiveRecord {
             'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'user_tests' => array(self::HAS_MANY, 'UserTest', 'user_profile_id'),
+            'company_tests' => array(self::HAS_MANY, 'UserTest', 'company_id'),
             'variable_details' => array(self::HAS_MANY, 'VariableDetail', 'user_profile_id'),
             'variables' => array(self::HAS_MANY, 'Variable', 'user_profile_id'),
         );

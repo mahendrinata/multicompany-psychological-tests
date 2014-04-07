@@ -13,7 +13,7 @@
                 <div class="sidebar-user-name">John Doe</div>
                 <div class="sidebar-user-links">
                     <?php
-                    echo CHtml::link('<i class="gi gi-user"></i>', array('admin/user/profile'), array('title' => 'Profile'));
+                    echo CHtml::link('<i class="gi gi-user"></i>', array('admin/usertest/profile'), array('title' => 'Profile'));
                     echo CHtml::link('<i class="gi gi-envelope"></i>', array('admin/user/profile'), array('title' => 'Message'));
                     echo CHtml::link('<i class="gi gi-cogwheel"></i>', array('admin/user/profile'), array('title' => 'Setting'));
                     echo CHtml::link('<i class="gi gi-exit"></i>', array('user/logout'), array('title' => 'Logout'));
@@ -25,9 +25,9 @@
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::COMPANY)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Company</span></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member of Company</a>', array('admin/user/member')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member of Company</a>', array('admin/usertest/index')); ?></li>
                     <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Tests of Company</a>', array('admin/test/company')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Test Results</a>', array('admin/usertest')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Test Results</a>', array('admin/usertest/result')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/usertest/analysis')); ?></li>
                 <?php } ?>
 

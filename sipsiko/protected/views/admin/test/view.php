@@ -93,6 +93,6 @@ $this->breadcrumbs = array(
         ));
         ?>
     </div>
-    <?php echo CHtml::link('<i class="fa fa-plus"></i> Add Answer', array('admin/question/create', 'id' => $testModel->slug), array('class' => 'btn btn-success', 'style' => 'margin-bottom:20px;')); ?>
+    <?php echo CHtml::link('<i class="fa fa-plus"></i> Add Question', array('admin/question/create', 'id' => $testModel->slug), array('class' => 'btn btn-success', 'style' => 'margin-bottom:20px;')); ?>
     <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test/index'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
 </div>

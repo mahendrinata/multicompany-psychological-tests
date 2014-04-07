@@ -10,6 +10,7 @@
  * @property string $status
  * @property integer $user_profile_id
  * @property integer $test_id
+ * @property integer $company_id 
  * @property string $created_at
  * @property string $updated_at
  */
@@ -49,6 +50,7 @@ class UserTest extends AppActiveRecord {
             'test_variables' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
             'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
+            'company' => array(self::BELONGS_TO, 'UserProfile', 'company_id'),
         );
     }
 
@@ -62,6 +64,7 @@ class UserTest extends AppActiveRecord {
             'note' => 'Note',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
+            'company_id' => 'Company',
             'test_id' => 'Test',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -96,6 +99,8 @@ class UserTest extends AppActiveRecord {
         $criteria->compare('user_profile_id', $this->user_profile_id);
 
         $criteria->compare('test_id', $this->test_id);
+
+        $criteria->compare('company_id', $this->company_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 
