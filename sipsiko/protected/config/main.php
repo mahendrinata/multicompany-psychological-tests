@@ -26,7 +26,8 @@ return array(
         ),
         'user' => array(
             'allowAutoLogin' => true,
-            'loginUrl' => 'user/login'
+            'loginUrl' => 'user/login',
+            'class' => 'WebUser',
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
