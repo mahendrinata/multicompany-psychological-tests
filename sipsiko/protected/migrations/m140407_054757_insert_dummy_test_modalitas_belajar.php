@@ -1299,6 +1299,8 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
 
     public function down() {
         $this->truncate('tests');
+        $this->truncate('questions');
+        $this->truncate('answers');
     }
 
 }
