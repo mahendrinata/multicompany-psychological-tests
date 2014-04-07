@@ -2,6 +2,18 @@
 
 class RoleController extends AdminController {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('index', 'view', 'create', 'update', 'delete'),
+                'roles' => array(RolePrivilege::ADMIN),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id']))

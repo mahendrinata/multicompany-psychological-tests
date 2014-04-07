@@ -2,6 +2,18 @@
 
 class TestController extends AdminController {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('index', 'view', 'create', 'update', 'delete'),
+                'roles' => array(RolePrivilege::EXPERT),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id']))
@@ -14,16 +26,16 @@ class TestController extends AdminController {
 
     public function actionView() {
         $this->data['testModel'] = $this->loadModel();
-        
+
         $questionModel = new Question('search');
         $questionModel->unsetAttributes();
         if (isset($_GET['Question']))
             $questionModel->attributes = $_GET['Question'];
-        
+
         $questionModel->test_id = $this->data['testModel']->id;
-        
+
         $this->data['questionModel'] = $questionModel;
-        
+
         $this->render('view', $this->data);
     }
 
@@ -63,9 +75,9 @@ class TestController extends AdminController {
         if (Yii::app()->request->isPostRequest) {
             $model = Test::model()->with('questions', 'questions.answers')->findByPk($_GET['id']);
             $this->loadModel()->delete();
-            foreach ($model->questions as  $question){
+            foreach ($model->questions as $question) {
                 $question->delete();
-                foreach ($question->answers as $answer){
+                foreach ($question->answers as $answer) {
                     $answer->delete();
                 }
             }

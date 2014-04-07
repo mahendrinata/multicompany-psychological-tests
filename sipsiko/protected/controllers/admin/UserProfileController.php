@@ -2,6 +2,21 @@
 
 class UserProfileController extends AdminController {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('index', 'view', 'member', 'company', 'expert', 'createMember', 'update', 'delete'),
+                'roles' => array(RolePrivilege::ADMIN),
+            ),
+            array('allow',
+                'actions' => array('registerCompany', 'registerExpert', 'registerMember'),
+                'roles' => array(RolePrivilege::COMPANY, RolePrivilege::EXPERT, RolePrivilege::MEMBER)),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id']))

@@ -60,20 +60,9 @@ class AdminController extends Controller {
         Yii::app()->user->setState('unregisters', $unregisters);
     }
 
-//    public function filters() {
-//        return array(
-//            'accessControl',
-//        );
-//    }
-//    public function accessRules() {
-//        return array(
-//            array('allow',
-//                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
-//                'users' => array('@'),
-//            ),
-//            array('deny',
-//                'users' => array('*'),
-//            ),
-//        );
-//    }
+    public function filters() {
+        return array(
+            'accessControl',
+        );
+    }
 }
