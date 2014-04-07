@@ -29,7 +29,7 @@ class Question extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('description, status, test_id', 'required'),
+            array('description', 'required'),
             array('test_id', 'numerical', 'integerOnly' => true),
             array('status', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),

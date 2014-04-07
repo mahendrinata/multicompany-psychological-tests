@@ -74,7 +74,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'address', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-5 col-sm-10 col-xs-12">
-        <?php echo $form->textArea($model, 'address', array('placeholder' => 'Description', 'class' => 'form-control input-datepicker', 'rows' => 6)); ?>
+        <?php echo $form->textArea($model, 'address', array('placeholder' => 'Description', 'class' => 'form-control', 'rows' => 6)); ?>
         <?php echo $form->error($model, 'address', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>

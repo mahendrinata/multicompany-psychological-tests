@@ -40,7 +40,7 @@ class UserProfile extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('first_name, status, user_id, role_id', 'required'),
+            array('first_name', 'required'),
             array('user_id, role_id', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, phone, status', 'length', 'max' => 255),
             array('photo', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true),

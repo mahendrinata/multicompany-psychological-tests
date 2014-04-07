@@ -7,9 +7,9 @@ class m140319_170259_create_answers_table extends CDbMigration {
             'id' => 'pk',
             'description' => 'text NOT NULL',
             'value' => 'integer NOT NULL',
-            'status' => 'string NOT NULL',
-            'question_id' => 'integer NOT NULL',
-            'variable_id' => 'integer NOT NULL',
+            'status' => 'string',
+            'question_id' => 'integer',
+            'variable_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

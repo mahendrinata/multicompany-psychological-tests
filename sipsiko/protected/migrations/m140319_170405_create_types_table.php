@@ -8,7 +8,7 @@ class m140319_170405_create_types_table extends CDbMigration {
             'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
             'description' => 'text',
-            'status' => 'string NOT NULL',
+            'status' => 'string',
             'user_profile_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

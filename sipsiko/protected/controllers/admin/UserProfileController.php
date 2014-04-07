@@ -139,17 +139,71 @@ class UserProfileController extends AdminController {
                     $userProfileModel = new UserProfile;
                     $userProfileModel->role_id = $roleModel->id;
                     $userProfileModel->user_id = Yii::app()->user->id;
+                    $userProfileModel->status = Status::ACTIVE;
                     $userProfileModel->save(false);
                 }
             }
 
-            $this->redirect(array('user/login'));
-
-//            $this->redirect(('admin/userprofile/register' . strtolower($_POST['UserProfile']['roles'][0])));
+            $this->setStateLogin();
+            $this->redirect(array('admin/dashboard'));
         }
 
 
         $this->render('choose');
+    }
+
+    public function actionRegisterMember() {
+        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::MEMBER]);
+
+        $this->performAjaxValidation($model, 'user-profile-form');
+
+        if (isset($_POST['UserProfile'])) {
+            $model->attributes = $_POST['UserProfile'];
+            if ($model->save()) {
+                $this->setStateLogin();
+                $this->redirect(array('admin/dashboard/index'));
+            }
+        }
+
+        $this->render('register_member', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionRegisterExpert() {
+        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::EXPERT]);
+
+        $this->performAjaxValidation($model, 'user-profile-form');
+
+        if (isset($_POST['UserProfile'])) {
+            $model->attributes = $_POST['UserProfile'];
+            if ($model->save()) {
+                $this->setStateLogin();
+                $this->redirect(array('admin/dashboard/index'));
+            }
+        }
+
+        $this->render('register_expert', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionRegisterCompany() {
+        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::COMPANY]);
+
+        $this->performAjaxValidation($model, 'user-profile-form');
+
+        if (isset($_POST['UserProfile'])) {
+            $model->attributes = $_POST['UserProfile'];
+            if ($model->save()) {
+                $this->setStateLogin();
+                $this->redirect(array('admin/dashboard/index'));
+            }
+        }
+
+        $this->render('register_company', array(
+            'model' => $model,
+        ));
     }
 
 }

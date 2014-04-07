@@ -28,7 +28,7 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, status, description, user_profile_id', 'required'),
+            array('slug, description', 'required'),
             array('slug', 'unique'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('status', 'length', 'max' => 255),

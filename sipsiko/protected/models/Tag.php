@@ -29,7 +29,7 @@ class Tag extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, status', 'required'),
+            array('slug, name', 'required'),
             array('parent_id, user_profile_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),

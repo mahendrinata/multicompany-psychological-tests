@@ -33,7 +33,7 @@ class User extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, email, password, status', 'required'),
+            array('username, email, password', 'required'),
             array('username, email', 'unique'),
             array('parent_id', 'numerical', 'integerOnly' => true),
             array('username, email, password, status, last_login_ip, token', 'length', 'max' => 255),
