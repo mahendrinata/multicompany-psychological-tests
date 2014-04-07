@@ -51,7 +51,7 @@ class TestController extends AdminController {
         if (isset($_POST['Test'])) {
             $model->attributes = $_POST['Test'];
             $model->is_expert = true;
-            $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
+            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
             if ($model->save())
                 $this->redirect(array('admin/test/index'));
         }
@@ -100,7 +100,7 @@ class TestController extends AdminController {
         if (isset($_GET['Test']))
             $model->attributes = $_GET['Test'];
 
-        $model->user_profile_id = $this->_profiles[RolePrivilege::EXPERT];
+        $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
 
         $this->render('index', array(
             'model' => $model,
@@ -113,7 +113,7 @@ class TestController extends AdminController {
         if (isset($_GET['Test']))
             $model->attributes = $_GET['Test'];
 
-        $model->user_profile_id = $this->_profiles[RolePrivilege::COMPANY];
+        $model->user_profile_id = $this->profiles[RolePrivilege::COMPANY];
 
         $this->render('company', array(
             'model' => $model,
@@ -137,7 +137,7 @@ class TestController extends AdminController {
     public function actionGenerate() {
         if (Yii::app()->request->isPostRequest) {
 
-            $save = Test::model()->generate($_GET['id'], $this->_profiles[RolePrivilege::COMPANY]);
+            $save = Test::model()->generate($_GET['id'], $this->profiles[RolePrivilege::COMPANY]);
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/test/company'));

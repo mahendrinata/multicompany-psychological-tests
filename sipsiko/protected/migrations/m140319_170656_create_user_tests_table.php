@@ -5,7 +5,7 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
     public function up() {
         $this->createTable('user_tests', array(
             'id' => 'pk',
-            'spent_time' => 'string NOT NULL',
+            'spent_time' => 'integer',
             'note' => 'text',
             'variable_detail_slug' => 'string NOT NULL',
             'status' => 'string',

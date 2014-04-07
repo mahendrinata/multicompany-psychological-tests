@@ -30,10 +30,10 @@ class UserTest extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('spent_time', 'required'),
+//            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
-            array('spent_time, variable_detail_slug, status', 'length', 'max' => 255),
-            array('note, created_at, updated_at', 'safe'),
+            array('variable_detail_slug, status', 'length', 'max' => 255),
+            array('spent_time, note, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, spent_time, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),

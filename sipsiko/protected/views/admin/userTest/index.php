@@ -71,6 +71,11 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
+                    'name' => 'test_id',
+                    'filter' => CHtml::activeDropDownList($model, 'test_id', CHtml::listData(Test::model()->getTestCompany($this->profiles[RolePrivilege::COMPANY]), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
+                    'value' => '$data->test->name'
+                ),
+                array(
                     'name' => 'created_at',
                     'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),

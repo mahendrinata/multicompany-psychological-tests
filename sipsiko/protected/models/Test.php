@@ -163,11 +163,11 @@ class Test extends AppActiveRecord {
 
     public function generate($id, $user_profile_id) {
         $model = $this->with('questions', 'questions.answers')->findBySlug($id);
-   
-        if(!empty($this->findBySlug($model->slug . '-' . $user_profile_id))){
+
+        if (!empty($this->findBySlug($model->slug . '-' . $user_profile_id))) {
             return false;
         }
-        
+
         $testModel = new Test;
         $testModel->slug = $model->slug . '-' . $user_profile_id;
         $testModel->name = $model->name;
@@ -184,7 +184,7 @@ class Test extends AppActiveRecord {
             $questionModel = new Question;
             $questionModel->description = $question->description;
             $questionModel->status = $question->status;
-            
+
             $answerList = array();
             foreach ($question->answers as $answer) {
                 $answerModel = new Answer;
@@ -198,8 +198,16 @@ class Test extends AppActiveRecord {
             $questionList[] = $questionModel;
         }
         $testModel->questions = $questionList;
-        
-        return $testModel->withRelated->save(false, array('questions', 'questions.answers'));;
+
+        return $testModel->withRelated->save(false, array('questions', 'questions.answers'));
+        ;
+    }
+
+    public function getTestCompany($id) {
+        return $this->findAllByAttributes(array(
+                'user_profile_id' => $id,
+                'status' => Status::ACTIVE
+        ));
     }
 
 }

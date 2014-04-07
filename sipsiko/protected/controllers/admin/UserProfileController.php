@@ -181,7 +181,7 @@ class UserProfileController extends AdminController {
     }
 
     public function actionRegisterMember() {
-        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::MEMBER]);
+        $model = UserProfile::model()->findByPk($this->profiles[RolePrivilege::MEMBER]);
 
         $this->performAjaxValidation($model, 'user-profile-form');
 
@@ -199,7 +199,7 @@ class UserProfileController extends AdminController {
     }
 
     public function actionRegisterExpert() {
-        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::EXPERT]);
+        $model = UserProfile::model()->findByPk($this->profiles[RolePrivilege::EXPERT]);
 
         $this->performAjaxValidation($model, 'user-profile-form');
 
@@ -217,7 +217,7 @@ class UserProfileController extends AdminController {
     }
 
     public function actionRegisterCompany() {
-        $model = UserProfile::model()->findByPk($this->_profiles[RolePrivilege::COMPANY]);
+        $model = UserProfile::model()->findByPk($this->profiles[RolePrivilege::COMPANY]);
 
         $this->performAjaxValidation($model, 'user-profile-form');
 

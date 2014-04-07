@@ -4,8 +4,8 @@ class AdminController extends Controller {
 
     public $layout = '//layouts/main';
     protected $_model;
-    protected $_roles;
-    protected $_profiles;
+    public $roles;
+    public $profiles;
     protected $_unregisters;
     protected $_url;
 
@@ -18,13 +18,13 @@ class AdminController extends Controller {
 
         Yii::app()->theme = 'proui';
 
-        $this->_roles = Yii::app()->user->getState('roles');
-        $this->_profiles = Yii::app()->user->getState('user_profiles');
+        $this->roles = Yii::app()->user->getState('roles');
+        $this->profiles = Yii::app()->user->getState('user_profiles');
         $this->_unregisters = Yii::app()->user->getState('unregisters');
 
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
 
-        if (empty($this->_profiles) && ($this->_url != 'admin/userprofile/choose')) {
+        if (empty($this->profiles) && ($this->_url != 'admin/userprofile/choose')) {
             $this->redirect(array('admin/userprofile/choose'));
         }
 
@@ -41,7 +41,7 @@ class AdminController extends Controller {
     }
 
     public function getUserProfileId($role) {
-        return $this->_profiles[$role];
+        return $this->profiles[$role];
     }
 
     public function setStateLogin() {

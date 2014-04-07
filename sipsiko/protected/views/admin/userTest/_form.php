@@ -12,34 +12,21 @@ $form = $this->beginWidget('CActiveForm', array(
     Fields with <span class="required">*</span> are <a class="alert-link" href="javascript:void(0)">required</a>.
 </div>
 
-<?php // echo $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model); ?>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'slug', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-3 col-sm-6 col-xs-12">
-        <div class="input-group">
-            <?php echo $form->textField($model, 'slug', array('placeholder' => 'Slug', 'class' => 'form-control slugify', 'readonly' => 'readonly')); ?>
-            <span class="input-group-btn">
-                <button class="btn btn-warning" type="button" onClick="removeReadOnly('.slugify')"><i class="fa fa-edit"></i></button>
-            </span>
-        </div>
-        <?php echo $form->error($model, 'slug', array('class' => 'help-block alert-danger')); ?>
+    <?php echo $form->label($model, 'user_profile_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'user_profile_id', CHtml::listData(UserProfile::model()->getActiveUserProfilesByRole(RolePrivilege::MEMBER), 'id', 'first_name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Member Test')); ?>
+        <?php echo $form->error($model, 'user_profile_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->textField($model, 'name', array('placeholder' => 'Name', 'class' => 'form-control', 'onKeyUp' => 'slugify(this, ".slugify")')); ?>
-        <?php echo $form->error($model, 'name', array('class' => 'help-block alert-danger')); ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <?php echo $form->label($model, 'description', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-5 col-sm-10 col-xs-12">
-        <?php echo $form->textArea($model, 'description', array('placeholder' => 'Description', 'class' => 'form-control', 'cols' => 6)); ?>
-        <?php echo $form->error($model, 'description', array('class' => 'help-block alert-danger')); ?>
+    <?php echo $form->label($model, 'test_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'test_id', CHtml::listData(Test::model()->getTestCompany($this->profiles[RolePrivilege::COMPANY]), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Test')); ?>
+        <?php echo $form->error($model, 'test_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
