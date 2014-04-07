@@ -95,20 +95,14 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'combination_variable',
-                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control text-right')),
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'type_id',
                     'filter' => CHtml::activeDropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'header' => 'Type Test',
                     'value' => '$data->type->name'
-                ),
-                array(
-                    'filter' => '',
-                    'header' => 'Question',
-                    'value' => 'count($data->questions)',
-                    'type' => 'raw',
-                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'created_at',

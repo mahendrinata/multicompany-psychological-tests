@@ -100,6 +100,7 @@ class Question extends AppActiveRecord {
 
         return new CActiveDataProvider('Question', array(
             'criteria' => $criteria,
+            'pagination' => false
         ));
     }
 
@@ -126,7 +127,7 @@ class Question extends AppActiveRecord {
                 if (!isset($answer['id']) || empty($answer['id'])) {
                     $answerModel = new Answer;
                 } else {
-                    $answerModel =  Answer::model()->findByPk($answer['id']);
+                    $answerModel = Answer::model()->findByPk($answer['id']);
                     unset($answer['id']);
                 }
                 $answerModel->attributes = $answer;
@@ -134,7 +135,7 @@ class Question extends AppActiveRecord {
             }
         }
         $questionModel->answers = $answerList;
-        
+
         return $questionModel->withRelated->save(false, array('answers'));
     }
 
