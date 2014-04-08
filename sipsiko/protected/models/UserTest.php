@@ -94,7 +94,7 @@ class UserTest extends AppActiveRecord {
 
         $criteria->compare('note', $this->note, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status', $this->status);
 
         $criteria->compare('user_profile_id', $this->user_profile_id);
 

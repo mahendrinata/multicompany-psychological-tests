@@ -42,7 +42,7 @@
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::MEMBER)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Member</span></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests</a>', array('admin/user')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests</a>', array('admin/usertest/member')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests Result</a>', array('admin/user')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/type')); ?></li>
 

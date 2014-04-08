@@ -13,7 +13,7 @@ class m140319_170804_create_variable_details_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_variable_details_unique', 'variable_details', 'slug');
+        $this->createIndex('slug_variable_details_index', 'variable_details', 'slug');
         $this->createIndex('status_variable_details_index', 'variable_details', 'status');
         $this->createIndex('user_profile_id_variable_details_index', 'variable_details', 'user_profile_id');
     }

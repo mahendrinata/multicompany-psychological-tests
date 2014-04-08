@@ -173,15 +173,19 @@ class Test extends AppActiveRecord {
         $testModel->name = $model->name;
         $testModel->description = $model->description;
         $testModel->is_public = false;
+        $testModel->is_expert = false;
         $testModel->combination_variable = $model->combination_variable;
         $testModel->status = Status::ACTIVE;
         $testModel->type_id = $model->type_id;
         $testModel->user_profile_id = $user_profile_id;
         $testModel->parent_id = $model->id;
-
-        $questionList = array();
+        $testModel->save(false);
+        
+        $copyTestModel = $this->findBySlug($model->slug . '-' . $user_profile_id);
+        
         foreach ($model->questions as $question) {
             $questionModel = new Question;
+            $questionModel->test_id = $copyTestModel->id;
             $questionModel->description = $question->description;
             $questionModel->status = $question->status;
 
@@ -195,12 +199,9 @@ class Test extends AppActiveRecord {
                 $answerList[] = $answerModel;
             }
             $questionModel->answers = $answerList;
-            $questionList[] = $questionModel;
+            $questionModel->withRelated->save(false, array('answers'));
         }
-        $testModel->questions = $questionList;
-
-        return $testModel->withRelated->save(false, array('questions', 'questions.answers'));
-        ;
+        return $testModel;
     }
 
     public function getTestCompany($id) {

@@ -8,6 +8,10 @@ class UserTestController extends AdminController {
                 'actions' => array('index', 'view', 'create', 'update', 'delete'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
+            array('allow',
+                'actions' => array('member', 'test'),
+                'roles' => array(RolePrivilege::MEMBER),
+            ),
             array('deny',
                 'users' => array('*'),
             ),
@@ -79,11 +83,40 @@ class UserTestController extends AdminController {
         if (isset($_GET['UserTest'])) {
             $model->attributes = $_GET['UserTest'];
         }
-        
+
         $model->status = Status::ACTIVE;
 
         $this->render('index', array(
             'model' => $model,
+        ));
+    }
+
+    public function actionMember() {
+        $model = new UserTest('search');
+        $model->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $model->attributes = $_GET['UserTest'];
+        }
+
+        $model->status = Status::ACTIVE;
+        $model->user_profile_id = $this->profiles[RolePrivilege::MEMBER];
+
+        $this->render('member', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionTest() {
+        $testModel = $this->loadModel();
+
+        if (isset($_POST['UserTest'])) {
+            $model->attributes = $_POST['UserTest'];
+            if ($model->save())
+                $this->redirect(array('admin/usertest/index'));
+        }
+
+        $this->render('test', array(
+            'model' => $testModel,
         ));
     }
 
