@@ -130,7 +130,7 @@ class Test extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.is_public', $this->is_public);
 
-        $criteria->compare($this->_alias . '.status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status);
 
         $criteria->compare($this->_alias . '.user_profile_id', $this->user_profile_id);
 

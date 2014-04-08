@@ -94,7 +94,7 @@ class Type extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status', $this->status);
 
         $criteria->compare('user_profile_id', $this->user_profile_id);
 

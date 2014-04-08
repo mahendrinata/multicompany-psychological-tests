@@ -102,7 +102,7 @@ class User extends AppActiveRecord {
 
         $criteria->compare('password', $this->password, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status', $this->status);
 
         $criteria->compare('last_login', $this->last_login, true);
 

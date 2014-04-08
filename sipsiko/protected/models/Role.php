@@ -89,7 +89,7 @@ class Role extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status', $this->status);
 
         $criteria->compare('created_at', $this->created_at, true);
 

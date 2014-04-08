@@ -95,7 +95,7 @@ class Variable extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.description', $this->description, true);
 
-        $criteria->compare($this->_alias . '.status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status);
 
         $criteria->compare($this->_alias . '.type_id', $this->type_id);
 

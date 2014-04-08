@@ -93,7 +93,7 @@ class Tag extends AppActiveRecord {
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status', $this->status);
 
         $criteria->compare('parent_id', $this->parent_id);
 

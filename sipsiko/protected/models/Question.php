@@ -87,7 +87,7 @@ class Question extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.description', $this->description, true);
 
-        $criteria->compare($this->_alias . '.status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status);
 
         $criteria->compare($this->_alias . '.test_id', $this->test_id);
 

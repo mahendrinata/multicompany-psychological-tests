@@ -125,7 +125,7 @@ class UserProfile extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.photo', $this->photo, true);
 
-        $criteria->compare($this->_alias . '.status', $this->status, true);
+        $criteria->compare($this->_alias . '.status', $this->status);
 
         $criteria->compare($this->_alias . '.user_id', $this->user_id);
 
