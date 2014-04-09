@@ -104,4 +104,23 @@ class TestVariable extends AppActiveRecord {
         return parent::model($className);
     }
 
+    public function setTestVariable($user_test_id) {
+        $sql = 'SELECT variables.id AS variable_id, SUM(answers.value) AS value 
+            FROM user_tests 
+            INNER JOIN test_answers ON user_tests.id = test_answers.user_test_id 
+            INNER JOIN answers ON answers.id = test_answers.answer_id 
+            INNER JOIN variables ON variables.id = answers.variable_id
+            WHERE user_tests.id = ' . $user_test_id . ' 
+            GROUP BY variables.id ';
+
+        $variables = $this->findAllBySql($sql);
+        foreach ($variables as $variable){
+            $testVariableModel = new TestVariable;
+            $testVariableModel->user_test_id = $user_test_id;
+            $testVariableModel->value = $variable->value;
+            $testVariableModel->variable_id = $variable->variable_id;
+            $testVariableModel->save(false);
+        }
+    }
+
 }

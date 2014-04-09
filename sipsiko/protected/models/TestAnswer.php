@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'test_answers':
  * @property integer $id
  * @property integer $user_test_id
+ * @property integer $question_id 
  * @property integer $answer_id
  * @property string $created_at
  * @property string $updated_at
@@ -28,12 +29,12 @@ class TestAnswer extends AppActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_test_id, answer_id', 'required'),
-			array('user_test_id, answer_id', 'numerical', 'integerOnly'=>true),
+			array('user_test_id, question_id, answer_id', 'required'),
+			array('user_test_id, question_id, answer_id', 'numerical', 'integerOnly'=>true),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_test_id, answer_id, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_test_id, question_id, answer_id, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,6 +86,8 @@ class TestAnswer extends AppActiveRecord
 		$criteria->compare('id',$this->id);
 
 		$criteria->compare('user_test_id',$this->user_test_id);
+
+		$criteria->compare('answer_id',$this->question_id);
 
 		$criteria->compare('answer_id',$this->answer_id);
 

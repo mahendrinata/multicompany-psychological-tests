@@ -1987,6 +1987,13 @@ code {
         left: 200px;
     }
 }
+.clearfix-display{
+    display: none;
+}
+.number-question{
+    float: left;
+    margin-left: -20px;
+}
 @media (min-width: 1200px) {
     .header-fixed-bottom .sidebar-content, .header-fixed-top .sidebar-content {
         padding-bottom: 0;
@@ -1994,5 +2001,14 @@ code {
     article p {
         font-size: 19px;
         line-height: 1.9;
+    }
+    .clearfix-lg{
+        display: block;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1119px){
+    .clearfix-sm{
+        display: block;
     }
 }

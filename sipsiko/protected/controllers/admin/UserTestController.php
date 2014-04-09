@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test'),
+                'actions' => array('member', 'test', 'savetestanswer'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -110,14 +110,34 @@ class UserTestController extends AdminController {
         $testModel = $this->loadModel();
 
         if (isset($_POST['UserTest'])) {
-            $model->attributes = $_POST['UserTest'];
-            if ($model->save())
-                $this->redirect(array('admin/usertest/index'));
+            $testModel->status = Status::INACTIVE;
+            if ($testModel->save())
+                TestVariable::model()->setTestVariable ($_POST['UserTest']['id']);
+                $this->redirect(array('admin/usertest/member'));
         }
 
         $this->render('test', array(
             'model' => $testModel,
         ));
+    }
+
+    public function actionSaveTestAnswer() {
+        if (Yii::app()->request->isPostRequest) {
+            $testAnswer = TestAnswer::model()->findByAttributes(array(
+                'user_test_id' => $_POST['user_test_id'],
+                'question_id' => $_POST['question_id']
+            ));
+            if (empty($testAnswer)) {
+                $newTestAnswer = new TestAnswer;
+                $newTestAnswer->attributes = $_POST;
+                $save = $newTestAnswer->save();
+            } else {
+                $testAnswer->answer_id = $_POST['answer_id'];
+                $save = $testAnswer->save();
+            }
+            echo json_encode(array('data' => $save));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
 }

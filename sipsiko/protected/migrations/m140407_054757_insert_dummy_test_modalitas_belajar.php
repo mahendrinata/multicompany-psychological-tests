@@ -839,7 +839,7 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 4
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
