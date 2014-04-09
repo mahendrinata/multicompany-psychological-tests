@@ -1,4 +1,4 @@
-<header class="navbar navbar-default">
+<header class="navbar navbar-default navbar-fixed-top">
     <ul class="nav navbar-nav-custom">
         <li class="hidden-xs hidden-sm">
             <a href="javascript:void(0)" id="sidebar-toggle-lg">
@@ -8,11 +8,6 @@
         <li class="hidden-md hidden-lg">
             <a href="javascript:void(0)" id="sidebar-toggle-sm">
                 <i class="fa fa-bars fa-fw"></i>
-            </a>
-        </li>
-        <li class="hidden-md hidden-lg">
-            <a href="./index.php.html">
-                <i class="gi gi-stopwatch fa-fw"></i>
             </a>
         </li>
     </ul>

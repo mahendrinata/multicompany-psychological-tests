@@ -26,7 +26,7 @@ $js = array(
 );
 
 foreach ($js as $script) {
-    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js', CClientScript::POS_HEAD);
+    $cs->registerScriptFile($themeBaseUrl . '/js/' . $script . '.js', CClientScript::POS_END);
 }
 ?>
 
@@ -51,10 +51,10 @@ foreach ($js as $script) {
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
     <body>
-        <div id="page-container" class="sidebar-full">
+        <div id="page-container" class="header-fixed-top sidebar-full">
             <?php $this->renderPartial('../../element/navigation/sidebar', array('themeBaseUrl' => $themeBaseUrl)); ?>
             <div id="main-container">
-                <?php // $this->renderPartial('../../element/navigation/header', array('themeBaseUrl' => $themeBaseUrl)); ?>
+                <?php $this->renderPartial('../../element/navigation/header', array('themeBaseUrl' => $themeBaseUrl)); ?>
                 <div id="page-content">
                     <div class="content-header">
                         <div class="header-section">
@@ -78,6 +78,7 @@ foreach ($js as $script) {
                     <?php endif ?>
                     <?php echo $content; ?>
                 </div>
+                <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
             </div>
         </div>
     </body>
