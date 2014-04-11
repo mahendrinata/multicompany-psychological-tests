@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -46,6 +46,7 @@ class UserTestController extends AdminController {
             if (empty($model->spent_time)) {
                 $testModel = Test::model()->findByPk($model->test_id);
                 $model->spent_time = $testModel->duration;
+                $model->show_result = $testModel->show_result;
             }
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
@@ -117,7 +118,7 @@ class UserTestController extends AdminController {
         if (isset($_POST['UserTest'])) {
             $testModel->status = Status::INACTIVE;
             if ($testModel->save())
-                TestVariable::model()->setTestVariable ($_POST['UserTest']['id']);
+                TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
             $this->redirect(array('admin/usertest/member'));
         }
 
@@ -149,10 +150,27 @@ class UserTestController extends AdminController {
         if (Yii::app()->request->isPostRequest) {
             $model = UserTest::model()->findByPk($_POST['user_test_id']);
             $model->spent_time = $model->spent_time - 1;
+            $model->time_used = $model->time_used + 1;
             if ($model->save())
                 echo json_encode(array('spentTime' => $model->spent_time));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+    
+    public function actionMemberResult(){
+        $model = new UserTest('search');
+        $model->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $model->attributes = $_GET['UserTest'];
+        }
+
+        $model->status = Status::INACTIVE;
+        $model->user_profile_id = $this->profiles[RolePrivilege::MEMBER];
+        $model->show_result = true;
+
+        $this->render('member_result', array(
+            'model' => $model,
+        ));
     }
 
 }

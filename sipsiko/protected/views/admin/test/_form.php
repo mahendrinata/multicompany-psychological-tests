@@ -67,6 +67,13 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->error($model, 'end_date', array('class' => 'help-block alert-danger')); ?>
         </div>
     </div>
+
+    <div class="form-group">
+        <?php echo $form->label($model, 'show_result', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-4 col-sm-6 col-xs-12">
+            <?php echo $form->radioButtonList($model, 'show_result', array(1 => 'Yes', 0 => 'No')); ?>
+        </div>
+    </div>
 <?php } ?>
 
 <div class="form-group">
@@ -78,7 +85,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="form-group">
     <?php echo $form->label($model, 'is_public', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-1 col-sm-2 col-xs-12">
+    <div class="col-lg-4 col-sm-6 col-xs-12">
         <?php echo $form->radioButtonList($model, 'is_public', Test::model()->getPublicationStatus()); ?>
     </div>
 </div>

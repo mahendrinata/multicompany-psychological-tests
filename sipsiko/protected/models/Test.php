@@ -11,6 +11,7 @@
  * @property integer $duration
  * @property string $start_date
  * @property string $end_date
+ * @property integer $show_result
  * @property integer $is_expert 
  * @property integer $is_public
  * @property string $status
@@ -44,12 +45,12 @@ class Test extends AppActiveRecord {
         return array(
             array('slug, name, is_public, combination_variable', 'required'),
             array('slug', 'unique'),
-            array('duration, is_public, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
+            array('duration, is_public, show_result, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, start_date, end_date, is_expert, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, description, duration, start_date, end_date, is_public, combination_variable, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, duration, start_date, end_date, is_public, is_expert, show_result, combination_variable, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -125,6 +126,8 @@ class Test extends AppActiveRecord {
         $criteria->compare($this->_alias . '.end_date', $this->end_date, true);
 
         $criteria->compare($this->_alias . '.is_expert', $this->is_expert);
+
+        $criteria->compare($this->_alias . '.show_result', $this->show_result);
 
         $criteria->compare($this->_alias . '.combination_variable', $this->combination_variable);
 

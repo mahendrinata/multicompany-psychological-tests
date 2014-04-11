@@ -8,6 +8,8 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
             'spent_time' => 'integer',
             'note' => 'text',
             'variable_detail_slug' => 'string NOT NULL',
+            'show_result' => 'boolean NOT NULL',
+            'time_used' => 'integer NOT NULL',
             'status' => 'string',
             'user_profile_id' => 'integer',
             'test_id' => 'integer',

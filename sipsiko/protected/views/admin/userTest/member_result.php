@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Member Tests' => array('member'),
+    'Member Result Tests' => array('member'),
     'Manage',
 );
 
@@ -16,7 +16,7 @@ $('.search-form form').submit(function(){
 
 <div class="block">
     <div class="block-title">
-        <h2><strong>Member Tests</strong> Management</h2>
+        <h2><strong>Member Result Tests</strong> Management</h2>
     </div>
     <div class="table-responsive">
         <?php
@@ -57,16 +57,14 @@ $('.search-form form').submit(function(){
                     'value' => '$data->test->name'
                 ),
                 array(
-                    'name' => 'spent_time',
+                    'name' => 'time_used',
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'test.start_date',
-                    'value' => '$data->test->start_date'
-                ),
-                array(
-                    'name' => 'test.end_date',
-                    'value' => '$data->test->end_date'
+                    'name' => 'test_variable.variable',
+                    'filter' => '',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getListTestVariable($data->test_variables)',
                 ),
                 array(
                     'name' => 'status',
@@ -82,12 +80,10 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{test}',
+                    'template' => '{view}',
                     'buttons' => array(
-                        'test' => array(
-                            'label' => 'Do Test',
-                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
-                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/test", array("id"=>$data->id))',
+                        'view' => array(
+                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/viewmemberresult", array("id"=>$data->id))',
                         ),
                     ),
                 )

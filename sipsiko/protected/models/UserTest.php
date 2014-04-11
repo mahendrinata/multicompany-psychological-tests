@@ -5,9 +5,11 @@
  *
  * The followings are the available columns in table 'user_tests':
  * @property integer $id
- * @property string $spent_time
+ * @property integer $spent_time
+ * @property integer $time_used 
  * @property string $note
  * @property string $status
+ * @property integer $show_result
  * @property integer $user_profile_id
  * @property integer $test_id
  * @property integer $company_id 
@@ -33,10 +35,10 @@ class UserTest extends AppActiveRecord {
 //            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
             array('variable_detail_slug, status', 'length', 'max' => 255),
-            array('spent_time, note, created_at, updated_at', 'safe'),
+            array('spent_time, time_used, show_result, note, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, spent_time, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, spent_time, time_used, show_result, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -51,6 +53,7 @@ class UserTest extends AppActiveRecord {
             'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
             'company' => array(self::BELONGS_TO, 'UserProfile', 'company_id'),
+            'variable_details' => array(self::HAS_MANY, 'VariableDetail', 'slug', 'on' => 'user_test.variable_detail_slug = variable_detail.slug'),
         );
     }
 
@@ -61,6 +64,8 @@ class UserTest extends AppActiveRecord {
         return array(
             'id' => 'Id',
             'spent_time' => 'Spent Time',
+            'time_used' => 'Time Used',
+            'show_result' => 'Show Result',
             'note' => 'Note',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
@@ -90,7 +95,11 @@ class UserTest extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('spent_time', $this->spent_time, true);
+        $criteria->compare('spent_time', $this->spent_time);
+
+        $criteria->compare('time_used', $this->time_used);
+
+        $criteria->compare('show_result', $this->show_result);
 
         $criteria->compare('note', $this->note, true);
 
