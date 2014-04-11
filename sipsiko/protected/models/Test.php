@@ -190,7 +190,7 @@ class Test extends AppActiveRecord {
         $testModel->parent_id = $model->id;
         $testModel->save(false);
 
-        $copyTestModel = $this->findBySlug($model->slug . '-' . $user_profile_id);
+        $copyTestModel = $this->findBySlug($model->slug . '-' . $user_profile_id . '-' . ($countTestOfCompany + 1));
 
         foreach ($model->questions as $question) {
             $questionModel = new Question;

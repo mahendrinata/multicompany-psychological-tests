@@ -67,10 +67,10 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
-                array(
-                    'name' => 'slug',
-                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
-                ),
+//                array(
+//                    'name' => 'slug',
+//                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
+//                ),
                 array(
                     'name' => 'name',
                     'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control'))
@@ -78,6 +78,14 @@ $('.search-form form').submit(function(){
                 array(
                     'name' => 'description',
                     'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'start_date',
+                    'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control'))
+                ),
+                array(
+                    'name' => 'end_date',
+                    'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'status',
@@ -93,25 +101,25 @@ $('.search-form form').submit(function(){
                     'value' => 'Test::model()->getPublicationLabel($data->is_public)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
-                array(
-                    'name' => 'combination_variable',
-                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control text-right')),
-                    'htmlOptions' => array('class' => 'text-right'),
-                ),
+//                array(
+//                    'name' => 'combination_variable',
+//                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control text-right')),
+//                    'htmlOptions' => array('class' => 'text-right'),
+//                ),
                 array(
                     'name' => 'type_id',
                     'filter' => CHtml::activeDropDownList($model, 'type_id', CHtml::listData(Type::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'header' => 'Type Test',
                     'value' => '$data->type->name'
                 ),
-                array(
-                    'name' => 'created_at',
-                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
-                ),
-                array(
-                    'name' => 'updated_at',
-                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
-                ),
+//                array(
+//                    'name' => 'created_at',
+//                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+//                ),
+//                array(
+//                    'name' => 'updated_at',
+//                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+//                ),
                 array(
                     'class' => 'CButtonColumn',
                     'filterHtmlOptions' => array('style' => 'width: 120px;'),
