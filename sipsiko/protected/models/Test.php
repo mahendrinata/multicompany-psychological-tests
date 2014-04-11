@@ -161,16 +161,25 @@ class Test extends AppActiveRecord {
             self::IS_PUBLIC);
     }
 
+    public function getPublicationLabel($status) {
+        $label = array(
+            'label-danger', 'label-success');
+
+        $publicationList = $this->getPublicationStatus();
+        return CHtml::tag("span", array("class" => "label " . $label[$status]), $publicationList[$status]);
+    }
+
     public function generate($id, $user_profile_id) {
         $model = $this->with('questions', 'questions.answers')->findBySlug($id);
 
-        if (!empty($this->findBySlug($model->slug . '-' . $user_profile_id))) {
-            return false;
-        }
+
+        $countTestOfCompany = $this->countByAttributes(array('parent_id' => $model->id, 'user_profile_id' => $user_profile_id));
+
+        $userProfileModel = UserProfile::model()->findByPk($user_profile_id);
 
         $testModel = new Test;
-        $testModel->slug = $model->slug . '-' . $user_profile_id;
-        $testModel->name = $model->name;
+        $testModel->slug = $model->slug . '-' . $user_profile_id . '-' . ($countTestOfCompany + 1);
+        $testModel->name = $model->name . ' ' . ($countTestOfCompany + 1) . ' (' . $userProfileModel->first_name . ')';
         $testModel->description = $model->description;
         $testModel->is_public = false;
         $testModel->is_expert = false;
@@ -180,9 +189,9 @@ class Test extends AppActiveRecord {
         $testModel->user_profile_id = $user_profile_id;
         $testModel->parent_id = $model->id;
         $testModel->save(false);
-        
+
         $copyTestModel = $this->findBySlug($model->slug . '-' . $user_profile_id);
-        
+
         foreach ($model->questions as $question) {
             $questionModel = new Question;
             $questionModel->test_id = $copyTestModel->id;

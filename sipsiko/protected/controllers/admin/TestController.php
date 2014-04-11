@@ -45,6 +45,7 @@ class TestController extends AdminController {
 
     public function actionCreate() {
         $model = new Test;
+        $model->is_expert = true;
 
         $this->performAjaxValidation($model, 'test-form');
 
@@ -128,7 +129,7 @@ class TestController extends AdminController {
 
         $model->status = Status::ACTIVE;
         $model->is_expert = true;
-        
+
         $this->render('active', array(
             'model' => $model,
         ));

@@ -97,7 +97,6 @@ class Question extends AppActiveRecord {
 
         return new CActiveDataProvider('Question', array(
             'criteria' => $criteria,
-            'pagination' => false
         ));
     }
 

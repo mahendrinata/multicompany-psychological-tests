@@ -90,7 +90,7 @@ $('.search-form form').submit(function(){
                     'name' => 'is_public',
                     'filter' => CHtml::activeDropDownList($model, 'is_public', Test::model()->getPublicationStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Publication')),
                     'type' => 'raw',
-                    'value' => '$data->is_public',
+                    'value' => 'Test::model()->getPublicationLabel($data->is_public)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(

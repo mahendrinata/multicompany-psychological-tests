@@ -62,6 +62,12 @@ $this->breadcrumbs = array(
                     'filter' => CHtml::activeTelField($questionModel, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
+                    'name' => 'question.answers',
+                    'filter' => '',
+                    'type' => 'raw',
+                    'value' => 'StringArray::toStringList($data->answers, "description")',
+                ),
+                array(
                     'name' => 'status',
                     'filter' => CHtml::activeDropDownList($questionModel, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                     'type' => 'raw',
@@ -87,7 +93,8 @@ $this->breadcrumbs = array(
                         'delete' => array(
                             'url' => 'Yii::app()->controller->createUrl("admin/question/delete", array("id"=>$data->id))',
                         ),
-                    )
+                    ),
+                    'visible' => $testModel->is_expert
                 )
             ),
         ));

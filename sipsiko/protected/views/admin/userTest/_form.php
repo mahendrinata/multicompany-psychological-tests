@@ -42,7 +42,7 @@ $form = $this->beginWidget('CActiveForm', array(
     <label class="col-lg-2 col-sm-2 control-label"></label>
     <div class="col-lg-9 col-xs-12">
         <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> ' . ($model->isNewRecord ? 'Create' : 'Save'), array('class' => 'btn btn-success', 'type' => 'submit')); ?>
-        <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/role'), array('class' => 'btn btn-warning')); ?>
+        <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/usertest'), array('class' => 'btn btn-warning')); ?>
     </div>
 </div>
 
