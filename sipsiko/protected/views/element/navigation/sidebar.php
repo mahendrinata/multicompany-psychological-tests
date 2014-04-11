@@ -1,21 +1,20 @@
 <div id="sidebar">
     <div class="sidebar-scroll">
         <div class="sidebar-content">
-            <a href="./index.php.html" class="sidebar-brand">
-                <i class="gi gi-flash"></i><strong>Pro</strong>UI
+            <a href="<?php echo Yii::app()->baseUrl . '/admin/dashboard'; ?>" class="sidebar-brand">
+                <i class="gi gi-charts"></i><strong>SIP</strong>SIKO
             </a>
             <div class="sidebar-section sidebar-user clearfix">
                 <div class="sidebar-user-avatar">
-                    <a href="./page_ready_user_profile.php.html">
+                    <a href="<?php echo Yii::app()->baseUrl . '/admin/userprofile/change'; ?>">
                         <img src="<?php echo $themeBaseUrl; ?>/img/placeholders/avatars/avatar2.jpg" alt="avatar" />
                     </a>
                 </div>
-                <div class="sidebar-user-name">John Doe</div>
+                <div class="sidebar-user-name"><?php echo Yii::app()->user->getState('username'); ?></div>
                 <div class="sidebar-user-links">
                     <?php
-                    echo CHtml::link('<i class="gi gi-user"></i>', array('admin/usertest/profile'), array('title' => 'Profile'));
-                    echo CHtml::link('<i class="gi gi-envelope"></i>', array('admin/user/profile'), array('title' => 'Message'));
-                    echo CHtml::link('<i class="gi gi-cogwheel"></i>', array('admin/user/profile'), array('title' => 'Setting'));
+                    echo CHtml::link('<i class="gi gi-user"></i>', array('admin/userprofile/change'), array('title' => 'Profile'));
+                    echo CHtml::link('<i class="gi gi-cogwheel"></i>', array('admin/user/changepassword'), array('title' => 'Setting'));
                     echo CHtml::link('<i class="gi gi-exit"></i>', array('user/logout'), array('title' => 'Logout'));
                     ?>
                 </div>
