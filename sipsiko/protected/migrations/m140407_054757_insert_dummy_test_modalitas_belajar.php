@@ -42,12 +42,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Jika akan menghadapi ulangan, kamu mudah hafal jika',
                         'answers' => array(
                             array(
-                                'description' => 'Menghafal materi ulangan sambil mengucapkannya keras-keras',
+                                'description' => 'Membolak-balik buku membaca materi ulangan',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Membolak-balik buku membaca materi ulangan',
+                                'description' => 'Menghafal materi ulangan sambil mengucapkannya keras-keras',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -62,12 +62,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Saat membaca suatu buku, yang sering kamu lakukan adalah',
                         'answers' => array(
                             array(
-                                'description' => 'Membaca sambil menggerakkan bibir dan mengucapkannya',
+                                'description' => 'Membacanya dengan tenang, cepat dan tekun',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Membacanya dengan tenang, cepat dan tekun',
+                                'description' => 'Membaca sambil menggerakkan bibir dan mengucapkannya',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -82,12 +82,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Saat berbicara, kamu',
                         'answers' => array(
                             array(
-                                'description' => 'Berbicara dengan kecepatan sedang',
+                                'description' => 'Berbicara dengan cepat',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Berbicara dengan cepat',
+                                'description' => 'Berbicara dengan kecepatan sedang',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -102,12 +102,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Di waktu luang, kamu biasanya',
                         'answers' => array(
                             array(
-                                'description' => 'Mendengarkan radio, mengobrol',
+                                'description' => 'Menonton televisi, membaca, mengisi TTS',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Menonton televisi, membaca, mengisi TTS',
+                                'description' => 'Mendengarkan radio, mengobrol',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -122,12 +122,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Kalau kamu marah, biasanya paling terlihat dari',
                         'answers' => array(
                             array(
-                                'description' => 'Intonasi suara',
+                                'description' => 'Ekspresi wajah',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Ekspresi wajah',
+                                'description' => 'Intonasi suara',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -142,12 +142,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Biasanya pada saat kamu tidak ada kegiatan',
                         'answers' => array(
                             array(
-                                'description' => 'Bebicara dengan diri sendiri',
+                                'description' => 'Melamun, menatap ke angkasa',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Melamun, menatap ke angkasa',
+                                'description' => 'Bebicara dengan diri sendiri',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -162,12 +162,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Pilih kegiatan yang kamu merasa nyaman melakukannya',
                         'answers' => array(
                             array(
-                                'description' => 'Berdebat, bercerita dan bermain musik',
+                                'description' => 'Menulis, menggambar, Mendesain',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Menulis, menggambar, Mendesain',
+                                'description' => 'Berdebat, bercerita dan bermain musik',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -182,12 +182,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Kata-kata khas kamu saat berbicara',
                         'answers' => array(
                             array(
-                                'description' => '"Dengarkan baik-baik…"',
+                                'description' => '"Lihat baik-baik…"',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => '"Lihat baik-baik…"',
+                                'description' => '"Dengarkan baik-baik…"',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -202,12 +202,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                         'description' => 'Mana yang paling sering terjadi saat di sekolah',
                         'answers' => array(
                             array(
-                                'description' => 'Kamu mendengarkan saja waktu guru menerangkan',
+                                'description' => 'Kamu memperhatikan wajah guru saat beliau berbicara/menerangkan',
                                 'value' => 1,
                                 'variable_id' => 44
                             ),
                             array(
-                                'description' => 'Kamu memperhatikan wajah guru saat beliau berbicara/menerangkan',
+                                'description' => 'Kamu mendengarkan saja waktu guru menerangkan',
                                 'value' => 1,
                                 'variable_id' => 45
                             ),
@@ -224,17 +224,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -244,17 +244,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -264,17 +264,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -284,17 +284,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -304,17 +304,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -324,17 +324,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -344,17 +344,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -364,17 +364,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -384,17 +384,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -404,17 +404,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -424,17 +424,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -444,17 +444,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -464,17 +464,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -484,17 +484,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -504,17 +504,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -524,17 +524,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -544,17 +544,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -564,17 +564,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -584,17 +584,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -604,17 +604,17 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 3,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Kadang-kadang',
                                 'value' => 2,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -824,12 +824,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -839,12 +839,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -854,12 +854,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -869,12 +869,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -884,12 +884,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -914,12 +914,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -929,12 +929,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -944,12 +944,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -959,12 +959,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -974,12 +974,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -989,12 +989,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -1019,12 +1019,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -1049,12 +1049,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -1079,12 +1079,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -1094,12 +1094,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -1109,12 +1109,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -1124,12 +1124,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -1139,12 +1139,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 45
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -1154,12 +1154,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -1184,12 +1184,12 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => 44
+                                'variable_id' => 45
                             ),
                         )
                     ),
