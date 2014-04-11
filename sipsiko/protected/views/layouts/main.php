@@ -17,6 +17,9 @@ $cs->scriptMap = array(
 );
 
 $cs->registerCoreScript('jquery');
+
+$cs->registerScriptFile($themeBaseUrl . '/js/countdown.min.js');
+
 $js = array(
     'vendor/modernizr-2.7.1-respond-1.4.2.min',
     'vendor/bootstrap.min',

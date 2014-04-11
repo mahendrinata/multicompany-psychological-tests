@@ -570,7 +570,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
             unset($column['questions']);
             $this->insert('tests', $column);
             foreach ($questions as $id => $question) {
-                $question['test_id'] = 1;
+                $question['test_id'] = 2;
                 $question['status'] = Status::ACTIVE;
                 $question['created_at'] = date('Y-m-d H:i:s');
                 $question['updated_at'] = date('Y-m-d H:i:s');
@@ -579,7 +579,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 unset($question['answers']);
                 $this->insert('questions', $question);
                 foreach ($answers as $answer) {
-                    $answer['question_id'] = $id + 1;
+                    $answer['question_id'] = $id + 71;
                     $answer['status'] = Status::ACTIVE;
                     $answer['created_at'] = date('Y-m-d H:i:s');
                     $answer['updated_at'] = date('Y-m-d H:i:s');

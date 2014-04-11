@@ -76,9 +76,8 @@ $('.search-form form').submit(function(){
                     'value' => '$data->test->name'
                 ),
                 array(
-                    'name' =>'test.duration',
-                    'value' => '$data->test->duration',
-                    'filter' => '',
+                    'name' =>'spent_time',
+                    'filter' => CHtml::activeTelField($model, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(

@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -42,9 +42,11 @@ class UserTestController extends AdminController {
         if (isset($_POST['UserTest'])) {
             $model->attributes = $_POST['UserTest'];
             $model->company_id = $this->profiles[RolePrivilege::COMPANY];
-           
-            $testModel = Test::model()->findByPk($model->test_id);
-            $model->spent_time = $testModel->duration;
+
+            if (empty($model->spent_time)) {
+                $testModel = Test::model()->findByPk($model->test_id);
+                $model->spent_time = $testModel->duration;
+            }
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }
@@ -116,7 +118,7 @@ class UserTestController extends AdminController {
             $testModel->status = Status::INACTIVE;
             if ($testModel->save())
                 TestVariable::model()->setTestVariable ($_POST['UserTest']['id']);
-                $this->redirect(array('admin/usertest/member'));
+            $this->redirect(array('admin/usertest/member'));
         }
 
         $this->render('test', array(
@@ -139,6 +141,16 @@ class UserTestController extends AdminController {
                 $save = $testAnswer->save();
             }
             echo json_encode(array('data' => $save));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionSetSpentTime() {
+        if (Yii::app()->request->isPostRequest) {
+            $model = UserTest::model()->findByPk($_POST['user_test_id']);
+            $model->spent_time = $model->spent_time - 1;
+            if ($model->save())
+                echo json_encode(array('spentTime' => $model->spent_time));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

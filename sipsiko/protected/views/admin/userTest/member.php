@@ -58,8 +58,8 @@ $('.search-form form').submit(function(){
                     'value' => '$data->test->name'
                 ),
                 array(
-                    'name' => 'test.duration',
-                    'value' => '$data->test->duration'
+                    'name' => 'spent_time',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'test.start_date',

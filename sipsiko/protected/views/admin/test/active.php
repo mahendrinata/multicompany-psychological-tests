@@ -121,8 +121,8 @@ $('.search-form form').submit(function(){
                     'class' => 'CButtonColumn',
                     'template' => '{generate}',
                     'deleteConfirmation' => 'Generate Test of Company',
-                    'generate' => array(
-                        'delete' => array(
+                    'buttons' => array(
+                        'generate' => array(
                             'label' => 'Generate',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/test/generate", array("id"=>$data->slug))',
