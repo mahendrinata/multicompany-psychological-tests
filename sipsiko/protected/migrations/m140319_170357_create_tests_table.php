@@ -8,7 +8,7 @@ class m140319_170357_create_tests_table extends CDbMigration {
             'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
             'description' => 'text',
-            'duration' => 'integer NOT NULL',
+            'duration' => 'integer',
             'start_date' => 'date',
             'end_date' => 'date',
             'is_public' => 'boolean NOT NULL',

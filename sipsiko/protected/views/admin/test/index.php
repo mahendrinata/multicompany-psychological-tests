@@ -80,6 +80,11 @@ $('.search-form form').submit(function(){
                     'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
+                    'name' => 'duration',
+                    'filter' => CHtml::activeTelField($model, 'duration', array('id' => false, 'class' => 'form-control text-right')),
+                    'htmlOptions' => array('class' => 'text-right'),
+                ),
+                array(
                     'name' => 'status',
                     'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                     'type' => 'raw',

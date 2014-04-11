@@ -58,11 +58,11 @@ $('.search-form form').submit(function(){
                     'value' => '$data->user_profile->first_name',
                     'header' => 'Member Name'
                 ),
-                array(
-                    'name' => 'company.first_name',
-                    'value' => '$data->company->first_name',
-                    'header' => 'Company Name'
-                ),
+//                array(
+//                    'name' => 'company.first_name',
+//                    'value' => '$data->company->first_name',
+//                    'header' => 'Company Name'
+//                ),
                 array(
                     'name' => 'status',
                     'filter' => '',
@@ -76,13 +76,29 @@ $('.search-form form').submit(function(){
                     'value' => '$data->test->name'
                 ),
                 array(
-                    'name' => 'created_at',
-                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+                    'name' =>'test.duration',
+                    'value' => '$data->test->duration',
+                    'filter' => '',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'updated_at',
-                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+                    'name' =>'test.start_date',
+                    'value' => '$data->test->start_date',
+                    'filter' => ''
                 ),
+                array(
+                    'name' =>'test.end_date',
+                    'value' => '$data->test->end_date',
+                    'filter' => ''
+                ),
+//                array(
+//                    'name' => 'created_at',
+//                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+//                ),
+//                array(
+//                    'name' => 'updated_at',
+//                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+//                ),
                 array(
                     'class' => 'CButtonColumn',
                     'filterHtmlOptions' => array('style' => 'width: 80px;')

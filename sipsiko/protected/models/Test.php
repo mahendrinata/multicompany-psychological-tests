@@ -155,6 +155,19 @@ class Test extends AppActiveRecord {
         return parent::model($className);
     }
 
+    public function beforeSave() {
+        if (empty($this->duration))
+            $this->duration = new CDbExpression('NULL');
+
+        if (empty($this->start_date))
+            $this->start_date = new CDbExpression('NULL');
+
+        if (empty($this->end_date))
+            $this->end_date = new CDbExpression('NULL');
+
+        return parent::beforeSave();
+    }
+
     public function getPublicationStatus() {
         return array(
             self::IS_PRIVATE,

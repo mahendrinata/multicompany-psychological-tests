@@ -42,6 +42,9 @@ class UserTestController extends AdminController {
         if (isset($_POST['UserTest'])) {
             $model->attributes = $_POST['UserTest'];
             $model->company_id = $this->profiles[RolePrivilege::COMPANY];
+           
+            $testModel = Test::model()->findByPk($model->test_id);
+            $model->spent_time = $testModel->duration;
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }

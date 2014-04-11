@@ -119,9 +119,9 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{delete}',
+                    'template' => '{generate}',
                     'deleteConfirmation' => 'Generate Test of Company',
-                    'buttons' => array(
+                    'generate' => array(
                         'delete' => array(
                             'label' => 'Generate',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',

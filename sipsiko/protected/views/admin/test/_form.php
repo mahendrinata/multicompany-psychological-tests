@@ -12,7 +12,7 @@ $form = $this->beginWidget('CActiveForm', array(
     Fields with <span class="required">*</span> are <a class="alert-link" href="javascript:void(0)">required</a>.
 </div>
 
-<?php // echo $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model); ?>
 
 <div class="form-group">
     <?php echo $form->label($model, 'slug', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
@@ -40,6 +40,14 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="col-lg-5 col-sm-10 col-xs-12">
         <?php echo $form->textArea($model, 'description', array('placeholder' => 'Description', 'class' => 'form-control', 'cols' => 6)); ?>
         <?php echo $form->error($model, 'description', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <?php echo $form->label($model, 'duration', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-1 col-sm-2 col-xs-12">
+        <?php echo $form->textField($model, 'duration', array('placeholder' => 'Duration', 'class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'duration', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
@@ -96,7 +104,13 @@ $form = $this->beginWidget('CActiveForm', array(
     <label class="col-lg-2 col-sm-2 control-label"></label>
     <div class="col-lg-9 col-xs-12">
         <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> ' . ($model->isNewRecord ? 'Create' : 'Save'), array('class' => 'btn btn-success', 'type' => 'submit')); ?>
-        <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test/' . ($model->is_expert) ? 'index' : 'company'), array('class' => 'btn btn-warning')); ?>
+        <?php
+        if ($model->is_expert) {
+            echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test/index'), array('class' => 'btn btn-warning'));
+        } else {
+            echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test/company'), array('class' => 'btn btn-warning'));
+        }
+        ?>
     </div>
 </div>
 

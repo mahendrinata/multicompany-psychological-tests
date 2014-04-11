@@ -9,7 +9,7 @@ class TestController extends AdminController {
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
-                'actions' => array('company', 'active', 'generate'),
+                'actions' => array('view', 'update', 'delete', 'company', 'active', 'generate'),
                 'roles' => array(RolePrivilege::COMPANY)
             ),
             array('deny',
@@ -69,8 +69,13 @@ class TestController extends AdminController {
 
         if (isset($_POST['Test'])) {
             $model->attributes = $_POST['Test'];
-            if ($model->save())
-                $this->redirect(array('admin/test/index'));
+            if ($model->save()) {
+                if ($model->is_expert) {
+                    $this->redirect(array('admin/test/index'));
+                } else {
+                    $this->redirect(array('admin/test/company'));
+                }
+            }
         }
 
         $this->render('update', array(
@@ -89,8 +94,13 @@ class TestController extends AdminController {
                 }
             }
 
-            if (!isset($_GET['ajax']))
-                $this->redirect(array('index'));
+            if (!isset($_GET['ajax'])) {
+                if ($model->is_expert) {
+                    $this->redirect(array('admin/test/index'));
+                } else {
+                    $this->redirect(array('admin/test/company'));
+                }
+            }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
@@ -136,14 +146,14 @@ class TestController extends AdminController {
     }
 
     public function actionGenerate() {
-        if (Yii::app()->request->isPostRequest) {
+//        if (Yii::app()->request->isPostRequest) {
 
             $save = Test::model()->generate($_GET['id'], $this->profiles[RolePrivilege::COMPANY]);
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/test/company'));
-        } else
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+//        } else
+//            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
 }
