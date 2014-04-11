@@ -30,6 +30,11 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
                 'description' => '',
             ),
             array(
+                'slug' => Type::model()->slugify('Otak Kanan Otak Kiri'),
+                'name' => 'Otak Kanan Otak Kiri',
+                'description' => '',
+            ),
+            array(
                 'slug' => Type::model()->slugify('papi-kostick'),
                 'name' => 'PAPI Kostick (Personality and Preference Inventory)',
                 'description' => '',

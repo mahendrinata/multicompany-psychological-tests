@@ -249,6 +249,19 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
                 'description' => '',
                 'type_id' => 5
             ),
+            /**
+             * Otak Kanan Otak Kiri
+             */
+            array(
+                'name' => 'Otak Kanan',
+                'description' => '',
+                'type_id' => 6
+            ),
+            array(
+                'name' => 'Otak Kiri',
+                'description' => '',
+                'type_id' => 6
+            ),
         );
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
