@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -156,8 +156,8 @@ class UserTestController extends AdminController {
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
-    
-    public function actionMemberResult(){
+
+    public function actionMemberResult() {
         $model = new UserTest('search');
         $model->unsetAttributes();
         if (isset($_GET['UserTest'])) {
@@ -171,6 +171,38 @@ class UserTestController extends AdminController {
         $this->render('member_result', array(
             'model' => $model,
         ));
+    }
+
+    public function actionPublic() {
+        $model = new Test('search');
+        $model->unsetAttributes();
+        if (isset($_GET['Test'])) {
+            $model->attributes = $_GET['Test'];
+        }
+
+        $model->status = Status::ACTIVE;
+        $model->is_public = true;
+
+        $this->render('public', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionGenerate() {
+        $testModel = Test::model()->findByPk($_GET['id']);
+
+        if (!empty($testModel)) {
+            $userTestModel = new UserTest;
+            $userTestModel->spent_time = $testModel->duration;
+            $userTestModel->show_result = true;
+            $userTestModel->status = Status::ACTIVE;
+            $userTestModel->test_id = $testModel->id;
+            $userTestModel->company_id = $testModel->user_profile_id;
+            $userTestModel->user_profile_id = $this->profiles[RolePrivilege::MEMBER];
+            if ($userTestModel->save()) {
+                $this->redirect(array('admin/usertest/member'));
+            }
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Member Result Tests' => array('member'),
+    'Member Public Tests' => array('member'),
     'Manage',
 );
 
@@ -16,7 +16,7 @@ $('.search-form form').submit(function(){
 
 <div class="block">
     <div class="block-title">
-        <h2><strong>Member Result Tests</strong> Management</h2>
+        <h2><strong>Member Tests</strong> Management</h2>
     </div>
     <div class="table-responsive">
         <?php
@@ -47,24 +47,17 @@ $('.search-form form').submit(function(){
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                 ),
+                'name',
+                'description',
                 array(
-                    'name' => 'company.first_name',
-                    'value' => '$data->company->first_name',
-                    'header' => 'Company'
-                ),
-                array(
-                    'name' => 'test_id',
-                    'value' => '$data->test->name'
-                ),
-                array(
-                    'name' => 'time_used',
+                    'name' => 'spent_time',
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'test_variable.variable',
-                    'filter' => '',
-                    'type' => 'raw',
-                    'value' => 'ModelHelper::getListTestVariable($data->test_variables)',
+                    'name' => 'start_date',
+                ),
+                array(
+                    'name' => 'end_date',
                 ),
                 array(
                     'name' => 'status',
@@ -72,18 +65,20 @@ $('.search-form form').submit(function(){
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
-//                array(
-//                    'name' => 'created_at',
-//                ),
-//                array(
-//                    'name' => 'updated_at',
-//                ),
+                array(
+                    'name' => 'created_at',
+                ),
+                array(
+                    'name' => 'updated_at',
+                ),
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{view}',
+                    'template' => '{generate}',
                     'buttons' => array(
-                        'view' => array(
-                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/viewmemberresult", array("id"=>$data->id))',
+                        'generate' => array(
+                            'label' => 'Generate Public Test',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
+                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/generate", array("id"=>$data->id))',
                         ),
                     ),
                 )

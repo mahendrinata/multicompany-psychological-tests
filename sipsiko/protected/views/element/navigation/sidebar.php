@@ -45,6 +45,7 @@
                     <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests</a>', array('admin/usertest/member')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests Result</a>', array('admin/usertest/memberresult')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/usertest/memberanalysis')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Generate Public Tests</a>', array('admin/usertest/public')); ?></li>
                 <?php } ?>
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::ADMIN)) { ?>
