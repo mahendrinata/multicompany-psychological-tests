@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'settimeused'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -203,6 +203,16 @@ class UserTestController extends AdminController {
                 $this->redirect(array('admin/usertest/member'));
             }
         }
+    }
+
+    public function actionSetTimeUsed() {
+        if (Yii::app()->request->isPostRequest) {
+            $model = UserTest::model()->findByPk($_POST['user_test_id']);
+            $model->time_used = $model->time_used + 1;
+            if ($model->save())
+                echo json_encode(array('timeUsed' => $model->time_used));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
 }

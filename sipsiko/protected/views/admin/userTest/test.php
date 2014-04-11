@@ -126,5 +126,14 @@ $this->breadcrumbs = array(
 
         timeCountDown();
         setTimeout(setSpentTimeTest, 60000);
+<?php } else { ?>
+        var setTimeUsedTest = function() {
+            $.post("<?php echo CController::createUrl('admin/usertest/settimeused') ?>", {
+                user_test_id: <?php echo $model->id; ?>
+            });
+
+            setTimeout(setTimeUsedTest, 60000);
+        };
+        setTimeout(setTimeUsedTest, 60000);
 <?php } ?>
 </script>
