@@ -1,6 +1,6 @@
 <div id="body-wrapper">
     <div id="header" >
-        <a href="index.html" id="logo"></a>
+        <a href="#" id="logo">SIPSIKO</a>
         <ul id="navigation">
             <li><?php echo CHtml::link('Beranda', $this->createUrl('site/index')); ?></li>
             <li><?php echo CHtml::link('Tes Psikologi', $this->createUrl('test/index')); ?></li>
