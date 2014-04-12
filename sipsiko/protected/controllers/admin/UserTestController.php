@@ -5,7 +5,7 @@ class UserTestController extends AdminController {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
@@ -43,11 +43,11 @@ class UserTestController extends AdminController {
             $model->attributes = $_POST['UserTest'];
             $model->company_id = $this->profiles[RolePrivilege::COMPANY];
 
+            $testModel = Test::model()->findByPk($model->test_id);
             if (empty($model->spent_time)) {
-                $testModel = Test::model()->findByPk($model->test_id);
                 $model->spent_time = $testModel->duration;
-                $model->show_result = $testModel->show_result;
             }
+            $model->show_result = $testModel->show_result;
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }
@@ -91,6 +91,7 @@ class UserTestController extends AdminController {
         }
 
         $model->status = Status::ACTIVE;
+        $model->company_id = $this->profiles[RolePrivilege::COMPANY];
 
         $this->render('index', array(
             'model' => $model,
@@ -213,6 +214,40 @@ class UserTestController extends AdminController {
                 echo json_encode(array('timeUsed' => $model->time_used));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionMemberTest() {
+        $model = new UserTest;
+
+        $this->performAjaxValidation($model, 'user-test-form');
+
+        if (isset($_POST['UserTest'])) {
+            $model->attributes = $_POST['UserTest'];
+            $model->company_id = $this->profiles[RolePrivilege::COMPANY];
+
+            $testModel = Test::model()->findByPk($_GET['id']);
+            if (empty($model->spent_time)) {
+                $model->spent_time = $testModel->duration;
+            }
+            
+            $model->show_result = $testModel->show_result;
+            $model->test_id = $testModel->id;
+            $model->save();
+        }
+
+        $userTestModel = new UserTest('search');
+        $userTestModel->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $model->attributes = $_GET['UserTest'];
+        }
+
+        $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
+        $userTestModel->test_id = $_GET['id'];
+
+        $this->render('member_test', array(
+            'model' => $model,
+            'userTestModel' => $userTestModel
+        ));
     }
 
 }

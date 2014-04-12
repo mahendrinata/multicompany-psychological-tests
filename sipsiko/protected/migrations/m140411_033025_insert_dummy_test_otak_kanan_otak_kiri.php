@@ -13,6 +13,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 'name' => 'Otak Kanan Otak Kiri',
                 'is_expert' => true,
                 'is_public' => true,
+                'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
                 'type_id' => 6,

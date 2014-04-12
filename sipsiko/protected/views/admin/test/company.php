@@ -128,7 +128,14 @@ $('.search-form form').submit(function(){
                 array(
                     'class' => 'CButtonColumn',
                     'filterHtmlOptions' => array('style' => 'width: 120px;'),
-                )
+                    'template' => '{user} {view} {update} {delete}',
+                    'buttons' => array(
+                        'user' => array(
+                            'label' => 'User Test',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
+                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/membertest", array("id"=>$data->id))',
+                        ),
+                    ))
             ),
         ));
         ?>

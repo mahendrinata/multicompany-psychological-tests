@@ -14,6 +14,14 @@ class ModelHelper {
         return CHtml::tag('ul', array(), $list);
     }
 
+    public static function getBooleanLabel($data) {
+        if ($data) {
+            return CHtml::tag('span', array('class' => 'label label-success'), 'Yes');
+        } else {
+            return CHtml::tag('span', array('class' => 'label label-danger'), 'No');
+        }
+    }
+
 }
 
 ?>

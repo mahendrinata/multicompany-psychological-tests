@@ -14,6 +14,7 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                 'name' => 'Modalitas Belajar',
                 'is_expert' => true,
                 'is_public' => true,
+                'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
                 'type_id' => 5,

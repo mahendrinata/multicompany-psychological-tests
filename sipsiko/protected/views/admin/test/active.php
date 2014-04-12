@@ -120,7 +120,6 @@ $('.search-form form').submit(function(){
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{generate}',
-                    'deleteConfirmation' => 'Generate Test of Company',
                     'buttons' => array(
                         'generate' => array(
                             'label' => 'Generate',
