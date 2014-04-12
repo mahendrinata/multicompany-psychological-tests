@@ -2,6 +2,18 @@
 
 class SiteController extends GuestController {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('index', 'error'),
+                'users' => array('*'),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function actionIndex() {
         $this->render('index', $this->data);
     }

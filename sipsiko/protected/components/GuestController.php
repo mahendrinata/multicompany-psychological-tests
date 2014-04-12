@@ -1,7 +1,7 @@
 <?php
 
 class GuestController extends Controller {
-    
+
     public $layout = '//layouts/frontend';
 
     public function init() {
@@ -9,6 +9,12 @@ class GuestController extends Controller {
 
         Yii::app()->theme = 'frontend';
         $this->data['themeBaseUrl'] = Yii::app()->theme->baseUrl;
+    }
+
+    public function filters() {
+        return array(
+            'accessControl',
+        );
     }
 
 }

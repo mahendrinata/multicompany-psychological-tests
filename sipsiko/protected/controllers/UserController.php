@@ -2,6 +2,18 @@
 
 class UserController extends GuestController {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('login', 'logout', 'register'),
+                'users' => array('*'),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function actionLogin() {
         $model = new LoginForm;
 
@@ -20,8 +32,8 @@ class UserController extends GuestController {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
-    
-    public function actionRegister(){
+
+    public function actionRegister() {
         $model = new User;
 
         $this->performAjaxValidation($model, 'user-form', array('User' => array('status' => Status::ACTIVE)));
@@ -35,7 +47,6 @@ class UserController extends GuestController {
 
         $this->data['model'] = $model;
         $this->render('register', $this->data);
-        
     }
 
 }

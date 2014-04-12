@@ -3,8 +3,8 @@
         <a href="index.html" id="logo"></a>
         <ul id="navigation">
             <li><?php echo CHtml::link('Beranda', $this->createUrl('site/index')); ?></li>
+            <li><?php echo CHtml::link('Tes Psikologi', $this->createUrl('test/index')); ?></li>
             <li><?php echo CHtml::link('Tentang Kami', $this->createUrl('site/about')); ?></li>
-            <li><?php echo CHtml::link('Fitur', $this->createUrl('site/feature')); ?></li>
             <li><?php echo CHtml::link('Kontak', $this->createUrl('site/contact')); ?></li>
             <li>
                 <?php echo CHtml::link('Login', $this->createUrl('user/login')); ?>
