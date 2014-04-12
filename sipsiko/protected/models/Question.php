@@ -48,6 +48,7 @@ class Question extends AppActiveRecord {
         return array(
             'answers' => array(self::HAS_MANY, 'Answer', 'question_id'),
             'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
+            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
         );
     }
 

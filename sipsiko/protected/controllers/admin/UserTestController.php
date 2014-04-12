@@ -5,11 +5,11 @@ class UserTestController extends AdminController {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'settimeused'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'settimeused', 'viewmember'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -29,7 +29,23 @@ class UserTestController extends AdminController {
     }
 
     public function actionView() {
+        $model = $this->loadModel();
+        
+        $testAnswerModel = new TestAnswer('search');
+        $testAnswerModel->unsetAttributes();
+        if (isset($_GET['TestAnswer'])) {
+            $testAnswerModel->attributes = $_GET['TestAnswer'];
+        }
+        $testAnswerModel->user_test_id = $model->id;
+
         $this->render('view', array(
+            'model' => $model,
+            'testAnswerModel' => $testAnswerModel
+        ));
+    }
+    
+    public function actionViewMember(){
+        $this->render('view_member', array(
             'model' => $this->loadModel(),
         ));
     }
@@ -174,6 +190,21 @@ class UserTestController extends AdminController {
         ));
     }
 
+    public function actionResult() {
+        $model = new UserTest('search');
+        $model->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $model->attributes = $_GET['UserTest'];
+        }
+
+        $model->status = Status::INACTIVE;
+        $model->company_id = $this->profiles[RolePrivilege::COMPANY];
+
+        $this->render('result', array(
+            'model' => $model,
+        ));
+    }
+
     public function actionPublic() {
         $model = new Test('search');
         $model->unsetAttributes();
@@ -229,7 +260,7 @@ class UserTestController extends AdminController {
             if (empty($model->spent_time)) {
                 $model->spent_time = $testModel->duration;
             }
-            
+
             $model->show_result = $testModel->show_result;
             $model->test_id = $testModel->id;
             $model->save();

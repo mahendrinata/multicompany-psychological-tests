@@ -26,8 +26,7 @@
                     <li class="sidebar-header"><span class="sidebar-header-title">Company</span></li>
                     <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member of Company</a>', array('admin/usertest/index')); ?></li>
                     <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Tests of Company</a>', array('admin/test/company')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Test Results</a>', array('admin/usertest/result')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/usertest/analysis')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Test Results</a>', array('admin/usertest/result')); ?></li>
                 <?php } ?>
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::EXPERT)) { ?>
@@ -42,8 +41,7 @@
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::MEMBER)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Member</span></li>
                     <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests</a>', array('admin/usertest/member')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests Result</a>', array('admin/usertest/memberresult')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Analysis Tests</a>', array('admin/usertest/memberanalysis')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Tests Result</a>', array('admin/usertest/memberresult')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Generate Public Tests</a>', array('admin/usertest/public')); ?></li>
                 <?php } ?>
 

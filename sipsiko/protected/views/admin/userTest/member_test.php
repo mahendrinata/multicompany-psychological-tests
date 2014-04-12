@@ -53,7 +53,7 @@ $('.search-form form').submit(function(){
             'rowCssClass' => array(),
             'id' => 'user-test-grid',
             'dataProvider' => $userTestModel->search(),
-            'filter' => $userTestModel,
+            'filter' => null,
             'ajaxUpdate' => true,
             'afterAjaxUpdate' => 'function(id, data){$(".select-chosen").chosen({width: "100%",allow_single_deselect: true});$(".input-datepicker").datepicker({format: "yyyy-mm-dd"});}',
             'pager' => array(
@@ -74,7 +74,6 @@ $('.search-form form').submit(function(){
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
-                    'filter' => CHtml :: activeTelField($userTestModel, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
                     'name' => 'user_profile.first_name',
@@ -82,37 +81,37 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'test_id',
-                    'filter' => CHtml:: activeDropDownList($userTestModel, 'test_id', CHtml::listData(Test::model()->getTestCompany($this->profiles[RolePrivilege::COMPANY]), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'value' => '$data->test->name'
                 ),
                 array(
                     'name' => 'spent_time',
-                    'filter' => CHtml :: activeTelField($userTestModel, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ), 
                 array(
                     'name' => 'test.start_date',
-                    'value' => '$data->test->start_date', 'filter' => ''
+                    'value' => '$data->test->start_date',
                 ),
                 array(
                     'name' => 'test.end_date',
                     'value' => '$data->test->end_date',
-                    'filter' => ''
                 ),
                 array(
                     'name' => 'time_used',
-                    'filter' => CHtml :: activeTelField($userTestModel, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ), 
                 array(
+                    'name' => 'test_variable.variable',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getListTestVariable($data->test_variables,true)',
+                ),
+                array(
                     'name' => 'status',
-                    'filter' => CHtml:: activeDropDownList($userTestModel, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ), array(
                     'class' => 'CButtonColumn',
-                    'filterHtmlOptions' => array('style' => 'width: 80px;')
+                    'htmlOptions' => array('style' => 'width: 80px;')
                 )
         )));
         ?>      

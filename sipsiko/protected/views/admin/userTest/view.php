@@ -13,14 +13,31 @@ $this->breadcrumbs = array(
     $this->widget('zii.widgets.CDetailView', array(
         'data' => $model,
         'attributes' => array(
-            'user_profile.first_name',
-            'company.first_name',
-            'test.name',
-            'status',
+            array(
+                'name' => 'user_profile.first_name',
+                'label' => 'Member Name'
+            ),
+            array(
+                'name' => 'company.first_name',
+                'label' => 'Company Name'
+            ),
+            array(
+                'name' => 'test.name',
+                'label' => 'Test Name'
+            ),
+            array(
+                'name' => 'status',
+                'value' => Status::get_tag_label($model->status),
+                'type' => 'raw'
+            ),
             'spent_time',
             'time_used',
-            'show_result',
-            'note',
+            array(
+                'name' => 'show_result',
+                'type' => 'raw',
+                'value' => ModelHelper::getBooleanLabel($model->show_result)
+            ),
+            'note:html',
             'created_at',
             'updated_at',
         ),
@@ -29,3 +46,82 @@ $this->breadcrumbs = array(
     ?>
     <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/usertest'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
 </div>
+
+<div class="block">
+    <div class="block-title">
+        <h2>Result User Test #<strong><?php echo $model->id; ?></strong></h2>
+    </div>
+    <?php
+    $this->widget('zii.widgets.CDetailView', array(
+        'data' => $model,
+        'htmlOptions' => array('class' => 'table table-borderless table-striped'),
+        'attributes' => array(
+            array(
+                'name' => 'test_variable.variable',
+                'type' => 'raw',
+                'value' => ModelHelper::getListTestVariable($model->test_variables, true),
+            ),
+            array(
+                'name' => 'variable_details',
+                'value' => ModelHelper::getVariableDetail($model->variable_details),
+                'type' => 'html'
+            )
+    )));
+    ?>
+</div>
+
+
+<div class="block">
+    <div class="block-title">
+        <h2>User Test Answer #<strong><?php echo $model->id; ?></strong></h2>
+    </div>
+    <div class="table-responsive">
+        <?php
+        $this->widget('zii.widgets.grid.CGridView', array(
+            'itemsCssClass' => 'table table-bordered table-striped table-vcenter',
+            'rowCssClass' => array(),
+            'id' => 'test-grid',
+            'dataProvider' => $testAnswerModel->search(),
+            'filter' => null,
+            'ajaxUpdate' => true,
+            'afterAjaxUpdate' => 'function(id, data){$(".select-chosen").chosen({width: "100%",allow_single_deselect: true});$(".input-datepicker").datepicker({format: "yyyy-mm-dd"});}',
+            'pager' => array(
+                'firstPageLabel' => '<<',
+                'prevPageLabel' => '<',
+                'nextPageLabel' => '>',
+                'lastPageLabel' => '>>',
+                'htmlOptions' => array('class' => 'yiiPager pagination pagination-sm remove-margin'),
+                'header' => ' ',
+                'cssFile' => '',
+                'selectedPageCssClass' => 'active',
+            ),
+            'pagerCssClass' => 'pagination',
+            'summaryCssClass' => 'alert alert-info',
+            'columns' => array(
+                array(
+                    'name' => 'id',
+                    'header' => 'ID',
+                    'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                ),
+                array(
+                    'name' => 'question.description',
+                    'value' => '$data->question->description',
+                    'header' => 'Question'
+                ),
+                array(
+                    'name' => 'answer.description',
+                    'value' => '$data->answer->description',
+                    'header' => 'Answer'
+                ),
+                array(
+                    'name' => 'answer.variable.name',
+                    'value' => '$data->answer->variable->name',
+                    'header' => 'Variable'
+                ),
+            ),
+        ));
+        ?>
+    </div>
+</div>
+

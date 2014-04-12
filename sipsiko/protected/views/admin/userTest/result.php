@@ -48,13 +48,18 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'company.first_name',
-                    'value' => '$data->company->first_name',
-                    'header' => 'Company'
+                    'name' => 'test_id',
+                    'value' => '$data->test->name',
+                    'header' => 'Test Name'
                 ),
                 array(
                     'name' => 'test_id',
-                    'value' => '$data->test->name'
+                    'value' => '$data->test->type->name',
+                    'header' => 'Type'
+                ),
+                array(
+                    'name' => 'spent_time',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'time_used',
@@ -64,16 +69,11 @@ $('.search-form form').submit(function(){
                     'name' => 'test_variable.variable',
                     'filter' => '',
                     'type' => 'raw',
-                    'value' => 'ModelHelper::getListTestVariable($data->test_variables)',
+                    'value' => 'ModelHelper::getListTestVariable($data->test_variables, true)',
                 ),
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{view}',
-                    'buttons' => array(
-                        'view' => array(
-                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/viewmember", array("id"=>$data->id))',
-                        ),
-                    ),
                 )
             ),
         ));

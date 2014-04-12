@@ -46,6 +46,16 @@ $form = $this->beginWidget('CActiveForm', array(
     </div>
 </div>
 
+<?php if ($model->status == Status::INACTIVE) { ?>
+    <div class="form-group">
+        <?php echo $form->label($model, 'note', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+        <div class="col-lg-8 col-sm-12 col-xs-12">
+            <?php echo $form->textArea($model, 'note', array('placeholder' => 'Note', 'class' => 'form-control textarea-editor', 'rows' => 20)); ?>
+            <?php echo $form->error($model, 'note', array('class' => 'help-block alert-danger')); ?>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="form-group">
     <label class="col-lg-2 col-sm-2 control-label"></label>
     <div class="col-lg-9 col-xs-12">

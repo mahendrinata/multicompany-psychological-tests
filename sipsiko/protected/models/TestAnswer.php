@@ -46,7 +46,8 @@ class TestAnswer extends AppActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'answer' => array(self::BELONGS_TO, 'Answers', 'answer_id'),
+			'question' => array(self::BELONGS_TO, 'Question', 'question_id'),
+			'answer' => array(self::BELONGS_TO, 'Answer', 'answer_id'),
 			'user_test' => array(self::BELONGS_TO, 'UserTests', 'user_test_id'),
 		);
 	}
