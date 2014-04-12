@@ -1,6 +1,7 @@
-/nbproject/
+/sipsiko/nbproject/
 /requirements/
-/sipsiko/protected/runtime/application.log
+/sipsiko/protected/runtime/
 /SIPSIKO YII/
 /demos/
 /sipsiko/assets/
+/nbproject/
