@@ -18,10 +18,24 @@ class UserTestController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModelCompany() {
         if ($this->_model === null) {
             if (isset($_GET['id']))
-                $this->_model = UserTest::model()->findbyPk($_GET['id']);
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'company_id' => $this->profiles[RolePrivilege::COMPANY]));
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
+    public function loadModelMember() {
+        if ($this->_model === null) {
+            if (isset($_GET['id']))
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::MEMBER]));
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -29,7 +43,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionView() {
-        $model = $this->loadModel();
+        $model = $this->loadModelCompany();
 
         $testAnswerModel = new TestAnswer('search');
         $testAnswerModel->unsetAttributes();
@@ -46,7 +60,7 @@ class UserTestController extends AdminController {
 
     public function actionViewMember() {
         $this->render('view_member', array(
-            'model' => $this->loadModel(),
+            'model' => $this->loadModelMember(),
         ));
     }
 
@@ -82,7 +96,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel();
+        $model = $this->loadModelCompany();
 
         $this->performAjaxValidation($model, 'user-test-form');
 
@@ -99,7 +113,7 @@ class UserTestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $this->loadModelCompany()->delete();
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/user-test/index'));
@@ -138,7 +152,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionTest() {
-        $testModel = $this->loadModel();
+        $testModel = $this->loadModelCompany();
 
         if (isset($_POST['UserTest'])) {
             $testModel->status = Status::INACTIVE;
