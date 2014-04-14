@@ -129,6 +129,19 @@ class UserTest extends AppActiveRecord {
         ));
     }
 
+    public function beforeSave() {
+        if (empty($this->spent_time))
+            $this->duration = new CDbExpression('NULL');
+
+        if (empty($this->start_date))
+            $this->start_date = new CDbExpression('NULL');
+
+        if (empty($this->end_date))
+            $this->end_date = new CDbExpression('NULL');
+
+        return parent::beforeSave();
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * @return UserTest the static model class

@@ -27,17 +27,32 @@ $('.search-form form').submit(function(){
     ?>
 
     <div class="form-group">
-        <?php echo $form->label($model, 'user_profile_id', array('class' => 'sr-only')); ?>
+        <?php echo $form->label($model, 'user_profile_id', array('class' => 'sr-only col-lg-5')); ?>
         <?php echo $form->dropDownList($model, 'user_profile_id', CHtml::listData(UserProfile::model()->getActiveUserProfilesByRole(RolePrivilege::MEMBER), 'id', 'first_name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Member Test')); ?>
         <?php echo $form->error($model, 'user_profile_id', array('class' => 'help-block alert-danger')); ?>
     </div>
     <div class="form-group">
         <?php echo $form->label($model, 'spent_time', array('class' => 'sr-only')); ?>
-        <?php echo $form->textField($model, 'spent_time', array('placeholder' => 'Spent Time', 'class' => 'form-control')); ?>
+        <?php echo $form->textField($model, 'spent_time', array('placeholder' => 'Spent Time', 'class' => 'form-control text-right')); ?>
         <?php echo $form->error($model, 'spent_time', array('class' => 'help-block alert-danger')); ?>
     </div>
     <div class="form-group">
-        <?php echo $form->label($model, 'status', array('class' => 'sr-only')); ?>
+        <?php echo $form->label($model, 'show_result', array('class' => 'sr-only col-lg-1')); ?>
+        <?php echo $form->dropDownList($model, 'show_result', array(1 => 'Yes', 0 => 'No'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Show Result')); ?>
+        <?php echo $form->error($model, 'show_result', array('class' => 'help-block alert-danger')); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $form->label($model, 'start_date', array('class' => 'sr-only')); ?>
+        <?php echo $form->textField($model, 'start_date', array('placeholder' => 'Start Date', 'class' => 'form-control input-datepicker')); ?>
+        <?php echo $form->error($model, 'start_date', array('class' => 'help-block alert-danger')); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $form->label($model, 'end_date', array('class' => 'sr-only')); ?>
+        <?php echo $form->textField($model, 'end_date', array('placeholder' => 'End Date', 'class' => 'form-control input-datepicker')); ?>
+        <?php echo $form->error($model, 'end_date', array('class' => 'help-block alert-danger')); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $form->label($model, 'status', array('class' => 'sr-only col-lg-3')); ?>
         <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
         <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
     </div>
@@ -116,7 +131,15 @@ $('.search-form form').submit(function(){
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
                     'filter' => CHtml::activeDropDownList($userTestModel, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
-                ), array(
+                ), 
+                array(
+                    'name' => 'show_result',
+                    'filter' => CHtml::activeDropDownList($userTestModel, 'show_result', array(1 => 'Yes', 0 => 'No'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Show Result')),
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getBooleanLabel($data->show_result)',
+                    'htmlOptions' => array('class' => 'text-center'),
+                ),
+                array(
                     'class' => 'CButtonColumn',
                     'htmlOptions' => array('style' => 'width: 80px;')
                 )

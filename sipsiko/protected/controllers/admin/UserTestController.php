@@ -251,20 +251,20 @@ class UserTestController extends AdminController {
         $model = new UserTest;
 
         $this->performAjaxValidation($model, 'user-test-form');
+        $testModel = Test::model()->findByPk($_GET['id']);
 
         if (isset($_POST['UserTest'])) {
             $model->attributes = $_POST['UserTest'];
             $model->company_id = $this->profiles[RolePrivilege::COMPANY];
 
-            $testModel = Test::model()->findByPk($_GET['id']);
-            if (empty($model->spent_time)) {
-                $model->spent_time = $testModel->duration;
-            }
-
-            $model->show_result = $testModel->show_result;
             $model->test_id = $testModel->id;
             if ($model->save())
                 $this->refresh();
+        }else {
+            $model->spent_time = $testModel->duration;
+            $model->show_result = $testModel->show_result;
+            $model->start_date = $testModel->start_date;
+            $model->end_date = $testModel->end_date;
         }
 
         $userTestModel = new UserTest('search');
@@ -274,7 +274,7 @@ class UserTestController extends AdminController {
         }
 
         $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
-        $userTestModel->test_id = $_GET['id'];
+        $userTestModel->test_id = $testModel->id;
 
         $this->render('member_test', array(
             'model' => $model,
