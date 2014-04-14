@@ -63,7 +63,15 @@ class UserTestController extends AdminController {
             if (empty($model->spent_time)) {
                 $model->spent_time = $testModel->duration;
             }
-            $model->show_result = $testModel->show_result;
+            if (empty($model->start_date)) {
+                $model->start_date = $testModel->start_date;
+            }
+            if (empty($model->end_date)) {
+                $model->end_date = $testModel->end_date;
+            }
+            if (empty($model->show_result)) {
+                $model->show_result = $testModel->show_result;
+            }
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }
