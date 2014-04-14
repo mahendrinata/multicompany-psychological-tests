@@ -13,6 +13,7 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
             'start_date' => 'date',
             'end_date' => 'date',
             'status' => 'string',
+            'token' => 'string',
             'user_profile_id' => 'integer',
             'test_id' => 'integer',
             'company_id' => 'integer',

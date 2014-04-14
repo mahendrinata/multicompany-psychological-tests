@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'settimeused', 'viewmember'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'viewmember'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -30,12 +30,17 @@ class UserTestController extends AdminController {
         return $this->_model;
     }
 
-    public function loadModelMember() {
+    public function loadModelMember($token = false) {
         if ($this->_model === null) {
-            if (isset($_GET['id']))
+            if (isset($_GET['id'])) {
+                if ($token) {
+                    UserTest::model()->generateToken($_GET['id']);
+                }
+
                 $this->_model = UserTest::model()->findByAttributes(array(
                     'id' => $_GET['id'],
                     'user_profile_id' => $this->profiles[RolePrivilege::MEMBER]));
+            }
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -152,46 +157,69 @@ class UserTestController extends AdminController {
     }
 
     public function actionTest() {
-        $testModel = $this->loadModelCompany();
+        $userTestModel = $this->loadModelMember(true);
 
         if (isset($_POST['UserTest'])) {
-            $testModel->status = Status::INACTIVE;
-            if ($testModel->save())
+            $userTestModel->status = Status::INACTIVE;
+            if ($userTestModel->save())
                 TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
             $this->redirect(array('admin/usertest/member'));
         }
 
         $this->render('test', array(
-            'model' => $testModel,
+            'model' => $userTestModel,
         ));
     }
 
     public function actionSaveTestAnswer() {
-        if (Yii::app()->request->isPostRequest) {
+        if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
             $testAnswer = TestAnswer::model()->findByAttributes(array(
                 'user_test_id' => $_POST['user_test_id'],
                 'question_id' => $_POST['question_id']
             ));
-            if (empty($testAnswer)) {
-                $newTestAnswer = new TestAnswer;
-                $newTestAnswer->attributes = $_POST;
-                $save = $newTestAnswer->save();
+            $userTestModel = UserTest::model()->findByAttributes(array(
+                'id' => $_POST['user_test_id'],
+                'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
+                'token' => $_POST['token']
+            ));
+            if (!empty($userTestModel)) {
+                if (empty($testAnswer)) {
+                    $newTestAnswer = new TestAnswer;
+                    $newTestAnswer->attributes = $_POST;
+                    $save = $newTestAnswer->save();
+                } else {
+                    $testAnswer->answer_id = $_POST['answer_id'];
+                    $save = $testAnswer->save();
+                }
+                echo json_encode(array('data' => $save));
             } else {
-                $testAnswer->answer_id = $_POST['answer_id'];
-                $save = $testAnswer->save();
+                echo json_encode(array('data' => $save, 'error' => 'Invalid request. Please do not repeat this request again.'));
             }
-            echo json_encode(array('data' => $save));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
     public function actionSetSpentTime() {
-        if (Yii::app()->request->isPostRequest) {
-            $model = UserTest::model()->findByPk($_POST['user_test_id']);
-            $model->spent_time = $model->spent_time - 1;
-            $model->time_used = $model->time_used + 1;
-            if ($model->save())
-                echo json_encode(array('spentTime' => $model->spent_time));
+        if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
+            $model = UserTest::model()->findByAttributes(array(
+                'id' => $_POST['user_test_id'],
+                'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
+                'token' => $_POST['token']));
+
+            if (!empty($model)) {
+                if (!empty($model->spent_time)) {
+                    $spent_time = $model->spent_time = $model->spent_time - 1;
+                    $model->time_used = $model->time_used + 1;
+                    if ($model->save())
+                        echo json_encode(array('spentTime' => $spent_time, 'time_used' => $model->time_used));
+                }else {
+                    $model->time_used = $model->time_used + 1;
+                    if ($model->save())
+                        echo json_encode(array('time_used' => $model->time_used));
+                }
+            } else {
+                throw new CHttpException(404, 'The requested page does not exist.');
+            }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
@@ -257,16 +285,6 @@ class UserTestController extends AdminController {
                 $this->redirect(array('admin/usertest/member'));
             }
         }
-    }
-
-    public function actionSetTimeUsed() {
-        if (Yii::app()->request->isPostRequest) {
-            $model = UserTest::model()->findByPk($_POST['user_test_id']);
-            $model->time_used = $model->time_used + 1;
-            if ($model->save())
-                echo json_encode(array('timeUsed' => $model->time_used));
-        } else
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
     public function actionMemberTest() {

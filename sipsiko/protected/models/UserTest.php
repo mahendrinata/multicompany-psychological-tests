@@ -12,6 +12,7 @@
  * @property integer $show_result
  * @property string $start_date 
  * @property string $end_date 
+ * @property string $token 
  * @property integer $user_profile_id
  * @property integer $test_id
  * @property integer $company_id 
@@ -37,10 +38,10 @@ class UserTest extends AppActiveRecord {
 //            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
             array('variable_detail_slug, status', 'length', 'max' => 255),
-            array('spent_time, time_used, start_date, end_date, show_result, note, created_at, updated_at', 'safe'),
+            array('spent_time, time_used, start_date, end_date, show_result, note, token, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, spent_time, time_used, show_result, start_date, end_date, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, spent_time, time_used, show_result, start_date, end_date, note, token, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -73,6 +74,7 @@ class UserTest extends AppActiveRecord {
             'end_date' => 'End Date',
             'note' => 'Note',
             'status' => 'Status',
+            'token' => 'Token',
             'user_profile_id' => 'User Profile',
             'company_id' => 'Company',
             'test_id' => 'Test',
@@ -114,6 +116,8 @@ class UserTest extends AppActiveRecord {
 
         $criteria->compare('status', $this->status);
 
+        $criteria->compare('token', $this->token);
+
         $criteria->compare('user_profile_id', $this->user_profile_id);
 
         $criteria->compare('test_id', $this->test_id);
@@ -131,7 +135,7 @@ class UserTest extends AppActiveRecord {
 
     public function beforeSave() {
         if (empty($this->spent_time))
-            $this->duration = new CDbExpression('NULL');
+            $this->spent_time = new CDbExpression('NULL');
 
         if (empty($this->start_date))
             $this->start_date = new CDbExpression('NULL');
@@ -148,6 +152,11 @@ class UserTest extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function generateToken($id) {
+        $token = md5(rand(0, 99999) . date('Y-m-d H:i:s'));
+        $this->updateByPk($id, array('token' => $token));
     }
 
 }

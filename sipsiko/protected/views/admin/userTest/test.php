@@ -9,12 +9,12 @@ $this->breadcrumbs = array(
         <h2><strong>Test</strong> <?php echo $model->test->name . ' (' . $model->company->first_name . ')'; ?></h2>
     </div>
     <div class="table-options clearfix">
-        <h2 class="pull-right"><strong>Time Remaining : <span id="time-remaining">Unlimited</span></strong></h2>
+        <h2 class="pull-right"><strong><?php echo (empty($model->spent_time)) ? 'Time Used' : 'Time Remaining'; ?> : <span id="time-remaining">Unlimited</span></strong></h2>
         <div class="clearfix"></div>
         <h4 class="pull-right">Total Question : <?php echo count($model->test->questions); ?></h4>
         <div class="clearfix"></div>
         <?php if (!empty($model->spent_time)) { ?>
-            <h4 class="pull-right">Time to answer the each question : <?php echo round(($model->spent_time * 60) / count($model->test->questions), 2); ?> seconds</h4>
+            <h4 class="pull-right">Time to answer each question : <?php echo round(($model->spent_time * 60) / count($model->test->questions), 2); ?> seconds</h4>
             <div class="clearfix"></div>
         <?php } ?>
         <hr>
@@ -85,7 +85,8 @@ $this->breadcrumbs = array(
             $.post("<?php echo CController::createUrl('admin/usertest/savetestanswer') ?>", {
                 user_test_id: $(this).attr('data-user-test'),
                 question_id: $(this).attr('data-question'),
-                answer_id: $(this).val()
+                answer_id: $(this).val(),
+                token: '<?php echo $model->token; ?>'
             },
             function(data, status) {
 
@@ -97,43 +98,34 @@ $this->breadcrumbs = array(
         });
     });
 
-<?php if (!empty($model->spent_time)) { ?>
-        var startDate = new Date();
-        var endDate = new Date(startDate.getTime() + (<?php echo $model->spent_time; ?> * 60 * 1000));
+    var startDate = new Date();
+    var endDate = new Date(startDate.getTime() + <?php echo abs($model->spent_time) * 60 * 1000; ?>);
 
-        var timeCountDown = function() {
-            var units = countdown.DEFAULTS;
-            var ts = countdown(null, endDate, units);
-            text = ts.toString();
-            $('#time-remaining').text(text);
+    var timeCountDown = function() {
+        var units = countdown.DEFAULTS;
+        var ts = countdown(null, endDate, units);
+        text = ts.toString();
+        $('#time-remaining').text(text);
 
-            setTimeout(timeCountDown, 1000);
-        };
+        setTimeout(timeCountDown, 1000);
+    };
 
-        var setSpentTimeTest = function() {
-            $.post("<?php echo CController::createUrl('admin/usertest/setspenttime') ?>", {
-                user_test_id: <?php echo $model->id; ?>
-            },
-            function(data, status) {
-                json = JSON.parse(data);
-                if (parseInt(json.spentTime) <= 0) {
-                    $('#user-test-form').submit();
-                }
-            });
+    timeCountDown();
 
-            setTimeout(setSpentTimeTest, 60000);
-        };
+    var setSpentTimeTest = function() {
+        $.post("<?php echo CController::createUrl('admin/usertest/setspenttime') ?>", {
+            user_test_id: <?php echo $model->id; ?>,
+            token: '<?php echo $model->token; ?>'
+        },
+        function(data, status) {
+            json = JSON.parse(data);
+            if (parseInt(json.spentTime) <= 0) {
+                $('#user-test-form').submit();
+            }
+        });
 
-        timeCountDown();
         setTimeout(setSpentTimeTest, 60000);
-<?php } else { ?>
-        var setTimeUsedTest = function() {
-            $.post("<?php echo CController::createUrl('admin/usertest/settimeused') ?>", {
-                user_test_id: <?php echo $model->id; ?>
-            });
+    };
 
-            setTimeout(setTimeUsedTest, 60000);
-        };
-        setTimeout(setTimeUsedTest, 60000);
-<?php } ?>
+    setTimeout(setSpentTimeTest, 60000);
 </script>
