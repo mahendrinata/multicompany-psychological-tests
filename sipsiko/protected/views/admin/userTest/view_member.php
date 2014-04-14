@@ -47,7 +47,7 @@ $this->breadcrumbs = array(
             array(
                 'name' => 'test_variable.variable',
                 'type' => 'raw',
-                'value' => ModelHelper::getListTestVariable($model->test_variables, true),
+                'value' => ModelHelper::getListTestVariable($model->test_variables),
             ),
             array(
                 'name' => 'variable_details',
