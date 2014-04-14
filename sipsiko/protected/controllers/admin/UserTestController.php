@@ -30,7 +30,7 @@ class UserTestController extends AdminController {
 
     public function actionView() {
         $model = $this->loadModel();
-        
+
         $testAnswerModel = new TestAnswer('search');
         $testAnswerModel->unsetAttributes();
         if (isset($_GET['TestAnswer'])) {
@@ -43,8 +43,8 @@ class UserTestController extends AdminController {
             'testAnswerModel' => $testAnswerModel
         ));
     }
-    
-    public function actionViewMember(){
+
+    public function actionViewMember() {
         $this->render('view_member', array(
             'model' => $this->loadModel(),
         ));
@@ -263,7 +263,8 @@ class UserTestController extends AdminController {
 
             $model->show_result = $testModel->show_result;
             $model->test_id = $testModel->id;
-            $model->save();
+            if ($model->save())
+                $this->refresh();
         }
 
         $userTestModel = new UserTest('search');
