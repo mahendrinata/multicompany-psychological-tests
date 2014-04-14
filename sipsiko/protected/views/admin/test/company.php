@@ -125,6 +125,15 @@ $('.search-form form').submit(function(){
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/usertest/membertest", array("id"=>$data->id))',
                         ),
+                        'view' => array(
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/viewcompany", array("id"=>$data->id))',
+                        ),
+                        'update' => array(
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/updatecompany", array("id"=>$data->id))',
+                        ),
+                        'delete' => array(
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/deletecompany", array("id"=>$data->id))',
+                        ),
                     ))
             ),
         ));

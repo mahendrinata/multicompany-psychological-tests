@@ -9,7 +9,7 @@ class TestController extends AdminController {
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
-                'actions' => array('view', 'update', 'delete', 'company', 'active', 'generate'),
+                'actions' => array('viewcompany', 'updatecompany', 'deletecompany', 'company', 'active', 'generate'),
                 'roles' => array(RolePrivilege::COMPANY)
             ),
             array('deny',
@@ -18,10 +18,25 @@ class TestController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModelExpert() {
         if ($this->_model === null) {
             if (isset($_GET['id']))
-                $this->_model = Test::model()->with('type')->findbyPk($_GET['id']);
+                $this->_model = Test::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]));
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
+    public function loadModelCompany() {
+        if ($this->_model === null) {
+            if (isset($_GET['id']))
+                $this->_model = Test::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
+
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -29,7 +44,22 @@ class TestController extends AdminController {
     }
 
     public function actionView() {
-        $this->data['testModel'] = $this->loadModel();
+        $this->data['testModel'] = $this->loadModelExpert();
+
+        $questionModel = new Question('search');
+        $questionModel->unsetAttributes();
+        if (isset($_GET['Question']))
+            $questionModel->attributes = $_GET['Question'];
+
+        $questionModel->test_id = $this->data['testModel']->id;
+
+        $this->data['questionModel'] = $questionModel;
+
+        $this->render('view', $this->data);
+    }
+
+    public function actionViewCompany() {
+        $this->data['testModel'] = $this->loadModelCompany();
 
         $questionModel = new Question('search');
         $questionModel->unsetAttributes();
@@ -63,18 +93,31 @@ class TestController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel();
+        $model = $this->loadModelExpert();
 
         $this->performAjaxValidation($model);
 
         if (isset($_POST['Test'])) {
             $model->attributes = $_POST['Test'];
             if ($model->save()) {
-                if ($model->is_expert) {
-                    $this->redirect(array('admin/test/index'));
-                } else {
-                    $this->redirect(array('admin/test/company'));
-                }
+                $this->redirect(array('admin/test/index'));
+            }
+        }
+
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
+
+    public function actionUpdateCompany() {
+        $model = $this->loadModelCompany();
+
+        $this->performAjaxValidation($model);
+
+        if (isset($_POST['Test'])) {
+            $model->attributes = $_POST['Test'];
+            if ($model->save()) {
+                $this->redirect(array('admin/test/company'));
             }
         }
 
@@ -85,8 +128,8 @@ class TestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = Test::model()->with('questions', 'questions.answers')->findByPk($_GET['id']);
-            $this->loadModel()->delete();
+            $model = $this->loadModelExpert();
+            $this->loadModelExpert()->delete();
             foreach ($model->questions as $question) {
                 $question->delete();
                 foreach ($question->answers as $answer) {
@@ -100,6 +143,24 @@ class TestController extends AdminController {
                 } else {
                     $this->redirect(array('admin/test/company'));
                 }
+            }
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionDeleteCompany() {
+        if (Yii::app()->request->isPostRequest) {
+            $model = $this->loadModelCompany();
+            $this->loadModelCompany()->delete();
+            foreach ($model->questions as $question) {
+                $question->delete();
+                foreach ($question->answers as $answer) {
+                    $answer->delete();
+                }
+            }
+
+            if (!isset($_GET['ajax'])) {
+                $this->redirect(array('admin/test/company'));
             }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
@@ -148,10 +209,12 @@ class TestController extends AdminController {
     public function actionGenerate() {
 //        if (Yii::app()->request->isPostRequest) {
 
-            $save = Test::model()->generate($_GET['id'], $this->profiles[RolePrivilege::COMPANY]);
+        $model = $this->loadModelCompany();
 
-            if (!isset($_GET['ajax']))
-                $this->redirect(array('admin/test/company'));
+        $save = Test::model()->generate($model->id, $this->profiles[RolePrivilege::COMPANY]);
+
+        if (!isset($_GET['ajax']))
+            $this->redirect(array('admin/test/company'));
 //        } else
 //            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
