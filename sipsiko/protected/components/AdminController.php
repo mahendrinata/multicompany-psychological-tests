@@ -8,11 +8,13 @@ class AdminController extends Controller {
     public $profiles;
     protected $_unregisters;
     protected $_url;
+    protected $_userId;
 
     public function init() {
         parent::init();
 
-        if (empty(Yii::app()->user->getId())) {
+        $this->_userId = Yii::app()->user->getId();
+        if (empty($this->_userId)) {
             $this->redirect(array('site/index'));
         }
 
