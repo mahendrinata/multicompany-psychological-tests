@@ -76,20 +76,25 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' =>'test.start_date',
-                    'value' => '$data->test->start_date',
-                    'filter' => ''
-                ),
-                array(
-                    'name' =>'test.end_date',
-                    'value' => '$data->test->end_date',
-                    'filter' => ''
-                ),
-                array(
                     'name' => 'time_used',
                     'filter' => CHtml :: activeTelField($model, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ), 
+                array(
+                    'name' =>'start_date',
+                    'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
+                ),
+                array(
+                    'name' =>'end_date',
+                    'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control input-datepicker'))
+                ),
+                array(
+                    'name' => 'show_result',
+                    'filter' => CHtml::activeDropDownList($model, 'show_result', array(1 => 'Yes', 0 => 'No'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Show Result')),
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getBooleanLabel($data->show_result)',
+                    'htmlOptions' => array('class' => 'text-center'),
+                ),
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',

@@ -53,7 +53,7 @@ $('.search-form form').submit(function(){
             'rowCssClass' => array(),
             'id' => 'user-test-grid',
             'dataProvider' => $userTestModel->search(),
-            'filter' => null,
+            'filter' => $userTestModel,
             'ajaxUpdate' => true,
             'afterAjaxUpdate' => 'function(id, data){$(".select-chosen").chosen({width: "100%",allow_single_deselect: true});$(".input-datepicker").datepicker({format: "yyyy-mm-dd"});}',
             'pager' => array(
@@ -74,31 +74,37 @@ $('.search-form form').submit(function(){
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'filter' => CHtml::activeTelField($userTestModel, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
                     'name' => 'user_profile.first_name',
-                    'value' => '$data->user_profile->first_name', 'header' => 'Member Name'
+                    'value' => '$data->user_profile->first_name', 
+                    'header' => 'Member Name',
+                    'filter' => ''
                 ),
                 array(
                     'name' => 'test_id',
-                    'value' => '$data->test->name'
+                    'value' => '$data->test->name',
+                    'filter' => ''
                 ),
                 array(
                     'name' => 'spent_time',
+                    'filter' => CHtml::activeTelField($userTestModel, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ), 
-                array(
-                    'name' => 'test.start_date',
-                    'value' => '$data->test->start_date',
-                ),
-                array(
-                    'name' => 'test.end_date',
-                    'value' => '$data->test->end_date',
-                ),
                 array(
                     'name' => 'time_used',
+                    'filter' => CHtml::activeTelField($userTestModel, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ), 
+                array(
+                    'name' => 'start_date',
+                    'filter' => CHtml::activeTelField($userTestModel, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
+                ),
+                array(
+                    'name' => 'end_date',
+                    'filter' => CHtml::activeTelField($userTestModel, 'end_date', array('id' => false, 'class' => 'form-control input-datepicker'))
+                ),
                 array(
                     'name' => 'test_variable.variable',
                     'type' => 'raw',
@@ -109,6 +115,7 @@ $('.search-form form').submit(function(){
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
+                    'filter' => CHtml::activeDropDownList($userTestModel, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                 ), array(
                     'class' => 'CButtonColumn',
                     'htmlOptions' => array('style' => 'width: 80px;')

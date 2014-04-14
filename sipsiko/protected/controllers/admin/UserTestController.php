@@ -270,7 +270,7 @@ class UserTestController extends AdminController {
         $userTestModel = new UserTest('search');
         $userTestModel->unsetAttributes();
         if (isset($_GET['UserTest'])) {
-            $model->attributes = $_GET['UserTest'];
+            $userTestModel->attributes = $_GET['UserTest'];
         }
 
         $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];

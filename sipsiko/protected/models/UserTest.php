@@ -10,6 +10,8 @@
  * @property string $note
  * @property string $status
  * @property integer $show_result
+ * @property string $start_date 
+ * @property string $end_date 
  * @property integer $user_profile_id
  * @property integer $test_id
  * @property integer $company_id 
@@ -35,10 +37,10 @@ class UserTest extends AppActiveRecord {
 //            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
             array('variable_detail_slug, status', 'length', 'max' => 255),
-            array('spent_time, time_used, show_result, note, created_at, updated_at', 'safe'),
+            array('spent_time, time_used, start_date, end_date, show_result, note, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, spent_time, time_used, show_result, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, spent_time, time_used, show_result, start_date, end_date, note, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -67,6 +69,8 @@ class UserTest extends AppActiveRecord {
             'spent_time' => 'Spent Time',
             'time_used' => 'Time Used',
             'show_result' => 'Show Result',
+            'start_date' => 'Start Date',
+            'end_date' => 'End Date',
             'note' => 'Note',
             'status' => 'Status',
             'user_profile_id' => 'User Profile',
@@ -103,6 +107,10 @@ class UserTest extends AppActiveRecord {
         $criteria->compare('show_result', $this->show_result);
 
         $criteria->compare('note', $this->note, true);
+
+        $criteria->compare('start_date', $this->start_date, true);
+
+        $criteria->compare('end_date', $this->end_date, true);
 
         $criteria->compare('status', $this->status);
 

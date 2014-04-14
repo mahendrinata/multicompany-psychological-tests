@@ -10,6 +10,8 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
             'variable_detail_slug' => 'string NOT NULL',
             'show_result' => 'boolean NOT NULL',
             'time_used' => 'integer NOT NULL',
+            'start_date' => 'date',
+            'end_date' => 'date',
             'status' => 'string',
             'user_profile_id' => 'integer',
             'test_id' => 'integer',
