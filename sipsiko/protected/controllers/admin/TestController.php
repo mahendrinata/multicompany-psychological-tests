@@ -138,11 +138,7 @@ class TestController extends AdminController {
             }
 
             if (!isset($_GET['ajax'])) {
-                if ($model->is_expert) {
-                    $this->redirect(array('admin/test/index'));
-                } else {
-                    $this->redirect(array('admin/test/company'));
-                }
+                $this->redirect(array('admin/test/index'));
             }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
