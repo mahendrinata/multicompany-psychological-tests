@@ -53,8 +53,20 @@ $('.search-form form').submit(function(){
                     'header' => 'Company'
                 ),
                 array(
-                    'name' => 'test_id',
+                    'name' => 'test.name',
                     'value' => '$data->test->name'
+                ),
+                array(
+                    'name' => 'test.description',
+                    'value' => '$data->test->description'
+                ),
+                array(
+                    'name' => 'type',
+                    'value' => '$data->test->type->name'
+                ),
+                array(
+                    'name' => 'spent_time',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'time_used',

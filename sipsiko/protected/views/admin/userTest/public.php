@@ -63,11 +63,11 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'start_date',
-                    'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'end_date',
-                    'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'type_id',

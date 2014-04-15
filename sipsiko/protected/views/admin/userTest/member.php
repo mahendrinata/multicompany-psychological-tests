@@ -53,20 +53,30 @@ $('.search-form form').submit(function(){
                     'header' => 'Company'
                 ),
                 array(
-                    'name' => 'test_id',
+                    'name' => 'test.name',
                     'value' => '$data->test->name'
+                ),
+                array(
+                    'name' => 'test.description',
+                    'value' => '$data->test->description'
+                ),
+                array(
+                    'name' => 'type',
+                    'value' => '$data->test->type->name'
                 ),
                 array(
                     'name' => 'spent_time',
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'test.start_date',
-                    'value' => '$data->test->start_date'
+                    'name' => 'time_used',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'test.end_date',
-                    'value' => '$data->test->end_date'
+                    'name' => 'start_date',
+                ),
+                array(
+                    'name' => 'end_date',
                 ),
                 array(
                     'name' => 'status',
@@ -75,10 +85,10 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
-                    'name' => 'created_at',
-                ),
-                array(
-                    'name' => 'updated_at',
+                    'name' => 'test.show_result',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getBooleanLabel($data->test->show_result)',
+                    'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
                     'class' => 'CButtonColumn',
