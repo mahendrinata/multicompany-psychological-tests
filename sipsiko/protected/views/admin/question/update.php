@@ -1,20 +1,25 @@
-<script type="text/javascript">
+<?php
+Yii::app()->clientScript->registerScript('update', "
     function renderAnswer(el) {
         answer = $('#answers').attr('data-id');
-        $.get("<?php echo CController::createUrl('admin/answer/create') ?>/id/" + answer, function(data) {
+        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer, function(data) {
             $(el).append(data);
-            $(".select-chosen").chosen({
-                width: "100%"
+            $('.select-chosen').chosen({
+                width: '100%'
             });
         });
         $('#answers').attr('data-id', (parseInt(answer) + 1));
     }
 
     function deleteAnswer(el) {
-        $.post("<?php echo Yii::app()->controller->createUrl('admin/answer/delete'); ?>/id/" + $(el).attr('data-id'));
+        if(typeof $(el).attr('data-id') != 'undefined'){
+            id = $(el).attr('data-id');
+            $.post('" . CController::createUrl('admin/answer/delete') . "/id/' + id);
+        }
         $(el).remove();
     }
-</script>
+", CClientScript::POS_END);
+?>
 
 <?php
 $this->breadcrumbs = array(

@@ -79,14 +79,15 @@ $this->breadcrumbs = array(
     <?php // echo CHtml::dropDownList('question_number', null, $list, array('class' => 'form-control', 'style' => 'position:fixed;top:370px;right:0;width:35px')); ?>
 </div>
 
-<script type="text/javascript">
+<?php
+Yii::app()->clientScript->registerScript('test', "
     $(document).ready(function() {
         $('.answers').change(function() {
-            $.post("<?php echo CController::createUrl('admin/usertest/savetestanswer') ?>", {
+            $.post('" . CController::createUrl('admin/usertest/savetestanswer') . "', {
                 user_test_id: $(this).attr('data-user-test'),
                 question_id: $(this).attr('data-question'),
                 answer_id: $(this).val(),
-                token: '<?php echo $model->token; ?>'
+                token: '" . $model->token . "'
             },
             function(data, status) {
 
@@ -99,7 +100,7 @@ $this->breadcrumbs = array(
     });
 
     var startDate = new Date();
-    var endDate = new Date(startDate.getTime() + <?php echo abs($model->spent_time) * 60 * 1000; ?>);
+    var endDate = new Date(startDate.getTime() + " . (abs($model->spent_time) * 60 * 1000) . ");
 
     var timeCountDown = function() {
         var units = countdown.DEFAULTS;
@@ -113,9 +114,9 @@ $this->breadcrumbs = array(
     timeCountDown();
 
     var setSpentTimeTest = function() {
-        $.post("<?php echo CController::createUrl('admin/usertest/setspenttime') ?>", {
-            user_test_id: <?php echo $model->id; ?>,
-            token: '<?php echo $model->token; ?>'
+        $.post('" . CController::createUrl('admin/usertest/setspenttime') . "', {
+            user_test_id: " . $model->id . ",
+            token: '" . $model->token . "'
         },
         function(data, status) {
             json = JSON.parse(data);
@@ -128,4 +129,5 @@ $this->breadcrumbs = array(
     };
 
     setTimeout(setSpentTimeTest, 60000);
-</script>
+", CClientScript::POS_END);
+?>

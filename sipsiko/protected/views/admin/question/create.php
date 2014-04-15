@@ -1,10 +1,11 @@
-<script type="text/javascript">
+<?php
+Yii::app()->clientScript->registerScript('create', "
     function renderAnswer(el) {
         answer = $('#answers').attr('data-id');
-        $.get("<?php echo CController::createUrl('admin/answer/create') ?>/id/" + answer, function(data) {
+        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer, function(data) {
             $(el).append(data);
-            $(".select-chosen").chosen({
-                width: "100%"
+            $('.select-chosen').chosen({
+                width: '100%'
             });
         });
         $('#answers').attr('data-id', (parseInt(answer) + 1));
@@ -13,7 +14,8 @@
     function deleteAnswer(el) {
         $(el).remove();
     }
-</script>
+", CClientScript::POS_END);
+?>
 
 <?php
 $this->breadcrumbs = array(
