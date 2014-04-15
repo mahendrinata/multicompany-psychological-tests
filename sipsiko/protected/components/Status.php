@@ -5,6 +5,7 @@ abstract class Status {
     const DRAFT = 'DRAFT';
     const ACTIVE = 'ACTIVE';
     const INACTIVE = 'INACTIVE';
+    const FINISH = 'FINISH';
     const VOID = 'VOID';
 
     public static function get_list() {
@@ -12,6 +13,7 @@ abstract class Status {
             self::DRAFT,
             self::ACTIVE,
             self::INACTIVE,
+            self::FINISH,
             self::VOID
         );
     }
@@ -29,6 +31,7 @@ abstract class Status {
             self::DRAFT => 'label-default',
             self::ACTIVE => 'label-success',
             self::INACTIVE => 'label-warning',
+            self::FINISH => 'label-info',
             self::VOID => 'label-danger',
         );
         if (in_array($status, self::get_list())) {

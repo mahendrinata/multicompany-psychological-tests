@@ -178,7 +178,7 @@ class UserTestController extends AdminController {
         $userTestModel = $this->loadModelMemberActive(true);
 
         if (isset($_POST['UserTest'])) {
-            $userTestModel->status = Status::INACTIVE;
+            $userTestModel->status = Status::FINISH;
             if ($userTestModel->save())
                 TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
             $this->redirect(array('admin/usertest/member'));
@@ -252,7 +252,7 @@ class UserTestController extends AdminController {
             $model->attributes = $_GET['UserTest'];
         }
 
-        $model->status = Status::INACTIVE;
+        $model->status = Status::FINISH;
         $model->user_profile_id = $this->profiles[RolePrivilege::MEMBER];
         $model->show_result = true;
 
@@ -268,7 +268,7 @@ class UserTestController extends AdminController {
             $model->attributes = $_GET['UserTest'];
         }
 
-        $model->status = Status::INACTIVE;
+        $model->status = Status::FINISH;
         $model->company_id = $this->profiles[RolePrivilege::COMPANY];
 
         $this->render('result', array(
