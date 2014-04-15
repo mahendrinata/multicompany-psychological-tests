@@ -30,7 +30,7 @@ class UserController extends GuestController {
 
     public function actionLogout() {
         Yii::app()->user->logout();
-        $this->redirect(Yii::app()->homeUrl);
+        $this->redirect(array('user/login'));
     }
 
     public function actionRegister() {
