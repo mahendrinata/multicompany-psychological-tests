@@ -47,6 +47,24 @@ class UserTestController extends AdminController {
         return $this->_model;
     }
 
+    public function loadModelMemberActive($token = false) {
+        if ($this->_model === null) {
+            if (isset($_GET['id'])) {
+                if ($token) {
+                    UserTest::model()->generateToken($_GET['id']);
+                }
+
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
+                    'status' => Status::ACTIVE));
+            }
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
     public function actionView() {
         $model = $this->loadModelCompany();
 
@@ -157,7 +175,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionTest() {
-        $userTestModel = $this->loadModelMember(true);
+        $userTestModel = $this->loadModelMemberActive(true);
 
         if (isset($_POST['UserTest'])) {
             $userTestModel->status = Status::INACTIVE;
@@ -180,7 +198,8 @@ class UserTestController extends AdminController {
             $userTestModel = UserTest::model()->findByAttributes(array(
                 'id' => $_POST['user_test_id'],
                 'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
-                'token' => $_POST['token']
+                'token' => $_POST['token'],
+                'active' => Status::ACTIVE
             ));
             if (!empty($userTestModel)) {
                 if (empty($testAnswer)) {
@@ -204,7 +223,9 @@ class UserTestController extends AdminController {
             $model = UserTest::model()->findByAttributes(array(
                 'id' => $_POST['user_test_id'],
                 'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
-                'token' => $_POST['token']));
+                'token' => $_POST['token'],
+                'status' => Status::ACTIVE
+            ));
 
             if (!empty($model)) {
                 if (!empty($model->spent_time)) {
