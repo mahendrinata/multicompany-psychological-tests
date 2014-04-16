@@ -199,7 +199,7 @@ class UserTestController extends AdminController {
                 'id' => $_POST['user_test_id'],
                 'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
                 'token' => $_POST['token'],
-                'active' => Status::ACTIVE
+                'status' => Status::ACTIVE
             ));
             if (!empty($userTestModel)) {
                 if (empty($testAnswer)) {

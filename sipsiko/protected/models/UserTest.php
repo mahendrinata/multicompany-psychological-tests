@@ -38,7 +38,7 @@ class UserTest extends AppActiveRecord {
 //            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
             array('variable_detail_slug, status', 'length', 'max' => 255),
-            array('spent_time, time_used, start_date, end_date, show_result, note, token, created_at, updated_at', 'safe'),
+            array('spent_time, time_used, start_date, status, end_date, show_result, note, token, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, spent_time, time_used, show_result, start_date, end_date, note, token, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),

@@ -51,23 +51,21 @@ $form = $this->beginWidget('CActiveForm', array(
     </div>
 </div>
 
-<?php if (!$model->is_expert) { ?>
-    <div class="form-group">
-        <?php echo $form->label($model, 'start_date', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-        <div class="col-lg-1 col-sm-2 col-xs-12">
-            <?php echo $form->textField($model, 'start_date', array('placeholder' => 'Start Date', 'class' => 'form-control input-datepicker')); ?>
-            <?php echo $form->error($model, 'start_date', array('class' => 'help-block alert-danger')); ?>
-        </div>
+<div class="form-group">
+    <?php echo $form->label($model, 'start_date', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-1 col-sm-2 col-xs-12">
+        <?php echo $form->textField($model, 'start_date', array('placeholder' => 'Start Date', 'class' => 'form-control input-datepicker')); ?>
+        <?php echo $form->error($model, 'start_date', array('class' => 'help-block alert-danger')); ?>
     </div>
+</div>
 
-    <div class="form-group">
-        <?php echo $form->label($model, 'end_date', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-        <div class="col-lg-1 col-sm-2 col-xs-12">
-            <?php echo $form->textField($model, 'end_date', array('placeholder' => 'End Date', 'class' => 'form-control input-datepicker')); ?>
-            <?php echo $form->error($model, 'end_date', array('class' => 'help-block alert-danger')); ?>
-        </div>
+<div class="form-group">
+    <?php echo $form->label($model, 'end_date', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-1 col-sm-2 col-xs-12">
+        <?php echo $form->textField($model, 'end_date', array('placeholder' => 'End Date', 'class' => 'form-control input-datepicker')); ?>
+        <?php echo $form->error($model, 'end_date', array('class' => 'help-block alert-danger')); ?>
     </div>
-<?php } ?>
+</div>
 
 <div class="form-group">
     <?php echo $form->label($model, 'show_result', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>

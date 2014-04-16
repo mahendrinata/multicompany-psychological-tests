@@ -85,9 +85,9 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
-                    'name' => 'test.show_result',
+                    'name' => 'show_result',
                     'type' => 'raw',
-                    'value' => 'ModelHelper::getBooleanLabel($data->test->show_result)',
+                    'value' => 'ModelHelper::getBooleanLabel($data->show_result)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(

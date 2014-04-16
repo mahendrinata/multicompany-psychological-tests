@@ -66,10 +66,6 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
-//                array(
-//                    'name' => 'slug',
-//                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
-//                ),
                 array(
                     'name' => 'name',
                     'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control'))
@@ -124,7 +120,7 @@ $('.search-form form').submit(function(){
                         'generate' => array(
                             'label' => 'Generate',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
-                            'url' => 'Yii::app()->controller->createUrl("admin/test/generate", array("id"=>$data->slug))',
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/generate", array("id"=>$data->id))',
                         ),
                     ),)
             ),

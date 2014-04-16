@@ -30,13 +30,17 @@ class TestController extends AdminController {
         return $this->_model;
     }
 
-    public function loadModelCompany() {
+    public function loadModelCompany($company = true) {
         if ($this->_model === null) {
-            if (isset($_GET['id']))
+            if (isset($_GET['id'])){
+                if($company){
                 $this->_model = Test::model()->findByAttributes(array(
                     'id' => $_GET['id'],
                     'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
-
+                }  else {
+                    $this->_model = Test::model()->findByPk($_GET['id']);
+                }
+            }
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -205,7 +209,7 @@ class TestController extends AdminController {
     public function actionGenerate() {
 //        if (Yii::app()->request->isPostRequest) {
 
-        $model = $this->loadModelCompany();
+        $model = $this->loadModelCompany(false);
 
         $save = Test::model()->generate($model->id, $this->profiles[RolePrivilege::COMPANY]);
 

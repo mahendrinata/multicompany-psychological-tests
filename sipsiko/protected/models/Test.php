@@ -186,7 +186,7 @@ class Test extends AppActiveRecord {
     }
 
     public function generate($id, $user_profile_id) {
-        $model = $this->with('questions', 'questions.answers')->findBySlug($id);
+        $model = $this->findByPk($id);
 
 
         $countTestOfCompany = $this->countByAttributes(array('parent_id' => $model->id, 'user_profile_id' => $user_profile_id));
