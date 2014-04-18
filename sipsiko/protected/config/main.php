@@ -11,7 +11,8 @@ return array(
         'application.helpers.*',
         'ext.ExtendedClientScript.jsmin.JSMin',
         'application.extensions.CAdvancedArBehavior',
-        'ext.PHPExcel',
+        'ext.PHPExcel.*',
+        'ext.EExcelView.*',
     ),
     'modules' => array(
         'gii' => array(
