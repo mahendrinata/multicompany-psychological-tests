@@ -122,7 +122,23 @@ $('.search-form form').submit(function(){
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/question/create", array("id"=>$data->slug))',
                         ),
-                    ),)
+                    ),),
+                array(
+                    'class' => 'CButtonColumn',
+                    'filterHtmlOptions' => array('style' => 'width: 80px;'),
+                    'template' => '{test} {result}',
+                    'buttons' => array(
+                        'test' => array(
+                            'label' => 'Try Validation Test',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/generatevalidation", array("id"=>$data->id))',
+                        ),
+                        'result' => array(
+                            'label' => 'Result Validation Test',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/action-log.png',
+                            'url' => 'Yii::app()->controller->createUrl("admin/test/result", array("id"=>$data->id))',
+                        ),
+                    ),),
             ),
         ));
         ?>

@@ -5,6 +5,10 @@ class UserTestController extends AdminController {
     public function accessRules() {
         return array(
             array('allow',
+                'actions' => array('validation', 'savevalidationanswer', 'setvalidationspenttime', 'validationview', 'validationdelete'),
+                'roles' => array(RolePrivilege::EXPERT),
+            ),
+            array('allow',
                 'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
@@ -57,6 +61,41 @@ class UserTestController extends AdminController {
                 $this->_model = UserTest::model()->findByAttributes(array(
                     'id' => $_GET['id'],
                     'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
+                    'status' => Status::ACTIVE));
+            }
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
+    public function loadModelExpert($token = false) {
+        if ($this->_model === null) {
+            if (isset($_GET['id'])) {
+                if ($token) {
+                    UserTest::model()->generateToken($_GET['id']);
+                }
+
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]));
+            }
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
+    public function loadModelExpertActive($token = false) {
+        if ($this->_model === null) {
+            if (isset($_GET['id'])) {
+                if ($token) {
+                    UserTest::model()->generateToken($_GET['id']);
+                }
+
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'user_profile_id' => $this->profiles[RolePrivilege::EXPERT],
                     'status' => Status::ACTIVE));
             }
             if ($this->_model === null)
@@ -139,7 +178,7 @@ class UserTestController extends AdminController {
             $this->loadModelCompany()->delete();
 
             if (!isset($_GET['ajax']))
-                $this->redirect(array('admin/user-test/index'));
+                $this->redirect(array('admin/usertest/index'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
@@ -341,6 +380,100 @@ class UserTestController extends AdminController {
             'model' => $model,
             'userTestModel' => $userTestModel
         ));
+    }
+
+    public function actionValidation() {
+        $userTestModel = $this->loadModelExpertActive(true);
+
+        if (isset($_POST['UserTest'])) {
+            $userTestModel->status = Status::FINISH;
+            if ($userTestModel->save())
+                TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
+            $this->redirect(array('admin/test/result', 'id' => $userTestModel->test_id));
+        }
+
+        $this->render('validation', array(
+            'model' => $userTestModel,
+        ));
+    }
+
+    public function actionSaveValidationAnswer() {
+        if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
+            $testAnswer = TestAnswer::model()->findByAttributes(array(
+                'user_test_id' => $_POST['user_test_id'],
+                'question_id' => $_POST['question_id']
+            ));
+            $userTestModel = UserTest::model()->findByAttributes(array(
+                'id' => $_POST['user_test_id'],
+                'user_profile_id' => $this->profiles[RolePrivilege::EXPERT],
+                'token' => $_POST['token'],
+                'status' => Status::ACTIVE
+            ));
+            if (!empty($userTestModel)) {
+                if (empty($testAnswer)) {
+                    $newTestAnswer = new TestAnswer;
+                    $newTestAnswer->attributes = $_POST;
+                    $save = $newTestAnswer->save();
+                } else {
+                    $testAnswer->answer_id = $_POST['answer_id'];
+                    $save = $testAnswer->save();
+                }
+                echo json_encode(array('data' => $save));
+            } else {
+                echo json_encode(array('data' => $save, 'error' => 'Invalid request. Please do not repeat this request again.'));
+            }
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionSetValidationSpentTime() {
+        if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
+            $model = UserTest::model()->findByAttributes(array(
+                'id' => $_POST['user_test_id'],
+                'user_profile_id' => $this->profiles[RolePrivilege::EXPERT],
+                'token' => $_POST['token'],
+                'status' => Status::ACTIVE
+            ));
+
+            if (!empty($model)) {
+                if (!empty($model->spent_time)) {
+                    $spent_time = $model->spent_time = $model->spent_time - 1;
+                    $model->time_used = $model->time_used + 1;
+                    if ($model->save())
+                        echo json_encode(array('spentTime' => $spent_time, 'time_used' => $model->time_used));
+                }else {
+                    $model->time_used = $model->time_used + 1;
+                    if ($model->save())
+                        echo json_encode(array('time_used' => $model->time_used));
+                }
+            } else {
+                throw new CHttpException(404, 'The requested page does not exist.');
+            }
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionValidationView() {
+        $model = $this->loadModelExpert();
+
+        $testAnswerModel = new TestAnswer('search');
+        $testAnswerModel->unsetAttributes();
+        if (isset($_GET['TestAnswer'])) {
+            $testAnswerModel->attributes = $_GET['TestAnswer'];
+        }
+        $testAnswerModel->user_test_id = $model->id;
+
+        $this->render('validation_view', array(
+            'model' => $model,
+            'testAnswerModel' => $testAnswerModel
+        ));
+    }
+
+    public function actionValidationDelete() {
+        if (Yii::app()->request->isPostRequest) {
+            $this->loadModelExpertActive()->delete();
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
 }

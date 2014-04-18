@@ -5,7 +5,7 @@ class TestController extends AdminController {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'generatevalidation', 'result'),
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
@@ -32,12 +32,12 @@ class TestController extends AdminController {
 
     public function loadModelCompany($company = true) {
         if ($this->_model === null) {
-            if (isset($_GET['id'])){
-                if($company){
-                $this->_model = Test::model()->findByAttributes(array(
-                    'id' => $_GET['id'],
-                    'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
-                }  else {
+            if (isset($_GET['id'])) {
+                if ($company) {
+                    $this->_model = Test::model()->findByAttributes(array(
+                        'id' => $_GET['id'],
+                        'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
+                } else {
                     $this->_model = Test::model()->findByPk($_GET['id']);
                 }
             }
@@ -217,6 +217,40 @@ class TestController extends AdminController {
             $this->redirect(array('admin/test/company'));
 //        } else
 //            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionGenerateValidation() {
+        $testModel = $this->loadModelExpert();
+
+        if (!empty($testModel)) {
+            $userTestModel = new UserTest;
+            $userTestModel->spent_time = $testModel->duration;
+            $userTestModel->show_result = true;
+            $userTestModel->status = Status::ACTIVE;
+            $userTestModel->test_id = $testModel->id;
+            $userTestModel->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+            if ($userTestModel->save()) {
+                $this->redirect(array('admin/usertest/validation', 'id' => $userTestModel->id));
+            }
+        }
+    }
+
+    public function actionResult() {
+        $testModel = $this->loadModelExpert();
+
+        $model = new UserTest('search');
+        $model->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $model->attributes = $_GET['UserTest'];
+        }
+
+        $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+        $model->test_id = $testModel->id;
+
+        $this->render('result', array(
+            'model' => $model,
+            'test' => $testModel
+        ));
     }
 
 }
