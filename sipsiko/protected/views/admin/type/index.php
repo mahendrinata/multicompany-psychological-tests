@@ -87,6 +87,12 @@ $('.search-form form').submit(function(){
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
+                    'name' => 'user_profile_id',
+                    'filter' => CHtml::activeDropDownList($model, 'user_profile_id', CHtml::listData(UserProfile::model()->getUserProfilesByRole(RolePrivilege::EXPERT), 'id', 'first_name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Expert Name')),
+                    'value' => '$data->user_profile->first_name',
+                    'header' => 'Expert Name'
+                ),
+                array(
                     'name' => 'created_at',
                     'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),

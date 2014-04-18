@@ -18,7 +18,7 @@
                 <?php echo CHtml::dropDownList('Question[answers][' . $id . '][status]', Status::ACTIVE, Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
             </div>
             <div class="col-lg-6">
-                <?php echo CHtml::dropDownList('Question[answers][' . $id . '][variable_id]', null, Type::model()->getTypeVariableList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
+                <?php echo CHtml::dropDownList('Question[answers][' . $id . '][variable_id]', null, CHtml::listData($test->type->variables, 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
             </div>
         </div>
     </div>

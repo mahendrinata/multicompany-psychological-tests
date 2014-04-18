@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerScript('create', "
     function renderAnswer(el) {
         answer = $('#answers').attr('data-id');
-        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer, function(data) {
+        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer +'/test_id/" . $test->id . "', function(data) {
             $(el).append(data);
             $('.select-chosen').chosen({
                 width: '100%'

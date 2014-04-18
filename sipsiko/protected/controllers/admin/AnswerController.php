@@ -26,7 +26,8 @@ class AnswerController extends AdminController {
 
     public function actionCreate() {
         $id = $_GET['id'] + 1;
-        $this->renderPartial('create', array('id' => $id));
+        $test = Test::model()->findByPk($_GET['test_id']);
+        $this->renderPartial('create', array('id' => $id, 'test' => $test));
     }
 
     public function actionDelete() {

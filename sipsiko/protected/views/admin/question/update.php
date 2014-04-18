@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerScript('update', "
     function renderAnswer(el) {
         answer = $('#answers').attr('data-id');
-        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer, function(data) {
+        $.get('" . CController::createUrl('admin/answer/create') . "/id/' + answer +'/test_id/" . $model->test_id . "', function(data) {
             $(el).append(data);
             $('.select-chosen').chosen({
                 width: '100%'
@@ -91,7 +91,7 @@ $this->breadcrumbs = array(
                             <?php echo CHtml::dropDownList('Question[answers][' . $i . '][status]', $answer->status, Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
                         </div>
                         <div class="col-lg-6">
-                            <?php echo CHtml::dropDownList('Question[answers][' . $i . '][variable_id]', $answer->variable_id, Type::model()->getTypeVariableList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
+                            <?php echo CHtml::dropDownList('Question[answers][' . $i . '][variable_id]', $answer->variable_id, CHtml::listData($model->test->type->variables, 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable')); ?>
                         </div>
                     </div>
                 </div>

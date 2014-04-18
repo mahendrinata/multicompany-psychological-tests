@@ -30,7 +30,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->textField($model, 'name', array('placeholder' => 'Name', 'class' => 'form-control')); ?>
+        <?php echo $form->textField($model, 'name', array('placeholder' => 'Name', 'class' => 'form-control', 'onKeyUp' => 'slugify(this, ".slugify")')); ?>
         <?php echo $form->error($model, 'name', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
