@@ -96,7 +96,15 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'filterHtmlOptions' => array('style' => 'width: 80px;')
+                    'filterHtmlOptions' => array('style' => 'width: 80px;'),
+                    'buttons' => array(
+                        'update' => array(
+                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ') ? true : false',
+                        ),
+                        'delete' => array(
+                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ') ? true : false',
+                        ),
+                    )
                 ),
             ),
         ));

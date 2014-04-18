@@ -14,10 +14,18 @@ class VariableController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModel($expert = false) {
         if ($this->_model === null) {
-            if (isset($_GET['id']))
-                $this->_model = Variable::model()->findbyPk($_GET['id']);
+            if (isset($_GET['id'])) {
+                if ($expert) {
+                    $this->_model = Variable::model()->findByAttributes(array(
+                        'id' => $_GET['id'],
+                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
+                    ));
+                } else {
+                    $this->_model = Variable::model()->findbyPk($_GET['id']);
+                }
+            }
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -47,7 +55,7 @@ class VariableController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel();
+        $model = $this->loadModel(true);
 
         $this->performAjaxValidation($model, 'variable-form');
 
@@ -64,7 +72,7 @@ class VariableController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $this->loadModel(true)->delete();
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/variable/index'));

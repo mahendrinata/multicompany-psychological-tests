@@ -265,6 +265,7 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
         );
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
+            $column['user_profile_id'] = 2;
             $column['created_at'] = date('Y-m-d H:i:s');
             $column['updated_at'] = date('Y-m-d H:i:s');
 

@@ -14,10 +14,18 @@ class TypeController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModel($expert = false) {
         if ($this->_model === null) {
-            if (isset($_GET['id']))
-                $this->_model = Type::model()->findbyPk($_GET['id']);
+            if (isset($_GET['id'])) {
+                if ($expert) {
+                    $this->_model = Type::model()->findByAttributes(array(
+                        'id' => $_GET['id'],
+                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
+                    ));
+                } else {
+                    $this->_model = Type::model()->findbyPk($_GET['id']);
+                }
+            }
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
@@ -47,7 +55,7 @@ class TypeController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel();
+        $model = $this->loadModel(true);
 
         $this->performAjaxValidation($model, 'type-form');
 
@@ -64,7 +72,7 @@ class TypeController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $this->loadModel(true)->delete();
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/type/index'));
