@@ -25,13 +25,17 @@ class AnswerController extends AdminController {
     }
 
     public function actionCreate() {
-        $id = $_GET['id'] + 1;
-        $test = Test::model()->findByPk($_GET['test_id']);
-        $this->renderPartial('create', array('id' => $id, 'test' => $test));
+        if (Yii::app()->request->isAjaxRequest) {
+            $id = $_GET['id'] + 1;
+            $test = Test::model()->findByPk($_GET['test_id']);
+            $this->renderPartial('create', array('id' => $id, 'test' => $test));
+        } else {
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+        }
     }
 
     public function actionDelete() {
-        if (Yii::app()->request->isPostRequest) {
+        if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
             $this->loadModel()->delete();
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');

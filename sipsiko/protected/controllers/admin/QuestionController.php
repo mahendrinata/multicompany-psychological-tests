@@ -16,8 +16,12 @@ class QuestionController extends AdminController {
 
     public function loadModel() {
         if ($this->_model === null) {
-            if (isset($_GET['id']))
-                $this->_model = Question::model()->with('answers')->findbyPk($_GET['id']);
+            if (isset($_GET['id'])){
+                $this->_model = Question::model()->findbyPk($_GET['id']);
+                if($this->_model->test->user_profile_id != $this->profiles[RolePrivilege::EXPERT]){
+                    $this->_model = null;
+                }
+            }
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
