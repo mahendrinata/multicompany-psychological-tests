@@ -4,6 +4,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'SIPSIKO',
     'preload' => array('log'),
+    'language' => 'id',
     'import' => array(
         'application.models.*',
         'application.models.forms.*',
@@ -23,6 +24,9 @@ return array(
         ),
     ),
     'components' => array(
+        'coreMessages' => array(
+            'basePath' => null,
+        ),
         'fixture' => array(
             'class' => 'system.test.CDbFixtureManager',
         ),
