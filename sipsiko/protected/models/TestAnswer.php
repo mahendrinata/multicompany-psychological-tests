@@ -109,4 +109,11 @@ class TestAnswer extends AppActiveRecord {
         return md5($token . substr($token, $number, $number));
     }
 
+    public function getDefaultAnswer($user_test_id = NULL) {
+        $model = $this->findAllByAttributes(array(
+            'user_test_id' => $user_test_id,
+        ));
+        return CHtml::listData($model, 'question_id', 'answer_id');
+    }
+
 }

@@ -238,10 +238,10 @@ class UserTestController extends AdminController {
             $userTestModel = UserTest::model()->findByAttributes(array(
                 'id' => $_POST['user_test_id'],
                 'user_profile_id' => $this->profiles[RolePrivilege::MEMBER],
-                'token' => $_POST['token'],
                 'status' => Status::ACTIVE
             ));
-            if (!empty($userTestModel)) {
+            $token = TestAnswer::model()->generateToken($userTestModel->token, $_POST['answer_choice']);
+            if (!empty($userTestModel) && $_POST['token'] == $token) {
                 if (empty($testAnswer)) {
                     $newTestAnswer = new TestAnswer;
                     $newTestAnswer->attributes = $_POST;
@@ -408,10 +408,10 @@ class UserTestController extends AdminController {
             $userTestModel = UserTest::model()->findByAttributes(array(
                 'id' => $_POST['user_test_id'],
                 'user_profile_id' => $this->profiles[RolePrivilege::EXPERT],
-                'token' => $_POST['token'],
                 'status' => Status::ACTIVE
             ));
-            if (!empty($userTestModel)) {
+            $token = TestAnswer::model()->generateToken($userTestModel->token, $_POST['answer_choice']);
+            if (!empty($userTestModel) && $_POST['token'] == $token) {
                 if (empty($testAnswer)) {
                     $newTestAnswer = new TestAnswer;
                     $newTestAnswer->attributes = $_POST;
@@ -422,7 +422,7 @@ class UserTestController extends AdminController {
                 }
                 echo json_encode(array('data' => $save));
             } else {
-                echo json_encode(array('data' => $save, 'error' => 'Invalid request. Please do not repeat this request again.'));
+                echo json_encode(array('data' => array('post_token' => $_POST['token'], 'answer_token' => $token), 'error' => 'Invalid request. Please do not repeat this request again.'));
             }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');

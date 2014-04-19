@@ -1,5 +1,6 @@
 <div class="row">
     <?php
+    $defaultAnswer = TestAnswer::model()->getDefaultAnswer($model->id);
     $i = 1;
     foreach ($model->test->questions as $question) {
         ?>
@@ -11,16 +12,24 @@
                         <?php echo $question->description; ?>
                     </label>
                     <?php
-                    $defaultModel = TestAnswer::model()->findByAttributes(array(
-                        'user_test_id' => $model->id,
-                        'question_id' => $question->id
-                    ));
-                    $default = (empty($defaultModel) ? null : $defaultModel->answer_id);
-                    echo CHtml::radiobuttonList(
-                        'UserTest[question][' . $question->id . ']', $default, CHtml::listData($question->answers, 'id', 'description'), array('required' => 'required',
-                        'data-user-test' => $model->id,
-                        'data-question' => $question->id,
-                        'class' => 'answers'));
+                    $default = (isset($defaultAnswer[$question->id]) && !empty($defaultAnswer[$question->id])) ? $defaultAnswer[$question->id] : null;
+                    foreach ($question->answers as $answer) {
+                        ?>
+                        <label class="radio">
+                            <?php
+                            echo CHtml::radioButton('UserTest[question][' . $question->id . ']', ($default == $answer->id) ? true : false, array(
+                                'required' => 'required',
+                                'data-user-test' => $model->id,
+                                'data-question' => $question->id,
+                                'data-answer' => $answer->id,
+                                'data-token' => TestAnswer::model()->generateToken($model->token, $answer->id),
+                                'value' => $answer->id,
+                                'class' => 'answers'));
+                            echo $answer->description;
+                            ?>
+                        </label>
+                        <?php
+                    }
                     ?>
                 </p>
             </div>
@@ -44,7 +53,8 @@ Yii::app()->clientScript->registerScript('test', "
                 user_test_id: $(this).attr('data-user-test'),
                 question_id: $(this).attr('data-question'),
                 answer_id: $(this).val(),
-                token: '" . $model->token . "'
+                answer_choice: $(this).attr('data-answer'),
+                token: $(this).attr('data-token')
             },
             function(data, status) {
 
