@@ -21,7 +21,7 @@ class UserProfileController extends AdminController {
                 'roles' => array(RolePrivilege::MEMBER)
             ),
             array('allow',
-                'actions' => array('choose'),
+                'actions' => array('choose', 'change'),
                 'users' => array('@')
             ),
             array('deny',
@@ -234,4 +234,15 @@ class UserProfileController extends AdminController {
         ));
     }
 
+    public function actionChange(){
+        $model = User::model()->findByPk(Yii::app()->user->id);
+        
+        if(isset($_POST['User'])){
+            
+        }
+        
+        $this->render('change', array(
+            'model' => $model
+        ));
+    }
 }
