@@ -140,7 +140,7 @@ class TestVariable extends AppActiveRecord {
             $i++;
         }
         $userTestModel->variable_detail_slug = implode('-', $slug);
-        $userTestModel->save();
+        return $userTestModel->save();
     }
 
 }

@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result', 'settestvariable'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
@@ -218,9 +218,10 @@ class UserTestController extends AdminController {
 
         if (isset($_POST['UserTest'])) {
             $userTestModel->status = Status::FINISH;
-            if ($userTestModel->save())
-                TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
-            $this->redirect(array('admin/usertest/member'));
+            if ($userTestModel->save()) {
+                if (TestVariable::model()->setTestVariable($_POST['UserTest']['id']))
+                    $this->redirect(array('admin/usertest/member'));
+            }
         }
 
         $this->render('test', array(
@@ -365,6 +366,7 @@ class UserTestController extends AdminController {
             $model->show_result = $testModel->show_result;
             $model->start_date = $testModel->start_date;
             $model->end_date = $testModel->end_date;
+            $model->status = $testModel->status;
         }
 
         $userTestModel = new UserTest('search');
@@ -474,6 +476,13 @@ class UserTestController extends AdminController {
             $this->loadModelExpertActive()->delete();
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionSetTestVariable() {
+        $model = $this->loadModelCompany();
+        if (TestVariable::model()->setTestVariable($model->id)) {
+            $this->redirect(array('admin/usertest/view', 'id' => $model->id));
+        }
     }
 
 }

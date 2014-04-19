@@ -44,6 +44,7 @@ $this->breadcrumbs = array(
         'htmlOptions' => array('class' => 'table table-borderless table-striped'),
     ));
     ?>
+    <?php echo CHtml::link('<i class="fa fa-check"></i> Generate Result', array('admin/usertest/settestvariable', 'id' => $model->id), array('class' => 'btn btn-success', 'style' => 'margin-bottom:20px;')); ?>
     <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/usertest'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
 </div>
 
@@ -119,6 +120,8 @@ $this->breadcrumbs = array(
                     'value' => '$data->answer->variable->name',
                     'header' => 'Variable'
                 ),
+                'created_at',
+                'updated_at',
             ),
         ));
         ?>
