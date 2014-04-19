@@ -36,8 +36,9 @@ class User extends AppActiveRecord {
             array('username, email, password', 'required'),
             array('email', 'email'),
             array('username, email', 'unique'),
-            array('parent_id', 'numerical', 'integerOnly' => true),
-            array('username, email, password, status, last_login_ip, token', 'length', 'max' => 255),
+            array('password_confirmation', 'required', 'on' => 'register'),
+            array('password', 'compare', 'compareAttribute' => 'password_confirmation', 'on' => 'register'),
+            array('username, password', 'length', 'min' => 5, 'max' => 255),
             array('last_login, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
