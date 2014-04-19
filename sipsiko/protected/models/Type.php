@@ -9,6 +9,8 @@
  * @property string $name
  * @property string $description
  * @property string $status
+ * @property string $conclusion
+ * @property string $template
  * @property integer $user_profile_id
  * @property string $created_at
  * @property string $updated_at
@@ -29,7 +31,7 @@ class Type extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name', 'required'),
+            array('slug, name, conclusion, template', 'required'),
             array('slug', 'unique'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
@@ -63,6 +65,8 @@ class Type extends AppActiveRecord {
             'name' => 'Name',
             'description' => 'Description',
             'status' => 'Status',
+            'conclusion' => 'Conclusion',
+            'template' => 'Template',
             'user_profile_id' => 'User Profile',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -95,6 +99,10 @@ class Type extends AppActiveRecord {
         $criteria->compare('description', $this->description, true);
 
         $criteria->compare('status', $this->status);
+
+        $criteria->compare('conclusion', $this->conclusion);
+
+        $criteria->compare('template', $this->template);
 
         $criteria->compare('user_profile_id', $this->user_profile_id);
 

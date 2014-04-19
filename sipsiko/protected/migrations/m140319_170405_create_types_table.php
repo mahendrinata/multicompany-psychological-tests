@@ -9,6 +9,8 @@ class m140319_170405_create_types_table extends CDbMigration {
             'name' => 'string NOT NULL',
             'description' => 'text',
             'status' => 'string',
+            'conclusion' => 'string NOT NULL',
+            'template' => 'string NOT NULL',
             'user_profile_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -16,6 +18,8 @@ class m140319_170405_create_types_table extends CDbMigration {
 
         $this->createIndex('slug_types_unique', 'types', 'slug');
         $this->createIndex('status_types_index', 'types', 'status');
+        $this->createIndex('conclusion_types_index', 'types', 'conclusion');
+        $this->createIndex('template_types_index', 'types', 'template');
         $this->createIndex('user_profile_id_types_index', 'types', 'user_profile_id');
     }
 

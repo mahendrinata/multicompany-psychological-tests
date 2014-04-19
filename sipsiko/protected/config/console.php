@@ -10,6 +10,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
+        'application.models.tests.*',
     ),
     // application components
     'components' => array(

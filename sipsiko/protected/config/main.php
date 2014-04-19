@@ -8,6 +8,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.models.forms.*',
+        'application.models.tests.*',
         'application.components.*',
         'application.helpers.*',
         'ext.ExtendedClientScript.jsmin.JSMin',
