@@ -1033,7 +1033,7 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
             unset($column['questions']);
             $this->insert('tests', $column);
             foreach ($questions as $id => $question) {
-                $question['test_id'] = 2;
+                $question['test_id'] = 3;
                 $question['status'] = Status::ACTIVE;
                 $question['created_at'] = date('Y-m-d H:i:s');
                 $question['updated_at'] = date('Y-m-d H:i:s');
