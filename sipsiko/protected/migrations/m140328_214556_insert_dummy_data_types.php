@@ -35,6 +35,11 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
                 'description' => '',
             ),
             array(
+                'slug' => Type::model()->slugify('Kepribadian'),
+                'name' => 'Kepribadian',
+                'description' => '',
+            ),
+            array(
                 'slug' => Type::model()->slugify('papi-kostick'),
                 'name' => 'PAPI Kostick (Personality and Preference Inventory)',
                 'description' => '',
@@ -66,7 +71,7 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
     }
 
     public function down() {
-        Type::model()->deleteAll();
+        $this->truncateTable('types');
     }
 
 

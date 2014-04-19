@@ -34,7 +34,7 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
             unset($column['combinations']);
             $this->insert('variable_details', $column);
             foreach ($combinations as $combination) {
-                $combination['variable_detail_id'] = $key + 1;
+                $combination['variable_detail_id'] = $key + 4;
                 $combination['created_at'] = date('Y-m-d H:i:s');
                 $combination['updated_at'] = date('Y-m-d H:i:s');
                 $this->insert('combinations', $combination);
@@ -43,7 +43,7 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
     }
 
     public function down() {
-        $this->truncate('variable_details');
-        $this->truncate('combinations');
+        $this->truncateTable('variable_details');
+        $this->truncateTable('combinations');
     }
 }

@@ -51,7 +51,7 @@ class m140402_093542_insert_dummy_data_tags extends CDbMigration {
     }
 
     public function down() {
-        Tag::model()->deleteAll();
+        $this->truncateTable('tags');
     }
 
 }

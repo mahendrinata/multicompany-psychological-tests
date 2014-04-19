@@ -262,6 +262,29 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
                 'description' => '',
                 'type_id' => 6
             ),
+            /**
+             * Kepribadian
+             */
+            array(
+                'name' => 'Sanguinis',
+                'description' => '',
+                'type_id' => 7
+            ),
+            array(
+                'name' => 'Koleris',
+                'description' => '',
+                'type_id' => 7
+            ),
+            array(
+                'name' => 'Melankolis',
+                'description' => '',
+                'type_id' => 7
+            ),
+            array(
+                'name' => 'Plegmatis',
+                'description' => '',
+                'type_id' => 7
+            ),
         );
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
@@ -274,7 +297,7 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
     }
 
     public function down() {
-        Variable::model()->deleteAll();
+        $this->truncateTable('variables');
     }
 
 }

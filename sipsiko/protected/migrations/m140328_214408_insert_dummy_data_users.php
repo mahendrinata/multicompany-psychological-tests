@@ -21,7 +21,7 @@ class m140328_214408_insert_dummy_data_users extends CDbMigration {
     }
 
     public function down() {
-        User::model()->deleteAll();
+        $this->truncateTable('users');
     }
 
 }

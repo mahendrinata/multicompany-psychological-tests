@@ -591,9 +591,9 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
     }
 
     public function down() {
-        $this->truncate('tests');
-        $this->truncate('questions');
-        $this->truncate('answers');
+        $this->truncateTable('tests');
+        $this->truncateTable('questions');
+        $this->truncateTable('answers');
     }
 
 }

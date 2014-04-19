@@ -39,7 +39,7 @@ class m140328_214357_insert_dummy_data_roles extends CDbMigration {
     }
 
     public function down() {
-        
+        $this->truncateTable('roles');
     }
 
 }

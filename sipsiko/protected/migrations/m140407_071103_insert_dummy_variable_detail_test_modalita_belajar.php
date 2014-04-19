@@ -53,8 +53,8 @@ class m140407_071103_insert_dummy_variable_detail_test_modalita_belajar extends 
     }
 
     public function down() {
-        $this->truncate('variable_details');
-        $this->truncate('combinations');
+        $this->truncateTable('variable_details');
+        $this->truncateTable('combinations');
     }
 
 }
