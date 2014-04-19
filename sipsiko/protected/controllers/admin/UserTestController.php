@@ -272,11 +272,11 @@ class UserTestController extends AdminController {
                     $spent_time = $model->spent_time = $model->spent_time - 1;
                     $model->time_used = $model->time_used + 1;
                     if ($model->save())
-                        echo json_encode(array('spentTime' => $spent_time, 'time_used' => $model->time_used));
+                        echo json_encode(array('spentTime' => $spent_time, 'timeUsed' => $model->time_used));
                 }else {
                     $model->time_used = $model->time_used + 1;
                     if ($model->save())
-                        echo json_encode(array('time_used' => $model->time_used));
+                        echo json_encode(array('timeUsed' => $model->time_used));
                 }
             } else {
                 throw new CHttpException(404, 'The requested page does not exist.');
@@ -442,11 +442,11 @@ class UserTestController extends AdminController {
                     $spent_time = $model->spent_time = $model->spent_time - 1;
                     $model->time_used = $model->time_used + 1;
                     if ($model->save())
-                        echo json_encode(array('spentTime' => $spent_time, 'time_used' => $model->time_used));
+                        echo json_encode(array('spentTime' => $spent_time, 'timeUsed' => $model->time_used));
                 }else {
                     $model->time_used = $model->time_used + 1;
                     if ($model->save())
-                        echo json_encode(array('time_used' => $model->time_used));
+                        echo json_encode(array('timeUsed' => $model->time_used));
                 }
             } else {
                 throw new CHttpException(404, 'The requested page does not exist.');

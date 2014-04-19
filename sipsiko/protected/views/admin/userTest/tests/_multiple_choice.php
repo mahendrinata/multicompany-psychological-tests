@@ -49,7 +49,7 @@
 Yii::app()->clientScript->registerScript('test', "
     $(document).ready(function() {
         $('.answers').change(function() {
-            $.post('" . CController::createUrl('admin/usertest/savevalidationanswer') . "', {
+            $.post('" . CController::createUrl(Template::getSetAnswerUrlByRole($role)) . "', {
                 user_test_id: $(this).attr('data-user-test'),
                 question_id: $(this).attr('data-question'),
                 answer_id: $(this).val(),

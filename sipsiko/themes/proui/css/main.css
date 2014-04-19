@@ -1994,6 +1994,13 @@ code {
     float: left;
     margin-left: -20px;
 }
+#test-description{
+    background-color: #FFF; 
+    right: 0; 
+    z-index: 2000; 
+    padding: 6px; 
+    border: 1px solid #EEE; 
+}
 @media (min-width: 1200px) {
     .header-fixed-bottom .sidebar-content, .header-fixed-top .sidebar-content {
         padding-bottom: 0;
@@ -2012,3 +2019,4 @@ code {
         display: block;
     }
 }
+

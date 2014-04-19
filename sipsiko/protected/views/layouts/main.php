@@ -24,7 +24,9 @@ $js = array(
     'plugins',
     'app',
     'function',
-    'countdown.min'
+    'countdown.min',
+    'jquery.sticky',
+    'custom'
 );
 
 foreach ($js as $script) {
