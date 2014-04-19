@@ -106,41 +106,17 @@ class TestVariable extends AppActiveRecord {
 
     public function setTestVariable($user_test_id) {
         $userTestModel = UserTest::model()->findByPk($user_test_id);
+        $conclusion = $userTestModel->test->type->conclusion;
 
-        $sql = 'SELECT variables.id AS variable_id, SUM(answers.value) AS value 
-            FROM user_tests 
-            INNER JOIN test_answers ON user_tests.id = test_answers.user_test_id 
-            INNER JOIN answers ON answers.id = test_answers.answer_id 
-            INNER JOIN variables ON variables.id = answers.variable_id
-            WHERE user_tests.id = ' . $user_test_id . ' 
-            GROUP BY variables.id 
-            ORDER BY value DESC';
-
-        $variables = $this->findAllBySql($sql);
-
-        $i = 0;
-        $slug = array();
-        foreach ($variables as $variable) {
-            $testVariable = $this->findByAttributes(array('user_test_id' => $user_test_id, 'variable_id' => $variable->variable_id));
-
-            if (empty($testVariable)) {
-                $testVariableModel = new TestVariable;
-                $testVariableModel->user_test_id = $user_test_id;
-                $testVariableModel->value = $variable->value;
-                $testVariableModel->variable_id = $variable->variable_id;
-                $testVariableModel->save(false);
-            } else {
-                $testVariable->value = $variable->value;
-                $testVariable->save();
-            }
-
-            if ($i < $userTestModel->test->combination_variable) {
-                $slug[] = $variable->variable_id;
-            }
-            $i++;
+        switch ($conclusion) {
+            case Conclusion::ORDERER:
+                $output = OrdererTest::model()->generate($userTestModel->id);
+                break;
+            default:
+                $output = false;
+                break;
         }
-        $userTestModel->variable_detail_slug = implode('-', $slug);
-        return $userTestModel->save();
+        return $output;
     }
 
 }
