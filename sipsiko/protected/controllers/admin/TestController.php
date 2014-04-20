@@ -22,25 +22,13 @@ class TestController extends AdminController {
         );
     }
 
-    public function loadModelExpert() {
-        if ($this->_model === null) {
-            if (isset($_GET['id']))
-                $this->_model = Test::model()->findByAttributes(array(
-                    'id' => $_GET['id'],
-                    'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]));
-            if ($this->_model === null)
-                throw new CHttpException(404, 'The requested page does not exist.');
-        }
-        return $this->_model;
-    }
-
-    public function loadModelCompany($company = true) {
+    public function loadModel($role = null) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
-                if ($company) {
+                if (!empty($role)) {
                     $this->_model = Test::model()->findByAttributes(array(
                         'id' => $_GET['id'],
-                        'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
+                        'user_profile_id' => $this->profiles[$role]));
                 } else {
                     $this->_model = Test::model()->findByPk($_GET['id']);
                 }
@@ -52,7 +40,7 @@ class TestController extends AdminController {
     }
 
     public function actionView() {
-        $this->data['testModel'] = $this->loadModelExpert();
+        $this->data['testModel'] = $this->loadModel(RolePrivilege::EXPERT);
 
         $questionModel = new Question('search');
         $questionModel->unsetAttributes();
@@ -67,7 +55,7 @@ class TestController extends AdminController {
     }
 
     public function actionViewCompany() {
-        $this->data['testModel'] = $this->loadModelCompany();
+        $this->data['testModel'] = $this->loadModel(RolePrivilege::COMPANY);
 
         $questionModel = new Question('search');
         $questionModel->unsetAttributes();
@@ -101,7 +89,7 @@ class TestController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModelExpert();
+        $model = $this->loadModel(RolePrivilege::EXPERT);
 
         $this->performAjaxValidation($model);
 
@@ -118,7 +106,7 @@ class TestController extends AdminController {
     }
 
     public function actionUpdateCompany() {
-        $model = $this->loadModelCompany();
+        $model = $this->loadModel(RolePrivilege::COMPANY);
 
         $this->performAjaxValidation($model);
 
@@ -136,8 +124,8 @@ class TestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModelExpert();
-            $this->loadModelExpert()->delete();
+            $model = $this->loadModel(RolePrivilege::EXPERT);
+            $this->loadModel(RolePrivilege::EXPERT)->delete();
             foreach ($model->questions as $question) {
                 $question->delete();
                 foreach ($question->answers as $answer) {
@@ -154,8 +142,8 @@ class TestController extends AdminController {
 
     public function actionDeleteCompany() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModelCompany();
-            $this->loadModelCompany()->delete();
+            $model = $this->loadModel(RolePrivilege::COMPANY);
+            $this->loadModel(RolePrivilege::COMPANY)->delete();
             foreach ($model->questions as $question) {
                 $question->delete();
                 foreach ($question->answers as $answer) {
@@ -219,7 +207,7 @@ class TestController extends AdminController {
     public function actionGenerate() {
 //        if (Yii::app()->request->isPostRequest) {
 
-        $model = $this->loadModelCompany(false);
+        $model = $this->loadModel();
 
         $save = Test::model()->generate($model->id, $this->profiles[RolePrivilege::COMPANY]);
 
@@ -230,7 +218,7 @@ class TestController extends AdminController {
     }
 
     public function actionGenerateValidation() {
-        $testModel = $this->loadModelExpert();
+        $testModel = $this->loadModel(RolePrivilege::EXPERT);
 
         if (!empty($testModel)) {
             $userTestModel = new UserTest;
@@ -246,7 +234,7 @@ class TestController extends AdminController {
     }
 
     public function actionResult() {
-        $testModel = $this->loadModelExpert();
+        $testModel = $this->loadModel(RolePrivilege::EXPERT);
 
         $model = new UserTest('search');
         $model->unsetAttributes();
