@@ -13,7 +13,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'public', 'generate', 'viewmember'),
+                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'generate', 'viewmember'),
                 'roles' => array(RolePrivilege::MEMBER),
             ),
             array('deny',
@@ -151,6 +151,8 @@ class UserTestController extends AdminController {
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }
+        
+        $model->status = Status::DRAFT;
 
         $this->render('create', array(
             'model' => $model,
@@ -184,6 +186,8 @@ class UserTestController extends AdminController {
     }
 
     public function actionIndex() {
+        UserTest::model()->setExpired();
+        
         $model = new UserTest('search');
         $model->unsetAttributes();
         if (isset($_GET['UserTest'])) {
@@ -199,6 +203,8 @@ class UserTestController extends AdminController {
     }
 
     public function actionMember() {
+        UserTest::model()->setExpired();
+        
         $model = new UserTest('search');
         $model->unsetAttributes();
         if (isset($_GET['UserTest'])) {
@@ -316,21 +322,6 @@ class UserTestController extends AdminController {
         ));
     }
 
-    public function actionPublic() {
-        $model = new Test('search');
-        $model->unsetAttributes();
-        if (isset($_GET['Test'])) {
-            $model->attributes = $_GET['Test'];
-        }
-
-        $model->status = Status::ACTIVE;
-        $model->is_public = true;
-
-        $this->render('public', array(
-            'model' => $model,
-        ));
-    }
-
     public function actionGenerate() {
         $testModel = Test::model()->findByPk($_GET['id']);
 
@@ -349,6 +340,8 @@ class UserTestController extends AdminController {
     }
 
     public function actionMemberTest() {
+        UserTest::model()->setExpired();
+        
         $model = new UserTest;
 
         $this->performAjaxValidation($model, 'user-test-form');
@@ -366,7 +359,7 @@ class UserTestController extends AdminController {
             $model->show_result = $testModel->show_result;
             $model->start_date = $testModel->start_date;
             $model->end_date = $testModel->end_date;
-            $model->status = $testModel->status;
+            $model->status = Status::DRAFT;
         }
 
         $userTestModel = new UserTest('search');

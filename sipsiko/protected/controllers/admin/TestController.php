@@ -12,6 +12,10 @@ class TestController extends AdminController {
                 'actions' => array('viewcompany', 'updatecompany', 'deletecompany', 'company', 'active', 'generate'),
                 'roles' => array(RolePrivilege::COMPANY)
             ),
+            array('allow',
+                'actions' => array('public'),
+                'roles' => array(RolePrivilege::MEMBER)
+            ),
             array('deny',
                 'users' => array('*'),
             ),
@@ -167,6 +171,8 @@ class TestController extends AdminController {
     }
 
     public function actionIndex() {
+        Test::model()->setExpired();
+
         $model = new Test('search');
         $model->unsetAttributes();
         if (isset($_GET['Test']))
@@ -180,6 +186,8 @@ class TestController extends AdminController {
     }
 
     public function actionCompany() {
+        Test::model()->setExpired();
+
         $model = new Test('search');
         $model->unsetAttributes();
         if (isset($_GET['Test']))
@@ -193,6 +201,8 @@ class TestController extends AdminController {
     }
 
     public function actionActive() {
+        Test::model()->setExpired();
+
         $model = new Test('search');
         $model->unsetAttributes();
         if (isset($_GET['Test']))
@@ -250,6 +260,23 @@ class TestController extends AdminController {
         $this->render('result', array(
             'model' => $model,
             'test' => $testModel
+        ));
+    }
+
+    public function actionPublic() {
+        Test::model()->setExpired();
+
+        $model = new Test('search');
+        $model->unsetAttributes();
+        if (isset($_GET['Test'])) {
+            $model->attributes = $_GET['Test'];
+        }
+
+        $model->status = Status::ACTIVE;
+        $model->is_public = true;
+
+        $this->render('public', array(
+            'model' => $model,
         ));
     }
 

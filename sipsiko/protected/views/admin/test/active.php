@@ -75,13 +75,6 @@ $('.search-form form').submit(function(){
                     'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
-                    'name' => 'status',
-                    'filter' => '',
-                    'type' => 'raw',
-                    'value' => 'Status::get_tag_label($data->status)',
-                    'htmlOptions' => array('class' => 'text-center'),
-                ),
-                array(
                     'name' => 'is_public',
                     'filter' => CHtml::activeDropDownList($model, 'is_public', Test::model()->getPublicationStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Publication')),
                     'type' => 'raw',
