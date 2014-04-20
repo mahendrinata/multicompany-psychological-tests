@@ -139,6 +139,17 @@ $('.search-form form').submit(function(){
                             'url' => 'Yii::app()->controller->createUrl("admin/test/result", array("id"=>$data->id))',
                         ),
                     ),),
+                array(
+                    'class' => 'CButtonColumn',
+                    'filterHtmlOptions' => array('style' => 'width: 40px;'),
+                    'template' => '{publicresult}',
+                    'buttons' => array(
+                        'publicresult' => array(
+                            'label' => 'Result Public Test',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/action-log.png',
+                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/publictest", array("id"=>$data->id))',
+                        ),
+                    ),),
             ),
         ));
         ?>

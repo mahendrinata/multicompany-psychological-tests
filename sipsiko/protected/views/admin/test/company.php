@@ -122,7 +122,7 @@ $('.search-form form').submit(function(){
                     'buttons' => array(
                         'user' => array(
                             'label' => 'User Test',
-                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
+                            'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/action-log.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/usertest/membertest", array("id"=>$data->id))',
                         ),
                         'view' => array(

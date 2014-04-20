@@ -5,7 +5,7 @@ class UserTestController extends AdminController {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('validation', 'savevalidationanswer', 'setvalidationspenttime', 'validationview', 'validationdelete'),
+                'actions' => array('validation', 'savevalidationanswer', 'setvalidationspenttime', 'validationview', 'validationdelete', 'publictest', 'publicresult'),
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
@@ -493,4 +493,39 @@ class UserTestController extends AdminController {
         }
     }
 
+    public function actionPublicTest() {
+        UserTest::model()->setExpired();
+
+        $testModel = Test::model()->findByPk($_GET['id']);
+
+        $userTestModel = new UserTest('search');
+        $userTestModel->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $userTestModel->attributes = $_GET['UserTest'];
+        }
+
+        $userTestModel->company_id = $this->profiles[RolePrivilege::EXPERT];
+        $userTestModel->test_id = $testModel->id;
+
+        $this->render('public_test', array(
+            'userTestModel' => $userTestModel,
+            'testModel' => $testModel
+        ));
+    }
+    
+     public function actionPublicResult() {
+        $model = $this->loadModelExpert();
+
+        $testAnswerModel = new TestAnswer('search');
+        $testAnswerModel->unsetAttributes();
+        if (isset($_GET['TestAnswer'])) {
+            $testAnswerModel->attributes = $_GET['TestAnswer'];
+        }
+        $testAnswerModel->user_test_id = $model->id;
+
+        $this->render('view', array(
+            'model' => $model,
+            'testAnswerModel' => $testAnswerModel
+        ));
+    }
 }

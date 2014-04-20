@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'User Tests' => array('index'),
+    'Tests' => array('admin/test/index'),
     'Manage',
 );
 
@@ -16,55 +16,7 @@ $('.search-form form').submit(function(){
 
 <div class="block">
     <div class="block-title">
-        <h2><strong>User Tests</strong> Management</h2>
-    </div>
-    <?php
-    $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'user-test-form',
-        'enableAjaxValidation' => true,
-        'htmlOptions' => array('class' => 'form-inline'),
-    ));
-    ?>
-
-    <div class="form-group">
-        <?php echo $form->label($model, 'user_profile_id', array('class' => 'sr-only col-lg-5')); ?>
-        <?php echo $form->dropDownList($model, 'user_profile_id', CHtml::listData(UserProfile::model()->getActiveUserProfilesByRole(RolePrivilege::MEMBER), 'id', 'first_name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Member Test')); ?>
-        <?php echo $form->error($model, 'user_profile_id', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo $form->label($model, 'spent_time', array('class' => 'sr-only')); ?>
-        <?php echo $form->textField($model, 'spent_time', array('placeholder' => 'Spent Time', 'class' => 'form-control text-right')); ?>
-        <?php echo $form->error($model, 'spent_time', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo $form->label($model, 'show_result', array('class' => 'sr-only col-lg-1')); ?>
-        <?php echo $form->dropDownList($model, 'show_result', array(1 => 'Yes', 0 => 'No'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Show Result')); ?>
-        <?php echo $form->error($model, 'show_result', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo $form->label($model, 'start_date', array('class' => 'sr-only')); ?>
-        <?php echo $form->textField($model, 'start_date', array('placeholder' => 'Start Date', 'class' => 'form-control input-datepicker')); ?>
-        <?php echo $form->error($model, 'start_date', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo $form->label($model, 'end_date', array('class' => 'sr-only')); ?>
-        <?php echo $form->textField($model, 'end_date', array('placeholder' => 'End Date', 'class' => 'form-control input-datepicker')); ?>
-        <?php echo $form->error($model, 'end_date', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo $form->label($model, 'status', array('class' => 'sr-only col-lg-3')); ?>
-        <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
-        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
-    </div>
-    <div class="form-group">
-        <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> Create', array('class' => 'btn btn-success', 'type' => 'submit')); ?>
-    </div>
-    <?php $this->endWidget(); ?>
-
-    <div class="table-options clearfix">
-        <div class="btn-group btn-group-sm pull-right">
-            <?php echo CHtml::link('<i class="fa fa-download"></i> Export Excel', array('admin/usertest/membertestexcelreport', 'id' => $testModel->id), array('class' => 'btn btn-success')) ?>
-        </div>
+        <h2><strong>Public Tests</strong> Management</h2>
     </div>
     <div class="table-responsive">
         <?php
@@ -146,7 +98,12 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'htmlOptions' => array('style' => 'width: 80px;')
+                    'template' => '{view}',
+                    'buttons' => array(
+                        'view' => array(
+                            'url' => 'Yii::app()->controller->createUrl("admin/usertest/publicresult", array("id"=>$data->id))',
+                        ),
+                    )
                 )
         )));
         ?>      
