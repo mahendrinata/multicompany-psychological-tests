@@ -50,13 +50,24 @@ class PHPExcel_Autoloader
      *
      */
     public static function Register() {
-        if (function_exists('__autoload')) {
-            //    Register any existing autoloader function with SPL, so we don't get any clashes
-            spl_autoload_register('__autoload');
-        }
-        //    Register ourselves with SPL
-        return spl_autoload_register(array('PHPExcel_Autoloader', 'Load'));
-    }   //    function Register()
+        $functions = spl_autoload_functions();
+        foreach ($functions as $function)
+            spl_autoload_unregister($function);
+        $functions = array_merge(array(array('PHPExcel_Autoloader', 'Load')), $functions);
+        foreach ($functions as $function)
+            $x = spl_autoload_register($function);
+        return $x;
+    }
+
+    
+//    public static function Register() {
+//        if (function_exists('__autoload')) {
+//            //    Register any existing autoloader function with SPL, so we don't get any clashes
+//            spl_autoload_register('__autoload');
+//        }
+//        //    Register ourselves with SPL
+//        return spl_autoload_register(array('PHPExcel_Autoloader', 'Load'));
+//    }   //    function Register()
 
 
     /**

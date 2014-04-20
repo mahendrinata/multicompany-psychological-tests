@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result', 'settestvariable'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'membertestexcelreport', 'result', 'settestvariable'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
@@ -151,7 +151,7 @@ class UserTestController extends AdminController {
             if ($model->save())
                 $this->redirect(array('admin/usertest/index'));
         }
-        
+
         $model->status = Status::DRAFT;
 
         $this->render('create', array(
@@ -187,7 +187,7 @@ class UserTestController extends AdminController {
 
     public function actionIndex() {
         UserTest::model()->setExpired();
-        
+
         $model = new UserTest('search');
         $model->unsetAttributes();
         if (isset($_GET['UserTest'])) {
@@ -204,7 +204,7 @@ class UserTestController extends AdminController {
 
     public function actionMember() {
         UserTest::model()->setExpired();
-        
+
         $model = new UserTest('search');
         $model->unsetAttributes();
         if (isset($_GET['UserTest'])) {
@@ -341,7 +341,7 @@ class UserTestController extends AdminController {
 
     public function actionMemberTest() {
         UserTest::model()->setExpired();
-        
+
         $model = new UserTest;
 
         $this->performAjaxValidation($model, 'user-test-form');
@@ -373,8 +373,23 @@ class UserTestController extends AdminController {
 
         $this->render('member_test', array(
             'model' => $model,
-            'userTestModel' => $userTestModel
+            'userTestModel' => $userTestModel,
+            'testModel' => $testModel
         ));
+    }
+
+    public function actionMemberTestExcelReport() {
+        $testModel = Test::model()->findByPk($_GET['id']);
+
+        $userTestModel = new UserTest('search');
+        $userTestModel->unsetAttributes();
+        if (isset($_GET['UserTest'])) {
+            $userTestModel->attributes = $_GET['UserTest'];
+        }
+
+        $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
+        $userTestModel->test_id = $testModel->id;
+        UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
     }
 
     public function actionValidation() {

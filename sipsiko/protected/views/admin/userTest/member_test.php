@@ -11,6 +11,10 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
+//$('#export-excel-member-test').click(function(){
+//    data = $('.filters').serialize();
+//    console.log(data);
+//})
 ");
 ?>
 
@@ -61,6 +65,11 @@ $('.search-form form').submit(function(){
     </div>
     <?php $this->endWidget(); ?>
 
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-right">
+            <?php echo CHtml::link('<i class="fa fa-download"></i> Export Excel', array('admin/usertest/membertestexcelreport', 'id' => $testModel->id), array('class' => 'btn btn-success')) ?>
+        </div>
+    </div>
     <div class="table-responsive">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -93,7 +102,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'user_profile.first_name',
-                    'value' => '$data->user_profile->first_name', 
+                    'value' => '$data->user_profile->first_name',
                     'header' => 'Member Name',
                     'filter' => ''
                 ),
@@ -106,12 +115,12 @@ $('.search-form form').submit(function(){
                     'name' => 'spent_time',
                     'filter' => CHtml::activeTelField($userTestModel, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
-                ), 
+                ),
                 array(
                     'name' => 'time_used',
                     'filter' => CHtml::activeTelField($userTestModel, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
-                ), 
+                ),
                 array(
                     'name' => 'start_date',
                     'filter' => CHtml::activeTelField($userTestModel, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
@@ -131,7 +140,7 @@ $('.search-form form').submit(function(){
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
                     'filter' => CHtml::activeDropDownList($userTestModel, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
-                ), 
+                ),
                 array(
                     'name' => 'show_result',
                     'filter' => CHtml::activeDropDownList($userTestModel, 'show_result', array(1 => 'Yes', 0 => 'No'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Show Result')),
