@@ -106,9 +106,11 @@ class TestVariable extends AppActiveRecord {
 
     public function setTestVariable($user_test_id) {
         $userTestModel = UserTest::model()->findByPk($user_test_id);
-        $type = $userTestModel->test->type;
+        if (empty($userTestModel))
+            return false;
 
-        switch ($type->type) {
+        $type = $userTestModel->test->type;
+        switch ($type->conclusion) {
             case Conclusion::SINGLE:
                 $output = ConclusionSingleTest::model()->generate($userTestModel->id);
                 break;

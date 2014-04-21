@@ -6,35 +6,19 @@ class ConclusionSingleTest extends ConclusionPsychologyTest {
         return parent::model($className);
     }
 
-    private function __getData($user_test_id) {
-        $sql = 'SELECT variables.id AS variable_id, SUM(answers.value) AS value 
-            FROM user_tests 
-            INNER JOIN test_answers ON user_tests.id = test_answers.user_test_id 
-            INNER JOIN answers ON answers.id = test_answers.answer_id 
-            INNER JOIN variables ON variables.id = answers.variable_id
-            WHERE user_tests.id = ' . $user_test_id . ' 
-            GROUP BY variables.id 
-            ORDER BY value DESC';
-
-        return $this->_calculateVariable($sql);
+    private function __getData() {
+        return TestVariable::model()->findAll(array(
+                'condition' => 'user_test_id =' . $this->getUserTestId(),
+                'order' => 'value DESC',
+                'limit' => $this->getCombination()
+        ));
     }
 
     public function generate($user_test_id) {
-        $userTestModel = $this->_getUserTest($user_test_id);
-
-        $i = 0;
-        $slug = array();
-        foreach ($this->__getData($userTestModel->id) as $variable) {
-            $this->_saveVariable($user_test_id, $variable);
-
-            if ($i < $userTestModel->test->combination_variable) {
-                $slug[] = $variable->variable_id;
-            }
-            $i++;
-        }
-
-        $userTestModel->variable_detail_slug = implode('-', $slug);
-        return $userTestModel->save();
+        $this->setUserTestModel(UserTest::model()->findByPk($user_test_id));
+        $this->_saveAllTestVariableFromAnswer();
+        $slugs = CHtml::listData($this->__getData(), 'id', 'variable_id');
+        return UserTest::model()->updateByPk($this->getUserTestId(), array('variable_detail_slug' => implode('-', $slugs)));
     }
 
 }

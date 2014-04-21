@@ -2,32 +2,107 @@
 
 class ConclusionPsychologyTest extends Conclusion {
 
-    protected function _getUserTest($user_test_id) {
-        return UserTest::model()->findByPk($user_test_id);
+    public $userTestModel;
+    public $testModel;
+
+    public function setUserTestModel($userTestModel) {
+        $this->userTestModel = $userTestModel;
+        $this->setTestModel($userTestModel->test);
     }
 
-    protected function _calculateVariable($sql) {
+    public function getUserTestModel() {
+        return $this->userTestModel;
+    }
+
+    public function setTestModel($testModel) {
+        $this->testModel = $testModel;
+    }
+
+    public function getTestModel() {
+        return $this->testModel;
+    }
+
+    public function getUserTestId() {
+        return $this->userTestModel->id;
+    }
+
+    public function getTestId() {
+        return $this->testModel->id;
+    }
+
+    public function getCombination() {
+        return $this->testModel->combination_variable;
+    }
+
+    protected function _calculateAllVariable() {
+        $sql = 'SELECT answers.variable_id AS variable_id, SUM(answers.value) AS value 
+            FROM user_tests 
+            INNER JOIN test_answers ON user_tests.id = test_answers.user_test_id 
+            INNER JOIN answers ON answers.id = test_answers.answer_id 
+            WHERE user_tests.id = ' . $this->getUserTestId() . ' 
+            GROUP BY answers.variable_id';
+
         return TestVariable::model()->findAllBySql($sql);
     }
 
-    protected function _getVariable($user_test_id, $variable) {
-        return TestVariable::model()->findByAttributes(array('user_test_id' => $user_test_id, 'variable_id' => $variable->variable_id));
+    protected function _calculateVariable($variable_id) {
+        $sql = 'SELECT SUM(answers.value) AS value 
+            FROM user_tests 
+            INNER JOIN test_answers ON user_tests.id = test_answers.user_test_id 
+            INNER JOIN answers ON answers.id = test_answers.answer_id 
+            WHERE user_tests.id = ' . $this->getUserTestId() . ' AND answers.variable_id = ' . $variable_id;
+
+        $testVariable = TestVariable::model()->findBySql($sql);
+
+        return (!empty($testVariable)) ? $testVariable->value : 0;
     }
 
-    protected function _saveVariable($user_test_id, $variable) {
-        $testVariable = $this->_getVariable($user_test_id, $variable);
+    protected function _getDefaultVariable() {
+        return $this->getTestModel()->type->variables;
+    }
+
+    protected function _getVariable($variable_id) {
+        return TestVariable::model()->findByAttributes(array('user_test_id' => $this->getUserTestId(), 'variable_id' => $variable_id));
+    }
+
+    protected function _saveVariable($variable_id) {
+        $testVariable = $this->_getVariable($variable_id);
 
         if (empty($testVariable)) {
             $testVariableModel = new TestVariable;
-            $testVariableModel->user_test_id = $user_test_id;
-            $testVariableModel->value = $variable->value;
-            $testVariableModel->variable_id = $variable->variable_id;
+            $testVariableModel->user_test_id = $this->getUserTestId();
+            $testVariableModel->value = $this->_calculateVariable($variable_id);
+            $testVariableModel->variable_id = $variable_id;
             $output = $testVariableModel->save(false);
         } else {
-            $testVariable->value = $variable->value;
+            $testVariable->value = $this->_calculateVariable($variable_id);
             $output = $testVariable->save();
         }
         return $output;
+    }
+
+    protected function _saveAllTestVariableFromAnswer($clear = false) {
+        if ($clear)
+            $this->_clearTestVarible();
+
+        $defaultVariable = $this->_getDefaultVariable();
+        foreach ($defaultVariable as $variable) {
+            $this->_saveVariable($variable->id);
+        }
+    }
+
+    protected function _saveTestVariableFromAnswer($clear = false) {
+        if ($clear)
+            $this->_clearTestVarible();
+
+        $testVariable = $this->_calculateAllVariable();
+        foreach ($testVariable as $variable) {
+            $this->_saveVariable($variable->id);
+        }
+    }
+
+    protected function _clearTestVarible() {
+        return TestVariable::model()->deleteAllByAttributes(array('user_test_id' => $this->getUserTestId()));
     }
 
     public static function model($className = __CLASS__) {

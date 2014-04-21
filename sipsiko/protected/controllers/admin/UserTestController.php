@@ -235,10 +235,11 @@ class UserTestController extends AdminController {
         $userTestModel = $this->loadModelMemberActive(true);
 
         if (isset($_POST['UserTest'])) {
-            $userTestModel->status = Status::FINISH;
-            if ($userTestModel->save()) {
-                if (TestVariable::model()->setTestVariable($_POST['UserTest']['id']))
+            if (TestVariable::model()->setTestVariable($_POST['UserTest']['id'])) {
+                $userTestModel->status = Status::FINISH;
+                if ($userTestModel->save()) {
                     $this->redirect(array('admin/usertest/member'));
+                }
             }
         }
 
