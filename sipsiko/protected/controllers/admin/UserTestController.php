@@ -177,7 +177,13 @@ class UserTestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModelCompany()->delete();
+            $model = $this->loadModelCompany();
+            if (!empty($model->test_answers)) {
+                $model->status = Status::VOID;
+                $model->save();
+            } else {
+                $model->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/usertest/index'));
@@ -512,8 +518,8 @@ class UserTestController extends AdminController {
             'testModel' => $testModel
         ));
     }
-    
-     public function actionPublicResult() {
+
+    public function actionPublicResult() {
         $model = $this->loadModelExpert();
 
         $testAnswerModel = new TestAnswer('search');
@@ -528,4 +534,5 @@ class UserTestController extends AdminController {
             'testAnswerModel' => $testAnswerModel
         ));
     }
+
 }

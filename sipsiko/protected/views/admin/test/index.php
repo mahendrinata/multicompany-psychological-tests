@@ -121,6 +121,13 @@ $('.search-form form').submit(function(){
                             'label' => 'Add Question',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/question/create", array("id"=>$data->slug))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
+                        ),
+                        'update' => array(
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
+                        ),
+                        'delete' => array(
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                     ),),
                 array(
@@ -132,6 +139,7 @@ $('.search-form form').submit(function(){
                             'label' => 'Try Validation Test',
                             'imageUrl' => Yii::app()->request->baseUrl . '/images/icon/add.png',
                             'url' => 'Yii::app()->controller->createUrl("admin/test/generatevalidation", array("id"=>$data->id))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                         'result' => array(
                             'label' => 'Result Validation Test',

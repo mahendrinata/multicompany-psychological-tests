@@ -105,10 +105,10 @@ $('.search-form form').submit(function(){
                     'filterHtmlOptions' => array('style' => 'width: 80px;'),
                     'buttons' => array(
                         'update' => array(
-                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ') ? true : false',
+                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ' && $data->status != "' . Status::VOID . '") ? true : false',
                         ),
                         'delete' => array(
-                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ') ? true : false',
+                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ' && $data->status != "' . Status::VOID . '") ? true : false',
                         ),
                     )
                 ),

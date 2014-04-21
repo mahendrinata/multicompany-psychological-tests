@@ -72,7 +72,9 @@ class VariableController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel(true)->delete();
+            $model = $this->loadModel(true);
+            $model->status = Status::VOID;
+            $model->save();
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/variable/index'));

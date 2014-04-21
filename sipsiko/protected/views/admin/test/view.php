@@ -92,9 +92,11 @@ $this->breadcrumbs = array(
                     'buttons' => array(
                         'update' => array(
                             'url' => 'Yii::app()->controller->createUrl("admin/question/update", array("id"=>$data->id))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                         'delete' => array(
                             'url' => 'Yii::app()->controller->createUrl("admin/question/delete", array("id"=>$data->id))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                     ),
                     'visible' => $testModel->is_expert

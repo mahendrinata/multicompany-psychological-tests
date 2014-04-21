@@ -64,7 +64,13 @@ class RoleController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $model = $this->loadModel();
+            if (!empty($model->users)) {
+                $model->status = Status::VOID;
+                $model->save();
+            } else {
+                $model->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/role/index'));

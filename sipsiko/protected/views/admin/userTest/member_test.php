@@ -146,8 +146,15 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'htmlOptions' => array('style' => 'width: 80px;')
-                )
+                    'htmlOptions' => array('style' => 'width: 80px;'),
+                    'buttons' => array(
+                        'update' => array(
+                            'visible' => '($data->status != "' . Status::VOID . '" && $data->status != "' . Status::FINISH . '") ? true : false',
+                        ),
+                        'delete' => array(
+                            'visible' => '($data->status != "' . Status::VOID . '" && $data->status != "' . Status::FINISH . '") ? true : false',
+                        ),
+                    ),),
         )));
         ?>      
     </div>

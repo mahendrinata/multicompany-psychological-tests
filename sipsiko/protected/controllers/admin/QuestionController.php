@@ -16,9 +16,9 @@ class QuestionController extends AdminController {
 
     public function loadModel() {
         if ($this->_model === null) {
-            if (isset($_GET['id'])){
+            if (isset($_GET['id'])) {
                 $this->_model = Question::model()->findbyPk($_GET['id']);
-                if($this->_model->test->user_profile_id != $this->profiles[RolePrivilege::EXPERT]){
+                if ($this->_model->test->user_profile_id != $this->profiles[RolePrivilege::EXPERT]) {
                     $this->_model = null;
                 }
             }
@@ -67,9 +67,14 @@ class QuestionController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel();
-            $this->loadModel()->delete();
-            foreach ($model->answers as $answer) {
-                $answer->delete();
+            if (!empty($model->test_answers)) {
+                $model->status = Status::VOID;
+                $model->save();
+            } else {
+                $model->delete();
+                foreach ($model->answers as $answer) {
+                    $answer->delete();
+                }
             }
 
             if (!isset($_GET['ajax']))

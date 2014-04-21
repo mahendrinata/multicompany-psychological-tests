@@ -96,7 +96,9 @@ class UserProfileController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $model = $this->loadModel();
+            $model->status = Status::VOID;
+            $model->save();
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/userprofile/index'));

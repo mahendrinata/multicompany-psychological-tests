@@ -36,7 +36,13 @@ class AnswerController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
-            $this->loadModel()->delete();
+            $model = $this->loadModel();
+            if(!empty($model->test_answers)){
+                $model->status = Status::VOID;
+                $model->save();
+            }else{
+                $model->delete();
+            }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

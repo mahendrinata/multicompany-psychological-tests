@@ -130,9 +130,11 @@ $('.search-form form').submit(function(){
                         ),
                         'update' => array(
                             'url' => 'Yii::app()->controller->createUrl("admin/test/updatecompany", array("id"=>$data->id))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                         'delete' => array(
                             'url' => 'Yii::app()->controller->createUrl("admin/test/deletecompany", array("id"=>$data->id))',
+                            'visible' => '($data->status != "' . Status::VOID . '") ? true : false',
                         ),
                     ))
             ),

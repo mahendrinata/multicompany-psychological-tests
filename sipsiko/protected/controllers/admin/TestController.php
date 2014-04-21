@@ -125,11 +125,16 @@ class TestController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(RolePrivilege::EXPERT);
-            $this->loadModel(RolePrivilege::EXPERT)->delete();
-            foreach ($model->questions as $question) {
-                $question->delete();
-                foreach ($question->answers as $answer) {
-                    $answer->delete();
+            if (!empty($model->user_tests)) {
+                $model->status = Status::VOID;
+                $model->save();
+            } else {
+                $this->loadModel(RolePrivilege::EXPERT)->delete();
+                foreach ($model->questions as $question) {
+                    $question->delete();
+                    foreach ($question->answers as $answer) {
+                        $answer->delete();
+                    }
                 }
             }
 
@@ -143,11 +148,16 @@ class TestController extends AdminController {
     public function actionDeleteCompany() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(RolePrivilege::COMPANY);
-            $this->loadModel(RolePrivilege::COMPANY)->delete();
-            foreach ($model->questions as $question) {
-                $question->delete();
-                foreach ($question->answers as $answer) {
-                    $answer->delete();
+            if (!empty($model->user_tests)) {
+                $model->status = Status::VOID;
+                $model->save();
+            } else {
+                $this->loadModel(RolePrivilege::COMPANY)->delete();
+                foreach ($model->questions as $question) {
+                    $question->delete();
+                    foreach ($question->answers as $answer) {
+                        $answer->delete();
+                    }
                 }
             }
 
