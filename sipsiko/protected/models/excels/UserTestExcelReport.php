@@ -19,7 +19,7 @@ class UserTestExcelReport extends ExcelReport {
             'Status',
         );
         $variableHead = CHtml::listData(Variable::model()->findAllByAttributes(array('type_id' => $testModel->type_id)), 'id', 'name');
-        $this->setCellHead(CMap::mergeArray($mainHead, $variableHead));
+        $this->setCellHead(CMap::mergeArray(CMap::mergeArray($mainHead, $variableHead), array('Kesimpulan')));
 
         $i = 0;
         foreach ($userTestModel as $userTest) {
@@ -39,7 +39,18 @@ class UserTestExcelReport extends ExcelReport {
             foreach ($variableHead as $key => $variable) {
                 $variableBody[] = (isset($testVariables[$key])) ? $testVariables[$key] : null;
             }
-            $this->setCellBody(CMap::mergeArray($mainBody, $variableBody));
+            if (!empty($userTest->variable_detail_slug)) {
+                $conclusions = explode('-', $userTest->variable_detail_slug);
+                $conclusion_array = array();
+                foreach ($conclusions as $conclusion) {
+                    if (!empty($conclusion)) {
+                        $conclusion_array[] = $variableHead[$conclusion];
+                    }
+                }
+                $this->setCellBody(CMap::mergeArray(CMap::mergeArray($mainBody, $variableBody), array(implode(' - ', $conclusion_array))));
+            } else {
+                $this->setCellBody(CMap::mergeArray($mainBody, $variableBody));
+            }
         }
 
         $this->render('Member Test Report');
