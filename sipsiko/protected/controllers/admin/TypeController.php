@@ -47,6 +47,7 @@ class TypeController extends AdminController {
 
         if (isset($_POST['Type'])) {
             $model->attributes = $_POST['Type'];
+            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
             if ($model->save())
                 $this->redirect(array('admin/type/index'));
         }

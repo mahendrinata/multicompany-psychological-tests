@@ -47,6 +47,7 @@ class VariableController extends AdminController {
 
         if (isset($_POST['Variable'])) {
             $model->attributes = $_POST['Variable'];
+            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
             if ($model->save())
                 $this->redirect(array('admin/variable/index'));
         }

@@ -43,12 +43,12 @@ class VariableDetailController extends AdminController {
     public function actionCreate() {
         $model = new VariableDetail;
 
-        $this->performAjaxValidation($model, 'variable-detail-form', array('VariableDetail' => array('user_profile_id' => $this->getUserProfileId(RolePrivilege::EXPERT))));
+        $this->performAjaxValidation($model, 'variable-detail-form');
 
         if (isset($_POST['VariableDetail'])) {
             $model->attributes = $_POST['VariableDetail'];
 
-            $model->user_profile_id = $this->getUserProfileId(RolePrivilege::EXPERT);
+            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
 
             if (isset($_POST['VariableDetail']['combinations']) && !empty($_POST['VariableDetail']['combinations']))
                 $model->combinations = $_POST['VariableDetail']['combinations'];

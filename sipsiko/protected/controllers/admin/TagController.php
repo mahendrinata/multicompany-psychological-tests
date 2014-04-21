@@ -47,6 +47,7 @@ class TagController extends AdminController {
 
         if (isset($_POST['Tag'])) {
             $model->attributes = $_POST['Tag'];
+            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
             if ($model->save())
                 $this->redirect(array('admin/tag/index'));
         }
