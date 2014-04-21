@@ -2,14 +2,15 @@
 
 class Conclusion {
 
-    const ORDERER = 'ORDERER';
-    const MBTI = 'MBTI';
+    const SINGLE = 'SINGLE';
+    const PAIR = 'PAIR';
+    const PAIR_ORDERER = 'PAIR_ORDERER';
     const DISC = 'DISC';
 
     public static function get_list() {
         return array(
-            self::ORDERER,
-            self::MBTI,
+            self::SINGLE,
+            self::PAIR,
             self::DISC,
         );
     }

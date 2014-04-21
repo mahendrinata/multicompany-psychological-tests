@@ -1,6 +1,6 @@
 <?php
 
-class PsychologyTest {
+class ConclusionPsychologyTest extends Conclusion {
 
     protected function _getUserTest($user_test_id) {
         return UserTest::model()->findByPk($user_test_id);

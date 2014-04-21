@@ -1,6 +1,6 @@
 <?php
 
-class MbtiTest extends PsychologyTest {
+class ConclusionDiscTest extends ConclusionPsychologyTest {
 
     public static function model($className = __CLASS__) {
         return parent::model($className);

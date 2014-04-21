@@ -8,7 +8,7 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
                 'slug' => Type::model()->slugify('mbti'),
                 'name' => 'MBTI (Myers-Briggs Type Indicator)',
                 'description' => '',
-                'conclusion' => Conclusion::MBTI,
+                'conclusion' => Conclusion::PAIR,
                 'template' => Template::MULTIPLE_CHOICE,
             ),
             array(
@@ -36,21 +36,21 @@ class m140328_214556_insert_dummy_data_types extends CDbMigration {
                 'slug' => Type::model()->slugify('modalitas-belajar'),
                 'name' => 'Modalitas Belajar',
                 'description' => '',
-                'conclusion' => Conclusion::ORDERER,
+                'conclusion' => Conclusion::SINGLE,
                 'template' => Template::MULTIPLE_CHOICE,
             ),
             array(
                 'slug' => Type::model()->slugify('Otak Kanan Otak Kiri'),
                 'name' => 'Otak Kanan Otak Kiri',
                 'description' => '',
-                'conclusion' => Conclusion::ORDERER,
+                'conclusion' => Conclusion::SINGLE,
                 'template' => Template::MULTIPLE_CHOICE,
             ),
             array(
                 'slug' => Type::model()->slugify('Kepribadian'),
                 'name' => 'Kepribadian',
                 'description' => '',
-                'conclusion' => Conclusion::ORDERER,
+                'conclusion' => Conclusion::SINGLE,
                 'template' => Template::MULTIPLE_CHOICE,
             ),
             array(

@@ -106,11 +106,20 @@ class TestVariable extends AppActiveRecord {
 
     public function setTestVariable($user_test_id) {
         $userTestModel = UserTest::model()->findByPk($user_test_id);
-        $conclusion = $userTestModel->test->type->conclusion;
+        $type = $userTestModel->test->type;
 
-        switch ($conclusion) {
-            case Conclusion::ORDERER:
-                $output = OrdererTest::model()->generate($userTestModel->id);
+        switch ($type->type) {
+            case Conclusion::SINGLE:
+                $output = ConclusionSingleTest::model()->generate($userTestModel->id);
+                break;
+            case Conclusion::PAIR:
+                $output = ConclusionPairTest::model()->generate($userTestModel->id);
+                break;
+            case Conclusion::PAIR_ORDERER:
+                $output = ConclusionPairOrdererTest::model()->generate($userTestModel->id);
+                break;
+            case Conclusion::DISC:
+                $output = ConclusionDiscTest::model()->generate($userTestModel->id);
                 break;
             default:
                 $output = false;
