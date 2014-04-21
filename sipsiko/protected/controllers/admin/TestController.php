@@ -22,7 +22,7 @@ class TestController extends AdminController {
         );
     }
 
-    public function loadModel($role = null) {
+    public function loadModel($role = null, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
                 if (!empty($role)) {
@@ -34,6 +34,8 @@ class TestController extends AdminController {
                 }
             }
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -89,7 +91,7 @@ class TestController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel(RolePrivilege::EXPERT);
+        $model = $this->loadModel(RolePrivilege::EXPERT, true);
 
         $this->performAjaxValidation($model);
 
@@ -106,7 +108,7 @@ class TestController extends AdminController {
     }
 
     public function actionUpdateCompany() {
-        $model = $this->loadModel(RolePrivilege::COMPANY);
+        $model = $this->loadModel(RolePrivilege::COMPANY, true);
 
         $this->performAjaxValidation($model);
 
@@ -124,7 +126,7 @@ class TestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModel(RolePrivilege::EXPERT);
+            $model = $this->loadModel(RolePrivilege::EXPERT, true);
             if (!empty($model->user_tests)) {
                 $model->status = Status::VOID;
                 $model->save();
@@ -147,7 +149,7 @@ class TestController extends AdminController {
 
     public function actionDeleteCompany() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModel(RolePrivilege::COMPANY);
+            $model = $this->loadModel(RolePrivilege::COMPANY, true);
             if (!empty($model->user_tests)) {
                 $model->status = Status::VOID;
                 $model->save();
@@ -217,7 +219,7 @@ class TestController extends AdminController {
     public function actionGenerate() {
 //        if (Yii::app()->request->isPostRequest) {
 
-        $model = $this->loadModel();
+        $model = $this->loadModel(null, true);
 
         $save = Test::model()->generate($model->id, $this->profiles[RolePrivilege::COMPANY]);
 
@@ -228,7 +230,7 @@ class TestController extends AdminController {
     }
 
     public function actionGenerateValidation() {
-        $testModel = $this->loadModel(RolePrivilege::EXPERT);
+        $testModel = $this->loadModel(RolePrivilege::EXPERT, true);
 
         if (!empty($testModel)) {
             $userTestModel = new UserTest;

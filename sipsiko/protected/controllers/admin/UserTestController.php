@@ -22,7 +22,7 @@ class UserTestController extends AdminController {
         );
     }
 
-    public function loadModelCompany() {
+    public function loadModelCompany($void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id']))
                 $this->_model = UserTest::model()->findByAttributes(array(
@@ -30,11 +30,13 @@ class UserTestController extends AdminController {
                     'company_id' => $this->profiles[RolePrivilege::COMPANY]));
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
+                throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
     }
 
-    public function loadModelMember($token = false) {
+    public function loadModelMember($token = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
                 if ($token) {
@@ -46,6 +48,8 @@ class UserTestController extends AdminController {
                     'user_profile_id' => $this->profiles[RolePrivilege::MEMBER]));
             }
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -69,7 +73,7 @@ class UserTestController extends AdminController {
         return $this->_model;
     }
 
-    public function loadModelExpert($token = false) {
+    public function loadModelExpert($token = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
                 if ($token) {
@@ -81,6 +85,8 @@ class UserTestController extends AdminController {
                     'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]));
             }
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -160,7 +166,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModelCompany();
+        $model = $this->loadModelCompany(true);
 
         $this->performAjaxValidation($model, 'user-test-form');
 
@@ -177,7 +183,7 @@ class UserTestController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModelCompany();
+            $model = $this->loadModelCompany(true);
             if (!empty($model->test_answers)) {
                 $model->status = Status::VOID;
                 $model->save();
@@ -329,7 +335,9 @@ class UserTestController extends AdminController {
     }
 
     public function actionGenerate() {
-        $testModel = Test::model()->findByPk($_GET['id']);
+        $testModel = Test::model()->findByAttributes(array(
+            'id' => $_GET['id'],
+            'status' => Status::ACTIVE));
 
         if (!empty($testModel)) {
             $userTestModel = new UserTest;
@@ -342,6 +350,8 @@ class UserTestController extends AdminController {
             if ($userTestModel->save()) {
                 $this->redirect(array('admin/usertest/member'));
             }
+        } else {
+            throw new CHttpException(404, 'The requested page does not exist.');
         }
     }
 
@@ -385,17 +395,23 @@ class UserTestController extends AdminController {
     }
 
     public function actionMemberTestExcelReport() {
-        $testModel = Test::model()->findByPk($_GET['id']);
+        $testModel = Test::model()->findByAttributes(array(
+            'id' => $_GET['id'],
+            'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
 
-        $userTestModel = new UserTest('search');
-        $userTestModel->unsetAttributes();
-        if (isset($_GET['UserTest'])) {
-            $userTestModel->attributes = $_GET['UserTest'];
+        if (!empty($testModel)) {
+            $userTestModel = new UserTest('search');
+            $userTestModel->unsetAttributes();
+            if (isset($_GET['UserTest'])) {
+                $userTestModel->attributes = $_GET['UserTest'];
+            }
+
+            $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
+            $userTestModel->test_id = $testModel->id;
+            UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
+        } else {
+            throw new CHttpException(404, 'The requested page does not exist.');
         }
-
-        $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
-        $userTestModel->test_id = $testModel->id;
-        UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
     }
 
     public function actionValidation() {

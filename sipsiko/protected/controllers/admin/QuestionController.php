@@ -22,7 +22,7 @@ class QuestionController extends AdminController {
                     $this->_model = null;
                 }
             }
-            if ($this->_model === null)
+            if ($this->_model === null || $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;

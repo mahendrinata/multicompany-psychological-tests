@@ -14,7 +14,7 @@ class TagController extends AdminController {
         );
     }
 
-    public function loadModel($expert = false) {
+    public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
                 if ($expert) {
@@ -27,6 +27,8 @@ class TagController extends AdminController {
                 }
             }
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -55,7 +57,7 @@ class TagController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel(true);
+        $model = $this->loadModel(true, true);
 
         $this->performAjaxValidation($model, 'tag-form');
 
@@ -72,7 +74,7 @@ class TagController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModel(true);
+            $model = $this->loadModel(true, true);
             $model->status = Status::VOID;
             $model->save();
 

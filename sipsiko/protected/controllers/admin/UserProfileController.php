@@ -30,11 +30,13 @@ class UserProfileController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModel($void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id']))
                 $this->_model = UserProfile::model()->findbyPk($_GET['id']);
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -79,7 +81,7 @@ class UserProfileController extends AdminController {
     }
 
     public function actionUpdateMember() {
-        $model = $this->loadModel();
+        $model = $this->loadModel(true);
 
         $this->performAjaxValidation($model, 'user-profile-form');
 
@@ -96,7 +98,7 @@ class UserProfileController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModel();
+            $model = $this->loadModel(true);
             $model->status = Status::VOID;
             $model->save();
 
@@ -236,15 +238,16 @@ class UserProfileController extends AdminController {
         ));
     }
 
-    public function actionChange(){
+    public function actionChange() {
         $model = User::model()->findByPk(Yii::app()->user->id);
-        
-        if(isset($_POST['User'])){
+
+        if (isset($_POST['User'])) {
             
         }
-        
+
         $this->render('change', array(
             'model' => $model
         ));
     }
+
 }

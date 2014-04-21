@@ -14,11 +14,13 @@ class RoleController extends AdminController {
         );
     }
 
-    public function loadModel() {
+    public function loadModel($void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id']))
                 $this->_model = Role::model()->findbyPk($_GET['id']);
             if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if($void &&  $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -47,7 +49,7 @@ class RoleController extends AdminController {
     }
 
     public function actionUpdate() {
-        $model = $this->loadModel();
+        $model = $this->loadModel(true);
 
         $this->performAjaxValidation($model, 'role-form');
 
@@ -64,7 +66,7 @@ class RoleController extends AdminController {
 
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
-            $model = $this->loadModel();
+            $model = $this->loadModel(true);
             if (!empty($model->users)) {
                 $model->status = Status::VOID;
                 $model->save();
