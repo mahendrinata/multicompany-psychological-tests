@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'variables':
  * @property integer $id
+ * @property string $slug 
  * @property string $name
  * @property string $description
  * @property string $status
@@ -33,11 +34,11 @@ class Variable extends AppActiveRecord {
         return array(
             array('name', 'required'),
             array('type_id, user_profile_id', 'numerical', 'integerOnly' => true),
-            array('name, status', 'length', 'max' => 255),
+            array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, description, status, type_id, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, status, type_id, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -91,6 +92,8 @@ class Variable extends AppActiveRecord {
 
         $criteria->compare($this->_alias . '.id', $this->id);
 
+        $criteria->compare($this->_alias . '.slug', $this->slug, true);
+
         $criteria->compare($this->_alias . '.name', $this->name, true);
 
         $criteria->compare($this->_alias . '.description', $this->description, true);
@@ -116,6 +119,12 @@ class Variable extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    
+    public function beforeSave() {
+        $type = Type::model()->findByPk($this->type_id);
+        $this->slug = $type->slug.'-'.$this->slugify($this->name);
+        return parent::beforeSave();
     }
 
 }
