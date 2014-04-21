@@ -13,8 +13,9 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
             array(
                 'slug' => Test::model()->slugify('Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)'),
                 'name' => 'Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)',
+                'description' => 'Tes Kepribadian digunakan untuk menentukan kepribadian seseorang.',
                 'is_expert' => true,
-                'is_public' => true,
+                'is_public' => false,
                 'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,

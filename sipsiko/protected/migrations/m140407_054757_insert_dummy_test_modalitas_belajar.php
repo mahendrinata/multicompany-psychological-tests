@@ -12,8 +12,9 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
             array(
                 'slug' => Test::model()->slugify('Modalitas Belajar'),
                 'name' => 'Modalitas Belajar',
+                'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'is_expert' => true,
-                'is_public' => true,
+                'is_public' => false,
                 'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
