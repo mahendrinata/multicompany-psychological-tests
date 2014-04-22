@@ -9,7 +9,7 @@ class m140328_214556_insert_dummy_data_type_otak_kanan_otak_kiri extends CDbMigr
             'slug' => $slug,
             'name' => 'DISC (Dominance, Influence, Steadiness, Compliance)',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::SINGLE,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,

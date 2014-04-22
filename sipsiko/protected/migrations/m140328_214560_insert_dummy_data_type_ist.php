@@ -9,7 +9,7 @@ class m140328_214560_insert_dummy_data_type_ist extends CDbMigration {
             'slug' => $slug,
             'name' => 'IST (Initial Strength Test)',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::PAIR_ORDERER,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,

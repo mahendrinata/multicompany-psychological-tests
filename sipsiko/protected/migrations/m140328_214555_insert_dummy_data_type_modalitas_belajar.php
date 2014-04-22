@@ -9,7 +9,7 @@ class m140328_214555_insert_dummy_data_type_modalitas_belajar extends CDbMigrati
             'slug' => $slug,
             'name' => 'Modalitas Belajar',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::SINGLE,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,

@@ -9,7 +9,7 @@ class m140328_214551_insert_dummy_data_type_disc extends CDbMigration {
             'slug' => $slug,
             'name' => 'DISC (Dominance, Influence, Steadiness, Compliance)',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::DISC,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,

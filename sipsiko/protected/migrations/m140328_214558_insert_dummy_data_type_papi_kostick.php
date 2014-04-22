@@ -9,7 +9,7 @@ class m140328_214558_insert_dummy_data_type_papi_kostick extends CDbMigration {
             'slug' => $slug,
             'name' => 'PAPI Kostick (Personality and Preference Inventory)',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::PAIR_ORDERER,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,

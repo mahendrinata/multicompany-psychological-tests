@@ -9,7 +9,7 @@ class m140328_214557_insert_dummy_data_type_kepribadian extends CDbMigration {
             'slug' => $slug,
             'name' => 'Kepribadian',
             'description' => '',
-            'conclusion' => Conclusion::PAIR,
+            'conclusion' => Conclusion::SINGLE,
             'template' => Template::MULTIPLE_CHOICE,
             'status' => Status::ACTIVE,
             'user_profile_id' => 2,
