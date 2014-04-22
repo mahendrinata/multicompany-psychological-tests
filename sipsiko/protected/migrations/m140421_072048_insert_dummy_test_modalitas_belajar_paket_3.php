@@ -22,7 +22,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
              */
             array(
                 'slug' => Test::model()->slugify('Modalitas Belajar Paket 3'),
-                'name' => 'Modalitas Belajar',
+                'name' => 'Modalitas Belajar Paket 3',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'is_expert' => true,
                 'is_public' => true,
