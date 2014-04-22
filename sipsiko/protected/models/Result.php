@@ -1,24 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "variable_details".
+ * This is the model class for table "results".
  *
- * The followings are the available columns in table 'variable_details':
+ * The followings are the available columns in table 'results':
  * @property integer $id
  * @property string $slug
  * @property string $description
- * @property string $status
- * @property integer $user_profile_id
+ * @property integer $user_test_id
+ * @property integer $variable_detail_id
  * @property string $created_at
  * @property string $updated_at
  */
-class VariableDetail extends AppActiveRecord {
+class Result extends CActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'variable_details';
+        return 'results';
     }
 
     /**
@@ -28,14 +28,12 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, description', 'required'),
-            array('slug', 'unique'),
-            array('user_profile_id', 'numerical', 'integerOnly' => true),
-            array('status', 'length', 'max' => 255),
+            array('user_test_id, variable_detail_id', 'numerical', 'integerOnly' => true),
+            array('slug', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, description, user_test_id, variable_detail_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -46,11 +44,8 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'combinations' => array(self::MANY_MANY, 'Variable', 'combinations(variable_detail_id, variable_id)'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
-            'tag_variables' => array(self::MANY_MANY, 'Tag', 'tag_variables(variable_detail_id, tag_id)'),
-            'user_test' => array(self::BELONGS_TO, 'UserTest', array('slug' => 'variable_detail_slug')),
-            'results' => array(self::HAS_MANY, 'Result', 'variable_detail_id'),
+            'user_test' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
+            'detail_variable' => array(self::BELONGS_TO, 'DetailVariable', 'detail_variable_id'),
         );
     }
 
@@ -60,9 +55,10 @@ class VariableDetail extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
+            'slug' => 'Slug',
             'description' => 'Description',
-            'status' => 'Status',
-            'user_profile_id' => 'User Profile',
+            'user_test_id' => 'User Test',
+            'variable_detail_id' => 'Variable Detail',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -87,35 +83,29 @@ class VariableDetail extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
+        $criteria->compare('slug', $this->slug, true);
+
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('user_test_id', $this->user_test_id);
 
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare('variable_detail_id', $this->variable_detail_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('VariableDetail', array(
+        return new CActiveDataProvider('Result', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return VariableDetail the static model class
+     * @return Result the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
-    }
-    
-    public function deleteWithCombination($variable_detail_id){
-        $variableDetailModel = $this->findByPk($variable_detail_id);
-        foreach ($variableDetailModel->combinations as $combination){
-            $combination->delete();
-        }
-        return $variableDetailModel->delete();
     }
 
 }

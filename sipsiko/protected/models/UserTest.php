@@ -57,7 +57,8 @@ class UserTest extends AppActiveRecord {
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
             'company' => array(self::BELONGS_TO, 'UserProfile', 'company_id'),
             'variable_details' => array(self::HAS_MANY, 'VariableDetail', array('slug' => 'variable_detail_slug')),
-            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id')
+            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
+            'results' => array(self::HAS_MANY, 'Result', 'user_test_id'),
         );
     }
 
