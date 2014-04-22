@@ -15,6 +15,7 @@ $this->breadcrumbs = array(
         'attributes' => array(
             'id',
             'slug',
+            'name',
             'description:html',
             'status',
             'user_profile.first_name',

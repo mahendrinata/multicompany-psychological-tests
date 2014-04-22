@@ -45,6 +45,14 @@ Yii::app()->clientScript->registerScript('search', "
 </div>
 
 <div class="form-group">
+    <?php echo $form->label($model, 'name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-4 col-sm-8 col-xs-12">
+        <?php echo $form->textField($model, 'name', array('id' => 'name', 'placeholder' => 'Name', 'class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'name', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<div class="form-group">
     <?php echo $form->label($model, 'description', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-8 col-sm-12 col-xs-12">
         <?php echo $form->textArea($model, 'description', array('placeholder' => 'Description', 'class' => 'form-control textarea-editor', 'rows' => 20)); ?>

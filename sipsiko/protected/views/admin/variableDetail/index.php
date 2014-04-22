@@ -72,6 +72,10 @@ $('.search-form form').submit(function(){
                     'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control')),
                 ),
                 array(
+                    'name' => 'name',
+                    'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control')),
+                ),
+                array(
                     'name' => 'description',
                     'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control')),
                     'type' => 'html'
