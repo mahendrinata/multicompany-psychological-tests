@@ -6,6 +6,7 @@ class m140319_170804_create_variable_details_table extends CDbMigration {
         $this->createTable('variable_details', array(
             'id' => 'pk',
             'slug' => 'string NOT NULL',
+            'name' => 'string NOT NULL',
             'description' => 'text',
             'status' => 'string',
             'user_profile_id' => 'integer',
