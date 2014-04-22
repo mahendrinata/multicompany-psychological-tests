@@ -17,32 +17,18 @@ abstract class AppActiveRecord extends CActiveRecord {
         ));
     }
 
-    /**
-     * Modifies a string to remove all non ASCII characters and spaces.
-     */
-    static public function slugify($text) {
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-
-        // trim
-        $text = trim($text, '-');
-
-        // transliterate
+    static public function slugify($string) {
+        $string = preg_replace('~[^\\pL\d]+~u', '-', $string);
+        $string = trim($string, '-');
         if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+            $string = iconv('utf-8', 'us-ascii//TRANSLIT', $string);
         }
-
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        if (empty($text)) {
+        $string = strtolower($string);
+        $string = preg_replace('~[^-\w]+~', '', $string);
+        if (empty($string)) {
             return 'n-a';
         }
-
-        return $text;
+        return $string;
     }
 
     public function findBySlug($slug = null) {

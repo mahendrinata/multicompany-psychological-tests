@@ -44,6 +44,7 @@ class m140402_093542_insert_dummy_data_tags extends CDbMigration {
             'slug' => Tag::model()->slugify($name),
             'name' => $name,
             'status' => Status::ACTIVE,
+            'user_profile_id' => 2,
             'parent_id' => $parent_id,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
