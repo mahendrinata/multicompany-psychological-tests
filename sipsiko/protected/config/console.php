@@ -38,10 +38,7 @@ return array(
     'commandMap' => array(
         'migrate' => array(
             'class' => 'system.cli.commands.MigrateCommand',
-            'migrationPath' => 'application.migrations',
             'migrationTable' => 'migrations',
-            'connectionID' => 'db',
-            'templateFile' => 'application.migrations.template',
         ),
     ),
 );
