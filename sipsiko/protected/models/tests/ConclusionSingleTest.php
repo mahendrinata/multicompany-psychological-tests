@@ -2,8 +2,17 @@
 
 class ConclusionSingleTest extends ConclusionPsychologyTest {
 
+    const CONCLUSION = 'CONCLUSION';
+
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    private function __getDescription($slug) {
+        $descripsions = array(
+            self::CONCLUSION => 'Kesimpulan Tes'
+        );
+        return $descripsions[$slug];
     }
 
     private function __getData() {
@@ -18,7 +27,11 @@ class ConclusionSingleTest extends ConclusionPsychologyTest {
         $this->setUserTestModel(UserTest::model()->findByPk($user_test_id));
         $this->_saveAllTestVariableFromAnswer();
         $slugs = CHtml::listData($this->__getData(), 'id', 'variable_id');
-        return UserTest::model()->updateByPk($this->getUserTestId(), array('variable_detail_slug' => implode('-', $slugs)));
+        return $this->_saveResult(array(
+            'slug' => self::CONCLUSION,
+            'description' => $this->__getDescription(self::CONCLUSION),
+            'variable_detail_slug' => implode('-', $slugs)
+        ));
     }
 
 }

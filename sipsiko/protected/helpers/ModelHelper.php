@@ -33,9 +33,39 @@ class ModelHelper {
     public static function getVariableDetail($data) {
         $list = array();
         foreach ($data as $detail) {
-            $list[] = $detail->description . '<hr>';
+            $list[] = '<h5><strong>' . $detail->name . '</strong></h5>' . $detail->description;
         }
         return implode('', $list);
+    }
+
+    public static function getResultVariableDetail($results) {
+        $list = array();
+        foreach ($results as $result) {
+            $list[] = '<h3><strong>' . $result->description . '</strong></h3><hr>';
+            $list[] = self::getVariableDetail($result->variable_details);
+        }
+        return implode('', $list);
+    }
+
+    public static function getConclusion($results) {
+        $list = array();
+        foreach ($results as $result) {
+            foreach ($result->variable_details as $variable_detail) {
+                $list[$variable_detail->slug] = $variable_detail->name;
+            }
+        }
+        foreach ($list as $key => $val) {
+            $list[$key] = CHtml::tag('li', array(), $val);
+        }
+        return CHtml::tag('ul', array(), implode('', $list));
+    }
+
+    public static function getAnswerList($answers) {
+        $list = array();
+        foreach ($answers as $answer) {
+            $list[] = CHtml::tag('li', array(), $answer->description . ' <br><strong><span class="text-info">[' . $answer->variable->name . ']</span> <span class="text-success">[Status : ' . $answer->status . ']</span> <span class="text-warning">[Point : ' . $answer->value . ']</span></strong>');
+        }
+        return CHtml::tag('ul', array(), implode('', $list));
     }
 
 }

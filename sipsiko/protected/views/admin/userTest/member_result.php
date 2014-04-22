@@ -79,6 +79,12 @@ $('.search-form form').submit(function(){
                     'value' => 'ModelHelper::getListTestVariable($data->test_variables)',
                 ),
                 array(
+                    'name' => 'results.variable_details',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getConclusion($data->results)',
+                    'header' => 'Conclusion'
+                ),
+                array(
                     'class' => 'CButtonColumn',
                     'template' => '{view}',
                     'buttons' => array(

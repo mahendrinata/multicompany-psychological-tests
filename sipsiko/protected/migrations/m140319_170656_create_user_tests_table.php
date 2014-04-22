@@ -7,7 +7,6 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
             'id' => 'pk',
             'spent_time' => 'integer',
             'note' => 'text',
-            'variable_detail_slug' => 'string NOT NULL',
             'show_result' => 'boolean NOT NULL',
             'time_used' => 'integer NOT NULL',
             'start_date' => 'date',
@@ -22,7 +21,6 @@ class m140319_170656_create_user_tests_table extends CDbMigration {
         ));
 
         $this->createIndex('status_user_tests_index', 'user_tests', 'status');
-        $this->createIndex('variable_detail_slug_user_tests_index', 'user_tests', 'variable_detail_slug');
         $this->createIndex('user_profile_id_user_tests_index', 'user_tests', 'user_profile_id');
         $this->createIndex('test_id_user_tests_index', 'user_tests', 'test_id');
         $this->createIndex('company_id_user_tests_index', 'user_tests', 'company_id');

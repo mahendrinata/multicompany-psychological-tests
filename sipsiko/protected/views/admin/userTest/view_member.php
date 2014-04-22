@@ -50,8 +50,8 @@ $this->breadcrumbs = array(
                 'value' => ModelHelper::getListTestVariable($model->test_variables),
             ),
             array(
-                'name' => 'variable_details',
-                'value' => ModelHelper::getVariableDetail($model->variable_details),
+                'name' => 'results.variable_details',
+                'value' => ModelHelper::getResultVariableDetail($model->results),
                 'type' => 'html'
             )
     )));

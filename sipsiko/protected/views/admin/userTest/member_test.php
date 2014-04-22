@@ -131,6 +131,12 @@ $('.search-form form').submit(function(){
                     'value' => 'ModelHelper::getListTestVariable($data->test_variables,true)',
                 ),
                 array(
+                    'name' => 'results.variable_details',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getConclusion($data->results)',
+                    'header' => 'Conclusion'
+                ),
+                array(
                     'name' => 'status',
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',

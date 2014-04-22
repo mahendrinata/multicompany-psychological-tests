@@ -81,6 +81,35 @@ class ConclusionPsychologyTest extends Conclusion {
         return $output;
     }
 
+    protected function _getResult($slug) {
+        return Result::model()->findByAttributes(array(
+            'user_test_id' => $this->getUserTestId(),
+            'slug' => $slug
+        ));
+    }
+
+    protected function _saveResult($result = array()) {
+        $resultModel = $this->_getResult($result['slug']);
+        if (empty($resultModel)) {
+            $newResultModel = new Result;
+            $newResultModel->user_test_id = $this->getUserTestId();
+            $newResultModel->slug = $result['slug'];
+            $newResultModel->description = $result['description'];
+            $newResultModel->variable_detail_slug = $result['variable_detail_slug'];
+            return $newResultModel->save();
+        } else {
+            $resultModel->description = $result['description'];
+            $resultModel->variable_detail_slug = $result['variable_detail_slug'];
+            return $resultModel->save();
+        }
+    }
+
+    protected function _createResult($results = array()) {
+        foreach ($results as $result) {
+            $this->_saveResult($result);
+        }
+    }
+
     protected function _saveAllTestVariableFromAnswer($clear = false) {
         if ($clear)
             $this->_clearTestVarible();

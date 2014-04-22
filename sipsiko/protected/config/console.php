@@ -25,15 +25,6 @@ return array(
             'password' => '',
             'charset' => 'utf8',
         ),
-        'commandMap' => array(
-            'migrate' => array(
-                'class' => 'system.cli.commands.MigrateCommand',
-                'migrationPath' => 'application.migrations',
-                'migrationTable' => 'migration',
-                'connectionID' => 'db',
-                'templateFile' => 'application.migrations.template',
-            ),
-        ),
         'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
@@ -42,6 +33,15 @@ return array(
                     'levels' => 'error, warning',
                 ),
             ),
+        ),
+    ),
+    'commandMap' => array(
+        'migrate' => array(
+            'class' => 'system.cli.commands.MigrateCommand',
+            'migrationPath' => 'application.migrations',
+            'migrationTable' => 'migrations',
+            'connectionID' => 'db',
+            'templateFile' => 'application.migrations.template',
         ),
     ),
 );

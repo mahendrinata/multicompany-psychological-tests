@@ -39,37 +39,55 @@ $('.search-form form').submit(function(){
             ),
             'pagerCssClass' => 'pagination',
             'summaryCssClass' => 'alert alert-info',
-            'filter' => null,
+            'filter' => $model,
             'columns' => array(
                 array(
                     'name' => 'id',
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
+                    'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right')),
                 ),
                 array(
                     'name' => 'test_id',
                     'value' => '$data->test->name',
+                    'filter' => CHtml::activeDropDownList($model, 'test_id', CHtml::listData(Test::model()->getTestCompany($this->profiles[RolePrivilege::COMPANY]), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Type Test')),
                     'header' => 'Test Name'
                 ),
                 array(
-                    'name' => 'test_id',
+                    'name' => 'test.type.name',
                     'value' => '$data->test->type->name',
-                    'header' => 'Type'
+                    'header' => 'Type',
                 ),
                 array(
                     'name' => 'spent_time',
+                    'filter' => CHtml::activeTelField($model, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'time_used',
+                    'filter' => CHtml::activeTelField($model, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
+                ),
+                array(
+                    'name' => 'start_date',
+                    'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
+                ),
+                array(
+                    'name' => 'end_date',
+                    'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'test_variable.variable',
                     'filter' => '',
                     'type' => 'raw',
                     'value' => 'ModelHelper::getListTestVariable($data->test_variables, true)',
+                ),
+                array(
+                    'name' => 'results.variable_details',
+                    'type' => 'raw',
+                    'value' => 'ModelHelper::getConclusion($data->results)',
+                    'header' => 'Conclusion'
                 ),
                 array(
                     'class' => 'CButtonColumn',

@@ -63,8 +63,8 @@ $this->breadcrumbs = array(
                 'value' => ModelHelper::getListTestVariable($model->test_variables, true),
             ),
             array(
-                'name' => 'variable_details',
-                'value' => ModelHelper::getVariableDetail($model->variable_details),
+                'name' => 'results.variable_details',
+                'value' => ModelHelper::getResultVariableDetail($model->results),
                 'type' => 'html'
             )
     )));
@@ -114,6 +114,12 @@ $this->breadcrumbs = array(
                     'name' => 'answer.description',
                     'value' => '$data->answer->description',
                     'header' => 'Answer'
+                ),
+                array(
+                    'name' => 'answer.value',
+                    'value' => '$data->answer->value',
+                    'header' => 'Point',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'answer.variable.name',

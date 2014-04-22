@@ -37,11 +37,11 @@ class UserTest extends AppActiveRecord {
         return array(
 //            array('spent_time', 'required'),
             array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
-            array('variable_detail_slug, status', 'length', 'max' => 255),
+            array('status', 'length', 'max' => 255),
             array('spent_time, time_used, start_date, status, end_date, show_result, note, token, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, spent_time, time_used, show_result, start_date, end_date, note, token, variable_detail_slug, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, spent_time, time_used, show_result, start_date, end_date, note, token, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -56,7 +56,6 @@ class UserTest extends AppActiveRecord {
             'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
             'company' => array(self::BELONGS_TO, 'UserProfile', 'company_id'),
-            'variable_details' => array(self::HAS_MANY, 'VariableDetail', array('slug' => 'variable_detail_slug')),
             'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
             'results' => array(self::HAS_MANY, 'Result', 'user_test_id'),
         );

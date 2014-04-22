@@ -44,7 +44,7 @@ $this->breadcrumbs = array(
         'htmlOptions' => array('class' => 'table table-borderless table-striped'),
     ));
     ?>
-    <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/test'), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
+    <?php echo CHtml::link('<i class="fa fa-arrow-left"></i> Back', array('admin/usertest/publictest', 'id' => $model->test_id), array('class' => 'btn btn-warning', 'style' => 'margin-bottom:20px;')); ?>
 </div>
 
 <div class="block">
@@ -62,8 +62,8 @@ $this->breadcrumbs = array(
                 'value' => ModelHelper::getListTestVariable($model->test_variables, true),
             ),
             array(
-                'name' => 'variable_details',
-                'value' => ModelHelper::getVariableDetail($model->variable_details),
+                'name' => 'results.variable_details',
+                'value' => ModelHelper::getResultVariableDetail($model->results),
                 'type' => 'html'
             )
     )));
@@ -113,6 +113,12 @@ $this->breadcrumbs = array(
                     'name' => 'answer.description',
                     'value' => '$data->answer->description',
                     'header' => 'Answer'
+                ),
+                array(
+                    'name' => 'answer.value',
+                    'value' => '$data->answer->value',
+                    'header' => 'Point',
+                    'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
                     'name' => 'answer.variable.name',

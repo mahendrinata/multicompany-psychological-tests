@@ -50,8 +50,7 @@ class VariableDetail extends AppActiveRecord {
             'combinations' => array(self::MANY_MANY, 'Variable', 'combinations(variable_detail_id, variable_id)'),
             'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
             'tag_variables' => array(self::MANY_MANY, 'Tag', 'tag_variables(variable_detail_id, tag_id)'),
-            'user_test' => array(self::BELONGS_TO, 'UserTest', array('slug' => 'variable_detail_slug')),
-            'results' => array(self::HAS_MANY, 'Result', 'variable_detail_id'),
+            'result' => array(self::BELONGS_TO, 'Result', array('slug' => 'variable_detail_slug')),
         );
     }
 

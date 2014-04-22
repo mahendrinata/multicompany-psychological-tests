@@ -20,8 +20,16 @@ $this->breadcrumbs = array(
             'duration',
             'start_date',
             'end_date',
-            'status',
-            'is_public',
+            array(
+                'name' => 'status',
+                'value' => Status::get_tag_label($testModel->status),
+                'type' => 'raw'
+            ),
+            array(
+                'name' => 'is_public',
+                'value' => ModelHelper::getBooleanLabel($testModel->is_public),
+                'type' => 'raw'
+            ),
             'combination_variable',
             'type.name',
             'created_at',
@@ -68,7 +76,7 @@ $this->breadcrumbs = array(
                     'name' => 'question.answers',
                     'filter' => '',
                     'type' => 'raw',
-                    'value' => 'StringArray::toStringList($data->answers, "description")',
+                    'value' => 'ModelHelper::getAnswerList($data->answers)',
                 ),
                 array(
                     'name' => 'status',

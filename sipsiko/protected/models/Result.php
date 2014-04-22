@@ -8,11 +8,11 @@
  * @property string $slug
  * @property string $description
  * @property integer $user_test_id
- * @property integer $variable_detail_id
+ * @property integer $variable_detail_slug
  * @property string $created_at
  * @property string $updated_at
  */
-class Result extends CActiveRecord {
+class Result extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
@@ -28,12 +28,12 @@ class Result extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_test_id, variable_detail_id', 'numerical', 'integerOnly' => true),
+            array('user_test_id, variable_detail_slug', 'numerical', 'integerOnly' => true),
             array('slug', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, description, user_test_id, variable_detail_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, description, user_test_id, variable_detail_slug, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -45,7 +45,7 @@ class Result extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'user_test' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
-            'detail_variable' => array(self::BELONGS_TO, 'DetailVariable', 'detail_variable_id'),
+            'variable_details' => array(self::HAS_MANY, 'VariableDetail', array('slug' => 'variable_detail_slug')),
         );
     }
 
@@ -58,7 +58,7 @@ class Result extends CActiveRecord {
             'slug' => 'Slug',
             'description' => 'Description',
             'user_test_id' => 'User Test',
-            'variable_detail_id' => 'Variable Detail',
+            'variable_detail_slug' => 'Variable Detail',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -89,7 +89,7 @@ class Result extends CActiveRecord {
 
         $criteria->compare('user_test_id', $this->user_test_id);
 
-        $criteria->compare('variable_detail_id', $this->variable_detail_id);
+        $criteria->compare('variable_detail_slug', $this->variable_detail_slug);
 
         $criteria->compare('created_at', $this->created_at, true);
 

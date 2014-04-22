@@ -35,6 +35,20 @@ class UserTestController extends AdminController {
         }
         return $this->_model;
     }
+    
+    public function loadModelMemberExpert($void = false) {
+        if ($this->_model === null) {
+            if (isset($_GET['id']))
+                $this->_model = UserTest::model()->findByAttributes(array(
+                    'id' => $_GET['id'],
+                    'company_id' => $this->profiles[RolePrivilege::EXPERT]));
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+            if ($void && $this->_model->status == Status::VOID)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
 
     public function loadModelMember($token = false, $void = false) {
         if ($this->_model === null) {
@@ -537,7 +551,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionPublicResult() {
-        $model = $this->loadModelExpert();
+        $model = $this->loadModelMemberExpert();
 
         $testAnswerModel = new TestAnswer('search');
         $testAnswerModel->unsetAttributes();
@@ -546,7 +560,7 @@ class UserTestController extends AdminController {
         }
         $testAnswerModel->user_test_id = $model->id;
 
-        $this->render('view', array(
+        $this->render('public_result', array(
             'model' => $model,
             'testAnswerModel' => $testAnswerModel
         ));
