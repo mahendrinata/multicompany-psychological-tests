@@ -58,6 +58,13 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
                 )
             ),
         );
+
+        $variableDetailModel = VariableDetail::model()->find(array('order' => 'id DESC'));
+        $startVariableDetail = 1;
+        if (!empty($variableDetailModel)) {
+            $startVariableDetail = $startVariableDetail + $variableDetailModel->id;
+        }
+        
         foreach ($row as $key => $column) {
             $column['status'] = Status::ACTIVE;
             $column['created_at'] = date('Y-m-d H:i:s');
@@ -67,7 +74,7 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
             unset($column['combinations']);
             $this->insert('variable_details', $column);
             foreach ($combinations as $combination) {
-                $combination['variable_detail_id'] = $key + 6;
+                $combination['variable_detail_id'] = $key + $startVariableDetail;
                 $combination['created_at'] = date('Y-m-d H:i:s');
                 $combination['updated_at'] = date('Y-m-d H:i:s');
                 $this->insert('combinations', $combination);

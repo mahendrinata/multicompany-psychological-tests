@@ -35,10 +35,10 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
         );
 
         $variableDetailModel = VariableDetail::model()->find(array('order' => 'id DESC'));
-        if (empty($variableDetailModel))
-            $startVariableDetail = 1;
-        else
-            $startVariableDetail = $variableDetailModel->id + 1;
+        $startVariableDetail = 1;
+        if (!empty($variableDetailModel)) {
+            $startVariableDetail = $startVariableDetail + $variableDetailModel->id;
+        }
 
         foreach ($row as $key => $column) {
             $column['status'] = Status::ACTIVE;

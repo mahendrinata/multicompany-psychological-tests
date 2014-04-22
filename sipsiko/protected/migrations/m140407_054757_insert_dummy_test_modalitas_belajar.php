@@ -1284,18 +1284,18 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
                 )
             )
         );
-        
-        $testModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($testModel))
-            $startTest = 1;
-        else
-            $startTest = $testModel->id + 1;
 
-        $qustionModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($questionModel))
-            $startQuestion = 1;
-        else
-            $startQuestion = $questionModel->id + 1;
+        $testModel = Test::model()->find(array('order' => 'id DESC'));
+        $startTest = 1;
+        if (!empty($testModel)) {
+            $startTest = $startTest + $testModel->id;
+        }
+
+        $questionModel = Question::model()->find(array('order' => 'id DESC'));
+        $startQuestion = 1;
+        if (!empty($questionModel)) {
+            $startQuestion = $startQuestion + $questionModel->id;
+        }
 
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;

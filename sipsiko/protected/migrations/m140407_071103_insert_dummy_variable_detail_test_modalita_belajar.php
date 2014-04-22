@@ -47,10 +47,10 @@ class m140407_071103_insert_dummy_variable_detail_test_modalita_belajar extends 
         );
 
         $variableDetailModel = VariableDetail::model()->find(array('order' => 'id DESC'));
-        if (empty($variableDetailModel))
-            $startVariableDetail = 1;
-        else
-            $startVariableDetail = $variableDetailModel->id + 1;
+        $startVariableDetail = 1;
+        if (!empty($variableDetailModel)) {
+            $startVariableDetail = $startVariableDetail + $variableDetailModel->id;
+        }
 
         foreach ($row as $key => $column) {
             $column['status'] = Status::ACTIVE;

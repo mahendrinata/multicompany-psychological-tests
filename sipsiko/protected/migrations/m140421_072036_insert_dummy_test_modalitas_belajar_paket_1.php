@@ -25,7 +25,7 @@ class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigr
                 'name' => 'Modalitas Belajar',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'is_expert' => true,
-                'is_public' => false,
+                'is_public' => true,
                 'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
@@ -236,16 +236,16 @@ class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigr
         );
         
         $testModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($testModel))
-            $startTest = 1;
-        else
-            $startTest = $testModel->id + 1;
+        $startTest = 1;
+        if (!empty($testModel)) {
+            $startTest = $startTest + $testModel->id;
+        }
 
-        $qustionModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($questionModel))
-            $startQuestion = 1;
-        else
-            $startQuestion = $questionModel->id + 1;
+        $questionModel = Question::model()->find(array('order' => 'id DESC'));
+        $startQuestion = 1;
+        if (!empty($questionModel)) {
+            $startQuestion = $startQuestion + $questionModel->id;
+        }
 
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;

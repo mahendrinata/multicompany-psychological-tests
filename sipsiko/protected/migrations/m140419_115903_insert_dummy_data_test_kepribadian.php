@@ -1040,16 +1040,16 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
         );
         
         $testModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($testModel))
-            $startTest = 1;
-        else
-            $startTest = $testModel->id + 1;
+        $startTest = 1;
+        if (!empty($testModel)) {
+            $startTest = $startTest + $testModel->id;
+        }
 
-        $qustionModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($questionModel))
-            $startQuestion = 1;
-        else
-            $startQuestion = $questionModel->id + 1;
+        $questionModel = Question::model()->find(array('order' => 'id DESC'));
+        $startQuestion = 1;
+        if (!empty($questionModel)) {
+            $startQuestion = $startQuestion + $questionModel->id;
+        }
 
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
