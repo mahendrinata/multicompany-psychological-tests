@@ -52,7 +52,7 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
             ),
             array(
                 'slug' => $plegmatisModel->id,
-                'name' => 'Plesgmatis',
+                'name' => 'Plegmatis',
                 'description' => '<p>Kekuatan :<ul><li>Mudah bergaul, santai, tenang dan teguh.</li><li>Sabar, seimbang, dan pendengar yang baik.</li><li>Tidak banyak bicara, tetapi cenderung bijaksana.</li><li>Simpatik dan baik hati (sering menyembunyikan emosi).</li><li>Kuat di bidang administrasi, dan cenderung ingin segalanya terorganisasi.</li><li>Penengah masalah yg baik.</li><li>Cenderung berusaha menemukan cara termudah.</li><li>Baik di bawah tekanan.</li><li>Menyenangkan dan tidak suka menyinggung perasaan.</li><li>Rasa humor yg tajam.</li><li>Senang melihat dan mengawasi.</li><li>Berbelaskasihan dan peduli.</li><li>Mudah diajak rukun dan damai.</li></ul></p><p>Kelemahan :<ul><li>Kurang antusias, terutama terhadap perubahan/ kegiatan baru.</li><li>Takut dan khawatir.</li><li>Menghindari konflik dan tanggung jawab.</li><li>Keras kepala, sulit kompromi (karena merasa benar).</li><li>Terlalu pemalu dan pendiam.</li><li>Humor kering dan mengejek (Sarkatis).</li><li>Kurang berorientasi pada tujuan.</li><li>Sulit bergerak dan kurang memotivasi diri.</li><li>Lebih suka sebagai penonton daripada terlibat.</li><li>Tidak senang didesak-desak.</li><li>Menunda-nunda / menggantungkan masalah.</li></ul></p>',
                 'user_profile_id' => 2,
                 'combinations' => array(
