@@ -254,5 +254,16 @@ class Test extends AppActiveRecord {
         
         return true;
     }
+    
+    public function deleteWithQuestionAndAnswer($test_id){
+        $testModel = $this->findByPk($test_id);
+        foreach ($testModel->questions as $question){
+            foreach ($question->answers as $answer){
+                $answer->delete();
+            }
+            $question->delete();
+        }
+        return $testModel->delete();
+    }
 
 }

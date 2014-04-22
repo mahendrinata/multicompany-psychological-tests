@@ -3,18 +3,10 @@
 class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration {
 
     public function up() {
-        $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
-        $typeModel = Type::model()->findBySlug($slug);
-
-        $kananSlug = Variable::model()->slugify('Otak Kanan');
-        $kananModel = Variable::model()->findBySlug($slug . '-' . $kananSlug);
-
-        $kiriSlug = Variable::model()->slugify('Otak Kiri');
-        $kiriModel = Variable::model()->findBySlug($slug . '-' . $kiriSlug);
         $row = array(
             /**
-             * $kananModel->id - Otak Kanan
-             * $kiriModel->id - Otak Kiri
+             * 47 - Otak Kanan
+             * 48 - Otak Kiri
              */
             array(
                 'slug' => Test::model()->slugify('Otak Kanan Otak Kiri'),
@@ -25,7 +17,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
-                'type_id' => $typeModel->id,
+                'type_id' => 6,
                 'questions' => array(
                     array(
                         'description' => 'Jika kamu duduk sebangku berdua, kamu pilih duduk di sisi kiri atau kanan',
@@ -33,12 +25,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Kanan',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Kiri',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -48,12 +40,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Subjektif',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Objectif',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -63,12 +55,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -78,12 +70,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -93,12 +85,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -108,12 +100,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Meniru gerakan instruktur dan merasakan "musik" yang mengiringi',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Mempelajari tahapan tiap-tiap langkah sambil berkata-kata pada diri sendiri selama melakukannya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -123,12 +115,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Memindahkan',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Membiarkan',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -138,12 +130,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -153,12 +145,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Geometri',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Aljabar',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -168,12 +160,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Wajah',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Nama',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -183,12 +175,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Melalui gambar',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Melalui tulisan',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -198,12 +190,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Nada bicara',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Apa yang dikatakan',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -213,12 +205,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Jarang',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -228,12 +220,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Berantakan dengan barang-barang yang mungkin kamu perlukan',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Rapi teratur',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -243,12 +235,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Menangkap ide suatu paragraf',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Menangkap detail suatu paragraf',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -258,12 +250,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Berbaring',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Duduk',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -273,12 +265,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Berbicara tentang atau melakukan hal-hal yang lucu',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => '. Berbicara tentang atau melakukan hal-hal yang masuk akal',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -288,12 +280,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Kamu dapat menjawab tapi tidak tahu bagaimana cara menjelaskannya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Kamu dapat menjelaskan dengan rinci bagaimana kamu mendapatkan jawabannya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -303,12 +295,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Jarang sekali',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Hampir selalu',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -318,12 +310,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -333,12 +325,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -348,12 +340,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -363,12 +355,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -378,12 +370,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -393,12 +385,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -408,12 +400,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                         )
                     ),
@@ -423,12 +415,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                         )
                     ),
@@ -438,12 +430,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -453,12 +445,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                         )
                     ),
@@ -468,12 +460,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -483,12 +475,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                         )
                     ),
@@ -498,12 +490,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -513,12 +505,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -528,12 +520,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -543,12 +535,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                         )
                     ),
@@ -558,12 +550,12 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                             array(
                                 'description' => 'Ya',
                                 'value' => 1,
-                                'variable_id' => $kananModel->id
+                                'variable_id' => 47
                             ),
                             array(
                                 'description' => 'Tidak',
                                 'value' => 1,
-                                'variable_id' => $kiriModel->id
+                                'variable_id' => 48
                             ),
                         )
                     ),
@@ -571,18 +563,6 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
             )
         );
         
-        $testModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($testModel))
-            $startTest = 1;
-        else
-            $startTest = $testModel->id + 1;
-
-        $qustionModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($questionModel))
-            $startQuestion = 1;
-        else
-            $startQuestion = $questionModel->id + 1;
-
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
             $column['created_at'] = date('Y-m-d H:i:s');
@@ -592,7 +572,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
             unset($column['questions']);
             $this->insert('tests', $column);
             foreach ($questions as $id => $question) {
-                $question['test_id'] = $startTest;
+                $question['test_id'] = 2;
                 $question['status'] = Status::ACTIVE;
                 $question['created_at'] = date('Y-m-d H:i:s');
                 $question['updated_at'] = date('Y-m-d H:i:s');
@@ -601,7 +581,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 unset($question['answers']);
                 $this->insert('questions', $question);
                 foreach ($answers as $answer) {
-                    $answer['question_id'] = $id + $startQuestion;
+                    $answer['question_id'] = $id + 71;
                     $answer['status'] = Status::ACTIVE;
                     $answer['created_at'] = date('Y-m-d H:i:s');
                     $answer['updated_at'] = date('Y-m-d H:i:s');
@@ -612,9 +592,9 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Otak Kanan Otak Kiri');
-        $testModel = Test::model()->findBySlug($testSlug);
-        Test::model()->deleteWithQuestionAndAnswer($testModel->id);
+        $this->truncateTable('tests');
+        $this->truncateTable('questions');
+        $this->truncateTable('answers');
     }
 
 }

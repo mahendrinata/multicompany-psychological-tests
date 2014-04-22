@@ -3,33 +3,22 @@
 class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigration
 {
 	public function up() {
-        $slug = Type::model()->slugify('Modalitas Belajar');
-        $typeModel = Type::model()->findBySlug($slug);
-
-        $visualSlug = Variable::model()->slugify('Visual');
-        $visualModel = Variable::model()->findBySlug($slug . '-' . $visualSlug);
-
-        $auditorySlug = Variable::model()->slugify('Auditory');
-        $auditoryModel = Variable::model()->findBySlug($slug . '-' . $auditorySlug);
-
-        $kinestheticSlug = Variable::model()->slugify('Kinesthetic');
-        $kinestheticModel = Variable::model()->findBySlug($slug . '-' . $kinestheticSlug);
         $row = array(
             /**
-             * $visualModel->id - Visual
-             * $auditoryModel->id - Auditory
-             * $kinestheticModel->id - Kinesthetic
+             * 44 - Visual
+             * 45 - Auditory
+             * 46 - Kinesthetic
              */
             array(
                 'slug' => Test::model()->slugify('Modalitas Belajar Paket 3'),
-                'name' => 'Modalitas Belajar',
+                'name' => 'Modalitas Belajar Paket 3',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'is_expert' => true,
-                'is_public' => false,
+                'is_public' => true,
                 'show_result' => true,
                 'combination_variable' => 1,
                 'user_profile_id' => 2,
-                'type_id' => $typeModel->id,
+                'type_id' => 5,
                 'questions' => array(
                     array(
                         'description' => 'Kamu lebih baik disuruh menggambarkan peta daripada menerangkan arah jalan kepada seseorang',
@@ -37,12 +26,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -52,12 +41,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -67,12 +56,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -82,12 +71,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -97,12 +86,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -112,12 +101,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -127,12 +116,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -142,12 +131,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -157,12 +146,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -172,12 +161,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -187,12 +176,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -202,12 +191,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -217,12 +206,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -232,12 +221,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -247,12 +236,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -262,12 +251,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -277,12 +266,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -292,12 +281,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -307,12 +296,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -322,12 +311,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -337,12 +326,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -352,12 +341,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $visualModel->id
+                                'variable_id' => 44
                             ),
                         )
                     ),
@@ -367,12 +356,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -382,12 +371,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -397,12 +386,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $auditoryModel->id
+                                'variable_id' => 45
                             ),
                         )
                     ),
@@ -412,12 +401,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -427,12 +416,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -442,12 +431,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -457,12 +446,12 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
@@ -472,31 +461,18 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                             array(
                                 'description' => 'Benar',
                                 'value' => 1,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                             array(
                                 'description' => 'Salah',
                                 'value' => 0,
-                                'variable_id' => $kinestheticModel->id
+                                'variable_id' => 46
                             ),
                         )
                     ),
                 )
             )
         );
-        
-        $testModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($testModel))
-            $startTest = 1;
-        else
-            $startTest = $testModel->id + 1;
-
-        $qustionModel = Test::model()->find(array('order' => 'id DESC'));
-        if (empty($questionModel))
-            $startQuestion = 1;
-        else
-            $startQuestion = $questionModel->id + 1;
-
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
             $column['created_at'] = date('Y-m-d H:i:s');
@@ -506,7 +482,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
             unset($column['questions']);
             $this->insert('tests', $column);
             foreach ($questions as $id => $question) {
-                $question['test_id'] = $startTest;
+                $question['test_id'] = 6;
                 $question['status'] = Status::ACTIVE;
                 $question['created_at'] = date('Y-m-d H:i:s');
                 $question['updated_at'] = date('Y-m-d H:i:s');
@@ -515,7 +491,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                 unset($question['answers']);
                 $this->insert('questions', $question);
                 foreach ($answers as $answer) {
-                    $answer['question_id'] = $id + $startQuestion;
+                    $answer['question_id'] = $id + 187;
                     $answer['status'] = Status::ACTIVE;
                     $answer['created_at'] = date('Y-m-d H:i:s');
                     $answer['updated_at'] = date('Y-m-d H:i:s');
@@ -526,8 +502,8 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Modalitas Belajar Paket 3');
-        $testModel = Test::model()->findBySlug($testSlug);
-        Test::model()->deleteWithQuestionAndAnswer($testModel->id);
+        $this->truncateTable('tests');
+        $this->truncateTable('questions');
+        $this->truncateTable('answers');
     }
 }

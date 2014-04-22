@@ -108,5 +108,13 @@ class VariableDetail extends AppActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+    
+    public function deleteWithCombination($variable_detail_id){
+        $variableDetailModel = $this->findByPk($variable_detail_id);
+        foreach ($variableDetailModel->combinations as $combination){
+            $combination->delete();
+        }
+        return $variableDetailModel->delete();
+    }
 
 }
