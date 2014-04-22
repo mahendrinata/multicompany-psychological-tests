@@ -7,17 +7,18 @@ class Conclusion {
     const PAIR_ORDERER = 'PAIR_ORDERER';
     const DISC = 'DISC';
 
-    public static function get_list() {
+    public static function getList() {
         return array(
             self::SINGLE,
             self::PAIR,
+            self::PAIR_ORDERER,
             self::DISC,
         );
     }
 
-    public static function get_map() {
+    public static function getMap() {
         $map = array();
-        foreach (self::get_list() as $status) {
+        foreach (self::getList() as $status) {
             $map[$status] = $status;
         }
         return $map;

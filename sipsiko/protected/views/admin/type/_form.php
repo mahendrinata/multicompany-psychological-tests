@@ -52,6 +52,22 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <div class="form-group">
+    <?php echo $form->label($model, 'template', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'template', Template::getMap(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Test Template')); ?>
+        <?php echo $form->error($model, 'template', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <?php echo $form->label($model, 'conclusion', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'conclusion', Conclusion::getMap(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Conclusion')); ?>
+        <?php echo $form->error($model, 'conclusion', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<div class="form-group">
     <label class="col-lg-2 col-sm-2 control-label"></label>
     <div class="col-lg-9 col-xs-12">
         <?php echo CHtml::htmlButton('<i class="fa fa-check"></i> ' . ($model->isNewRecord ? 'Create' : 'Save'), array('class' => 'btn btn-success', 'type' => 'submit')); ?>
