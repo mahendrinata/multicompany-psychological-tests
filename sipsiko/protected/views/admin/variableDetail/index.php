@@ -68,8 +68,8 @@ $('.search-form form').submit(function(){
                     'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
-                    'name' => 'slug',
-                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control')),
+                    'name' => 'shortness',
+                    'filter' => CHtml::activeTelField($model, 'shortness', array('id' => false, 'class' => 'form-control')),
                 ),
                 array(
                     'name' => 'name',

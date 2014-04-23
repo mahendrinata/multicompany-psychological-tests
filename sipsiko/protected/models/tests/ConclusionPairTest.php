@@ -30,20 +30,18 @@ class ConclusionPairTest extends ConclusionPsychologyTest {
         $countVariable = count($slugs) / self::PAIR_COUNT;
         $variables = array();
         for ($i = 0; $i < $countVariable; $i++) {
-            $offset = ($i == 0) ? 0 : ($i * self::PAIR_COUNT) - 1;
+            $offset = ($i == 0) ? 0 : ($i * self::PAIR_COUNT);
             $variables[$i] = array_slice($slugs, $offset, 2, true);
         }
+        $keys = array();
         foreach ($variables as $variable){
-            $compare = array();
-            foreach ($variable as $key => $val){
-                
-            }
+                $key = array_keys($variable, max($variable));
+                $keys[] = $key[0];
         }
-        print_r($variables);die;
         return $this->_saveResult(array(
                 'slug' => self::CONCLUSION,
                 'description' => $this->__getDescription(self::CONCLUSION),
-                'variable_detail_slug' => implode('-', $slugs)
+                'variable_detail_slug' => implode('-', $keys)
         ));
     }
 

@@ -28,7 +28,7 @@ class Result extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_test_id, variable_detail_slug', 'numerical', 'integerOnly' => true),
+            array('user_test_id', 'numerical', 'integerOnly' => true),
             array('slug', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().

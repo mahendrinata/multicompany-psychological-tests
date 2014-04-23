@@ -51,7 +51,7 @@ class ModelHelper {
         $list = array();
         foreach ($results as $result) {
             foreach ($result->variable_details as $variable_detail) {
-                $list[$variable_detail->slug] = $variable_detail->name;
+                $list[$variable_detail->slug] = $variable_detail->shortness;
             }
         }
         foreach ($list as $key => $val) {

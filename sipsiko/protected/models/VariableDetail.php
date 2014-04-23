@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'variable_details':
  * @property integer $id
  * @property string $slug
+ * @property string $shortness
  * @property string $name
  * @property string $description
  * @property string $status
@@ -29,14 +30,14 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, description', 'required'),
+            array('slug, shortness, name, description', 'required'),
             array('slug', 'unique'),
             array('user_profile_id', 'numerical', 'integerOnly' => true),
             array('status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, shortness, name, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -61,6 +62,7 @@ class VariableDetail extends AppActiveRecord {
         return array(
             'id' => 'Id',
             'slug' => 'Slug',
+            'shortness' => 'Shortness',
             'name' => 'Name',
             'description' => 'Description',
             'status' => 'Status',
@@ -90,6 +92,8 @@ class VariableDetail extends AppActiveRecord {
         $criteria->compare('id', $this->id);
 
         $criteria->compare('slug', $this->slug, true);
+
+        $criteria->compare('shortness', $this->shortness, true);
 
         $criteria->compare('name', $this->name, true);
         
