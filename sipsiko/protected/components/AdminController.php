@@ -67,4 +67,19 @@ class AdminController extends Controller {
             'accessControl',
         );
     }
+
+    public function validateGetRequest($ids = 'id') {
+        if (is_array($ids)) {
+            foreach ($ids as $id) {
+                if (!isset($_GET[$id]) || $_GET[$id] == '') {
+                    throw new CHttpException(404, 'The requested page does not exist.');
+                }
+            }
+        } else {
+            if (!isset($_GET[$ids]) || $_GET[$ids] == '') {
+                throw new CHttpException(404, 'The requested page does not exist.');
+            }
+        }
+    }
+
 }

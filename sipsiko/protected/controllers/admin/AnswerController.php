@@ -26,6 +26,7 @@ class AnswerController extends AdminController {
 
     public function actionCreate() {
         if (Yii::app()->request->isAjaxRequest) {
+            $this->validateGetRequest(array('id', 'test_id'));
             $id = $_GET['id'] + 1;
             $test = Test::model()->findByPk($_GET['test_id']);
             $this->renderPartial('create', array('id' => $id, 'test' => $test));
@@ -37,10 +38,10 @@ class AnswerController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isAjaxRequest && Yii::app()->request->isPostRequest) {
             $model = $this->loadModel();
-            if(!empty($model->test_answers)){
+            if (!empty($model->test_answers)) {
                 $model->status = Status::VOID;
                 $model->save();
-            }else{
+            } else {
                 $model->delete();
             }
         } else

@@ -63,7 +63,7 @@ $('.search-form form').submit(function(){
 
     <div class="table-options clearfix">
         <div class="btn-group btn-group-sm pull-right">
-            <?php echo CHtml::link('<i class="fa fa-download"></i> Export Excel', array('admin/usertest/membertestexcelreport', 'id' => $testModel->id), array('class' => 'btn btn-success')) ?>
+            <?php echo CHtml::link('<i class="fa fa-download"></i> Export Excel', array('admin/usertest/membertest', 'id' => $testModel->id, 'excel' => true), array('class' => 'btn btn-success')) ?>
         </div>
     </div>
     <div class="table-responsive">

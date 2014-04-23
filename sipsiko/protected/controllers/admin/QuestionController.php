@@ -29,6 +29,7 @@ class QuestionController extends AdminController {
     }
 
     public function actionCreate() {
+        $this->validateGetRequest();
         $this->data['test'] = Test::model()->findBySlug($_GET['id']);
 
         $questionModel = new Question;

@@ -9,7 +9,7 @@ class UserTestController extends AdminController {
                 'roles' => array(RolePrivilege::EXPERT),
             ),
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'membertestexcelreport', 'result', 'settestvariable'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result', 'settestvariable'),
                 'roles' => array(RolePrivilege::COMPANY),
             ),
             array('allow',
@@ -344,12 +344,16 @@ class UserTestController extends AdminController {
         $model->status = Status::FINISH;
         $model->company_id = $this->profiles[RolePrivilege::COMPANY];
 
+        if (isset($_GET['excel']) && $_GET['excel'] == true)
+            UserTestExcelReport::model()->getAllMemberResult($model);
+
         $this->render('result', array(
             'model' => $model,
         ));
     }
 
     public function actionGenerate() {
+        $this->validateGetRequest();
         $testModel = Test::model()->findByAttributes(array(
             'id' => $_GET['id'],
             'status' => Status::ACTIVE));
@@ -371,6 +375,7 @@ class UserTestController extends AdminController {
     }
 
     public function actionMemberTest() {
+        $this->validateGetRequest();
         UserTest::model()->setExpired();
 
         $model = new UserTest;
@@ -402,31 +407,14 @@ class UserTestController extends AdminController {
         $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
         $userTestModel->test_id = $testModel->id;
 
+        if (isset($_GET['excel']) && $_GET['excel'] == true)
+            UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
+        
         $this->render('member_test', array(
             'model' => $model,
             'userTestModel' => $userTestModel,
             'testModel' => $testModel
         ));
-    }
-
-    public function actionMemberTestExcelReport() {
-        $testModel = Test::model()->findByAttributes(array(
-            'id' => $_GET['id'],
-            'user_profile_id' => $this->profiles[RolePrivilege::COMPANY]));
-
-        if (!empty($testModel)) {
-            $userTestModel = new UserTest('search');
-            $userTestModel->unsetAttributes();
-            if (isset($_GET['UserTest'])) {
-                $userTestModel->attributes = $_GET['UserTest'];
-            }
-
-            $userTestModel->company_id = $this->profiles[RolePrivilege::COMPANY];
-            $userTestModel->test_id = $testModel->id;
-            UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
-        } else {
-            throw new CHttpException(404, 'The requested page does not exist.');
-        }
     }
 
     public function actionValidation() {
@@ -532,8 +520,9 @@ class UserTestController extends AdminController {
     }
 
     public function actionPublicTest() {
+        $this->validateGetRequest();
         UserTest::model()->setExpired();
-
+        
         $testModel = Test::model()->findByPk($_GET['id']);
 
         $userTestModel = new UserTest('search');
@@ -545,6 +534,9 @@ class UserTestController extends AdminController {
         $userTestModel->company_id = $this->profiles[RolePrivilege::EXPERT];
         $userTestModel->test_id = $testModel->id;
 
+        if (isset($_GET['excel']) && $_GET['excel'] == true)
+            UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
+        
         $this->render('public_test', array(
             'userTestModel' => $userTestModel,
             'testModel' => $testModel

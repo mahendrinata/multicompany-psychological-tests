@@ -18,6 +18,11 @@ $('.search-form form').submit(function(){
     <div class="block-title">
         <h2><strong>Member Result Tests</strong> Management</h2>
     </div>
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-right">
+            <?php echo CHtml::link('<i class="fa fa-download"></i> Export Excel', array('admin/usertest/result', 'excel' => true), array('class' => 'btn btn-success')) ?>
+        </div>
+    </div>
     <div class="table-responsive">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
