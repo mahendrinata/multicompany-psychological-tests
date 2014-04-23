@@ -239,14 +239,40 @@ class UserProfileController extends AdminController {
     }
 
     public function actionChange() {
-        $model = User::model()->findByPk(Yii::app()->user->id);
+        $expert = UserProfile::model()->findByPk($this->profiles[RolePrivilege::EXPERT]);
+        $this->performAjaxValidation($expert, 'expert-profile-form');
 
-        if (isset($_POST['User'])) {
-            
+        $company = UserProfile::model()->findByPk($this->profiles[RolePrivilege::COMPANY]);
+        $this->performAjaxValidation($company, 'company-profile-form');
+
+        $member = UserProfile::model()->findByPk($this->profiles[RolePrivilege::MEMBER]);
+        $this->performAjaxValidation($member, 'member-profile-form');
+
+        if (isset($_POST['UserProfile'])) {
+            $model = UserProfile::model()->findByPk($_POST['UserProfile']['id']);
+            switch ($model->role->slug) {
+                case RolePrivilege::EXPERT:
+                    $expert->attributes = $_POST['UserProfile'];
+                    if ($expert->save())
+                        $this->refresh();
+                    break;
+                case RolePrivilege::COMPANY:
+                    $company->attributes = $_POST['UserProfile'];
+                    if ($company->save())
+                        $this->refresh();
+                    break;
+                case RolePrivilege::MEMBER:
+                    $member->attributes = $_POST['UserProfile'];
+                    if ($member->save())
+                        $this->refresh();
+                    break;
+            }
         }
 
         $this->render('change', array(
-            'model' => $model
+            'expert' => $expert,
+            'company' => $company,
+            'member' => $member
         ));
     }
 
