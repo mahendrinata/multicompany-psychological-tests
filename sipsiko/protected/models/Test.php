@@ -244,8 +244,8 @@ class Test extends AppActiveRecord {
 
         $this->updateAll(
             array('status' => Status::INACTIVE), 
-            'end_date IS NOT NULL AND end_date < :endDate AND status = :status', 
-            array(':endDate' => date('Y-m-d'), ':status' => Status::ACTIVE));
+            'end_date IS NOT NULL AND end_date < :endDate AND (status = :active OR status = :draf)', 
+            array(':endDate' => date('Y-m-d'), ':active' => Status::ACTIVE, ':draf' => Status::DRAFT));
         
         $this->updateAll(
             array('status' => Status::DRAFT), 
