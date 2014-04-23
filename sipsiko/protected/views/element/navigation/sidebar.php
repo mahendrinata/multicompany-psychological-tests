@@ -24,14 +24,14 @@
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::COMPANY)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Company</span></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member of Company</a>', array('admin/usertest/index')); ?></li>
-                    <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Tests of Company</a>', array('admin/test/company')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Test Results</a>', array('admin/usertest/result')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Company Member</a>', array('admin/usertest/index')); ?></li>
+                    <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Company Tests</a>', array('admin/test/company')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Member Test Results</a>', array('admin/usertest/result')); ?></li>
                 <?php } ?>
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::EXPERT)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Expert</span></li>
-                    <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Management Tests</a>', array('admin/test')); ?></li>
+                    <li><?php echo CHtml::link('<i class="hi hi-list sidebar-nav-icon"></i> Tests Management</a>', array('admin/test')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Test Type</a>', array('admin/type')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Variable</a>', array('admin/variable')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Variable Detail</a>', array('admin/variabledetail')); ?></li>
@@ -40,9 +40,9 @@
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::MEMBER)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Member</span></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests</a>', array('admin/usertest/member')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Tests Schedule</a>', array('admin/usertest/member')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Tests Result</a>', array('admin/usertest/memberresult')); ?></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Generate Public Tests</a>', array('admin/test/public')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-certificate sidebar-nav-icon"></i> Public Tests</a>', array('admin/test/public')); ?></li>
                 <?php } ?>
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::ADMIN)) { ?>

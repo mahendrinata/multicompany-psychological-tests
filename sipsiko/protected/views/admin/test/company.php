@@ -20,14 +20,14 @@ $('.search-form form').submit(function(){
 
 <div class="block">
     <div class="block-title">
-        <h2><strong>Tests of Company</strong> Management</h2>
+        <h2><strong>Company Tests</strong> Management</h2>
     </div>
     <div class="table-options clearfix">
         <div class="btn-group btn-group-sm pull-right">
             <button class="btn btn-primary search-button">
                 <i class="icon-search"></i> Advanced Search
             </button>
-            <?php echo CHtml::link('<i class="icon-plus"></i> New Test of Company', array('admin/test/active'), array('class' => 'btn btn-success')); ?>
+            <?php echo CHtml::link('<i class="icon-plus"></i> New Company Test', array('admin/test/active'), array('class' => 'btn btn-success')); ?>
         </div>
     </div>
     <div class="search-form" style="display:none">

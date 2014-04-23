@@ -125,6 +125,8 @@ $this->breadcrumbs = array(
                     'value' => '$data->answer->variable->name',
                     'header' => 'Variable'
                 ),
+                'created_at',
+                'updated_at',
             ),
         ));
         ?>
