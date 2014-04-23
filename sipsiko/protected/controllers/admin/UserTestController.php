@@ -35,7 +35,7 @@ class UserTestController extends AdminController {
         }
         return $this->_model;
     }
-    
+
     public function loadModelMemberExpert($void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id']))
@@ -433,10 +433,11 @@ class UserTestController extends AdminController {
         $userTestModel = $this->loadModelExpertActive(true);
 
         if (isset($_POST['UserTest'])) {
-            $userTestModel->status = Status::FINISH;
-            if ($userTestModel->save())
-                TestVariable::model()->setTestVariable($_POST['UserTest']['id']);
-            $this->redirect(array('admin/test/result', 'id' => $userTestModel->test_id));
+            if (TestVariable::model()->setTestVariable($_POST['UserTest']['id'])) {
+                $userTestModel->status = Status::FINISH;
+                if ($userTestModel->save())
+                    $this->redirect(array('admin/test/result', 'id' => $userTestModel->test_id));
+            }
         }
 
         $this->render('validation', array(
