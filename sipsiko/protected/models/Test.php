@@ -43,7 +43,7 @@ class Test extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, is_public, combination_variable', 'required'),
+            array('slug, name, is_public, combination_variable, type_id, status, show_result', 'required'),
             array('slug', 'unique'),
             array('duration, is_public, show_result, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),

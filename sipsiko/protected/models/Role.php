@@ -28,7 +28,7 @@ class Role extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name', 'required'),
+            array('slug, name, status', 'required'),
             array('slug', 'unique'),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),

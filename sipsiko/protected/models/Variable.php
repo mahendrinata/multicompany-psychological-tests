@@ -32,7 +32,8 @@ class Variable extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name', 'required'),
+            array('slug, name, status, type_id', 'required'),
+            array('slug', 'unique'),
             array('type_id, user_profile_id', 'numerical', 'integerOnly' => true),
             array('slug, name, status', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),

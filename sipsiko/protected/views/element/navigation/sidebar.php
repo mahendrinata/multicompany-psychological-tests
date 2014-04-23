@@ -47,7 +47,7 @@
 
                 <?php if (Yii::app()->user->checkAccess(RolePrivilege::ADMIN)) { ?>
                     <li class="sidebar-header"><span class="sidebar-header-title">Master Data</span></li>
-                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Roles Management</a>', array('admin/type')); ?></li>
+                    <li><?php echo CHtml::link('<i class="gi gi-charts sidebar-nav-icon"></i> Roles Management</a>', array('admin/role')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Users Management</a>', array('admin/user')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Member Management</a>', array('admin/userprofile/member')); ?></li>
                     <li><?php echo CHtml::link('<i class="gi gi-user sidebar-nav-icon"></i> Company Management</a>', array('admin/userprofile/company')); ?></li>
