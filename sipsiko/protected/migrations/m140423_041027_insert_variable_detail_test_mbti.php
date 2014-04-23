@@ -262,17 +262,17 @@ class m140423_041027_insert_variable_detail_test_mbti extends CDbMigration {
             )
         ),
         array(
-            'slug' => implode('-', array($introvertModel->id, $introvertModel->id, $thingkingModel->id, $perceivingModel->id)),
+            'slug' => implode('-', array($extrovertModel->id, $intuitiveModel->id, $thingkingModel->id, $perceivingModel->id)),
             'shortness' => 'ENTP',
             'name' => 'Inovatif – Kreatif',
             'description' => '<ul><li>Gesit, kreatif, inovatif, cerdik, logis, baik dalam banyak hal.</li><li>Banyak bicara dan punya kemampuan debat yang baik. Bisa berargumentasi untuk senang-senang saja tanpa merasa bersalah.</li><li>Fleksibel. Punya banyak cara untuk memecahkan masalah dan tantangan.</li><li>Kurang konsisten. Cenderung untuk melakukan hal baru yang menarik hati setelah melakukan sesuatu yang lain.</li><li>Punya keinginan kuat untuk mengembangkan diri.</li></ul><h5>Saran Pengembangan</h5><ul><li>Cobalah untuk win-win solution. Jangan ingin menang sendiri</li><li>Belajarlah untuk disiplin dan konsisten.</li><li>Hindari perdebatan tidak penting.</li><li>Belajarlah untuk sedikit waspada. Seimbangkan cara pandang Anda agar tidak terlalu optimis dan mengambil resiko yang tidak realistis.</li><li>Belajarlah untuk memberi perhatian pada perasaan orang lain.</li></ul><h5>Saran Profesi</h5><p>Pengacara, Psikolog, Konsultan, Ilmuwan, Aktor,Marketing, Programmer, Fotografer</p><h5>Pasangan/Partner Alami</h5><p>INFJ atau INTJ</p>',
             'user_profile_id' => 2,
             'combinations' => array(
                 array(
-                    'variable_id' => $introvertModel->id,
+                    'variable_id' => $extrovertModel->id,
                 ),
                 array(
-                    'variable_id' => $introvertModel->id,
+                    'variable_id' => $intuitiveModel->id,
                 ),
                 array(
                     'variable_id' => $thingkingModel->id,
