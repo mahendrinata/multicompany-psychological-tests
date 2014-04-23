@@ -19,7 +19,7 @@ class UserTestExcelReport extends ExcelReport {
             'Status',
         );
         $variableHead = CHtml::listData(Variable::model()->findAllByAttributes(array('type_id' => $testModel->type_id)), 'id', 'name');
-        $this->setCellHead(CMap::mergeArray(CMap::mergeArray($mainHead, $variableHead), array('Kesimpulan')));
+        $this->setCellHead(array_merge(array_merge($mainHead, $variableHead), array('Total', 'Kesimpulan')));
 
         $i = 0;
         foreach ($userTestModel as $userTest) {
@@ -37,19 +37,18 @@ class UserTestExcelReport extends ExcelReport {
             $testVariables = CHtml::listData($userTest->test_variables, 'variable_id', 'value');
             $variableBody = array();
             foreach ($variableHead as $key => $variable) {
-                $variableBody[] = (isset($testVariables[$key])) ? $testVariables[$key] : null;
+                $variableBody[] = (isset($testVariables[$key])) ? $testVariables[$key] : 0;
             }
-            if (!empty($userTest->variable_detail_slug)) {
-                $conclusions = explode('-', $userTest->variable_detail_slug);
-                $conclusion_array = array();
-                foreach ($conclusions as $conclusion) {
-                    if (!empty($conclusion)) {
-                        $conclusion_array[] = $variableHead[$conclusion];
-                    }
+            $total = array_sum($variableBody);
+            $results = $userTest->results;
+            if (!empty($results)) {
+                $shortness = array();
+                foreach ($results as $result) {
+                    $shortness[] = $result->variable_details[0]->shortness;
                 }
-                $this->setCellBody(CMap::mergeArray(CMap::mergeArray($mainBody, $variableBody), array(implode(' - ', $conclusion_array))));
+                $this->setCellBody(array_merge(array_merge($mainBody, $variableBody), array($total, implode(' - ', $shortness))));
             } else {
-                $this->setCellBody(CMap::mergeArray($mainBody, $variableBody));
+                $this->setCellBody(array_merge($mainBody, $variableBody));
             }
         }
 
