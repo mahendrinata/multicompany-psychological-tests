@@ -20,14 +20,14 @@ $this->breadcrumbs = array(
                 <div class="col-xs-3">
                     <span>1. Profile</span>
                 </div>
-                <div class="col-xs-3">
-                    <span>2. Member</span>
+                <div class="col-xs-3 active">
+                    <span>2. Expert</span>
                 </div>
                 <div class="col-xs-3">
                     <span>3. Company</span>
                 </div>
-                <div class="col-xs-3 active">
-                    <span>4. Expert</span>
+                <div class="col-xs-3">
+                    <span>4. Member</span>
                 </div>
             </div>
         </div>
