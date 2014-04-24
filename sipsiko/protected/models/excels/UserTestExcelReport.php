@@ -67,8 +67,8 @@ class UserTestExcelReport extends ExcelReport {
             'Tanggal Akhir',
             'Status',
             'Variabel',
-            'Jumlah',
-            'Total',
+            'Score',
+            'Total Score',
             'Kesimpulan'
         );
         $this->setCellHead($mainHead);
@@ -102,7 +102,7 @@ class UserTestExcelReport extends ExcelReport {
                 if ($j == 0) {
                     $this->setCellBody(array_merge($mainBody, array($variable, $count, array_sum($testVariables), implode(' - ', $shortness))));
                 } else {
-                    $this->setCellBody(array_merge($this->_createNullValue(count($mainBody)), array($variable, $count)));
+                    $this->setCellBody(array_merge($this->_createNullValue(count($mainBody)), array($variable, $count, null, null)));
                 }
                 $j++;
             }
