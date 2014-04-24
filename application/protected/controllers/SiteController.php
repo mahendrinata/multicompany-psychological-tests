@@ -25,6 +25,7 @@ class SiteController extends GuestController {
             ),
         );
     }
+
     public function actionIndex() {
         $this->render('index', $this->data);
     }

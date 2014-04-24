@@ -562,7 +562,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 )
             )
         );
-        
+
         foreach ($row as $column) {
             $column['status'] = Status::ACTIVE;
             $column['created_at'] = date('Y-m-d H:i:s');

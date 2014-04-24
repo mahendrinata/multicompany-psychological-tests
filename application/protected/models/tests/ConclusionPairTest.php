@@ -34,9 +34,9 @@ class ConclusionPairTest extends ConclusionPsychologyTest {
             $variables[$i] = array_slice($slugs, $offset, 2, true);
         }
         $keys = array();
-        foreach ($variables as $variable){
-                $key = array_keys($variable, max($variable));
-                $keys[] = $key[0];
+        foreach ($variables as $variable) {
+            $key = array_keys($variable, max($variable));
+            $keys[] = $key[0];
         }
         return $this->_saveResult(array(
                 'slug' => self::CONCLUSION,

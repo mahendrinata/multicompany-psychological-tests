@@ -238,27 +238,21 @@ class Test extends AppActiveRecord {
 
     public function setExpired() {
         $this->updateAll(
-            array('status' => Status::ACTIVE), 
-            '((start_date IS NOT NULL AND start_date >= :startDate) OR (end_date IS NOT NULL AND end_date >= :endDate)) AND status = :status', 
-            array(':startDate' => date('Y-m-d'), ':endDate' => date('Y-m-d'),':status' => Status::DRAFT));
+            array('status' => Status::ACTIVE), '((start_date IS NOT NULL AND start_date >= :startDate) OR (end_date IS NOT NULL AND end_date >= :endDate)) AND status = :status', array(':startDate' => date('Y-m-d'), ':endDate' => date('Y-m-d'), ':status' => Status::DRAFT));
 
         $this->updateAll(
-            array('status' => Status::INACTIVE), 
-            'end_date IS NOT NULL AND end_date < :endDate AND (status = :active OR status = :draf)', 
-            array(':endDate' => date('Y-m-d'), ':active' => Status::ACTIVE, ':draf' => Status::DRAFT));
-        
+            array('status' => Status::INACTIVE), 'end_date IS NOT NULL AND end_date < :endDate AND (status = :active OR status = :draf)', array(':endDate' => date('Y-m-d'), ':active' => Status::ACTIVE, ':draf' => Status::DRAFT));
+
         $this->updateAll(
-            array('status' => Status::DRAFT), 
-            'start_date IS NOT NULL AND start_date > :startDate AND status != :status', 
-            array(':startDate' => date('Y-m-d'), ':status' => Status::DRAFT));
-        
+            array('status' => Status::DRAFT), 'start_date IS NOT NULL AND start_date > :startDate AND status != :status', array(':startDate' => date('Y-m-d'), ':status' => Status::DRAFT));
+
         return true;
     }
-    
-    public function deleteWithQuestionAndAnswer($test_id){
+
+    public function deleteWithQuestionAndAnswer($test_id) {
         $testModel = $this->findByPk($test_id);
-        foreach ($testModel->questions as $question){
-            foreach ($question->answers as $answer){
+        foreach ($testModel->questions as $question) {
+            foreach ($question->answers as $answer) {
                 $answer->delete();
             }
             $question->delete();

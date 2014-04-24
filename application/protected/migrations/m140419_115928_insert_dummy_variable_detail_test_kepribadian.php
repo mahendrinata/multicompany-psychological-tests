@@ -1,8 +1,8 @@
 <?php
 
-class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMigration
-{
-	public function up() {
+class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMigration {
+
+    public function up() {
         $slug = Type::model()->slugify('Kepribadian');
 
         $sanguinisSlug = Variable::model()->slugify('Sanguinis');
@@ -72,7 +72,7 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
         if (!empty($variableDetailModel)) {
             $startVariableDetail = $startVariableDetail + $variableDetailModel->id;
         }
-        
+
         foreach ($row as $key => $column) {
             $column['status'] = Status::ACTIVE;
             $column['created_at'] = date('Y-m-d H:i:s');
@@ -91,5 +91,7 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
     }
 
     public function down() {
+        
     }
+
 }

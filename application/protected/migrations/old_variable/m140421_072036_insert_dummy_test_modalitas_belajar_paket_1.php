@@ -1,8 +1,8 @@
 <?php
 
-class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigration
-{
-	public function up() {
+class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigration {
+
+    public function up() {
         $row = array(
             /**
              * 44 - Visual
@@ -256,4 +256,5 @@ class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigr
         $this->truncateTable('questions');
         $this->truncateTable('answers');
     }
+
 }

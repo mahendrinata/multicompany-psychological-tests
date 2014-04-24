@@ -409,7 +409,7 @@ class UserTestController extends AdminController {
 
         if (isset($_GET['excel']) && $_GET['excel'] == true)
             UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
-        
+
         $this->render('member_test', array(
             'model' => $model,
             'userTestModel' => $userTestModel,
@@ -522,7 +522,7 @@ class UserTestController extends AdminController {
     public function actionPublicTest() {
         $this->validateGetRequest();
         UserTest::model()->setExpired();
-        
+
         $testModel = Test::model()->findByPk($_GET['id']);
 
         $userTestModel = new UserTest('search');
@@ -536,7 +536,7 @@ class UserTestController extends AdminController {
 
         if (isset($_GET['excel']) && $_GET['excel'] == true)
             UserTestExcelReport::model()->getMemberResult($userTestModel, $testModel);
-        
+
         $this->render('public_test', array(
             'userTestModel' => $userTestModel,
             'testModel' => $testModel

@@ -20,7 +20,7 @@ class RoleController extends AdminController {
                 $this->_model = Role::model()->findbyPk($_GET['id']);
             if ($this->_model === null)
                 throw new CHttpException(404, 'The requested page does not exist.');
-            if($void &&  $this->_model->status == Status::VOID)
+            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;

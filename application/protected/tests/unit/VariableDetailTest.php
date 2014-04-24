@@ -1,13 +1,13 @@
 <?php
 
-class VariableDetailTest extends CDbTestCase
-{
-	public $fixtures=array(
-		'variableDetails'=>'VariableDetail',
-	);
+class VariableDetailTest extends CDbTestCase {
 
-	public function testCreate()
-	{
+    public $fixtures = array(
+        'variableDetails' => 'VariableDetail',
+    );
 
-	}
+    public function testCreate() {
+        
+    }
+
 }

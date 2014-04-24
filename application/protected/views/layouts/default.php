@@ -84,7 +84,7 @@ foreach ($js as $script) {
                         <?php
                         $this->widget('zii.widgets.CBreadcrumbs', array(
                             'links' => $this->breadcrumbs,
-                            'tagName'=> 'ul',
+                            'tagName' => 'ul',
                             'htmlOptions' => array('class' => 'breadcrumb'),
                             'activeLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
                             'inactiveLinkTemplate' => '<li class="active">{label}</li>',

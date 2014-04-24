@@ -570,7 +570,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
                 )
             )
         );
-        
+
         $testModel = Test::model()->find(array('order' => 'id DESC'));
         $startTest = 1;
         if (!empty($testModel)) {

@@ -133,10 +133,10 @@ class ExcelReport {
         $writer->save('php://output');
         exit;
     }
-    
-    protected function _createNullValue($count){
+
+    protected function _createNullValue($count) {
         $array = array();
-        for($i = 0; $i < $count;$i++){
+        for ($i = 0; $i < $count; $i++) {
             $array[] = null;
         }
         return $array;

@@ -30,8 +30,9 @@ $this->breadcrumbs = array(
                 Fields with <span class="required">*</span> are <a class="alert-link" href="javascript:void(0)">required</a>.
             </div>
 
-            <?php // echo $form->errorSummary($expert); 
-            echo $form->hiddenField($expert,'id', array('readonly' => 'readonly'));
+            <?php
+            // echo $form->errorSummary($expert); 
+            echo $form->hiddenField($expert, 'id', array('readonly' => 'readonly'));
             ?>
 
             <div class="form-group">
@@ -82,8 +83,9 @@ $this->breadcrumbs = array(
                 'htmlOptions' => array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data',),
             ));
             ?>
-            <?php // echo $form->errorSummary($company); 
-            echo $form->hiddenField($company,'id', array('readonly' => 'readonly'));
+            <?php
+            // echo $form->errorSummary($company); 
+            echo $form->hiddenField($company, 'id', array('readonly' => 'readonly'));
             ?>
             <div class="form-group">
                 <?php echo $form->label($company, 'first_name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
@@ -133,8 +135,9 @@ $this->breadcrumbs = array(
                 'htmlOptions' => array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data',),
             ));
             ?>
-            <?php // echo $form->errorSummary($member); 
-            echo $form->hiddenField($member,'id', array('readonly' => 'readonly'));
+            <?php
+            // echo $form->errorSummary($member); 
+            echo $form->hiddenField($member, 'id', array('readonly' => 'readonly'));
             ?>
 
             <div class="form-group">

@@ -28,9 +28,9 @@ class ConclusionSingleTest extends ConclusionPsychologyTest {
         $this->_saveAllTestVariableFromAnswer();
         $slugs = CHtml::listData($this->__getData(), 'id', 'variable_id');
         return $this->_saveResult(array(
-            'slug' => self::CONCLUSION,
-            'description' => $this->__getDescription(self::CONCLUSION),
-            'variable_detail_slug' => implode('-', $slugs)
+                'slug' => self::CONCLUSION,
+                'description' => $this->__getDescription(self::CONCLUSION),
+                'variable_detail_slug' => implode('-', $slugs)
         ));
     }
 

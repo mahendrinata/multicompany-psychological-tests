@@ -38,7 +38,7 @@ class UserIdentity extends CUserIdentity {
                 $this->_unregisters[$profile->role->slug] = $profile->id;
             }
         }
-        
+
         $this->setState('roles', $this->_roles);
         $this->setState('user_profiles', $this->_profiles);
         $this->setState('unregisters', $this->_unregisters);

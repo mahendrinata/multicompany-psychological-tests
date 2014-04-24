@@ -71,7 +71,7 @@ $('.search-form form').submit(function(){
                     'value' => '$data->test->name'
                 ),
                 array(
-                    'name' =>'spent_time',
+                    'name' => 'spent_time',
                     'filter' => CHtml::activeTelField($model, 'spent_time', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
@@ -79,13 +79,13 @@ $('.search-form form').submit(function(){
                     'name' => 'time_used',
                     'filter' => CHtml :: activeTelField($model, 'time_used', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
-                ), 
+                ),
                 array(
-                    'name' =>'start_date',
+                    'name' => 'start_date',
                     'filter' => CHtml::activeTelField($model, 'start_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
-                    'name' =>'end_date',
+                    'name' => 'end_date',
                     'filter' => CHtml::activeTelField($model, 'end_date', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(

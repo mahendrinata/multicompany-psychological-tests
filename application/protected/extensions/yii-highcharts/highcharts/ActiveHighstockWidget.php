@@ -8,56 +8,54 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  * @version 3.0.10
  */
-
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'HighstockWidget.php');
 
 /**
  * Usage:
  *
-$this->widget('highcharts.ActiveHighstockWidget', array(
-    'options' => array(
-        'title' => array('text' => 'Site Percentile'),
-        'yAxis' => array(
-            'title' => array('text' => 'Site Rank')
-        ),
-        'series' => array(
-            array(
-                'name'  => 'Site percentile',
-                'data'  => 'SiteRank12',        // data column in the dataprovider
-                'time'  => 'RankDate',          // time column in the dataprovider
-                // 'timeType'  => 'date',
-                // defaults to a mysql timestamp, other options are 'date' (run through strtotime()) or 'plain'
-            ),
-            array(
-                'name'  => 'Site percentile',
-                'time'  => 'RankDate',          // time column in the dataprovider
-                'type'  => 'arearange',
-                'data'  => array(
-                    'Column1',      // specify an array of data options
-                    'Column2',      // if you are using an area range charts
-                ),
-            ),
-        ),
-    ),
-    'dataProvider' => $dataProvider,
-));
+  $this->widget('highcharts.ActiveHighstockWidget', array(
+  'options' => array(
+  'title' => array('text' => 'Site Percentile'),
+  'yAxis' => array(
+  'title' => array('text' => 'Site Rank')
+  ),
+  'series' => array(
+  array(
+  'name'  => 'Site percentile',
+  'data'  => 'SiteRank12',        // data column in the dataprovider
+  'time'  => 'RankDate',          // time column in the dataprovider
+  // 'timeType'  => 'date',
+  // defaults to a mysql timestamp, other options are 'date' (run through strtotime()) or 'plain'
+  ),
+  array(
+  'name'  => 'Site percentile',
+  'time'  => 'RankDate',          // time column in the dataprovider
+  'type'  => 'arearange',
+  'data'  => array(
+  'Column1',      // specify an array of data options
+  'Column2',      // if you are using an area range charts
+  ),
+  ),
+  ),
+  ),
+  'dataProvider' => $dataProvider,
+  ));
  *
  * @see HighchartsWidget for additional options
  */
-class ActiveHighstockWidget extends HighstockWidget
-{
+class ActiveHighstockWidget extends HighstockWidget {
+
     /**
      * Pass in a data provider that we will turn into the series
      * @var CDataProvider
      */
     public $dataProvider;
 
-    public function run()
-    {
+    public function run() {
         $data = $this->dataProvider->getData();
         $series = $this->options['series'];
 
-        if(count($data) > 0) {
+        if (count($data) > 0) {
             foreach ($series as $i => $batch) {
                 if (isset($batch['time']) && isset($batch['data']) &&
                     !is_array($batch['time'])
@@ -106,7 +104,7 @@ class ActiveHighstockWidget extends HighstockWidget
                 break;
             default:
                 $functionName = 'process' . ucfirst($timeType);
-                if(method_exists($this, $functionName)) {
+                if (method_exists($this, $functionName)) {
                     return call_user_func(array($this, $functionName), $row, $batch);
                 } else {
                     throw new Exception("Can't call your custom date processing function");
@@ -129,14 +127,13 @@ class ActiveHighstockWidget extends HighstockWidget
      * @param $batch
      * @return array
      */
-    protected function processData($row, $batch)
-    {
-        if(!is_array($batch['data'])) {
+    protected function processData($row, $batch) {
+        if (!is_array($batch['data'])) {
             return array(floatval($row[$batch['data']]));
         }
 
         $items = array();
-        foreach($batch['data'] as $item) {
+        foreach ($batch['data'] as $item) {
             $items[] = floatval($row[$item]);
         }
         return $items;
@@ -188,4 +185,5 @@ class ActiveHighstockWidget extends HighstockWidget
         }
         array_multisort($dates, SORT_ASC, $series);
     }
+
 }

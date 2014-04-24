@@ -151,31 +151,31 @@ class XUploadAction extends CAction {
      *
      * @since 0.1
      */
-    public function init( ) {
+    public function init() {
 
-        if( !isset( $this->path ) ) {
-            $this->path = realpath( Yii::app( )->getBasePath( )."/../uploads" );
+        if (!isset($this->path)) {
+            $this->path = realpath(Yii::app()->getBasePath() . "/../uploads");
         }
 
-        if( !is_dir( $this->path ) ) {
-            mkdir( $this->path, 0777, true );
-            chmod ( $this->path , 0777 );
+        if (!is_dir($this->path)) {
+            mkdir($this->path, 0777, true);
+            chmod($this->path, 0777);
             //throw new CHttpException(500, "{$this->path} does not exists.");
-        } else if( !is_writable( $this->path ) ) {
-            chmod( $this->path, 0777 );
+        } else if (!is_writable($this->path)) {
+            chmod($this->path, 0777);
             //throw new CHttpException(500, "{$this->path} is not writable.");
         }
-        if( $this->subfolderVar === null ) {
-            $this->_subfolder = Yii::app( )->request->getQuery( $this->subfolderVar, date( "mdY" ) );
-        } else if($this->subfolderVar !== false ) {
-            $this->_subfolder = date( "mdY" );
+        if ($this->subfolderVar === null) {
+            $this->_subfolder = Yii::app()->request->getQuery($this->subfolderVar, date("mdY"));
+        } else if ($this->subfolderVar !== false) {
+            $this->_subfolder = date("mdY");
         }
 
-        if( !isset($this->_formModel)) {
-            $this->formModel = Yii::createComponent(array('class'=>$this->formClass));
+        if (!isset($this->_formModel)) {
+            $this->formModel = Yii::createComponent(array('class' => $this->formClass));
         }
 
-        if($this->secureFileNames) {
+        if ($this->secureFileNames) {
             $this->formModel->secureFileNames = true;
         }
     }
@@ -185,13 +185,13 @@ class XUploadAction extends CAction {
      * @since 0.1
      * @author Asgaroth
      */
-    public function run( ) {
+    public function run() {
         $this->sendHeaders();
 
         $this->handleDeleting() or $this->handleUploading();
     }
-    protected function sendHeaders()
-    {
+
+    protected function sendHeaders() {
         header('Vary: Accept');
         if (isset($_SERVER['HTTP_ACCEPT']) && (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)) {
             header('Content-type: application/json');
@@ -199,13 +199,13 @@ class XUploadAction extends CAction {
             header('Content-type: text/plain');
         }
     }
+
     /**
      * Removes temporary file from its directory and from the session
      *
      * @return bool Whether deleting was meant by request
      */
-    protected function handleDeleting()
-    {
+    protected function handleDeleting() {
         if (isset($_GET["_method"]) && $_GET["_method"] == "delete") {
             $success = false;
             if ($_GET["file"][0] !== '.' && Yii::app()->user->hasState($this->stateVariable)) {
@@ -232,8 +232,7 @@ class XUploadAction extends CAction {
      *
      * @throws CHttpException
      */
-    protected function handleUploading()
-    {
+    protected function handleUploading() {
         $this->init();
         $model = $this->formModel;
         $model->{$this->fileAttribute} = CUploadedFile::getInstance($model, $this->fileAttribute);
@@ -258,16 +257,16 @@ class XUploadAction extends CAction {
                 $returnValue = $this->beforeReturn();
                 if ($returnValue === true) {
                     echo json_encode(array(array(
-                        "name" => $model->{$this->displayNameAttribute},
-                        "type" => $model->{$this->mimeTypeAttribute},
-                        "size" => $model->{$this->sizeAttribute},
-                        "url" => $this->getFileUrl($model->{$this->fileNameAttribute}),
-                        "thumbnail_url" => $model->getThumbnailUrl($this->getPublicPath()),
-                        "delete_url" => $this->getController()->createUrl($this->getId(), array(
-                            "_method" => "delete",
-                            "file" => $model->{$this->fileNameAttribute},
-                        )),
-                        "delete_type" => "POST"
+                            "name" => $model->{$this->displayNameAttribute},
+                            "type" => $model->{$this->mimeTypeAttribute},
+                            "size" => $model->{$this->sizeAttribute},
+                            "url" => $this->getFileUrl($model->{$this->fileNameAttribute}),
+                            "thumbnail_url" => $model->getThumbnailUrl($this->getPublicPath()),
+                            "delete_url" => $this->getController()->createUrl($this->getId(), array(
+                                "_method" => "delete",
+                                "file" => $model->{$this->fileNameAttribute},
+                            )),
+                            "delete_type" => "POST"
                     )));
                 } else {
                     echo json_encode(array(array("error" => $returnValue,)));
@@ -293,18 +292,18 @@ class XUploadAction extends CAction {
         $path = $this->getPath();
 
         // Now we need to save our file info to the user's session
-        $userFiles = Yii::app( )->user->getState( $this->stateVariable, array());
+        $userFiles = Yii::app()->user->getState($this->stateVariable, array());
 
         $userFiles[$this->formModel->{$this->fileNameAttribute}] = array(
-            "path" => $path.$this->formModel->{$this->fileNameAttribute},
+            "path" => $path . $this->formModel->{$this->fileNameAttribute},
             //the same file or a thumb version that you generated
-            "thumb" => $path.$this->formModel->{$this->fileNameAttribute},
+            "thumb" => $path . $this->formModel->{$this->fileNameAttribute},
             "filename" => $this->formModel->{$this->fileNameAttribute},
             'size' => $this->formModel->{$this->sizeAttribute},
             'mime' => $this->formModel->{$this->mimeTypeAttribute},
             'name' => $this->formModel->{$this->displayNameAttribute},
         );
-        Yii::app( )->user->setState( $this->stateVariable, $userFiles );
+        Yii::app()->user->setState($this->stateVariable, $userFiles);
 
         return true;
     }
@@ -315,7 +314,7 @@ class XUploadAction extends CAction {
      * @return string
      */
     protected function getFileUrl($fileName) {
-        return $this->getPublicPath().$fileName;
+        return $this->getPublicPath() . $fileName;
     }
 
     /**
@@ -363,6 +362,7 @@ class XUploadAction extends CAction {
      * @return bool
      */
     protected function fileExists($file) {
-        return is_file( $file['path'] );
+        return is_file($file['path']);
     }
+
 }

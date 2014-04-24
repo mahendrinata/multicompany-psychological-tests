@@ -83,8 +83,8 @@ class ConclusionPsychologyTest extends Conclusion {
 
     protected function _getResult($slug) {
         return Result::model()->findByAttributes(array(
-            'user_test_id' => $this->getUserTestId(),
-            'slug' => $slug
+                'user_test_id' => $this->getUserTestId(),
+                'slug' => $slug
         ));
     }
 

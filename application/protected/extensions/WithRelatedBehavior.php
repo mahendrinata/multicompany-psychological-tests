@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WithRelatedBehavior class file.
  *
@@ -16,427 +17,375 @@
  * @version 0.65
  * @package yiiext.with-related-behavior
  */
-class WithRelatedBehavior extends CActiveRecordBehavior
-{
-	/**
-	 * Validate main model and all it's related models recursively.
-	 * @param array $data attributes and relations.
-	 * @param boolean $clearErrors whether to call {@link CModel::clearErrors} before performing validation.
-	 * @param CActiveRecord $owner for internal needs.
-	 * @return boolean whether the validation is successful without any error.
-	 */
-	public function validate($data=null,$clearErrors=true,$owner=null)
-	{
-		if($owner===null)
-			$owner=$this->getOwner();
+class WithRelatedBehavior extends CActiveRecordBehavior {
 
-		if($data===null)
-		{
-			$attributes=null;
-			$newData=array();
-		}
-		else
-		{
-			// retrieve real class attributes that was specified in the class declaration
-			$classAttributes=get_class_vars(get_class($owner));
-			unset($classAttributes['db']); // has nothing in common with the application logic
-			$classAttributes=array_keys($classAttributes);
+    /**
+     * Validate main model and all it's related models recursively.
+     * @param array $data attributes and relations.
+     * @param boolean $clearErrors whether to call {@link CModel::clearErrors} before performing validation.
+     * @param CActiveRecord $owner for internal needs.
+     * @return boolean whether the validation is successful without any error.
+     */
+    public function validate($data = null, $clearErrors = true, $owner = null) {
+        if ($owner === null)
+            $owner = $this->getOwner();
 
-			// mixing virtual attributes that represents database table columns with real class attributes
-			$attributeNames=array_merge($classAttributes,$owner->attributeNames());
-			// array_intersect must not be used here because when error_reporting is -1 notice will happen
-			// since $data array contains not just scalar string values
-			$attributes=array_uintersect($data,$attributeNames,
-				create_function('$x,$y','return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
+        if ($data === null) {
+            $attributes = null;
+            $newData = array();
+        } else {
+            // retrieve real class attributes that was specified in the class declaration
+            $classAttributes = get_class_vars(get_class($owner));
+            unset($classAttributes['db']); // has nothing in common with the application logic
+            $classAttributes = array_keys($classAttributes);
 
-			if($attributes===array())
-				$attributes=null;
+            // mixing virtual attributes that represents database table columns with real class attributes
+            $attributeNames = array_merge($classAttributes, $owner->attributeNames());
+            // array_intersect must not be used here because when error_reporting is -1 notice will happen
+            // since $data array contains not just scalar string values
+            $attributes = array_uintersect($data, $attributeNames, create_function('$x,$y', 'return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
 
-			// array_udiff must not be used here because when error_reporting is -1 notice will happen
-			// since $data array contains not just scalar string values
-			$newData=array_udiff($data,$attributeNames,
-				create_function('$x,$y','return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
-		}
+            if ($attributes === array())
+                $attributes = null;
 
-		$valid=$owner->validate($attributes,$clearErrors);
+            // array_udiff must not be used here because when error_reporting is -1 notice will happen
+            // since $data array contains not just scalar string values
+            $newData = array_udiff($data, $attributeNames, create_function('$x,$y', 'return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
+        }
 
-		foreach($newData as $name=>$data)
-		{
-			if(!is_array($data))
-				$name=$data;
+        $valid = $owner->validate($attributes, $clearErrors);
 
-			if(!$owner->hasRelated($name))
-				continue;
+        foreach ($newData as $name => $data) {
+            if (!is_array($data))
+                $name = $data;
 
-			/** @var CActiveRecord|CActiveRecord[] $related */
-			$related=$owner->getRelated($name);
+            if (!$owner->hasRelated($name))
+                continue;
 
-			if(is_array($related))
-			{
-				foreach($related as $model)
-				{
-					if(is_array($data))
-						$valid=$this->validate($data,$clearErrors,$model) && $valid;
-					else
-						$valid=$model->validate(null,$clearErrors) && $valid;
-				}
-			}
-			else
-			{
-				if(is_array($data))
-					$valid=$this->validate($data,$clearErrors,$related) && $valid;
-				else
-					$valid=$related->validate(null,$clearErrors) && $valid;
-			}
-		}
+            /** @var CActiveRecord|CActiveRecord[] $related */
+            $related = $owner->getRelated($name);
 
-		return $valid;
-	}
+            if (is_array($related)) {
+                foreach ($related as $model) {
+                    if (is_array($data))
+                        $valid = $this->validate($data, $clearErrors, $model) && $valid;
+                    else
+                        $valid = $model->validate(null, $clearErrors) && $valid;
+                }
+            }
+            else {
+                if (is_array($data))
+                    $valid = $this->validate($data, $clearErrors, $related) && $valid;
+                else
+                    $valid = $related->validate(null, $clearErrors) && $valid;
+            }
+        }
 
-	/**
-	 * @param array|string $foreignKey
-	 * @param CDbTableSchema $ownerTableSchema
-	 * @param CDbTableSchema $dependentTableSchema
-	 * @return array
-	 */
-	protected function getDependencyAttributes($foreignKey, $ownerTableSchema, $dependentTableSchema)
-	{
-		$dbSchema = $this->getOwner()->getDbConnection()->getSchema();
-		$map = array();
+        return $valid;
+    }
 
-		if(is_string($foreignKey))
-			$foreignKey=preg_split('/\s*,\s*/',$foreignKey,-1,PREG_SPLIT_NO_EMPTY);
+    /**
+     * @param array|string $foreignKey
+     * @param CDbTableSchema $ownerTableSchema
+     * @param CDbTableSchema $dependentTableSchema
+     * @return array
+     */
+    protected function getDependencyAttributes($foreignKey, $ownerTableSchema, $dependentTableSchema) {
+        $dbSchema = $this->getOwner()->getDbConnection()->getSchema();
+        $map = array();
 
-		foreach($foreignKey as $fk=>$pk)
-		{
-			if(is_int($fk))
-			{
-				$index = $fk;
-				$fk = $pk;
+        if (is_string($foreignKey))
+            $foreignKey = preg_split('/\s*,\s*/', $foreignKey, -1, PREG_SPLIT_NO_EMPTY);
 
-				if(isset($ownerTableSchema->foreignKeys[$fk]) && $dbSchema->compareTableNames($dependentTableSchema->rawName,$ownerTableSchema->foreignKeys[$fk][0]))
-					$pk=$ownerTableSchema->foreignKeys[$fk][1];
-				else // FK constraints undefined
-				{
-					if(is_array($dependentTableSchema->primaryKey)) // composite PK
-						$pk=$dependentTableSchema->primaryKey[$index];
-					else
-						$pk=$dependentTableSchema->primaryKey;
-				}
-			}
-			$map[$fk] = $pk;
-		}
-		return $map;
-	}
+        foreach ($foreignKey as $fk => $pk) {
+            if (is_int($fk)) {
+                $index = $fk;
+                $fk = $pk;
 
-	/**
-	 * Save main model and all it's related models recursively.
-	 * @param bool $runValidation whether to perform validation before saving the record.
-	 * @param array $data attributes and relations.
-	 * @param CActiveRecord $owner for internal needs.
-	 * @return boolean whether the saving succeeds.
-	 * @throws CDbException
-	 * @throws Exception
-	 */
-	public function save($runValidation=true,$data=null,$owner=null)
-	{
-		if($owner===null)
-		{
-			if($runValidation && !$this->validate($data))
-				return false;
+                if (isset($ownerTableSchema->foreignKeys[$fk]) && $dbSchema->compareTableNames($dependentTableSchema->rawName, $ownerTableSchema->foreignKeys[$fk][0]))
+                    $pk = $ownerTableSchema->foreignKeys[$fk][1];
+                else { // FK constraints undefined
+                    if (is_array($dependentTableSchema->primaryKey)) // composite PK
+                        $pk = $dependentTableSchema->primaryKey[$index];
+                    else
+                        $pk = $dependentTableSchema->primaryKey;
+                }
+            }
+            $map[$fk] = $pk;
+        }
+        return $map;
+    }
 
-			$owner=$this->getOwner();
-		}
+    /**
+     * Save main model and all it's related models recursively.
+     * @param bool $runValidation whether to perform validation before saving the record.
+     * @param array $data attributes and relations.
+     * @param CActiveRecord $owner for internal needs.
+     * @return boolean whether the saving succeeds.
+     * @throws CDbException
+     * @throws Exception
+     */
+    public function save($runValidation = true, $data = null, $owner = null) {
+        if ($owner === null) {
+            if ($runValidation && !$this->validate($data))
+                return false;
 
-		/** @var CDbConnection $db */
-		$db=$owner->getDbConnection();
+            $owner = $this->getOwner();
+        }
 
-		if($db->getCurrentTransaction()===null)
-			$transaction=$db->beginTransaction();
+        /** @var CDbConnection $db */
+        $db = $owner->getDbConnection();
 
-		try
-		{
-			if($data===null)
-			{
-				$attributes=null;
-				$newData=array();
-			}
-			else
-			{
-				// not mixing virtual attributes that represents database table columns with real class attributes
-				// since real class attributes shouldn't be persisted in the database, it's actual only for validation part
-				$attributeNames=$owner->attributeNames();
-				// array_intersect must not be used here because when error_reporting is -1 notice will happen
-				// since $data array contains not just scalar string values
-				$attributes=array_uintersect($data,$attributeNames,
-					create_function('$x,$y','return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
+        if ($db->getCurrentTransaction() === null)
+            $transaction = $db->beginTransaction();
 
-				if($attributes===array())
-					$attributes=null;
+        try {
+            if ($data === null) {
+                $attributes = null;
+                $newData = array();
+            } else {
+                // not mixing virtual attributes that represents database table columns with real class attributes
+                // since real class attributes shouldn't be persisted in the database, it's actual only for validation part
+                $attributeNames = $owner->attributeNames();
+                // array_intersect must not be used here because when error_reporting is -1 notice will happen
+                // since $data array contains not just scalar string values
+                $attributes = array_uintersect($data, $attributeNames, create_function('$x,$y', 'return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
 
-				// array_diff must not be used here because when error_reporting is -1 notice will happen
-				// since $data array contains not just scalar string values
-				$newData=array_udiff($data,$attributeNames,
-					create_function('$x,$y','return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
-			}
+                if ($attributes === array())
+                    $attributes = null;
 
-			$ownerTableSchema=$owner->getTableSchema();
-			/** @var CDbCommandBuilder $builder */
-			$builder=$owner->getCommandBuilder();
-			$schema=$builder->getSchema();
-			$relations=$owner->getMetaData()->relations;
-			$queue=array();
+                // array_diff must not be used here because when error_reporting is -1 notice will happen
+                // since $data array contains not just scalar string values
+                $newData = array_udiff($data, $attributeNames, create_function('$x,$y', 'return !is_string($x) || !is_string($y) ? -1 : strcmp($x,$y);'));
+            }
 
-			foreach($newData as $name=>$data)
-			{
-				if(!is_array($data))
-				{
-					$name=$data;
-					$data=null;
-				}
+            $ownerTableSchema = $owner->getTableSchema();
+            /** @var CDbCommandBuilder $builder */
+            $builder = $owner->getCommandBuilder();
+            $schema = $builder->getSchema();
+            $relations = $owner->getMetaData()->relations;
+            $queue = array();
 
-				if(!$owner->hasRelated($name))
-					continue;
+            foreach ($newData as $name => $data) {
+                if (!is_array($data)) {
+                    $name = $data;
+                    $data = null;
+                }
 
-				$relationClass=get_class($relations[$name]);
-				$relatedClass=$relations[$name]->className;
+                if (!$owner->hasRelated($name))
+                    continue;
 
-				if($relationClass===CActiveRecord::BELONGS_TO)
-				{
-					/** @var CActiveRecord|CActiveRecord[] $related */
-					$related=$owner->getRelated($name);
-					$relatedTableSchema=$related->getTableSchema();
+                $relationClass = get_class($relations[$name]);
+                $relatedClass = $relations[$name]->className;
 
-					if($data!==null)
-						$this->save(false,$data,$related);
-					else
-						$related->getIsNewRecord() ? $related->insert() : $related->update();
+                if ($relationClass === CActiveRecord::BELONGS_TO) {
+                    /** @var CActiveRecord|CActiveRecord[] $related */
+                    $related = $owner->getRelated($name);
+                    $relatedTableSchema = $related->getTableSchema();
 
-					$fks = $relations[$name]->foreignKey;
-					$map = $this->getDependencyAttributes($fks, $relatedTableSchema, $ownerTableSchema);
-					foreach ($map as $fk => $pk) {
-						$owner->$fk = $related->$pk;
-					}
-				}
-				else
-					$queue[]=array($relationClass,$relatedClass,$relations[$name]->foreignKey,$name,$data);
-			}
+                    if ($data !== null)
+                        $this->save(false, $data, $related);
+                    else
+                        $related->getIsNewRecord() ? $related->insert() : $related->update();
 
-			if(!($owner->getIsNewRecord() ? $owner->insert($attributes) : $owner->update($attributes)))
-				return false;
+                    $fks = $relations[$name]->foreignKey;
+                    $map = $this->getDependencyAttributes($fks, $relatedTableSchema, $ownerTableSchema);
+                    foreach ($map as $fk => $pk) {
+                        $owner->$fk = $related->$pk;
+                    }
+                } else
+                    $queue[] = array($relationClass, $relatedClass, $relations[$name]->foreignKey, $name, $data);
+            }
 
-			foreach($queue as $pack)
-			{
-				list($relationClass,$relatedClass,$fks,$name,$data)=$pack;
-				$related=$owner->getRelated($name);
-				$relatedTableSchema=CActiveRecord::model($relatedClass)->getTableSchema();
+            if (!($owner->getIsNewRecord() ? $owner->insert($attributes) : $owner->update($attributes)))
+                return false;
 
-				switch($relationClass)
-				{
-					case CActiveRecord::HAS_ONE:
-						$map = $this->getDependencyAttributes($fks, $ownerTableSchema, $relatedTableSchema);
-						foreach ($map as $fk => $pk) {
-							$related->$fk = $owner->$pk;
-						}
+            foreach ($queue as $pack) {
+                list($relationClass, $relatedClass, $fks, $name, $data) = $pack;
+                $related = $owner->getRelated($name);
+                $relatedTableSchema = CActiveRecord::model($relatedClass)->getTableSchema();
 
-						if($data===null)
-							$related->getIsNewRecord() ? $related->insert() : $related->update();
-						else
-							$this->save(false,$data,$related);
-						break;
-					case CActiveRecord::HAS_MANY:
-						$map = $this->getDependencyAttributes($fks, $ownerTableSchema, $relatedTableSchema);
-						foreach($related as $model)
-						{
-							foreach($map as $fk=>$pk)
-								$model->$fk = $owner->$pk;
+                switch ($relationClass) {
+                    case CActiveRecord::HAS_ONE:
+                        $map = $this->getDependencyAttributes($fks, $ownerTableSchema, $relatedTableSchema);
+                        foreach ($map as $fk => $pk) {
+                            $related->$fk = $owner->$pk;
+                        }
 
-							if($data===null)
-								$model->getIsNewRecord() ? $model->insert() : $model->update();
-							else
-								$this->save(false,$data,$model);
-						}
-						break;
-					case CActiveRecord::MANY_MANY:
-						if(!preg_match('/^\s*(.*?)\((.*)\)\s*$/',$fks,$matches))
-							throw new CDbException(Yii::t('yiiext','The relation "{relation}" in active record class "{class}" is specified with an invalid foreign key. The format of the foreign key must be "joinTable(fk1,fk2,...)".',
-								array('{class}'=>get_class($owner),'{relation}'=>$name)));
+                        if ($data === null)
+                            $related->getIsNewRecord() ? $related->insert() : $related->update();
+                        else
+                            $this->save(false, $data, $related);
+                        break;
+                    case CActiveRecord::HAS_MANY:
+                        $map = $this->getDependencyAttributes($fks, $ownerTableSchema, $relatedTableSchema);
+                        foreach ($related as $model) {
+                            foreach ($map as $fk => $pk)
+                                $model->$fk = $owner->$pk;
 
-						if(($joinTable=$schema->getTable($matches[1]))===null)
-							throw new CDbException(Yii::t('yiiext','The relation "{relation}" in active record class "{class}" is not specified correctly: the join table "{joinTable}" given in the foreign key cannot be found in the database.',
-								array('{class}'=>get_class($owner),'{relation}'=>$name,'{joinTable}'=>$matches[1])));
+                            if ($data === null)
+                                $model->getIsNewRecord() ? $model->insert() : $model->update();
+                            else
+                                $this->save(false, $data, $model);
+                        }
+                        break;
+                    case CActiveRecord::MANY_MANY:
+                        if (!preg_match('/^\s*(.*?)\((.*)\)\s*$/', $fks, $matches))
+                            throw new CDbException(Yii::t('yiiext', 'The relation "{relation}" in active record class "{class}" is specified with an invalid foreign key. The format of the foreign key must be "joinTable(fk1,fk2,...)".', array('{class}' => get_class($owner), '{relation}' => $name)));
 
-						$fks=preg_split('/\s*,\s*/',$matches[2],-1,PREG_SPLIT_NO_EMPTY);
-						$ownerMap=array();
-						$relatedMap=array();
-						$fkDefined=true;
+                        if (($joinTable = $schema->getTable($matches[1])) === null)
+                            throw new CDbException(Yii::t('yiiext', 'The relation "{relation}" in active record class "{class}" is not specified correctly: the join table "{joinTable}" given in the foreign key cannot be found in the database.', array('{class}' => get_class($owner), '{relation}' => $name, '{joinTable}' => $matches[1])));
 
-						foreach($fks as $fk)
-						{
-							if(!isset($joinTable->columns[$fk]))
-								throw new CDbException(Yii::t('yii','The relation "{relation}" in active record class "{class}" is specified with an invalid foreign key "{key}". There is no such column in the table "{table}".',
-									array('{class}'=>get_class($owner),'{relation}'=>$name,'{key}'=>$fk,'{table}'=>$joinTable->name)));
+                        $fks = preg_split('/\s*,\s*/', $matches[2], -1, PREG_SPLIT_NO_EMPTY);
+                        $ownerMap = array();
+                        $relatedMap = array();
+                        $fkDefined = true;
 
-							if(isset($joinTable->foreignKeys[$fk]))
-							{
-								list($tableName,$pk)=$joinTable->foreignKeys[$fk];
+                        foreach ($fks as $fk) {
+                            if (!isset($joinTable->columns[$fk]))
+                                throw new CDbException(Yii::t('yii', 'The relation "{relation}" in active record class "{class}" is specified with an invalid foreign key "{key}". There is no such column in the table "{table}".', array('{class}' => get_class($owner), '{relation}' => $name, '{key}' => $fk, '{table}' => $joinTable->name)));
 
-								if(!isset($ownerMap[$pk]) && $schema->compareTableNames($ownerTableSchema->rawName,$tableName))
-									$ownerMap[$pk]=$fk;
-								else if(!isset($relatedMap[$pk]) && $schema->compareTableNames($relatedTableSchema->rawName,$tableName))
-									$relatedMap[$pk]=$fk;
-								else
-								{
-									$fkDefined=false;
-									break;
-								}
-							}
-							else
-							{
-								$fkDefined=false;
-								break;
-							}
-						}
+                            if (isset($joinTable->foreignKeys[$fk])) {
+                                list($tableName, $pk) = $joinTable->foreignKeys[$fk];
 
-						if(!$fkDefined)
-						{
-							$ownerMap=array();
-							$relatedMap=array();
+                                if (!isset($ownerMap[$pk]) && $schema->compareTableNames($ownerTableSchema->rawName, $tableName))
+                                    $ownerMap[$pk] = $fk;
+                                else if (!isset($relatedMap[$pk]) && $schema->compareTableNames($relatedTableSchema->rawName, $tableName))
+                                    $relatedMap[$pk] = $fk;
+                                else {
+                                    $fkDefined = false;
+                                    break;
+                                }
+                            } else {
+                                $fkDefined = false;
+                                break;
+                            }
+                        }
 
-							foreach($fks as $i=>$fk)
-							{
-								if($i<count($ownerTableSchema->primaryKey))
-								{
-									$pk=is_array($ownerTableSchema->primaryKey) ? $ownerTableSchema->primaryKey[$i] : $ownerTableSchema->primaryKey;
-									$ownerMap[$pk]=$fk;
-								}
-								else
-								{
-									$j=$i-count($ownerTableSchema->primaryKey);
-									$pk=is_array($relatedTableSchema->primaryKey) ? $relatedTableSchema->primaryKey[$j] : $relatedTableSchema->primaryKey;
-									$relatedMap[$pk]=$fk;
-								}
-							}
-						}
+                        if (!$fkDefined) {
+                            $ownerMap = array();
+                            $relatedMap = array();
 
-						if($ownerMap===array() && $relatedMap===array())
-							throw new CDbException(Yii::t('yii','The relation "{relation}" in active record class "{class}" is specified with an incomplete foreign key. The foreign key must consist of columns referencing both joining tables.',
-								array('{class}'=>get_class($owner),'{relation}'=>$name)));
+                            foreach ($fks as $i => $fk) {
+                                if ($i < count($ownerTableSchema->primaryKey)) {
+                                    $pk = is_array($ownerTableSchema->primaryKey) ? $ownerTableSchema->primaryKey[$i] : $ownerTableSchema->primaryKey;
+                                    $ownerMap[$pk] = $fk;
+                                } else {
+                                    $j = $i - count($ownerTableSchema->primaryKey);
+                                    $pk = is_array($relatedTableSchema->primaryKey) ? $relatedTableSchema->primaryKey[$j] : $relatedTableSchema->primaryKey;
+                                    $relatedMap[$pk] = $fk;
+                                }
+                            }
+                        }
 
-						$insertAttributes=array();
-						$deleteAttributes=array();
+                        if ($ownerMap === array() && $relatedMap === array())
+                            throw new CDbException(Yii::t('yii', 'The relation "{relation}" in active record class "{class}" is specified with an incomplete foreign key. The foreign key must consist of columns referencing both joining tables.', array('{class}' => get_class($owner), '{relation}' => $name)));
 
-						foreach($related as $model)
-						{
-							$newFlag=$model->getIsNewRecord();
+                        $insertAttributes = array();
+                        $deleteAttributes = array();
 
-							if($data===null)
-								$newFlag ? $model->insert() : $model->update();
-							else
-								$this->save(false,$data,$model);
+                        foreach ($related as $model) {
+                            $newFlag = $model->getIsNewRecord();
 
-							$joinTableAttributes=array();
+                            if ($data === null)
+                                $newFlag ? $model->insert() : $model->update();
+                            else
+                                $this->save(false, $data, $model);
 
-							foreach($ownerMap as $pk=>$fk)
-								$joinTableAttributes[$fk]=$owner->$pk;
+                            $joinTableAttributes = array();
 
-							foreach($relatedMap as $pk=>$fk)
-								$joinTableAttributes[$fk]=$model->$pk;
+                            foreach ($ownerMap as $pk => $fk)
+                                $joinTableAttributes[$fk] = $owner->$pk;
 
-							if(!$newFlag)
-								$deleteAttributes[]=$joinTableAttributes;
+                            foreach ($relatedMap as $pk => $fk)
+                                $joinTableAttributes[$fk] = $model->$pk;
 
-							$insertAttributes[]=$joinTableAttributes;
-						}
+                            if (!$newFlag)
+                                $deleteAttributes[] = $joinTableAttributes;
 
-						if($deleteAttributes!==array())
-						{
-							$condition=$builder->createInCondition($joinTable,array_merge(array_values($ownerMap),array_values($relatedMap)),$deleteAttributes);
-							$criteria=$builder->createCriteria($condition);
-							$builder->createDeleteCommand($joinTable,$criteria)->execute();
-						}
+                            $insertAttributes[] = $joinTableAttributes;
+                        }
 
-						foreach($insertAttributes as $attributes)
-							$builder->createInsertCommand($joinTable,$attributes)->execute();
-						break;
-				}
-			}
+                        if ($deleteAttributes !== array()) {
+                            $condition = $builder->createInCondition($joinTable, array_merge(array_values($ownerMap), array_values($relatedMap)), $deleteAttributes);
+                            $criteria = $builder->createCriteria($condition);
+                            $builder->createDeleteCommand($joinTable, $criteria)->execute();
+                        }
 
-			if(isset($transaction))
-				$transaction->commit();
+                        foreach ($insertAttributes as $attributes)
+                            $builder->createInsertCommand($joinTable, $attributes)->execute();
+                        break;
+                }
+            }
 
-			return true;
-		}
-		catch(Exception $e)
-		{
-			if(isset($transaction))
-				$transaction->rollback();
+            if (isset($transaction))
+                $transaction->commit();
 
-			throw $e;
-		}
-	}
+            return true;
+        } catch (Exception $e) {
+            if (isset($transaction))
+                $transaction->rollback();
 
-	/**
-	 * @param string $name
-	 * @param mixed $keys
-	 */
-	public function link($name,$keys)
-	{
-		$owner=$this->getOwner();
+            throw $e;
+        }
+    }
 
-		if(!$owner->getMetaData()->hasRelation($name))
-			throw new CDbException(Yii::t('yiiext','The relation "{relation}" in active record class "{class}" is not specified.',
-				array('{class}'=>get_class($owner),'{relation}'=>$name)));
+    /**
+     * @param string $name
+     * @param mixed $keys
+     */
+    public function link($name, $keys) {
+        $owner = $this->getOwner();
 
-		$ownerTableSchema=$owner->getTableSchema();
-		$builder=$owner->getCommandBuilder();
-		$schema=$builder->getSchema();
-		$relation=$owner->getMetaData()->relations[$name];
-		$relationClass=get_class($relation);
-		$relatedClass=$relation->className;
+        if (!$owner->getMetaData()->hasRelation($name))
+            throw new CDbException(Yii::t('yiiext', 'The relation "{relation}" in active record class "{class}" is not specified.', array('{class}' => get_class($owner), '{relation}' => $name)));
 
-		switch($relationClass)
-		{
-			case CActiveRecord::BELONGS_TO:
-				break;
-			case CActiveRecord::HAS_ONE:
-				break;
-			case CActiveRecord::HAS_MANY:
-				break;
-			case CActiveRecord::MANY_MANY:
-				break;
-		}
-	}
+        $ownerTableSchema = $owner->getTableSchema();
+        $builder = $owner->getCommandBuilder();
+        $schema = $builder->getSchema();
+        $relation = $owner->getMetaData()->relations[$name];
+        $relationClass = get_class($relation);
+        $relatedClass = $relation->className;
 
-	/**
-	 * @param string $name
-	 * @param mixed $keys
-	 */
-	public function unlink($name,$keys=null)
-	{
-		$owner=$this->getOwner();
+        switch ($relationClass) {
+            case CActiveRecord::BELONGS_TO:
+                break;
+            case CActiveRecord::HAS_ONE:
+                break;
+            case CActiveRecord::HAS_MANY:
+                break;
+            case CActiveRecord::MANY_MANY:
+                break;
+        }
+    }
 
-		if(!$owner->getMetaData()->hasRelation($name))
-			throw new CDbException(Yii::t('yiiext','The relation "{relation}" in active record class "{class}" is not specified.',
-				array('{class}'=>get_class($owner),'{relation}'=>$name)));
+    /**
+     * @param string $name
+     * @param mixed $keys
+     */
+    public function unlink($name, $keys = null) {
+        $owner = $this->getOwner();
 
-		$ownerTableSchema=$owner->getTableSchema();
-		$builder=$owner->getCommandBuilder();
-		$schema=$builder->getSchema();
-		$relation=$owner->getMetaData()->relations[$name];
-		$relationClass=get_class($relation);
-		$relatedClass=$relation->className;
+        if (!$owner->getMetaData()->hasRelation($name))
+            throw new CDbException(Yii::t('yiiext', 'The relation "{relation}" in active record class "{class}" is not specified.', array('{class}' => get_class($owner), '{relation}' => $name)));
 
-		switch($relationClass)
-		{
-			case CActiveRecord::BELONGS_TO:
-				break;
-			case CActiveRecord::HAS_ONE:
-				break;
-			case CActiveRecord::HAS_MANY:
-				break;
-			case CActiveRecord::MANY_MANY:
-				break;
-		}
-	}
+        $ownerTableSchema = $owner->getTableSchema();
+        $builder = $owner->getCommandBuilder();
+        $schema = $builder->getSchema();
+        $relation = $owner->getMetaData()->relations[$name];
+        $relationClass = get_class($relation);
+        $relatedClass = $relation->className;
+
+        switch ($relationClass) {
+            case CActiveRecord::BELONGS_TO:
+                break;
+            case CActiveRecord::HAS_ONE:
+                break;
+            case CActiveRecord::HAS_MANY:
+                break;
+            case CActiveRecord::MANY_MANY:
+                break;
+        }
+    }
+
 }

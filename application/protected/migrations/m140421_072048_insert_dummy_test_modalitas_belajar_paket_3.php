@@ -1,8 +1,8 @@
 <?php
 
-class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigration
-{
-	public function up() {
+class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigration {
+
+    public function up() {
         $slug = Type::model()->slugify('Modalitas Belajar');
         $typeModel = Type::model()->findBySlug($slug);
 
@@ -484,7 +484,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
                 )
             )
         );
-        
+
         $testModel = Test::model()->find(array('order' => 'id DESC'));
         $startTest = 1;
         if (!empty($testModel)) {
@@ -530,4 +530,5 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }
+
 }

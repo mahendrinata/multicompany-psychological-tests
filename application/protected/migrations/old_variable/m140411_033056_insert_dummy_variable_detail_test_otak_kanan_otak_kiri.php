@@ -1,8 +1,8 @@
 <?php
 
-class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri extends CDbMigration
-{
-	public function up() {
+class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri extends CDbMigration {
+
+    public function up() {
         $row = array(
             array(
                 'slug' => '47',
@@ -46,4 +46,5 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
         $this->truncateTable('variable_details');
         $this->truncateTable('combinations');
     }
+
 }

@@ -1,8 +1,8 @@
 <?php
 
-class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMigration
-{
-	public function up() {
+class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMigration {
+
+    public function up() {
         $row = array(
             array(
                 'slug' => '49',
@@ -66,4 +66,5 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
         $this->truncateTable('variable_details');
         $this->truncateTable('combinations');
     }
+
 }

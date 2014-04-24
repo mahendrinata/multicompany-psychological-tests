@@ -3,7 +3,6 @@ $this->breadcrumbs = array(
     'Tags' => array('index'),
     'Create',
 );
-
 ?>
 <div class="block">
     <div class="block-title">

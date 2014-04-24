@@ -1038,7 +1038,7 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
                 )
             )
         );
-        
+
         $testModel = Test::model()->find(array('order' => 'id DESC'));
         $startTest = 1;
         if (!empty($testModel)) {

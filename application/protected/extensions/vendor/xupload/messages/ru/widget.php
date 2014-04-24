@@ -1,4 +1,5 @@
 <?php
+
 return array(
     '1#Add files|0#Choose file' => '1#Добавить файлы|0#Выбрать файл',
     'File is too big' => 'Файл слишком большой',
@@ -11,5 +12,4 @@ return array(
     "Start" => 'Загрузить',
     "Cancel" => 'Отменить',
     "Delete" => 'Удалить'
-
 );

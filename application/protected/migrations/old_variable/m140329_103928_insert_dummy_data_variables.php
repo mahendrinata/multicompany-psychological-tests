@@ -68,13 +68,13 @@ class m140329_103928_insert_dummy_data_variables extends CDbMigration {
             array(
                 'name' => 'Compliance',
                 'description' => 'Dorongan untuk menjadi benar, pasti dan aman. Intensi dasarnya to avoid trouble.',
-                 'type_id' => 2
-           ),
+                'type_id' => 2
+            ),
             array(
                 'name' => 'Star',
                 'description' => 'Variable kosong (Pembanding).',
-                 'type_id' => 2
-           ),
+                'type_id' => 2
+            ),
             /**
              * EPPS (Edwards Personal Preference Schedule)
              */

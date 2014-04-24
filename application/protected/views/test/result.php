@@ -18,7 +18,7 @@
         </div>
         <hr class="h50">
         <?php
-        foreach ($variableDetail as $detail){
+        foreach ($variableDetail as $detail) {
             echo $detail->description;
         }
         ?>

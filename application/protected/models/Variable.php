@@ -121,10 +121,10 @@ class Variable extends AppActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-    
+
     public function beforeSave() {
         $type = Type::model()->findByPk($this->type_id);
-        $this->slug = $type->slug.'-'.$this->slugify($this->name);
+        $this->slug = $type->slug . '-' . $this->slugify($this->name);
         return parent::beforeSave();
     }
 

@@ -95,7 +95,7 @@ class VariableDetail extends AppActiveRecord {
         $criteria->compare('shortness', $this->shortness, true);
 
         $criteria->compare('name', $this->name, true);
-        
+
         $criteria->compare('description', $this->description, true);
 
         $criteria->compare('status', $this->status);
@@ -118,10 +118,10 @@ class VariableDetail extends AppActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-    
-    public function deleteWithCombination($variable_detail_id){
+
+    public function deleteWithCombination($variable_detail_id) {
         $variableDetailModel = $this->findByPk($variable_detail_id);
-        foreach ($variableDetailModel->combinations as $combination){
+        foreach ($variableDetailModel->combinations as $combination) {
             $combination->delete();
         }
         return $variableDetailModel->delete();

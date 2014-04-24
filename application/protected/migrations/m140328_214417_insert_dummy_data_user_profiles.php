@@ -83,7 +83,7 @@ class m140328_214417_insert_dummy_data_user_profiles extends CDbMigration {
         foreach ($row as $column) {
             $column['created_at'] = date('Y-m-d H:i:s');
             $column['updated_at'] = date('Y-m-d H:i:s');
-            
+
             $this->insert('user_profiles', $column);
         }
     }

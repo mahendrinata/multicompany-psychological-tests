@@ -1,13 +1,13 @@
 <?php
 
-class TestAnswerTest extends CDbTestCase
-{
-	public $fixtures=array(
-		'testAnswers'=>'TestAnswer',
-	);
+class TestAnswerTest extends CDbTestCase {
 
-	public function testCreate()
-	{
+    public $fixtures = array(
+        'testAnswers' => 'TestAnswer',
+    );
 
-	}
+    public function testCreate() {
+        
+    }
+
 }

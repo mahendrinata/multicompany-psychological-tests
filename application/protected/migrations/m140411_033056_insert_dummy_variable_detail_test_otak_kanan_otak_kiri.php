@@ -1,8 +1,8 @@
 <?php
 
-class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri extends CDbMigration
-{
-	public function up() {
+class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri extends CDbMigration {
+
+    public function up() {
         $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
 
         $kananSlug = Variable::model()->slugify('Otak Kanan');
@@ -10,7 +10,7 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
 
         $kiriSlug = Variable::model()->slugify('Otak Kiri');
         $kiriModel = Variable::model()->findBySlug($slug . '-' . $kiriSlug);
-        
+
         $row = array(
             array(
                 'slug' => $kananModel->id,
@@ -62,5 +62,7 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
     }
 
     public function down() {
+        
     }
+
 }
