@@ -1,24 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "test_answers".
+ * This is the model class for table "members".
  *
- * The followings are the available columns in table 'test_answers':
+ * The followings are the available columns in table 'members':
  * @property integer $id
- * @property integer $user_test_id
- * @property integer $question_id
- * @property integer $answer_id
- * @property integer $total_update
+ * @property string $first_name
+ * @property string $last_name
+ * @property integer $gender
+ * @property string $birth_place
+ * @property string $birth_date
+ * @property string $address
+ * @property string $phone
+ * @property string $photo
+ * @property integer $status_id
+ * @property integer $user_id
  * @property string $created_at
  * @property string $updated_at
  */
-class TestAnswer extends AppActiveRecord {
+class Member extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'test_answers';
+        return 'members';
     }
 
     /**
@@ -28,12 +34,13 @@ class TestAnswer extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_test_id, question_id, answer_id, total_update', 'required'),
-            array('user_test_id, question_id, answer_id, total_update', 'numerical', 'integerOnly' => true),
-            array('created_at, updated_at', 'safe'),
+            array('first_name, gender, status_id', 'required'),
+            array('gender, status_id, user_id', 'numerical', 'integerOnly' => true),
+            array('first_name, last_name, birth_place, birth_date, phone, photo', 'length', 'max' => 255),
+            array('address, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, user_test_id, question_id, answer_id, total_update, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, birth_place, birth_date, address, phone, photo, status_id, user_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -44,9 +51,8 @@ class TestAnswer extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Answer' => array(self::BELONGS_TO, 'Answer', 'answer_id'),
-            'Question' => array(self::BELONGS_TO, 'Question', 'question_id'),
-            'UserTest' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
+            'User' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'UserTest' => array(self::HAS_MANY, 'UserTest', 'member_id'),
         );
     }
 
@@ -56,10 +62,16 @@ class TestAnswer extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
-            'user_test_id' => 'User Test',
-            'question_id' => 'Question',
-            'answer_id' => 'Answer',
-            'total_update' => 'Total Update',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'gender' => 'Gender',
+            'birth_place' => 'Birth Place',
+            'birth_date' => 'Birth Date',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'photo' => 'Photo',
+            'status_id' => 'Status',
+            'user_id' => 'User',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -84,41 +96,41 @@ class TestAnswer extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('user_test_id', $this->user_test_id);
+        $criteria->compare('first_name', $this->first_name, true);
 
-        $criteria->compare('question_id', $this->question_id);
+        $criteria->compare('last_name', $this->last_name, true);
 
-        $criteria->compare('answer_id', $this->answer_id);
+        $criteria->compare('gender', $this->gender);
 
-        $criteria->compare('total_update', $this->total_update);
+        $criteria->compare('birth_place', $this->birth_place, true);
+
+        $criteria->compare('birth_date', $this->birth_date, true);
+
+        $criteria->compare('address', $this->address, true);
+
+        $criteria->compare('phone', $this->phone, true);
+
+        $criteria->compare('photo', $this->photo, true);
+
+        $criteria->compare('status_id', $this->status_id);
+
+        $criteria->compare('user_id', $this->user_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('TestAnswer', array(
+        return new CActiveDataProvider('Member', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return TestAnswer the static model class
+     * @return Member the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
-    }
-
-    public function generateToken($token, $id) {
-        $number = substr($id, -1, 1);
-        return md5($token . substr($token, $number, $number));
-    }
-
-    public function getDefaultAnswer($user_test_id = NULL) {
-        $model = $this->findAllByAttributes(array(
-            'user_test_id' => $user_test_id,
-        ));
-        return CHtml::listData($model, 'question_id', 'answer_id');
     }
 
 }

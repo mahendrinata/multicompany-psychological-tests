@@ -11,23 +11,23 @@
  * @property integer $duration
  * @property string $start_date
  * @property string $end_date
+ * @property integer $publication_id
  * @property integer $show_result
- * @property integer $is_expert 
- * @property integer $is_public
- * @property string $status
- * @property integer $combination_variable 
- * @property integer $user_profile_id
+ * @property integer $combination_variable
+ * @property integer $status_id
+ * @property integer $company_id
+ * @property integer $expert_id
  * @property integer $type_id
  * @property integer $parent_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
 class Test extends AppActiveRecord {
 
-    const IS_PRIVATE = 'PRIVATE';
-    const IS_PUBLIC = 'PUBLIC';
-
-    private $_alias = 'Test';
+    const STATUS_PRIVATE = 0;
+    const STATUS_PUBLIC = 1;
 
     /**
      * @return string the associated database table name
@@ -43,14 +43,13 @@ class Test extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, is_public, combination_variable, type_id, status, show_result', 'required'),
-            array('slug', 'unique'),
-            array('duration, is_public, show_result, combination_variable, user_profile_id, type_id, parent_id', 'numerical', 'integerOnly' => true),
-            array('slug, name, status', 'length', 'max' => 255),
-            array('description, start_date, end_date, is_expert, created_at, updated_at', 'safe'),
+            array('slug, name, description, publication_id, show_result, combination_variable, status_id, type_id', 'required'),
+            array('duration, publication_id, show_result, combination_variable, status_id, company_id, expert_id, type_id, parent_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, name', 'length', 'max' => 255),
+            array('start_date, end_date, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, description, duration, start_date, end_date, is_public, is_expert, show_result, combination_variable, status, user_profile_id, type_id, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, duration, start_date, end_date, publication_id, show_result, combination_variable, status_id, company_id, expert_id, type_id, parent_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -61,12 +60,15 @@ class Test extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'questions' => array(self::HAS_MANY, 'Question', 'test_id'),
-            'parent' => array(self::BELONGS_TO, 'Test', 'parent_id'),
-            'tests' => array(self::HAS_MANY, 'Test', 'parent_id'),
-            'type' => array(self::BELONGS_TO, 'Type', 'type_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
-            'user_tests' => array(self::HAS_MANY, 'UserTest', 'test_id'),
+            'questions' => array(self::HAS_MANY, 'Questions', 'test_id'),
+            'updated_by0' => array(self::BELONGS_TO, 'Users', 'updated_by'),
+            'company' => array(self::BELONGS_TO, 'Companies', 'company_id'),
+            'created_by0' => array(self::BELONGS_TO, 'Users', 'created_by'),
+            'expert' => array(self::BELONGS_TO, 'Experts', 'expert_id'),
+            'parent' => array(self::BELONGS_TO, 'Tests', 'parent_id'),
+            'tests' => array(self::HAS_MANY, 'Tests', 'parent_id'),
+            'type' => array(self::BELONGS_TO, 'Types', 'type_id'),
+            'user_tests' => array(self::HAS_MANY, 'UserTests', 'test_id'),
         );
     }
 
@@ -82,12 +84,16 @@ class Test extends AppActiveRecord {
             'duration' => 'Duration',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
-            'is_public' => 'Publication',
+            'publication_id' => 'Publication',
+            'show_result' => 'Show Result',
             'combination_variable' => 'Combination Variable',
-            'status' => 'Status',
-            'user_profile_id' => 'User Profile',
+            'status_id' => 'Status',
+            'company_id' => 'Company',
+            'expert_id' => 'Expert',
             'type_id' => 'Type',
-            'parent_id' => 'Created By',
+            'parent_id' => 'Parent',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -109,41 +115,44 @@ class Test extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->alias = $this->_alias;
 
-        $criteria->compare($this->_alias . '.id', $this->id);
+        $criteria->compare('id', $this->id);
 
-        $criteria->compare($this->_alias . '.slug', $this->slug, true);
+        $criteria->compare('slug', $this->slug, true);
 
-        $criteria->compare($this->_alias . '.name', $this->name, true);
+        $criteria->compare('name', $this->name, true);
 
-        $criteria->compare($this->_alias . '.description', $this->description, true);
+        $criteria->compare('description', $this->description, true);
 
-        $criteria->compare($this->_alias . '.duration', $this->duration);
+        $criteria->compare('duration', $this->duration);
 
-        $criteria->compare($this->_alias . '.start_date', $this->start_date, true);
+        $criteria->compare('start_date', $this->start_date, true);
 
-        $criteria->compare($this->_alias . '.end_date', $this->end_date, true);
+        $criteria->compare('end_date', $this->end_date, true);
 
-        $criteria->compare($this->_alias . '.is_expert', $this->is_expert);
+        $criteria->compare('publication_id', $this->publication_id);
 
-        $criteria->compare($this->_alias . '.show_result', $this->show_result);
+        $criteria->compare('show_result', $this->show_result);
 
-        $criteria->compare($this->_alias . '.combination_variable', $this->combination_variable);
+        $criteria->compare('combination_variable', $this->combination_variable);
 
-        $criteria->compare($this->_alias . '.is_public', $this->is_public);
+        $criteria->compare('status_id', $this->status_id);
 
-        $criteria->compare($this->_alias . '.status', $this->status);
+        $criteria->compare('company_id', $this->company_id);
 
-        $criteria->compare($this->_alias . '.user_profile_id', $this->user_profile_id);
+        $criteria->compare('expert_id', $this->expert_id);
 
-        $criteria->compare($this->_alias . '.type_id', $this->type_id);
+        $criteria->compare('type_id', $this->type_id);
 
-        $criteria->compare($this->_alias . '.parent_id', $this->parent_id);
+        $criteria->compare('parent_id', $this->parent_id);
 
-        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
+        $criteria->compare('created_by', $this->created_by);
 
-        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
+        $criteria->compare('updated_by', $this->updated_by);
+
+        $criteria->compare('created_at', $this->created_at, true);
+
+        $criteria->compare('updated_at', $this->updated_at, true);
 
         return new CActiveDataProvider('Test', array(
             'criteria' => $criteria,
@@ -173,8 +182,8 @@ class Test extends AppActiveRecord {
 
     public function getPublicationStatus() {
         return array(
-            self::IS_PRIVATE,
-            self::IS_PUBLIC);
+            self::STATUS_PRIVATE,
+            self::STATUS_PUBLIC);
     }
 
     public function getPublicationLabel($status) {
@@ -197,12 +206,11 @@ class Test extends AppActiveRecord {
         $testModel->slug = $model->slug . '-' . $user_profile_id . '-' . ($countTestOfCompany + 1);
         $testModel->name = $model->name . ' ' . ($countTestOfCompany + 1) . ' (' . $userProfileModel->first_name . ')';
         $testModel->description = $model->description;
-        $testModel->is_public = false;
-        $testModel->is_expert = false;
+        $testModel->publication_id = self::STATUS_PRIVATE;
         $testModel->combination_variable = $model->combination_variable;
         $testModel->status = Status::ACTIVE;
         $testModel->type_id = $model->type_id;
-        $testModel->user_profile_id = $user_profile_id;
+        $testModel->company_id = $user_profile_id;
         $testModel->parent_id = $model->id;
         $testModel->save(false);
 
@@ -224,14 +232,14 @@ class Test extends AppActiveRecord {
                 $answerList[] = $answerModel;
             }
             $questionModel->answers = $answerList;
-            $questionModel->withRelated->save(false, array('answers'));
+            $questionModel->withRelated->save(false, array('Answer'));
         }
         return $testModel;
     }
 
     public function getTestCompany($id) {
         return $this->findAllByAttributes(array(
-                'user_profile_id' => $id,
+                'company_id' => $id,
                 'status' => Status::ACTIVE
         ));
     }
@@ -251,8 +259,8 @@ class Test extends AppActiveRecord {
 
     public function deleteWithQuestionAndAnswer($test_id) {
         $testModel = $this->findByPk($test_id);
-        foreach ($testModel->questions as $question) {
-            foreach ($question->answers as $answer) {
+        foreach ($testModel->Question as $question) {
+            foreach ($question->Answer as $answer) {
                 $answer->delete();
             }
             $question->delete();

@@ -7,9 +7,11 @@
  * @property integer $id
  * @property string $description
  * @property integer $value
- * @property string $status
+ * @property integer $status_id
  * @property integer $question_id
  * @property integer $variable_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
@@ -29,13 +31,12 @@ class Answer extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('description, value', 'required'),
-            array('value, question_id, variable_id', 'numerical', 'integerOnly' => true),
-            array('status', 'length', 'max' => 255),
+            array('description, value, status_id, question_id, variable_id', 'required'),
+            array('value, status_id, question_id, variable_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, description, value, status, question_id, variable_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, description, value, status_id, question_id, variable_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -46,9 +47,11 @@ class Answer extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'question' => array(self::BELONGS_TO, 'Question', 'question_id'),
-            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
-            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'answer_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Question' => array(self::BELONGS_TO, 'Question', 'question_id'),
+            'Variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
+            'TestVariable' => array(self::HAS_MANY, 'TestAnswer', 'answer_id'),
         );
     }
 
@@ -60,9 +63,11 @@ class Answer extends AppActiveRecord {
             'id' => 'Id',
             'description' => 'Description',
             'value' => 'Value',
-            'status' => 'Status',
+            'status_id' => 'Status',
             'question_id' => 'Question',
             'variable_id' => 'Variable',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -91,11 +96,15 @@ class Answer extends AppActiveRecord {
 
         $criteria->compare('value', $this->value);
 
-        $criteria->compare('status', $this->status, true);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('question_id', $this->question_id);
 
         $criteria->compare('variable_id', $this->variable_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 

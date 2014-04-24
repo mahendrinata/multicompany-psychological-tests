@@ -6,16 +6,19 @@
  * The followings are the available columns in table 'user_tests':
  * @property integer $id
  * @property integer $spent_time
- * @property integer $time_used 
  * @property string $note
- * @property string $status
  * @property integer $show_result
- * @property string $start_date 
- * @property string $end_date 
- * @property string $token 
- * @property integer $user_profile_id
+ * @property integer $time_used
+ * @property string $start_date
+ * @property string $end_date
+ * @property integer $status_id
+ * @property string $token
  * @property integer $test_id
- * @property integer $company_id 
+ * @property integer $member_id
+ * @property integer $expert_id
+ * @property integer $company_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
@@ -35,13 +38,13 @@ class UserTest extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-//            array('spent_time', 'required'),
-            array('user_profile_id, test_id', 'numerical', 'integerOnly' => true),
-            array('status', 'length', 'max' => 255),
-            array('spent_time, time_used, start_date, status, end_date, show_result, note, token, created_at, updated_at', 'safe'),
+            array('show_result, time_used, status_id', 'required'),
+            array('spent_time, show_result, time_used, status_id, test_id, member_id, expert_id, company_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('token', 'length', 'max' => 255),
+            array('note, start_date, end_date, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, spent_time, time_used, show_result, start_date, end_date, note, token, status, user_profile_id, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, spent_time, note, show_result, time_used, start_date, end_date, status_id, token, test_id, member_id, expert_id, company_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -52,12 +55,15 @@ class UserTest extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'test_variables' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
-            'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
-            'company' => array(self::BELONGS_TO, 'UserProfile', 'company_id'),
-            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
-            'results' => array(self::HAS_MANY, 'Result', 'user_test_id'),
+            'Result' => array(self::HAS_MANY, 'Result', 'user_test_id'),
+            'TestAnswer' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
+            'TestVariable' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'Company' => array(self::BELONGS_TO, 'Company', 'company_id'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
+            'Member' => array(self::BELONGS_TO, 'Member', 'member_id'),
+            'Test' => array(self::BELONGS_TO, 'Test', 'test_id'),
         );
     }
 
@@ -68,16 +74,19 @@ class UserTest extends AppActiveRecord {
         return array(
             'id' => 'Id',
             'spent_time' => 'Spent Time',
-            'time_used' => 'Time Used',
+            'note' => 'Note',
             'show_result' => 'Show Result',
+            'time_used' => 'Time Used',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
-            'note' => 'Note',
-            'status' => 'Status',
+            'status_id' => 'Status',
             'token' => 'Token',
-            'user_profile_id' => 'User Profile',
-            'company_id' => 'Company',
             'test_id' => 'Test',
+            'member_id' => 'Member',
+            'expert_id' => 'Expert',
+            'company_id' => 'Company',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -104,25 +113,31 @@ class UserTest extends AppActiveRecord {
 
         $criteria->compare('spent_time', $this->spent_time);
 
-        $criteria->compare('time_used', $this->time_used);
+        $criteria->compare('note', $this->note, true);
 
         $criteria->compare('show_result', $this->show_result);
 
-        $criteria->compare('note', $this->note, true);
+        $criteria->compare('time_used', $this->time_used);
 
         $criteria->compare('start_date', $this->start_date, true);
 
         $criteria->compare('end_date', $this->end_date, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
 
-        $criteria->compare('token', $this->token);
-
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare('token', $this->token, true);
 
         $criteria->compare('test_id', $this->test_id);
 
+        $criteria->compare('member_id', $this->member_id);
+
+        $criteria->compare('expert_id', $this->expert_id);
+
         $criteria->compare('company_id', $this->company_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 

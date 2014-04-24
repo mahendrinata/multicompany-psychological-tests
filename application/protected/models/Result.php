@@ -5,10 +5,9 @@
  *
  * The followings are the available columns in table 'results':
  * @property integer $id
- * @property string $slug
+ * @property integer $conclusion_detail_id
  * @property string $description
  * @property integer $user_test_id
- * @property integer $variable_detail_slug
  * @property string $created_at
  * @property string $updated_at
  */
@@ -28,12 +27,12 @@ class Result extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_test_id', 'numerical', 'integerOnly' => true),
-            array('slug', 'length', 'max' => 255),
-            array('description, created_at, updated_at', 'safe'),
+            array('conclusion_detail_id, description, user_test_id', 'required'),
+            array('conclusion_detail_id, user_test_id', 'numerical', 'integerOnly' => true),
+            array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, description, user_test_id, variable_detail_slug, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, conclusion_detail_id, description, user_test_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -44,8 +43,7 @@ class Result extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_test' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
-            'variable_details' => array(self::HAS_MANY, 'VariableDetail', array('slug' => 'variable_detail_slug')),
+            'UserTest' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
         );
     }
 
@@ -55,10 +53,9 @@ class Result extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
-            'slug' => 'Slug',
+            'conclusion_detail_id' => 'Conclusion Detail',
             'description' => 'Description',
             'user_test_id' => 'User Test',
-            'variable_detail_slug' => 'Variable Detail',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -83,13 +80,11 @@ class Result extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('slug', $this->slug, true);
+        $criteria->compare('conclusion_detail_id', $this->conclusion_detail_id);
 
         $criteria->compare('description', $this->description, true);
 
         $criteria->compare('user_test_id', $this->user_test_id);
-
-        $criteria->compare('variable_detail_slug', $this->variable_detail_slug);
 
         $criteria->compare('created_at', $this->created_at, true);
 

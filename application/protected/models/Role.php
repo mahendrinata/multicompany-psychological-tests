@@ -8,7 +8,9 @@
  * @property string $slug
  * @property string $name
  * @property string $description
- * @property string $status
+ * @property integer $status_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
@@ -28,13 +30,13 @@ class Role extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, status', 'required'),
-            array('slug', 'unique'),
-            array('slug, name, status', 'length', 'max' => 255),
+            array('slug, name, status_id', 'required'),
+            array('status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, name', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, description, status, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -45,7 +47,9 @@ class Role extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_profiles' => array(self::HAS_MANY, 'UserProfile', 'role_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'UserRole' => array(self::HAS_MANY, 'UserRole', 'role_id'),
         );
     }
 
@@ -58,7 +62,9 @@ class Role extends AppActiveRecord {
             'slug' => 'Slug',
             'name' => 'Name',
             'description' => 'Description',
-            'status' => 'Status',
+            'status_id' => 'Status',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -89,7 +95,11 @@ class Role extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 

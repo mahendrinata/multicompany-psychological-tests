@@ -6,14 +6,14 @@
  * The followings are the available columns in table 'questions':
  * @property integer $id
  * @property string $description
- * @property string $status
+ * @property integer $status_id
  * @property integer $test_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
 class Question extends AppActiveRecord {
-
-    private $_alias = 'Question';
 
     /**
      * @return string the associated database table name
@@ -29,13 +29,12 @@ class Question extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('status', 'required'),
-            array('test_id', 'numerical', 'integerOnly' => true),
-            array('status', 'length', 'max' => 255),
+            array('description, status_id, test_id', 'required'),
+            array('status_id, test_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, description, status, test_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, description, status_id, test_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -46,9 +45,11 @@ class Question extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'answers' => array(self::HAS_MANY, 'Answer', 'question_id'),
-            'test' => array(self::BELONGS_TO, 'Test', 'test_id'),
-            'test_answers' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
+            'Answer' => array(self::HAS_MANY, 'Answer', 'question_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Test' => array(self::BELONGS_TO, 'Test', 'test_id'),
+            'TestAnswer' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
         );
     }
 
@@ -59,8 +60,10 @@ class Question extends AppActiveRecord {
         return array(
             'id' => 'Id',
             'description' => 'Description',
-            'status' => 'Status',
+            'status_id' => 'Status',
             'test_id' => 'Test',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -82,19 +85,22 @@ class Question extends AppActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->alias = $this->_alias;
 
-        $criteria->compare($this->_alias . '.id', $this->id);
+        $criteria->compare('id', $this->id);
 
-        $criteria->compare($this->_alias . '.description', $this->description, true);
+        $criteria->compare('description', $this->description, true);
 
-        $criteria->compare($this->_alias . '.status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
 
-        $criteria->compare($this->_alias . '.test_id', $this->test_id);
+        $criteria->compare('test_id', $this->test_id);
 
-        $criteria->compare($this->_alias . '.created_at', $this->created_at, true);
+        $criteria->compare('created_by', $this->created_by);
 
-        $criteria->compare($this->_alias . '.updated_at', $this->updated_at, true);
+        $criteria->compare('updated_by', $this->updated_by);
+
+        $criteria->compare('created_at', $this->created_at, true);
+
+        $criteria->compare('updated_at', $this->updated_at, true);
 
         return new CActiveDataProvider('Question', array(
             'criteria' => $criteria,
@@ -131,9 +137,9 @@ class Question extends AppActiveRecord {
                 $answerList[] = $answerModel;
             }
         }
-        $questionModel->answers = $answerList;
+        $questionModel->Answer = $answerList;
 
-        return $questionModel->withRelated->save(false, array('answers'));
+        return $questionModel->withRelated->save(false, array('Answer'));
     }
 
 }

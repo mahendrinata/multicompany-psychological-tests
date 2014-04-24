@@ -7,9 +7,11 @@
  * @property integer $id
  * @property string $slug
  * @property string $name
- * @property string $status
+ * @property integer $status_id
  * @property integer $parent_id
- * @property integer $user_profile_id
+ * @property integer $expert_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
@@ -29,14 +31,13 @@ class Tag extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, status', 'required'),
-            array('slug', 'unique'),
-            array('parent_id, user_profile_id', 'numerical', 'integerOnly' => true),
-            array('slug, name, status', 'length', 'max' => 255),
+            array('slug, name, status_id, expert_id', 'required'),
+            array('status_id, parent_id, expert_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, name', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, status, parent_id, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, status_id, parent_id, expert_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -47,11 +48,12 @@ class Tag extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tag_variables' => array(self::MANY_MANY, 'VariableDetail', 'tag_variables(tag_id, variable_detail_id)'),
-            'parent' => array(self::BELONGS_TO, 'Tag', 'parent_id'),
-            'tags' => array(self::HAS_MANY, 'Tag', 'parent_id'),
-            'tag_childs' => array(self::HAS_MANY, 'Tag', array('parent_id' => 'id'), 'through' => 'parent'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
+            'TagVariable' => array(self::HAS_MANY, 'TagVariable', 'tag_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
+            'Parent' => array(self::BELONGS_TO, 'Tag', 'parent_id'),
+            'Tag' => array(self::HAS_MANY, 'Tag', 'parent_id'),
         );
     }
 
@@ -63,9 +65,11 @@ class Tag extends AppActiveRecord {
             'id' => 'Id',
             'slug' => 'Slug',
             'name' => 'Name',
-            'status' => 'Status',
-            'parent_id' => 'Created By',
-            'user_profile_id' => 'User Profile',
+            'status_id' => 'Status',
+            'parent_id' => 'Parent',
+            'expert_id' => 'Expert',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -94,11 +98,15 @@ class Tag extends AppActiveRecord {
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('parent_id', $this->parent_id);
 
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare('expert_id', $this->expert_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 

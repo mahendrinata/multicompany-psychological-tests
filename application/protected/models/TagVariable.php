@@ -1,24 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "test_answers".
+ * This is the model class for table "tag_variables".
  *
- * The followings are the available columns in table 'test_answers':
+ * The followings are the available columns in table 'tag_variables':
  * @property integer $id
- * @property integer $user_test_id
- * @property integer $question_id
- * @property integer $answer_id
- * @property integer $total_update
+ * @property integer $tag_id
+ * @property integer $variable_detail_id
  * @property string $created_at
  * @property string $updated_at
  */
-class TestAnswer extends AppActiveRecord {
+class TagVariable extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'test_answers';
+        return 'tag_variables';
     }
 
     /**
@@ -28,12 +26,12 @@ class TestAnswer extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_test_id, question_id, answer_id, total_update', 'required'),
-            array('user_test_id, question_id, answer_id, total_update', 'numerical', 'integerOnly' => true),
+            array('tag_id, variable_detail_id', 'required'),
+            array('tag_id, variable_detail_id', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, user_test_id, question_id, answer_id, total_update, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, tag_id, variable_detail_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -44,9 +42,8 @@ class TestAnswer extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Answer' => array(self::BELONGS_TO, 'Answer', 'answer_id'),
-            'Question' => array(self::BELONGS_TO, 'Question', 'question_id'),
-            'UserTest' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
+            'VariableDetail' => array(self::BELONGS_TO, 'VariableDetail', 'variable_detail_id'),
+            'Tag' => array(self::BELONGS_TO, 'Tag', 'tag_id'),
         );
     }
 
@@ -56,10 +53,8 @@ class TestAnswer extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
-            'user_test_id' => 'User Test',
-            'question_id' => 'Question',
-            'answer_id' => 'Answer',
-            'total_update' => 'Total Update',
+            'tag_id' => 'Tag',
+            'variable_detail_id' => 'Variable Detail',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -84,41 +79,25 @@ class TestAnswer extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('user_test_id', $this->user_test_id);
+        $criteria->compare('tag_id', $this->tag_id);
 
-        $criteria->compare('question_id', $this->question_id);
-
-        $criteria->compare('answer_id', $this->answer_id);
-
-        $criteria->compare('total_update', $this->total_update);
+        $criteria->compare('variable_detail_id', $this->variable_detail_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('TestAnswer', array(
+        return new CActiveDataProvider('TagVariable', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return TestAnswer the static model class
+     * @return TagVariable the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
-    }
-
-    public function generateToken($token, $id) {
-        $number = substr($id, -1, 1);
-        return md5($token . substr($token, $number, $number));
-    }
-
-    public function getDefaultAnswer($user_test_id = NULL) {
-        $model = $this->findAllByAttributes(array(
-            'user_test_id' => $user_test_id,
-        ));
-        return CHtml::listData($model, 'question_id', 'answer_id');
     }
 
 }

@@ -43,8 +43,8 @@ class TestVariable extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_test' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
-            'variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
+            'Variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
+            'UserTest' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
         );
     }
 
@@ -109,7 +109,7 @@ class TestVariable extends AppActiveRecord {
         if (empty($userTestModel))
             return false;
 
-        $type = $userTestModel->test->type;
+        $type = $userTestModel->Test->Type;
         switch ($type->conclusion) {
             case Conclusion::SINGLE:
                 $output = ConclusionSingleTest::model()->generate($userTestModel->id);

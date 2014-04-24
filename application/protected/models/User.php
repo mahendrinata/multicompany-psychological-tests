@@ -8,7 +8,7 @@
  * @property string $username
  * @property string $email
  * @property string $password
- * @property string $status
+ * @property integer $status_id
  * @property string $last_login
  * @property string $last_login_ip
  * @property integer $login_count
@@ -33,16 +33,13 @@ class User extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, email, password, status', 'required'),
-            array('email', 'email'),
-            array('username, email', 'unique'),
-            array('password_confirmation', 'required', 'on' => 'register'),
-            array('password', 'compare', 'compareAttribute' => 'password_confirmation', 'on' => 'register'),
-            array('username, password', 'length', 'min' => 5, 'max' => 255),
+            array('username, email, password, status_id, login_count', 'required'),
+            array('status_id, login_count, parent_id', 'numerical', 'integerOnly' => true),
+            array('username, email, password, last_login_ip, token', 'length', 'max' => 255),
             array('last_login, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, username, email, password, status, last_login, last_login_ip, token, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, username, email, password, status_id, last_login, last_login_ip, login_count, token, parent_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -53,10 +50,35 @@ class User extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user_profiles' => array(self::HAS_MANY, 'UserProfile', 'user_id'),
-            'roles' => array(self::HAS_MANY, 'Role', array('role_id' => 'id'), 'through' => 'user_profiles'),
-            'parent' => array(self::BELONGS_TO, 'User', 'parent_id'),
-            'users' => array(self::HAS_MANY, 'User', 'parent_id'),
+            'ExpertUser' => array(self::HAS_MANY, 'ExpertUser', 'user_id'),
+            'Member' => array(self::HAS_MANY, 'Member', 'user_id'),
+            'UserRole' => array(self::HAS_MANY, 'UserRole', 'user_id'),
+            'Parent' => array(self::BELONGS_TO, 'User', 'parent_id'),
+            'User' => array(self::HAS_MANY, 'User', 'parent_id'),
+            'CreateAnswer' => array(self::HAS_MANY, 'Answer', 'created_by'),
+            'CreateCompanie' => array(self::HAS_MANY, 'Company', 'created_by'),
+            'CompanyUser' => array(self::HAS_MANY, 'CompanyUser', 'user_id'),
+            'CreateExpert' => array(self::HAS_MANY, 'Expert', 'created_by'),
+            'CreateQuestion' => array(self::HAS_MANY, 'Question', 'created_by'),
+            'CreateRole' => array(self::HAS_MANY, 'Role', 'created_by'),
+            'CreateTag' => array(self::HAS_MANY, 'Tag', 'created_by'),
+            'CreateTest' => array(self::HAS_MANY, 'Test', 'created_by'),
+            'CreateType' => array(self::HAS_MANY, 'Type', 'created_by'),
+            'CreateUserTest' => array(self::HAS_MANY, 'UserTest', 'created_by'),
+            'CreateVariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'created_by'),
+            'CreateVariable' => array(self::HAS_MANY, 'Variable', 'created_by'),
+            'UpdateAnswer' => array(self::HAS_MANY, 'Answer', 'updated_by'),
+            'UpdateCompanie' => array(self::HAS_MANY, 'Company', 'updated_by'),
+            'CompanyUser' => array(self::HAS_MANY, 'CompanyUser', 'user_id'),
+            'UpdateExpert' => array(self::HAS_MANY, 'Expert', 'updated_by'),
+            'UpdateQuestion' => array(self::HAS_MANY, 'Question', 'updated_by'),
+            'UpdateRole' => array(self::HAS_MANY, 'Role', 'updated_by'),
+            'UpdateTag' => array(self::HAS_MANY, 'Tag', 'updated_by'),
+            'UpdateTest' => array(self::HAS_MANY, 'Test', 'updated_by'),
+            'UpdateType' => array(self::HAS_MANY, 'Type', 'updated_by'),
+            'UpdateUserTest' => array(self::HAS_MANY, 'UserTest', 'updated_by'),
+            'UpdateVariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'updated_by'),
+            'UpdateVariable' => array(self::HAS_MANY, 'Variable', 'updated_by'),
         );
     }
 
@@ -69,9 +91,10 @@ class User extends AppActiveRecord {
             'username' => 'Username',
             'email' => 'Email',
             'password' => 'Password',
-            'status' => 'Status',
+            'status_id' => 'Status',
             'last_login' => 'Last Login',
             'last_login_ip' => 'Last Login Ip',
+            'login_count' => 'Login Count',
             'token' => 'Token',
             'parent_id' => 'Parent',
             'created_at' => 'Created At',
@@ -104,11 +127,13 @@ class User extends AppActiveRecord {
 
         $criteria->compare('password', $this->password, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('last_login', $this->last_login, true);
 
         $criteria->compare('last_login_ip', $this->last_login_ip, true);
+
+        $criteria->compare('login_count', $this->login_count);
 
         $criteria->compare('token', $this->token, true);
 
@@ -167,10 +192,9 @@ class User extends AppActiveRecord {
     }
 
     public function getActiveUserByUsername($username = NULL) {
-        return $this->with(array('user_profiles', 'user_profiles.role'))
-                ->findByAttributes(array(
-                    'username' => $username,
-                    'status' => Status::ACTIVE));
+        return $this->findByAttributes(array(
+                'username' => $username,
+                'status' => Status::ACTIVE));
     }
 
     public function afterLogin($user) {

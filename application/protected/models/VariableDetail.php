@@ -9,8 +9,10 @@
  * @property string $shortness
  * @property string $name
  * @property string $description
- * @property string $status
- * @property integer $user_profile_id
+ * @property integer $status_id
+ * @property integer $expert_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
@@ -30,13 +32,13 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, shortness, name, description, status', 'required'),
-            array('user_profile_id', 'numerical', 'integerOnly' => true),
-            array('status', 'length', 'max' => 255),
-            array('description, created_at, updated_at', 'safe'),
+            array('slug, shortness, name, description, status_id, expert_id', 'required'),
+            array('status_id, expert_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, shortness, name', 'length', 'max' => 255),
+            array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, shortness, name, description, status, user_profile_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, shortness, name, description, status_id, expert_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -47,10 +49,12 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'combinations' => array(self::MANY_MANY, 'Variable', 'combinations(variable_detail_id, variable_id)'),
-            'user_profile' => array(self::BELONGS_TO, 'UserProfile', 'user_profile_id'),
-            'tag_variables' => array(self::MANY_MANY, 'Tag', 'tag_variables(variable_detail_id, tag_id)'),
-            'result' => array(self::BELONGS_TO, 'Result', array('slug' => 'variable_detail_slug')),
+            'Combination' => array(self::HAS_MANY, 'Combination', 'variable_detail_id'),
+            'ResultDetail' => array(self::HAS_MANY, 'ResultDetail', 'variable_detail_id'),
+            'TagVariable' => array(self::HAS_MANY, 'TagVariable', 'variable_detail_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
         );
     }
 
@@ -64,8 +68,10 @@ class VariableDetail extends AppActiveRecord {
             'shortness' => 'Shortness',
             'name' => 'Name',
             'description' => 'Description',
-            'status' => 'Status',
-            'user_profile_id' => 'User Profile',
+            'status_id' => 'Status',
+            'expert_id' => 'Expert',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -98,9 +104,13 @@ class VariableDetail extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status', $this->status);
+        $criteria->compare('status_id', $this->status_id);
 
-        $criteria->compare('user_profile_id', $this->user_profile_id);
+        $criteria->compare('expert_id', $this->expert_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 
@@ -121,7 +131,7 @@ class VariableDetail extends AppActiveRecord {
 
     public function deleteWithCombination($variable_detail_id) {
         $variableDetailModel = $this->findByPk($variable_detail_id);
-        foreach ($variableDetailModel->combinations as $combination) {
+        foreach ($variableDetailModel->Combination as $combination) {
             $combination->delete();
         }
         return $variableDetailModel->delete();
