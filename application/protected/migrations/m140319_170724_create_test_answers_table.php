@@ -8,6 +8,7 @@ class m140319_170724_create_test_answers_table extends CDbMigration {
             'user_test_id' => 'integer NOT NULL',
             'question_id' => 'integer NOT NULL',
             'answer_id' => 'integer NOT NULL',
+            'total_update' => 'integer NOT NULL',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));

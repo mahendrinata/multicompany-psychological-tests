@@ -8,17 +8,21 @@ class m140319_170754_create_variables_table extends CDbMigration {
             'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
             'description' => 'text',
-            'status' => 'string',
-            'type_id' => 'integer',
-            'user_profile_id' => 'integer',
+            'status_id' => 'integer NOT NULL',
+            'type_id' => 'integer NOT NULL',
+            'expert_id' => 'integer NOT NULL',
+            'created_by' => 'integer',
+            'updated_by' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ));
 
         $this->createIndex('slug_variables_unique', 'variables', 'slug');
-        $this->createIndex('status_variables_index', 'variables', 'status');
+        $this->createIndex('status_id_variables_index', 'variables', 'status_id');
         $this->createIndex('type_id_variables_index', 'variables', 'type_id');
-        $this->createIndex('user_profiles_id_variables_index', 'variables', 'user_profile_id');
+        $this->createIndex('expert_id_variables_index', 'variables', 'expert_id');
+        $this->createIndex('created_by_variables_index', 'variables', 'created_by');
+        $this->createIndex('updated_by_variables_index', 'variables', 'updated_by');
     }
 
     public function down() {

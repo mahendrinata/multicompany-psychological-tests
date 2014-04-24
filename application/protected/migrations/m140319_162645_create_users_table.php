@@ -8,7 +8,7 @@ class m140319_162645_create_users_table extends CDbMigration {
             'username' => 'string NOT NULL',
             'email' => 'string NOT NULL',
             'password' => 'string NOT NULL',
-            'status' => 'string',
+            'status_id' => 'integer NOT NULL',
             'last_login' => 'datetime',
             'last_login_ip' => 'string',
             'login_count' => 'integer NOT NULL',
@@ -20,7 +20,7 @@ class m140319_162645_create_users_table extends CDbMigration {
 
         $this->createIndex('username_users_unique', 'users', 'username', true);
         $this->createIndex('email_users_unique', 'users', 'email', true);
-        $this->createIndex('status_users_index', 'users', 'status');
+        $this->createIndex('status_id_users_index', 'users', 'status_id');
         $this->createIndex('token_users_index', 'users', 'token');
         $this->createIndex('parent_id_users_index', 'users', 'parent_id');
     }

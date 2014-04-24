@@ -48,7 +48,7 @@ return array(
             ),
         ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=sipsiko_yii',
+            'connectionString' => 'mysql:host=localhost;dbname=sipsiko_multicompany',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '',
