@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "user_roles".
+ * This is the model class for table "positions".
  *
- * The followings are the available columns in table 'user_roles':
+ * The followings are the available columns in table 'positions':
  * @property integer $id
+ * @property string $slug
+ * @property string $name
+ * @property string $description
  * @property integer $status_id
- * @property integer $user_id
  * @property integer $role_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
-class UserRole extends AppActiveRecord {
+class Position extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'user_roles';
+        return 'positions';
     }
 
     /**
@@ -27,12 +31,13 @@ class UserRole extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('status_id, user_id, role_id', 'required'),
-            array('status_id, user_id, role_id', 'numerical', 'integerOnly' => true),
-            array('created_at, updated_at', 'safe'),
+            array('slug, name, status_id, role_id', 'required'),
+            array('status_id, role_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, name', 'length', 'max' => 255),
+            array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, status_id, user_id, role_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, status_id, role_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -43,8 +48,10 @@ class UserRole extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'PositionAccess' => array(self::HAS_MANY, 'PositionAccess', 'position_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Role' => array(self::BELONGS_TO, 'Role', 'role_id'),
-            'User' => array(self::BELONGS_TO, 'User', 'user_id'),
         );
     }
 
@@ -54,9 +61,13 @@ class UserRole extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
+            'slug' => 'Slug',
+            'name' => 'Name',
+            'description' => 'Description',
             'status_id' => 'Status',
-            'user_id' => 'User',
             'role_id' => 'Role',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -81,24 +92,32 @@ class UserRole extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
+        $criteria->compare('slug', $this->slug, true);
+
+        $criteria->compare('name', $this->name, true);
+
+        $criteria->compare('description', $this->description, true);
+
         $criteria->compare('status_id', $this->status_id);
 
-        $criteria->compare('user_id', $this->user_id);
-
         $criteria->compare('role_id', $this->role_id);
+
+        $criteria->compare('created_by', $this->created_by);
+
+        $criteria->compare('updated_by', $this->updated_by);
 
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('UserRole', array(
+        return new CActiveDataProvider('Position', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return UserRole the static model class
+     * @return Position the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);

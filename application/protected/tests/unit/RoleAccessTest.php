@@ -1,9 +1,9 @@
 <?php
 
-class UserRolesTest extends CDbTestCase {
+class RoleAccessTest extends CDbTestCase {
 
     public $fixtures = array(
-        'userRoles' => 'UserRoles',
+        'roleAccesses' => 'RoleAccess',
     );
 
     public function testCreate() {

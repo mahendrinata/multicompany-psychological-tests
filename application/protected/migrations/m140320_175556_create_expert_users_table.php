@@ -2,7 +2,7 @@
 
 class m140320_175556_create_expert_users_table extends CDbMigration {
 
-     public function up() {
+    public function up() {
         $this->createTable('expert_users', array(
             'id' => 'pk',
             'expert_id' => 'integer NOT NULL',

@@ -67,6 +67,10 @@ class User extends AppActiveRecord {
             'CreateUserTest' => array(self::HAS_MANY, 'UserTest', 'created_by'),
             'CreateVariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'created_by'),
             'CreateVariable' => array(self::HAS_MANY, 'Variable', 'created_by'),
+            'CreateAccess' => array(self::HAS_MANY, 'CreateAccess', 'created_by'),
+            'CreatePosition' => array(self::HAS_MANY, 'CreatePosition', 'created_by'),
+            'CreateRoleAccess' => array(self::HAS_MANY, 'CreateRoleAccess', 'created_by'),
+            'CreateRoleAccess' => array(self::HAS_MANY, 'CreateRoleAccess', 'created_by'),
             'UpdateAnswer' => array(self::HAS_MANY, 'Answer', 'updated_by'),
             'UpdateCompanie' => array(self::HAS_MANY, 'Company', 'updated_by'),
             'CompanyUser' => array(self::HAS_MANY, 'CompanyUser', 'user_id'),
@@ -79,6 +83,10 @@ class User extends AppActiveRecord {
             'UpdateUserTest' => array(self::HAS_MANY, 'UserTest', 'updated_by'),
             'UpdateVariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'updated_by'),
             'UpdateVariable' => array(self::HAS_MANY, 'Variable', 'updated_by'),
+            'UpdateAccess' => array(self::HAS_MANY, 'UpdateAccess', 'updated_by'),
+            'UpdatePosition' => array(self::HAS_MANY, 'UpdatePosition', 'updated_by'),
+            'UpdateRoleAccess' => array(self::HAS_MANY, 'UpdateRoleAccess', 'updated_by'),
+            'UpdateRoleAccess' => array(self::HAS_MANY, 'UpdateRoleAccess', 'updated_by'),
         );
     }
 

@@ -16,5 +16,4 @@ class m140328_212650_add_foreign_key_position_accesses extends CDbMigration {
         $this->dropForeignKey('fk_updated_by_position_accesses', 'position_accesses');
     }
 
-
 }
