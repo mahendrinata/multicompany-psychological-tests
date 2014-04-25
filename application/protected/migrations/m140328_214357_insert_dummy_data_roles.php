@@ -5,34 +5,33 @@ class m140328_214357_insert_dummy_data_roles extends CDbMigration {
     public function up() {
         $row = array(
             array(
-                'slug' => RolePrivilege::ADMIN,
-                'name' => RolePrivilege::ADMIN,
+                'slug' => Role::ADMIN,
+                'name' => ucwords(Role::ADMIN),
                 'description' => '',
             ),
             array(
-                'slug' => RolePrivilege::EXPERT,
-                'name' => RolePrivilege::EXPERT,
+                'slug' => Role::EXPERT,
+                'name' => ucwords(Role::EXPERT),
                 'description' => '',
             ),
             array(
-                'slug' => RolePrivilege::COMPANY,
-                'name' => RolePrivilege::COMPANY,
+                'slug' => Role::COMPANY,
+                'name' => ucwords(Role::COMPANY),
                 'description' => '',
             ),
             array(
-                'slug' => RolePrivilege::MEMBER,
-                'name' => RolePrivilege::MEMBER,
+                'slug' => Role::MEMBER,
+                'name' => ucwords(Role::MEMBER),
                 'description' => '',
             ),
             array(
-                'slug' => RolePrivilege::GUEST,
-                'name' => RolePrivilege::GUEST,
+                'slug' => Role::GUEST,
+                'name' => ucwords(Role::GUEST),
                 'description' => '',
         ));
         foreach ($row as $column) {
-            $column['status'] = Status::ACTIVE;
+            $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['created_at'] = date('Y-m-d H:i:s');
-            $column['updated_at'] = date('Y-m-d H:i:s');
 
             $this->insert('roles', $column);
         }

@@ -7,13 +7,19 @@
  * @property integer $id
  * @property string $slug
  * @property string $name
- * @property string $descripsion
+ * @property string $description
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
 class Status extends AppActiveRecord {
+
+    const DRAFT = 'DRAFT';
+    const ACTIVE = 'ACTIVE';
+    const INACTIVE = 'INACTIVE';
+    const FINISH = 'FINISH';
+    const VOID = 'VOID';
 
     /**
      * @return string the associated database table name
@@ -32,10 +38,10 @@ class Status extends AppActiveRecord {
             array('slug, name', 'required'),
             array('created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
-            array('descripsion, created_at, updated_at', 'safe'),
+            array('description, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, descripsion, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, description, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -74,7 +80,7 @@ class Status extends AppActiveRecord {
             'id' => 'Id',
             'slug' => 'Slug',
             'name' => 'Name',
-            'descripsion' => 'Descripsion',
+            'description' => 'Description',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'created_at' => 'Created At',
@@ -105,7 +111,7 @@ class Status extends AppActiveRecord {
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->compare('descripsion', $this->descripsion, true);
+        $criteria->compare('description', $this->descripsion, true);
 
         $criteria->compare('created_by', $this->created_by);
 
@@ -126,6 +132,52 @@ class Status extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function getListStatus() {
+        $list = array(
+            self::DRAFT,
+            self::ACTIVE,
+            self::INACTIVE,
+            self::FINISH,
+            self::VOID
+        );
+        $output = array();
+        for ($i = 1; $i < count($list); $i++) {
+            $output[($i + 1)] = $list[$i];
+        }
+        return $output;
+    }
+    
+    public function getStatusIdBySlug($slug){
+        return array_search($slug, $this->getListStatus());
+    }
+
+    public function getMapStatus() {
+        $map = array();
+        foreach ($this->getListStatus() as $status) {
+            $map[$status] = $status;
+        }
+        return $map;
+    }
+
+    public function getLabelClassStatus($status) {
+        $label = array(
+            self::DRAFT => 'label-default',
+            self::ACTIVE => 'label-success',
+            self::INACTIVE => 'label-warning',
+            self::FINISH => 'label-info',
+            self::VOID => 'label-danger',
+        );
+        if (in_array($status, $this->getListStatus())) {
+            return $label[$status];
+        } else {
+            return null;
+        }
+    }
+
+    public function getLabelStatus($status) {
+        return CHtml::tag("span", array("class" => "label " . $this->getLabelClassStatus($status)), $status);
     }
 
 }

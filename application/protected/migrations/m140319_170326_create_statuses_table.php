@@ -7,7 +7,7 @@ class m140319_170326_create_statuses_table extends CDbMigration {
             'id' => 'pk',
             'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
-            'descripsion' => 'text',
+            'description' => 'text',
             'created_by' => 'integer',
             'updated_by' => 'integer',
             'created_at' => 'datetime',

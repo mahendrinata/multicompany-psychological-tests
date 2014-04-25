@@ -16,6 +16,12 @@
  */
 class Role extends AppActiveRecord {
 
+    const ADMIN = 'ADMIN';
+    const EXPERT = 'EXPERT';
+    const COMPANY = 'COMPANY';
+    const MEMBER = 'MEMBER';
+    const GUEST = 'GUEST';
+
     /**
      * @return string the associated database table name
      */
@@ -117,6 +123,37 @@ class Role extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function getList() {
+        $list = array(
+            self::ADMIN,
+            self::EXPERT,
+            self::COMPANY,
+            self::MEMBER,
+            self::GUEST
+        );
+        $output = array();
+        for ($i = 1; $i < count($list); $i++) {
+            $output[($i + 1)] = $list[$i];
+        }
+        return $output;
+    }
+
+    public function getPriority() {
+        $roles = $this->getList();
+        foreach ($roles as $key => $value) {
+            $priorities[$value] = $key;
+        }
+        return $priorities;
+    }
+
+    public function getMap() {
+        $map = array();
+        foreach ($this->getList() as $role) {
+            $map[$role] = $role;
+        }
+        return $map;
     }
 
 }

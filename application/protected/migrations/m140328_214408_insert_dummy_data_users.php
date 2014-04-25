@@ -10,9 +10,8 @@ class m140328_214408_insert_dummy_data_users extends CDbMigration {
                 'username' => User::model()->slugify($username),
                 'email' => $username . '@sipsiko.com',
                 'password' => User::model()->hashPassword($username),
-                'status' => Status::ACTIVE,
+                'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
             );
         }
         foreach ($row as $column) {
