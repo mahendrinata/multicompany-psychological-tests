@@ -40,14 +40,15 @@ class m140402_093542_insert_dummy_data_tags extends CDbMigration {
     }
 
     public function insertTag($name = NULL, $parent_id = NULL) {
+        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $this->insert('tags', array(
             'slug' => Tag::model()->slugify($name),
             'name' => $name,
-            'status' => Status::ACTIVE,
-            'user_profile_id' => 2,
+            'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
+            'expert_id' => 1,
             'parent_id' => $parent_id,
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'created_by' => $user->id
         ));
     }
 
