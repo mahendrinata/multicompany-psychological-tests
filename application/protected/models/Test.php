@@ -181,10 +181,19 @@ class Test extends AppActiveRecord {
         return parent::beforeSave();
     }
 
-    public function getPublicationStatus() {
-        return array(
+    public function getListPublication() {
+        $list = array(
             self::STATUS_PRIVATE,
             self::STATUS_PUBLIC);
+        $output = array();
+        for ($i = 0; $i < count($list); $i++) {
+            $output[($i + 1)] = $list[$i];
+        }
+        return $output;
+    }
+
+    public function getPublicationIdBySlug($slug){
+        return array_search($slug, $this->getListPublication());
     }
 
     public function getPublicationLabel($status) {
