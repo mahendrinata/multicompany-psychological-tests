@@ -60,15 +60,16 @@ class Test extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'questions' => array(self::HAS_MANY, 'Questions', 'test_id'),
-            'updated_by0' => array(self::BELONGS_TO, 'Users', 'updated_by'),
-            'company' => array(self::BELONGS_TO, 'Companies', 'company_id'),
-            'created_by0' => array(self::BELONGS_TO, 'Users', 'created_by'),
-            'expert' => array(self::BELONGS_TO, 'Experts', 'expert_id'),
-            'parent' => array(self::BELONGS_TO, 'Tests', 'parent_id'),
-            'tests' => array(self::HAS_MANY, 'Tests', 'parent_id'),
-            'type' => array(self::BELONGS_TO, 'Types', 'type_id'),
-            'user_tests' => array(self::HAS_MANY, 'UserTests', 'test_id'),
+            'Question' => array(self::HAS_MANY, 'Question', 'test_id'),
+            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
+            'Company' => array(self::BELONGS_TO, 'Company', 'company_id'),
+            'Createdby' => array(self::BELONGS_TO, 'User', 'created_by'),
+            'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
+            'Parent' => array(self::BELONGS_TO, 'Test', 'parent_id'),
+            'Tests' => array(self::HAS_MANY, 'Test', 'parent_id'),
+            'Type' => array(self::BELONGS_TO, 'Type', 'type_id'),
+            'UserTest' => array(self::HAS_MANY, 'UserTest', 'test_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

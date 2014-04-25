@@ -56,6 +56,7 @@ class Variable extends AppActiveRecord {
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
             'Type' => array(self::BELONGS_TO, 'Type', 'type_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

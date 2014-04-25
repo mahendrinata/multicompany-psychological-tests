@@ -64,6 +64,7 @@ class UserTest extends AppActiveRecord {
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
             'Member' => array(self::BELONGS_TO, 'Member', 'member_id'),
             'Test' => array(self::BELONGS_TO, 'Test', 'test_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

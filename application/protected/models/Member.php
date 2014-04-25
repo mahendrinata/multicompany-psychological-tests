@@ -15,6 +15,7 @@
  * @property string $photo
  * @property integer $status_id
  * @property integer $user_id
+ * @property integer $position_id
  * @property string $created_at
  * @property string $updated_at
  */
@@ -53,6 +54,8 @@ class Member extends AppActiveRecord {
         return array(
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
             'UserTest' => array(self::HAS_MANY, 'UserTest', 'member_id'),
+            'Position' => array(self::BELONGS_TO, 'Position', 'position_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 
@@ -72,6 +75,7 @@ class Member extends AppActiveRecord {
             'photo' => 'Photo',
             'status_id' => 'Status',
             'user_id' => 'User',
+            'position_id' => 'Position',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         );
@@ -115,6 +119,8 @@ class Member extends AppActiveRecord {
         $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('user_id', $this->user_id);
+
+        $criteria->compare('position_id', $this->position_id);
 
         $criteria->compare('created_at', $this->created_at, true);
 

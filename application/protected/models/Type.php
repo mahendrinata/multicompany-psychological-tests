@@ -55,6 +55,7 @@ class Type extends AppActiveRecord {
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
             'Variable' => array(self::HAS_MANY, 'Variable', 'type_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

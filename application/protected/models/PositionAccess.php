@@ -49,6 +49,7 @@ class PositionAccess extends CActiveRecord {
             'Access' => array(self::BELONGS_TO, 'Access', 'access_id'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Position' => array(self::BELONGS_TO, 'Position', 'position_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

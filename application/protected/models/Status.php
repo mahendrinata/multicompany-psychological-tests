@@ -1,26 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "accesses".
+ * This is the model class for table "statuses".
  *
- * The followings are the available columns in table 'accesses':
+ * The followings are the available columns in table 'statuses':
  * @property integer $id
- * @property integer $slug
+ * @property string $slug
  * @property string $name
- * @property string $url
- * @property integer $status_id
+ * @property string $descripsion
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
-class Access extends AppActiveRecord {
+class Status extends AppActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'accesses';
+        return 'statuses';
     }
 
     /**
@@ -30,13 +29,13 @@ class Access extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('slug, name, url, status_id', 'required'),
-            array('slug, status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
-            array('name, url', 'length', 'max' => 255),
-            array('created_at, updated_at', 'safe'),
+            array('slug, name', 'required'),
+            array('created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('slug, name', 'length', 'max' => 255),
+            array('descripsion, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, url, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, descripsion, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -47,11 +46,23 @@ class Access extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
-            'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
-            'PositionAccess' => array(self::HAS_MANY, 'PositionAccess', 'access_id'),
-            'RoleAccess' => array(self::HAS_MANY, 'RoleAccess', 'access_id'),
-            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
+            'Access' => array(self::HAS_MANY, 'Access', 'status_id'),
+            'Answer' => array(self::HAS_MANY, 'Answer', 'status_id'),
+            'Company' => array(self::HAS_MANY, 'Company', 'status_id'),
+            'Expert' => array(self::HAS_MANY, 'Expert', 'status_id'),
+            'Member' => array(self::HAS_MANY, 'Member', 'status_id'),
+            'PositionAccess' => array(self::HAS_MANY, 'PositionAccess', 'status_id'),
+            'Position' => array(self::HAS_MANY, 'Position', 'status_id'),
+            'Question' => array(self::HAS_MANY, 'Question', 'status_id'),
+            'RoleAccess' => array(self::HAS_MANY, 'RoleAccess', 'status_id'),
+            'Role' => array(self::HAS_MANY, 'Role', 'status_id'),
+            'Tag' => array(self::HAS_MANY, 'Tag', 'status_id'),
+            'Test' => array(self::HAS_MANY, 'Test', 'status_id'),
+            'Type' => array(self::HAS_MANY, 'Type', 'status_id'),
+            'UserTest' => array(self::HAS_MANY, 'UserTest', 'status_id'),
+            'User' => array(self::HAS_MANY, 'User', 'status_id'),
+            'VariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'status_id'),
+            'Variable' => array(self::HAS_MANY, 'Variable', 'status_id'),
         );
     }
 
@@ -63,8 +74,7 @@ class Access extends AppActiveRecord {
             'id' => 'Id',
             'slug' => 'Slug',
             'name' => 'Name',
-            'url' => 'Url',
-            'status_id' => 'Status',
+            'descripsion' => 'Descripsion',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'created_at' => 'Created At',
@@ -91,13 +101,11 @@ class Access extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('slug', $this->slug);
+        $criteria->compare('slug', $this->slug, true);
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->compare('url', $this->url, true);
-
-        $criteria->compare('status_id', $this->status_id);
+        $criteria->compare('descripsion', $this->descripsion, true);
 
         $criteria->compare('created_by', $this->created_by);
 
@@ -107,14 +115,14 @@ class Access extends AppActiveRecord {
 
         $criteria->compare('updated_at', $this->updated_at, true);
 
-        return new CActiveDataProvider('Access', array(
+        return new CActiveDataProvider('Status', array(
             'criteria' => $criteria,
         ));
     }
 
     /**
      * Returns the static model of the specified AR class.
-     * @return Access the static model class
+     * @return Status the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);

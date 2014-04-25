@@ -53,6 +53,7 @@ class Company extends AppActiveRecord {
             'CompanyUser' => array(self::HAS_MANY, 'CompanyUser', 'company_id'),
             'Test' => array(self::HAS_MANY, 'Test', 'company_id'),
             'UserTest' => array(self::HAS_MANY, 'UserTest', 'company_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

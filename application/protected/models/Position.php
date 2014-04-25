@@ -52,6 +52,8 @@ class Position extends AppActiveRecord {
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+            'Member' => array(self::HAS_MANY, 'Member', 'position_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

@@ -49,6 +49,7 @@ class RoleAccess extends CActiveRecord {
             'Access' => array(self::BELONGS_TO, 'Access', 'access_id'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

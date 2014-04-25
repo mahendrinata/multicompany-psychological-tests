@@ -50,6 +50,7 @@ class Question extends AppActiveRecord {
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Test' => array(self::BELONGS_TO, 'Test', 'test_id'),
             'TestAnswer' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

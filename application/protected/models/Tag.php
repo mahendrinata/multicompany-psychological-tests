@@ -54,6 +54,7 @@ class Tag extends AppActiveRecord {
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
             'Parent' => array(self::BELONGS_TO, 'Tag', 'parent_id'),
             'Tag' => array(self::HAS_MANY, 'Tag', 'parent_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

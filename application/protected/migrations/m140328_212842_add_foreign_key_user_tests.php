@@ -9,6 +9,7 @@ class m140328_212842_add_foreign_key_user_tests extends CDbMigration {
         $this->addForeignKey('fk_test_id_user_tests', 'user_tests', 'test_id', 'tests', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_created_by_user_tests', 'user_tests', 'created_by', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_updated_by_user_tests', 'user_tests', 'updated_by', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_status_id_user_tests', 'user_tests', 'status_id', 'statuses', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down() {
@@ -18,6 +19,7 @@ class m140328_212842_add_foreign_key_user_tests extends CDbMigration {
         $this->dropForeignKey('fk_test_id_user_user_tests', 'user_test');
         $this->dropForeignKey('fk_created_by_user_tests', 'user_tests');
         $this->dropForeignKey('fk_updated_by_user_tests', 'user_tests');
+        $this->dropForeignKey('fk_status_id_user_tests', 'user_tests');
     }
 
 }

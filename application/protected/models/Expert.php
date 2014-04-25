@@ -58,6 +58,7 @@ class Expert extends AppActiveRecord {
             'UserTest' => array(self::HAS_MANY, 'UserTest', 'expert_id'),
             'VariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'expert_id'),
             'Variable' => array(self::HAS_MANY, 'Variable', 'expert_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 

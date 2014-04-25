@@ -52,6 +52,7 @@ class Answer extends AppActiveRecord {
             'Question' => array(self::BELONGS_TO, 'Question', 'question_id'),
             'Variable' => array(self::BELONGS_TO, 'Variable', 'variable_id'),
             'TestVariable' => array(self::HAS_MANY, 'TestAnswer', 'answer_id'),
+            'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
 
