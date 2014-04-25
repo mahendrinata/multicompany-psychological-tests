@@ -3,18 +3,19 @@
 class m140328_214562_insert_dummy_data_type_quiz extends CDbMigration {
 
     public function up() {
+        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $slug = Type::model()->slugify('Quiz');
 
         $type = array(
             'slug' => $slug,
             'name' => 'Quiz',
             'description' => '',
-            'conclusion' => Conclusion::SINGLE,
-            'template' => Template::MULTIPLE_CHOICE,
-            'status' => Status::ACTIVE,
-            'user_profile_id' => 2,
+            'conclusion_id' => Conclusion::SINGLE,
+            'template_test_id' => Template::MULTIPLE_CHOICE,
+            'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
+            'expert_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'created_by' => $user->id
         );
         $this->insert('types', $type);
 
@@ -33,11 +34,11 @@ class m140328_214562_insert_dummy_data_type_quiz extends CDbMigration {
 
         foreach ($row as $column) {
             $column['slug'] = $typeModel->slug . '-' . Variable::model()->slugify($column['name']);
-            $column['status'] = Status::ACTIVE;
+            $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['type_id'] = $typeModel->id;
-            $column['user_profile_id'] = 2;
+            $column['expert_id'] = 1;
             $column['created_at'] = date('Y-m-d H:i:s');
-            $column['updated_at'] = date('Y-m-d H:i:s');
+            $column['created_by'] = $user->id;
 
             $this->insert('variables', $column);
         }
