@@ -5,3 +5,6 @@
 /demos/
 /sipsiko/assets/
 /nbproject/
+/application/nbproject/private/
+/application/protected/runtime/
+/application/assets/
