@@ -143,7 +143,7 @@ class Status extends AppActiveRecord {
             self::VOID
         );
         $output = array();
-        for ($i = 1; $i < count($list); $i++) {
+        for ($i = 0; $i < count($list); $i++) {
             $output[($i + 1)] = $list[$i];
         }
         return $output;

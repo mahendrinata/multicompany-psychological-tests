@@ -14,7 +14,7 @@ class m140320_175554_create_members_table extends CDbMigration {
             'phone' => 'string',
             'photo' => 'string',
             'status_id' => 'integer NOT NULL',
-            'user_id' => 'integer',
+            'user_id' => 'integer NOT NULL',
             'position_id' => 'integer NOT NULL',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

@@ -16,6 +16,11 @@
  * @property string $updated_at
  */
 class Position extends AppActiveRecord {
+    
+    const ADMIN = 'ADMIN';
+    const OWNER = 'OWNER';
+    const EMPLOYEE = 'EMPLOYEE';
+    const MEMBER = 'MEMBER';
 
     /**
      * @return string the associated database table name
@@ -123,6 +128,32 @@ class Position extends AppActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    
+    public function getListPosition() {
+        $list = array(
+            self::ADMIN,
+            self::OWNER,
+            self::EMPLOYEE,
+            self::MEMBER,
+        );
+        $output = array();
+        for ($i = 1; $i < count($list); $i++) {
+            $output[($i + 1)] = $list[$i];
+        }
+        return $output;
+    }
+
+    public function getMapPosition() {
+        $map = array();
+        foreach ($this->getListPosition() as $role) {
+            $map[$role] = $role;
+        }
+        return $map;
+    }
+
+    public function getPositionIdBySlug($slug){
+        return array_search($slug, $this->getListPosition());
     }
 
 }

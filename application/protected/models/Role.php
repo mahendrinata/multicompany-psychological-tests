@@ -125,7 +125,7 @@ class Role extends AppActiveRecord {
         return parent::model($className);
     }
 
-    public function getList() {
+    public function getListRole() {
         $list = array(
             self::ADMIN,
             self::EXPERT,
@@ -134,26 +134,22 @@ class Role extends AppActiveRecord {
             self::GUEST
         );
         $output = array();
-        for ($i = 1; $i < count($list); $i++) {
+        for ($i = 0; $i < count($list); $i++) {
             $output[($i + 1)] = $list[$i];
         }
         return $output;
     }
 
-    public function getPriority() {
-        $roles = $this->getList();
-        foreach ($roles as $key => $value) {
-            $priorities[$value] = $key;
-        }
-        return $priorities;
-    }
-
-    public function getMap() {
+    public function getMapRole() {
         $map = array();
-        foreach ($this->getList() as $role) {
+        foreach ($this->getListRole() as $role) {
             $map[$role] = $role;
         }
         return $map;
+    }
+
+    public function getRoleIdBySlug($slug){
+        return array_search($slug, $this->getListRole());
     }
 
 }

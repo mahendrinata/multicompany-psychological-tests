@@ -3,6 +3,7 @@
 class m140328_214357_insert_dummy_data_roles extends CDbMigration {
 
     public function up() {
+        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $row = array(
             array(
                 'slug' => Role::ADMIN,
@@ -32,6 +33,7 @@ class m140328_214357_insert_dummy_data_roles extends CDbMigration {
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['created_at'] = date('Y-m-d H:i:s');
+            $column['created_by'] = $user->id;
 
             $this->insert('roles', $column);
         }
