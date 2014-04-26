@@ -425,6 +425,67 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                     $positions[Role::ADMIN . '-' . Position::ADMIN],
                 )
             ),
+            array(
+                'slug' => Access::slugify('admin/usertest/validation'),
+                'name' => 'Expert Validation User Test',
+                'url' => 'admin/usertest/validation',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/savevalidationanswer'),
+                'name' => 'Expert Save Validation Answer User Test',
+                'url' => 'admin/usertest/savevalidationanswer',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/savevalidationspenttime'),
+                'name' => 'Expert Validation Spent Time User Test',
+                'url' => 'admin/usertest/savevalidationspenttime',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/validationview'),
+                'name' => 'Expert Validation View User Test',
+                'url' => 'admin/usertest/validationview',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/validationdelete'),
+                'name' => 'Expert Validation Delete User Test',
+                'url' => 'admin/usertest/validationdelete',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/publictest'),
+                'name' => 'Expert Public User Test',
+                'url' => 'admin/usertest/publictest',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/publicresult'),
+                'name' => 'Expert Public Result User Test',
+                'url' => 'admin/usertest/validation',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
         );
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
