@@ -51,7 +51,7 @@ class User extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'ExpertUsers' => array(self::HAS_MANY, 'ExpertUser', 'user_id'),
-            'Members' => array(self::HAS_MANY, 'Member', 'user_id'),
+            'Member' => array(self::HAS_ONE, 'Member', 'user_id'),
             'UserRoles' => array(self::HAS_MANY, 'UserRole', 'user_id'),
             'Parent' => array(self::BELONGS_TO, 'User', 'parent_id'),
             'Users' => array(self::HAS_MANY, 'User', 'parent_id'),

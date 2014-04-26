@@ -49,6 +49,7 @@ class ExpertUser extends AppActiveRecord {
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
+            'Position' => array(self::BELONGS_TO, 'Position', 'position_id'),
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );

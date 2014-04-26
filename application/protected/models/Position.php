@@ -58,6 +58,8 @@ class Position extends AppActiveRecord {
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Role' => array(self::BELONGS_TO, 'Role', 'role_id'),
             'Members' => array(self::HAS_MANY, 'Member', 'position_id'),
+            'CompanyUsers' => array(self::HAS_MANY, 'CompanyUser', 'position_id'),
+            'ExpertUsers' => array(self::HAS_MANY, 'ExpertUser', 'position_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

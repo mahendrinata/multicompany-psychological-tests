@@ -48,6 +48,7 @@ class CompanyUser extends AppActiveRecord {
         return array(
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'Company' => array(self::BELONGS_TO, 'Company', 'company_id'),
+            'Position' => array(self::BELONGS_TO, 'Position', 'position_id'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
