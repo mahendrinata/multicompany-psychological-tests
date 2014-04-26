@@ -15,20 +15,32 @@ class AccessWebUser extends CWebUser {
     private function _init() {
         $this->_roles = $this->getState('roles');
         $this->_accesses = $this->getState('accesses');
-        $this->_url = Yii::app()->request->getUrl();
+        $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
 
     public function checkUserAccess() {
-        $arraySlug = Access::model()->slugify($this->_url);
-        if (count($arraySlug) > 0) {
-            if (in_array($arraySlug[0], array('admin'))) {
-                $slug = implode('-', array($arraySlug[0], $arraySlug[2], $arraySlug[3]));
-            } else {
-                $slug = implode('-', array($arraySlug[0], $arraySlug[2]));
+        $slug = Access::model()->slugify($this->_url);
+        if (isset($this->_url[$slug])) {
+            $params = explode(';', $this->_url[$slug]['params']);
+            foreach ($params as $param) {
+                $value = explode(':', $param);
+                if (count($value) == 2 && ($value[1] == 'true' || $value[1] == 1)) {
+                    $paramVal = Yii::app()->getRequest()->getQuery($value[0]);
+                    if (empty($paramVal)) {
+                        throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+                    }
+                }
             }
-            $this->_accesses[$slug];
+        } else {
+            throw new CHttpException(404, 'The requested page does not exist.');
         }
-        die;
+    }
+
+    public function link($name, $url = array(), $htmlOption = array()) {
+        if (isset($url[0]) && isset($this->_accesses[$url[0]])) {
+            return CHtml::link($name, $url, $htmlOption);
+        }
+        return null;
     }
 
 }

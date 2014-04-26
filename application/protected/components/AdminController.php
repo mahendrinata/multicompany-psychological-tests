@@ -12,35 +12,16 @@ class AdminController extends Controller {
 
     public function init() {
         parent::init();
-        
+
         AccessWebUser::call()->checkUserAccess();
 
-        $this->_userId = Yii::app()->user->getId();
         if (empty($this->_userId)) {
-            $this->redirect(array('site/index'));
+            $this->redirect(array('site/login'));
+        } else {
+            $this->_userId = Yii::app()->user->getId();
         }
 
         Yii::app()->theme = 'proui';
-
-        $this->roles = Yii::app()->user->getState('roles');
-        $this->accesses = Yii::app()->user->getState('accesses');
-
-        $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
-
-//        if (empty($this->profiles) && ($this->_url != 'admin/userprofile/choose')) {
-//            $this->redirect(array('admin/userprofile/choose'));
-//        }
-//
-//        $registerUrl = array(
-//            'admin/userprofile/registerexpert',
-//            'admin/userprofile/registercompany',
-//            'admin/userprofile/registermember',
-//        );
-//        if (!empty($this->_unregisters) && !in_array($this->_url, $registerUrl)) {
-//            foreach ($this->_unregisters as $role => $unregister) {
-//                $this->redirect(array('admin/userprofile/register' . strtolower($role)));
-//            }
-//        }
     }
 
     public function getUserProfileId($role) {
