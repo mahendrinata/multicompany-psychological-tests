@@ -3,6 +3,7 @@
 class m140422_220519_insert_dummy_test_mbti extends CDbMigration {
 
     public function up() {
+        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $slug = Type::model()->slugify('mbti');
         $typeModel = Type::model()->findBySlug($slug);
 
@@ -34,11 +35,10 @@ class m140422_220519_insert_dummy_test_mbti extends CDbMigration {
                 'slug' => Test::model()->slugify('MBTI Nafis Mudrika'),
                 'name' => 'MBTI Nafis Mudrika',
                 'description' => 'MBTI sangat berguna di dunia pendidikan dan pengembangan karier. MBTI bisa digunakan sebagai  panduan  untuk  memilih  jurusan  kuliah  sampai dengan  profesi  yang  cocok  dengan kepribadian.',
-                'is_expert' => true,
-                'is_public' => false,
+                'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PRIVATE),
                 'show_result' => true,
-                'combination_variable' => 4,
-                'user_profile_id' => 2,
+                'combination_variable' => 1,
+                'expert_id' => 1,
                 'type_id' => $typeModel->id,
                 'questions' => array(
                     array(
@@ -958,27 +958,27 @@ class m140422_220519_insert_dummy_test_mbti extends CDbMigration {
         }
 
         foreach ($row as $column) {
-            $column['status'] = Status::ACTIVE;
+            $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['created_at'] = date('Y-m-d H:i:s');
-            $column['updated_at'] = date('Y-m-d H:i:s');
+            $column['created_by'] = $user->id;
 
             $questions = $column['questions'];
             unset($column['questions']);
             $this->insert('tests', $column);
             foreach ($questions as $id => $question) {
                 $question['test_id'] = $startTest;
-                $question['status'] = Status::ACTIVE;
+                $question['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
                 $question['created_at'] = date('Y-m-d H:i:s');
-                $question['updated_at'] = date('Y-m-d H:i:s');
+                $question['created_by'] = $user->id;
 
                 $answers = $question['answers'];
                 unset($question['answers']);
                 $this->insert('questions', $question);
                 foreach ($answers as $answer) {
                     $answer['question_id'] = $id + $startQuestion;
-                    $answer['status'] = Status::ACTIVE;
+                    $answer['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
                     $answer['created_at'] = date('Y-m-d H:i:s');
-                    $answer['updated_at'] = date('Y-m-d H:i:s');
+                    $answer['created_by'] = $user->id;
                     $this->insert('answers', $answer);
                 }
             }
