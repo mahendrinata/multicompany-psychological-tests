@@ -45,7 +45,11 @@ class AccessWebUser extends CWebUser {
     }
 
     public function checkMemberAccess() {
-        return (!isset($this->_roles['Member']) || empty($this->_roles['Member'])) ? false : true;
+        return (isset($this->_roles['Member']) && !empty($this->_roles['Member']) && $this->_roles['Member']['Role']['id'] == Role::model()->getRoleIdBySlug(Role::MEMBER)) ? true : false;
+    }
+
+    public function checkAdminAccess() {
+        return (isset($this->_roles['Member']) && !empty($this->_roles['Member']) && $this->_roles['Member']['Role']['id'] == Role::model()->getRoleIdBySlug(Role::ADMIN)) ? true : false;
     }
 
     public function getCompanyIds($position = false) {
@@ -72,7 +76,18 @@ class AccessWebUser extends CWebUser {
 
     public function getMemberId($position = false) {
         $output = null;
-        if (isset($this->_roles['Member']) && !empty($this->_roles['Member'])) {
+        if (isset($this->_roles['Member']) && !empty($this->_roles['Member']) && $this->_roles['Member']['Role']['id'] == Role::model()->getRoleIdBySlug(Role::MEMBER)) {
+            if ($position)
+                $output = array('member_id' => $this->_roles['Member']['id'], 'position_id' => $this->_roles['Member']['Position']['id']);
+            else
+                $output = $this->_roles['Member']['id'];
+        }
+        return $output;
+    }
+
+    public function getAdminId($position = false) {
+        $output = null;
+        if (isset($this->_roles['Member']) && !empty($this->_roles['Member']) && $this->_roles['Member']['Role']['id'] == Role::model()->getRoleIdBySlug(Role::ADMIN)) {
             if ($position)
                 $output = array('member_id' => $this->_roles['Member']['id'], 'position_id' => $this->_roles['Member']['Position']['id']);
             else
