@@ -45,11 +45,11 @@ class Question extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Answer' => array(self::HAS_MANY, 'Answer', 'question_id'),
+            'Answers' => array(self::HAS_MANY, 'Answer', 'question_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Test' => array(self::BELONGS_TO, 'Test', 'test_id'),
-            'TestAnswer' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
+            'TestAnswers' => array(self::HAS_MANY, 'TestAnswer', 'question_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

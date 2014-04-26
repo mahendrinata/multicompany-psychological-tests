@@ -55,9 +55,9 @@ class UserTest extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Result' => array(self::HAS_MANY, 'Result', 'user_test_id'),
-            'TestAnswer' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
-            'TestVariable' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
+            'Results' => array(self::HAS_MANY, 'Result', 'user_test_id'),
+            'TestAnswers' => array(self::HAS_MANY, 'TestAnswer', 'user_test_id'),
+            'TestVariables' => array(self::HAS_MANY, 'TestVariable', 'user_test_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'Company' => array(self::BELONGS_TO, 'Company', 'company_id'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),

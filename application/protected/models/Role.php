@@ -55,7 +55,7 @@ class Role extends AppActiveRecord {
         return array(
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
-            'UserRole' => array(self::HAS_MANY, 'UserRole', 'role_id'),
+            'Positions' => array(self::HAS_MANY, 'Position', 'role_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

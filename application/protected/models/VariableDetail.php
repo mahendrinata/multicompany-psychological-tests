@@ -49,9 +49,9 @@ class VariableDetail extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Combination' => array(self::HAS_MANY, 'Combination', 'variable_detail_id'),
-            'ResultDetail' => array(self::HAS_MANY, 'ResultDetail', 'variable_detail_id'),
-            'TagVariable' => array(self::HAS_MANY, 'TagVariable', 'variable_detail_id'),
+            'Combinations' => array(self::HAS_MANY, 'Combination', 'variable_detail_id'),
+            'ResultDetails' => array(self::HAS_MANY, 'ResultDetail', 'variable_detail_id'),
+            'TagVariables' => array(self::HAS_MANY, 'TagVariable', 'variable_detail_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),

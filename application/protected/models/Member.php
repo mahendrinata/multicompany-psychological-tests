@@ -53,7 +53,7 @@ class Member extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
-            'UserTest' => array(self::HAS_MANY, 'UserTest', 'member_id'),
+            'UserTests' => array(self::HAS_MANY, 'UserTest', 'member_id'),
             'Position' => array(self::BELONGS_TO, 'Position', 'position_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );

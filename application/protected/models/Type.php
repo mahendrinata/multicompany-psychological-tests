@@ -50,11 +50,11 @@ class Type extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Test' => array(self::HAS_MANY, 'Test', 'type_id'),
+            'Tests' => array(self::HAS_MANY, 'Test', 'type_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),
-            'Variable' => array(self::HAS_MANY, 'Variable', 'type_id'),
+            'Variables' => array(self::HAS_MANY, 'Variable', 'type_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

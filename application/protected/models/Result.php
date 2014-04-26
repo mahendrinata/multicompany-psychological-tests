@@ -44,6 +44,7 @@ class Result extends AppActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'UserTest' => array(self::BELONGS_TO, 'UserTest', 'user_test_id'),
+            'ResultDetails' => array(self::HAS_MANY, 'ResultDetail', 'result_id'),
         );
     }
 

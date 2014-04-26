@@ -48,16 +48,15 @@ class Expert extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'ExpertUser' => array(self::HAS_MANY, 'ExpertUser', 'expert_id'),
+            'ExpertUsers' => array(self::HAS_MANY, 'ExpertUser', 'expert_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
-            'ResultDetail' => array(self::HAS_MANY, 'ResultDetail', 'result_id'),
-            'Tag' => array(self::HAS_MANY, 'Tag', 'expert_id'),
-            'Test' => array(self::HAS_MANY, 'Test', 'expert_id'),
-            'Type' => array(self::HAS_MANY, 'Type', 'expert_id'),
-            'UserTest' => array(self::HAS_MANY, 'UserTest', 'expert_id'),
-            'VariableDetail' => array(self::HAS_MANY, 'VariableDetail', 'expert_id'),
-            'Variable' => array(self::HAS_MANY, 'Variable', 'expert_id'),
+            'Tags' => array(self::HAS_MANY, 'Tag', 'expert_id'),
+            'Tests' => array(self::HAS_MANY, 'Test', 'expert_id'),
+            'Types' => array(self::HAS_MANY, 'Type', 'expert_id'),
+            'UserTests' => array(self::HAS_MANY, 'UserTest', 'expert_id'),
+            'VariableDetails' => array(self::HAS_MANY, 'VariableDetail', 'expert_id'),
+            'Variables' => array(self::HAS_MANY, 'Variable', 'expert_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

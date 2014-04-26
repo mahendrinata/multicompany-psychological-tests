@@ -50,9 +50,9 @@ class Company extends AppActiveRecord {
         return array(
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
-            'CompanyUser' => array(self::HAS_MANY, 'CompanyUser', 'company_id'),
-            'Test' => array(self::HAS_MANY, 'Test', 'company_id'),
-            'UserTest' => array(self::HAS_MANY, 'UserTest', 'company_id'),
+            'CompanyUsers' => array(self::HAS_MANY, 'CompanyUser', 'company_id'),
+            'Tests' => array(self::HAS_MANY, 'Test', 'company_id'),
+            'UserTests' => array(self::HAS_MANY, 'UserTest', 'company_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

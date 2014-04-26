@@ -49,8 +49,8 @@ class Access extends AppActiveRecord {
         return array(
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
-            'PositionAccess' => array(self::HAS_MANY, 'PositionAccess', 'access_id'),
-            'RoleAccess' => array(self::HAS_MANY, 'RoleAccess', 'access_id'),
+            'PositionAccesses' => array(self::HAS_MANY, 'PositionAccess', 'access_id'),
+            'RoleAccesses' => array(self::HAS_MANY, 'RoleAccess', 'access_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }

@@ -49,9 +49,9 @@ class Variable extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'Answer' => array(self::HAS_MANY, 'Answer', 'variable_id'),
-            'Combination' => array(self::HAS_MANY, 'Combination', 'variable_id'),
-            'TestVariable' => array(self::HAS_MANY, 'TestVariable', 'variable_id'),
+            'Answers' => array(self::HAS_MANY, 'Answer', 'variable_id'),
+            'Combinations' => array(self::HAS_MANY, 'Combination', 'variable_id'),
+            'TestVariables' => array(self::HAS_MANY, 'TestVariable', 'variable_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),

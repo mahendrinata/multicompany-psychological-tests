@@ -53,11 +53,11 @@ class Position extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'PositionAccess' => array(self::HAS_MANY, 'PositionAccess', 'position_id'),
+            'PositionAccesses' => array(self::HAS_MANY, 'PositionAccess', 'position_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Role' => array(self::BELONGS_TO, 'Role', 'role_id'),
-            'Member' => array(self::HAS_MANY, 'Member', 'position_id'),
+            'Members' => array(self::HAS_MANY, 'Member', 'position_id'),
             'Status' => array(self::BELONGS_TO, 'Status', 'status_id'),
         );
     }
