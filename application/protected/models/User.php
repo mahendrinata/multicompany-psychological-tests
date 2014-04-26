@@ -34,6 +34,7 @@ class User extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('username, email, password, status_id, login_count', 'required'),
+            array('username, email', 'unique'),
             array('status_id, login_count, parent_id', 'numerical', 'integerOnly' => true),
             array('username, email, password, last_login_ip, token', 'length', 'max' => 255),
             array('last_login, created_at, updated_at', 'safe'),

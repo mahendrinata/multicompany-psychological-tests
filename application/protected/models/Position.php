@@ -37,6 +37,7 @@ class Position extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, status_id, role_id', 'required'),
+            array('slug', 'unique'),
             array('status_id, role_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),

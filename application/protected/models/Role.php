@@ -37,6 +37,7 @@ class Role extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, status_id', 'required'),
+            array('slug', 'unique'),
             array('status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
@@ -148,7 +149,7 @@ class Role extends AppActiveRecord {
         return $map;
     }
 
-    public function getRoleIdBySlug($slug){
+    public function getRoleIdBySlug($slug) {
         return array_search($slug, $this->getListRole());
     }
 

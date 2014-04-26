@@ -36,6 +36,7 @@ class Status extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name', 'required'),
+            array('slug', 'unique'),
             array('created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),
@@ -147,8 +148,8 @@ class Status extends AppActiveRecord {
         }
         return $output;
     }
-    
-    public function getStatusIdBySlug($slug){
+
+    public function getStatusIdBySlug($slug) {
         return array_search($slug, $this->getListStatus());
     }
 

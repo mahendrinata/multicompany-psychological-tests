@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'members':
  * @property integer $id
+ * @property string $slug 
  * @property string $first_name
  * @property string $last_name
  * @property integer $gender
@@ -35,13 +36,14 @@ class Member extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('first_name, gender, status_id', 'required'),
+            array('slug, first_name, gender, status_id', 'required'),
+            array('slug', 'unique'),
             array('gender, status_id, user_id', 'numerical', 'integerOnly' => true),
-            array('first_name, last_name, birth_place, birth_date, phone, photo', 'length', 'max' => 255),
+            array('slug, first_name, last_name, birth_place, birth_date, phone, photo', 'length', 'max' => 255),
             array('address, created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, first_name, last_name, gender, birth_place, birth_date, address, phone, photo, status_id, user_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, first_name, last_name, gender, birth_place, birth_date, address, phone, photo, status_id, user_id, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -65,6 +67,7 @@ class Member extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
+            'Slug' => 'Slug',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'gender' => 'Gender',
@@ -99,6 +102,8 @@ class Member extends AppActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+
+        $criteria->compare('slug', $this->slug, true);
 
         $criteria->compare('first_name', $this->first_name, true);
 

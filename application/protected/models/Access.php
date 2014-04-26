@@ -32,6 +32,7 @@ class Access extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, url, status_id', 'required'),
+            array('slug', 'unique'),
             array('status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('name, url', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),

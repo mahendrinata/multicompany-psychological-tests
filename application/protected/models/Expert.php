@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'experts':
  * @property integer $id
+ * @property string $slug 
  * @property string $name
  * @property string $address
  * @property string $phone
@@ -31,13 +32,14 @@ class Expert extends AppActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, address, phone, status_id', 'required'),
+            array('slug, name, address, phone, status_id', 'required'),
+            array('slug', 'unique'),
             array('status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
-            array('name, phone, photo', 'length', 'max' => 255),
+            array('slug, name, phone, photo', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, address, phone, photo, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, address, phone, photo, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -67,6 +69,7 @@ class Expert extends AppActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'Id',
+            'Slug' => 'Slug',
             'name' => 'Name',
             'address' => 'Address',
             'phone' => 'Phone',
@@ -97,6 +100,8 @@ class Expert extends AppActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+
+        $criteria->compare('slug', $this->slug, true);
 
         $criteria->compare('name', $this->name, true);
 

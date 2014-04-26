@@ -34,6 +34,7 @@ class Type extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, status_id, conclusion_id, template_test_id, expert_id', 'required'),
+            array('slug', 'unique'),
             array('status_id, conclusion_id, template_test_id, expert_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
             array('description, created_at, updated_at', 'safe'),

@@ -44,6 +44,7 @@ class Test extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, description, publication_id, show_result, combination_variable, status_id, type_id', 'required'),
+            array('slug', 'unique'),
             array('duration, publication_id, show_result, combination_variable, status_id, company_id, expert_id, type_id, parent_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('slug, name', 'length', 'max' => 255),
             array('start_date, end_date, created_at, updated_at', 'safe'),
@@ -192,7 +193,7 @@ class Test extends AppActiveRecord {
         return $output;
     }
 
-    public function getPublicationIdBySlug($slug){
+    public function getPublicationIdBySlug($slug) {
         return array_search($slug, $this->getListPublication());
     }
 
