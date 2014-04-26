@@ -247,7 +247,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
             ),
             array(
                 'slug' => Access::slugify('admin/test/generatevalidation'),
-                'name' => 'Generate Validation Test',
+                'name' => 'Generate Expert Validation Test',
                 'url' => 'admin/test/generatevalidation',
                 'params' => 'id:true',
                 'Positions' => array(
@@ -256,7 +256,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
             ),
             array(
                 'slug' => Access::slugify('admin/test/result'),
-                'name' => 'Result Test',
+                'name' => 'Result Expert Test',
                 'url' => 'admin/test/result',
                 'params' => 'id:true',
                 'Positions' => array(
