@@ -7,14 +7,14 @@ class m140328_214419_insert_dummy_data_members extends CDbMigration {
         $positionAdmin = Position::model()->findBySlug(Role::ADMIN . '-' . Position::ADMIN);
         $row = array(
             array(
-                'slug' => Member::slugify('Mahendri Winata'),
+                'slug' => Member::slugify('Administrator'),
                 'first_name' => 'Administrator',
                 'last_name' => '',
                 'address' => 'Jl. Penyu No.40 Bandung',
                 'phone' => '085721821555',
                 'photo' => '',
                 'gender' => 1,
-                'postion_id' => $positionAdmin->id
+                'position_id' => $positionAdmin->id
             ),
             array(
                 'slug' => Member::slugify('Mahendri Winata'),

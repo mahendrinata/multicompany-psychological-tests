@@ -25,24 +25,6 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 )
             ),
             array(
-                'slug' => Access::slugify('admin/answer/delete'),
-                'name' => 'Delete Answer',
-                'url' => 'admin/answer/delete',
-                'params' => 'id:true',
-                'Positions' => array(
-                    $positions[Role::EXPERT . '-' . Position::OWNER],
-                )
-            ),
-            array(
-                'slug' => Access::slugify('admin/answer/delete'),
-                'name' => 'Delete Answer',
-                'url' => 'admin/answer/delete',
-                'params' => 'id:true',
-                'Positions' => array(
-                    $positions[Role::EXPERT . '-' . Position::OWNER],
-                )
-            ),
-            array(
                 'slug' => Access::slugify('admin/dashboard'),
                 'name' => 'Dashboard Index',
                 'url' => 'admin/dashboard',
@@ -724,17 +706,35 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 )
             ),
         );
-        foreach ($row as $column) {
+
+        $access = Access::model()->find(array('order' => 'id DESC'));
+        $startAccess = 1;
+        if (!empty($access)) {
+            $startAccess = $startAccess + $access->id;
+        }
+        foreach ($row as $key => $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['created_by'] = $user->id;
             $column['created_at'] = date('Y-m-d H:i:s');
 
-            $this->insert('statuses', $column);
+            $position = $column['Positions'];
+            unset($column['Positions']);
+            $this->insert('accesses', $column);
+            foreach ($position as $position_id) {
+                $pos = array(
+                    'position_id' => $position_id,
+                    'access_id' => $startAccess + $key,
+                    'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
+                    'created_by' => $user->id,
+                    'created_at' => date('Y-m-d H:i:s')
+                );
+                $this->insert('position_accesses', $pos);
+            }
         }
     }
 
     public function down() {
-        $this->truncateTable('statuses');
+        $this->truncateTable('accesses');
     }
 
 }

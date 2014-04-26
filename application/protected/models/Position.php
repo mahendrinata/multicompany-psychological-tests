@@ -16,7 +16,7 @@
  * @property string $updated_at
  */
 class Position extends AppActiveRecord {
-    
+
     const ADMIN = 'ADMIN';
     const OWNER = 'OWNER';
     const EMPLOYEE = 'EMPLOYEE';
@@ -131,7 +131,7 @@ class Position extends AppActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-    
+
     public function getListPosition() {
         $list = array(
             self::ADMIN,
@@ -154,8 +154,17 @@ class Position extends AppActiveRecord {
         return $map;
     }
 
-    public function getPositionIdBySlug($slug){
+    public function getPositionIdBySlug($slug) {
         return array_search($slug, $this->getListPosition());
+    }
+
+    public function getMapperPosition() {
+        $positions = $this->findAll();
+        $mapper = array();
+        foreach ($positions as $position) {
+            $mapper[$position->slug] = $position;
+        }
+        return $mapper;
     }
 
 }

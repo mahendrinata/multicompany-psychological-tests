@@ -18,7 +18,7 @@ class m140319_170405_create_types_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_types_unique', 'types', 'slug');
+        $this->createIndex('slug_types_unique', 'types', 'slug', true);
         $this->createIndex('status_id_types_index', 'types', 'status_id');
         $this->createIndex('conclusion_id_types_index', 'types', 'conclusion_id');
         $this->createIndex('template_test_id_types_index', 'types', 'template_test_id');

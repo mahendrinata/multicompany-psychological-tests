@@ -21,7 +21,7 @@ class m140320_175554_create_members_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_members_unique', 'members', 'slug');
+        $this->createIndex('slug_members_unique', 'members', 'slug', true);
         $this->createIndex('status_id_members_index', 'members', 'status_id');
         $this->createIndex('user_id_members_index', 'members', 'user_id');
         $this->createIndex('position_id_members_index', 'members', 'position_id');

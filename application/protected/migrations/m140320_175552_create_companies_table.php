@@ -17,7 +17,7 @@ class m140320_175552_create_companies_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_companies_unique', 'companies', 'slug');
+        $this->createIndex('slug_companies_unique', 'companies', 'slug', true);
         $this->createIndex('status_id_companies_index', 'companies', 'status_id');
         $this->createIndex('created_by_companies_index', 'companies', 'created_by');
         $this->createIndex('updated_by_companies_index', 'companies', 'updated_by');

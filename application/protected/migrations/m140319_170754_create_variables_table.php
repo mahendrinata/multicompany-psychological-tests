@@ -17,7 +17,7 @@ class m140319_170754_create_variables_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_variables_unique', 'variables', 'slug');
+        $this->createIndex('slug_variables_unique', 'variables', 'slug', true);
         $this->createIndex('status_id_variables_index', 'variables', 'status_id');
         $this->createIndex('type_id_variables_index', 'variables', 'type_id');
         $this->createIndex('expert_id_variables_index', 'variables', 'expert_id');

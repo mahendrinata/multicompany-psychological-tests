@@ -16,7 +16,7 @@ class m140319_170242_create_positions_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
-        $this->createIndex('slug_positions_unique', 'positions', 'slug');
+        $this->createIndex('slug_positions_unique', 'positions', 'slug', true);
         $this->createIndex('status_id_positions_index', 'positions', 'status_id');
         $this->createIndex('role_id_positions_index', 'positions', 'role_id');
         $this->createIndex('created_by_positions_index', 'positions', 'created_by');

@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'accesses':
  * @property integer $id
- * @property integer $slug
+ * @property string $slug
  * @property string $name
  * @property string $url
  * @property string $params 
@@ -32,7 +32,7 @@ class Access extends AppActiveRecord {
         // will receive user inputs.
         return array(
             array('slug, name, url, status_id', 'required'),
-            array('slug, status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('status_id, created_by, updated_by', 'numerical', 'integerOnly' => true),
             array('name, url', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
@@ -93,7 +93,7 @@ class Access extends AppActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->compare('slug', $this->slug);
+        $criteria->compare('slug', $this->slug, true);
 
         $criteria->compare('name', $this->name, true);
 
