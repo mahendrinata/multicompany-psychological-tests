@@ -672,6 +672,57 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                     $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail'),
+                'name' => 'Variable Detail Index',
+                'url' => 'admin/variabledetail',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail/index'),
+                'name' => 'Variable Detail Index',
+                'url' => 'admin/variabledetail/index',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail/view'),
+                'name' => 'View Variable Detail',
+                'url' => 'admin/variabledetail/view',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail/create'),
+                'name' => 'Create Variable Detail',
+                'url' => 'admin/variabledetail/create',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail/update'),
+                'name' => 'Update Variable Detail',
+                'url' => 'admin/variabledetail/update',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/variabledetail/delete'),
+                'name' => 'Delete Variable Detail',
+                'url' => 'admin/variabledetail/delete',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
         );
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
