@@ -13,8 +13,8 @@ class AccessWebUser extends CWebUser {
     }
 
     private function _init() {
-        $this->_roles = $this->getState('roles');
-        $this->_accesses = $this->getState('accesses');
+        $this->_roles =  Yii::app()->user->getState('roles');
+        $this->_accesses =  Yii::app()->user->getState('accesses');
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
 

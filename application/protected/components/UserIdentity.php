@@ -35,13 +35,13 @@ class UserIdentity extends CUserIdentity {
                 $this->_roles['CompanyUsers'][$key] = array(
                     'Company' => array(
                         'id' => $companyUser->Company->id,
-                        'name' => $companyUser->Company->name
+                        'name' => $companyUser->Company->name,
+                        'Position' => array(
+                            'id' => $companyUser->Position->id,
+                            'slug' => $companyUser->Position->slug,
+                            'name' => $companyUser->Position->name
+                        )
                     ),
-                    'Position' => array(
-                        'id' => $companyUser->Position->id,
-                        'slug' => $companyUser->Position->slug,
-                        'name' => $companyUser->Position->name
-                    )
                 );
 
                 foreach ($companyUser->Position->PositionAccesses as $positionAccess) {
@@ -49,7 +49,8 @@ class UserIdentity extends CUserIdentity {
                         $this->_accesses[$positionAccess->Access->slug] = array(
                             'slug' => $positionAccess->Access->slug,
                             'name' => $positionAccess->Access->name,
-                            'url' => $positionAccess->Access->url);
+                            'url' => $positionAccess->Access->url,
+                            'params' => $positionAccess->Access->params);
                     }
                 }
             }
@@ -60,13 +61,13 @@ class UserIdentity extends CUserIdentity {
                 $this->_roles['ExpertUsers'][$key] = array(
                     'Expert' => array(
                         'id' => $expertUser->Expert->id,
-                        'name' => $expertUser->Expert->name
+                        'name' => $expertUser->Expert->name,
+                        'Position' => array(
+                            'id' => $expertUser->Position->id,
+                            'slug' => $expertUser->Position->slug,
+                            'name' => $expertUser->Position->name
+                        )
                     ),
-                    'Position' => array(
-                        'id' => $expertUser->Position->id,
-                        'slug' => $expertUser->Position->slug,
-                        'name' => $expertUser->Position->name
-                    )
                 );
 
                 foreach ($expertUser->Position->PositionAccesses as $positionAccess) {
@@ -74,7 +75,8 @@ class UserIdentity extends CUserIdentity {
                         $this->_accesses[$positionAccess->Access->slug] = array(
                             'slug' => $positionAccess->Access->slug,
                             'name' => $positionAccess->Access->name,
-                            'url' => $positionAccess->Access->url);
+                            'url' => $positionAccess->Access->url,
+                            'params' => $positionAccess->Access->params);
                     }
                 }
             }
@@ -97,7 +99,8 @@ class UserIdentity extends CUserIdentity {
                     $this->_accesses[$positionAccess->Access->slug] = array(
                         'slug' => $positionAccess->Access->slug,
                         'name' => $positionAccess->Access->name,
-                        'url' => $positionAccess->Access->url);
+                        'url' => $positionAccess->Access->url,
+                        'params' => $positionAccess->Access->params);
                 }
             }
         }

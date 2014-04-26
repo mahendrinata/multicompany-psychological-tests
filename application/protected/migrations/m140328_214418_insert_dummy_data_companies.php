@@ -3,7 +3,8 @@
 class m140328_214418_insert_dummy_data_companies extends CDbMigration {
 
     public function up() {
-        $user = User::model()->findByAttributes(array('username' => 'admin'));
+        $creater = User::model()->findByAttributes(array('username' => 'admin'));
+        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $row = array(
             array(
                 'slug' => Company::slugify('CV. Madain'),
@@ -14,7 +15,7 @@ class m140328_214418_insert_dummy_data_companies extends CDbMigration {
             ),
         );
         foreach ($row as $column) {
-            $column['created_by'] = $user->id;
+            $column['created_by'] = $creater->id;
             $column['created_at'] = date('Y-m-d H:i:s');
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
 
@@ -26,7 +27,7 @@ class m140328_214418_insert_dummy_data_companies extends CDbMigration {
                 'user_id' => $user->id,
                 'position_id' => $position->id,
                 'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
-                'created_by' => $user->id,
+                'created_by' => $creater->id,
                 'created_at' => date('Y-m-d')
             ));
         }
