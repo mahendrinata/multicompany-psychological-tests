@@ -91,7 +91,11 @@ class UserIdentity extends CUserIdentity {
                 'Position' => array(
                     'id' => $user->Member->Position->id,
                     'slug' => $user->Member->Position->slug,
-                    'name' => $user->Member->Position->name
+                    'name' => $user->Member->Position->name,
+                    'Role' => array(
+                        'id' => $user->Member->Position->Role->id,
+                        'slug' => $user->Member->Position->Role->slug,
+                        'name' => $user->Member->Position->Role->name)
                 )
             );
             foreach ($user->Member->Position->PositionAccesses as $positionAccess) {
