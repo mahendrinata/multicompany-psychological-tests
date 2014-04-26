@@ -124,17 +124,17 @@ class UserTest extends AppActiveRecord {
 
         $criteria->compare('end_date', $this->end_date, true);
 
-        $criteria->compare('status_id', $this->status_id);
+        $criteria->addInCondition('status_id', $this->status_id);
 
         $criteria->compare('token', $this->token, true);
 
         $criteria->compare('test_id', $this->test_id);
 
-        $criteria->compare('member_id', $this->member_id);
+        $criteria->addInCondition('member_id', $this->member_id);
 
-        $criteria->compare('expert_id', $this->expert_id);
+        $criteria->addInCondition('expert_id', $this->expert_id);
 
-        $criteria->compare('company_id', $this->company_id);
+        $criteria->addInCondition('company_id', $this->company_id);
 
         $criteria->compare('created_by', $this->created_by);
 

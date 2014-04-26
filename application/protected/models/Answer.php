@@ -97,7 +97,7 @@ class Answer extends AppActiveRecord {
 
         $criteria->compare('value', $this->value);
 
-        $criteria->compare('status_id', $this->status_id);
+        $criteria->addInCondition('status_id', $this->status_id);
 
         $criteria->compare('question_id', $this->question_id);
 

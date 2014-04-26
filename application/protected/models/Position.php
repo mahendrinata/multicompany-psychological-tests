@@ -108,9 +108,9 @@ class Position extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->compare('status_id', $this->status_id);
+        $criteria->addInCondition('status_id', $this->status_id);
 
-        $criteria->compare('role_id', $this->role_id);
+        $criteria->addInCondition('role_id', $this->role_id);
 
         $criteria->compare('created_by', $this->created_by);
 

@@ -100,11 +100,11 @@ class Tag extends AppActiveRecord {
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->compare('status_id', $this->status_id);
+        $criteria->addInCondition('status_id', $this->status_id);
 
         $criteria->compare('parent_id', $this->parent_id);
 
-        $criteria->compare('expert_id', $this->expert_id);
+        $criteria->addInCondition('expert_id', $this->expert_id);
 
         $criteria->compare('created_by', $this->created_by);
 
