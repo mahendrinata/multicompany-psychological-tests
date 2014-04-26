@@ -158,7 +158,7 @@ class TestController extends AdminController {
         if (isset($_GET['Test']))
             $model->attributes = $_GET['Test'];
 
-        $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+//        $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
 
         $this->render('index', array(
             'model' => $model,

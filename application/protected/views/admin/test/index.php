@@ -65,24 +65,24 @@ $('.search-form form').submit(function(){
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
-                    'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
+                    'filter' => CHtml::activeTextField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
                     'name' => 'name',
-                    'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTextField($model, 'name', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'description',
-                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTextField($model, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'duration',
-                    'filter' => CHtml::activeTelField($model, 'duration', array('id' => false, 'class' => 'form-control text-right')),
+                    'filter' => CHtml::activeTextField($model, 'duration', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(
-                    'name' => 'status',
-                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
+                    'name' => 'status_id',
+                    'filter' => CHtml::activeDropDownList($model, 'status_id', Status::model()->getListStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
                     'type' => 'raw',
                     'value' => 'Status::get_tag_label($data->status)',
                     'htmlOptions' => array('class' => 'text-center'),
@@ -103,7 +103,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'name' => 'combination_variable',
-                    'filter' => CHtml::activeTelField($model, 'combination_variable', array('id' => false, 'class' => 'form-control text-right')),
+                    'filter' => CHtml::activeTextField($model, 'combination_variable', array('id' => false, 'class' => 'form-control text-right')),
                     'htmlOptions' => array('class' => 'text-right'),
                 ),
                 array(

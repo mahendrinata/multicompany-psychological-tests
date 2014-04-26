@@ -256,13 +256,13 @@ class Test extends AppActiveRecord {
 
     public function setExpired() {
         $this->updateAll(
-            array('status' => Status::ACTIVE), '((start_date IS NOT NULL AND start_date >= :startDate) OR (end_date IS NOT NULL AND end_date >= :endDate)) AND status = :status', array(':startDate' => date('Y-m-d'), ':endDate' => date('Y-m-d'), ':status' => Status::DRAFT));
+            array('status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE)), '((start_date IS NOT NULL AND start_date >= :startDate) OR (end_date IS NOT NULL AND end_date >= :endDate)) AND status_id = :status', array(':startDate' => date('Y-m-d'), ':endDate' => date('Y-m-d'), ':status' => Status::model()->getStatusIdBySlug(Status::DRAFT)));
 
         $this->updateAll(
-            array('status' => Status::INACTIVE), 'end_date IS NOT NULL AND end_date < :endDate AND (status = :active OR status = :draf)', array(':endDate' => date('Y-m-d'), ':active' => Status::ACTIVE, ':draf' => Status::DRAFT));
+            array('status_id' => Status::model()->getStatusIdBySlug(Status::INACTIVE)), 'end_date IS NOT NULL AND end_date < :endDate AND (status_id = :active OR status_id = :draf)', array(':endDate' => date('Y-m-d'), ':active' => Status::model()->getStatusIdBySlug(Status::ACTIVE), ':draf' => Status::model()->getStatusIdBySlug(Status::DRAFT)));
 
         $this->updateAll(
-            array('status' => Status::DRAFT), 'start_date IS NOT NULL AND start_date > :startDate AND status != :status', array(':startDate' => date('Y-m-d'), ':status' => Status::DRAFT));
+            array('status_id' => Status::model()->getStatusIdBySlug(Status::DRAFT)), 'start_date IS NOT NULL AND start_date > :startDate AND status_id != :status', array(':startDate' => date('Y-m-d'), ':status' => Status::model()->getStatusIdBySlug(Status::DRAFT)));
 
         return true;
     }
