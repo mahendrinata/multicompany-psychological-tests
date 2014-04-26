@@ -12,7 +12,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'url' => 'admin/answer/create',
                 'params' => 'id:true;type_id:true',
                 'Positions' => array(
-                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
             array(
@@ -21,7 +21,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'url' => 'admin/answer/delete',
                 'params' => 'id:true',
                 'Positions' => array(
-                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
             array(
@@ -30,7 +30,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'url' => 'admin/answer/delete',
                 'params' => 'id:true',
                 'Positions' => array(
-                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
             array(
@@ -39,7 +39,7 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'url' => 'admin/answer/delete',
                 'params' => 'id:true',
                 'Positions' => array(
-                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
             array(
