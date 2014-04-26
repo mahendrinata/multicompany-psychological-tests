@@ -13,8 +13,8 @@ class AccessWebUser extends CWebUser {
     }
 
     private function _init() {
-        $this->_roles =  Yii::app()->user->getState('roles');
-        $this->_accesses =  Yii::app()->user->getState('accesses');
+        $this->_roles = Yii::app()->user->getState('roles');
+        $this->_accesses = Yii::app()->user->getState('accesses');
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
 
@@ -34,6 +34,51 @@ class AccessWebUser extends CWebUser {
         } else {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
+    }
+
+    public function checkCompanyAccess() {
+        return (!isset($this->_roles['CompanyUsers']) || empty($this->_roles['CompanyUsers'])) ? false : true;
+    }
+
+    public function checkExpertAccess() {
+        return (!isset($this->_roles['ExpertUsers']) || empty($this->_roles['ExpertUsers'])) ? false : true;
+    }
+
+    public function checkMemberAccess() {
+        return (!isset($this->_roles['Member']) || empty($this->_roles['Member'])) ? false : true;
+    }
+
+    public function getCompanyIds($position = false) {
+        $output = array();
+        foreach ($this->_roles['CompanyUsers'] as $companyUser) {
+            if ($position)
+                $output[] = array('company_id' => $companyUser['id'], 'position_id' => $companyUser['Position']['id']);
+            else
+                $output[] = $companyUser['id'];
+        }
+        return $output;
+    }
+
+    public function getExpertIds($position = false) {
+        $output = array();
+        foreach ($this->_roles['ExpertUsers'] as $expertUser) {
+            if ($position)
+                $output[] = array('expert_id' => $expertUser['id'], 'position_id' => $expertUser['Position']['id']);
+            else
+                $output[] = $expertUser['id'];
+        }
+        return $output;
+    }
+
+    public function getMemberId($position = false) {
+        $output = null;
+        if (isset($this->_roles['Member']) && !empty($this->_roles['Member'])) {
+            if ($position)
+                $output = array('member_id' => $this->_roles['Member']['id'], 'position_id' => $this->_roles['Member']['Position']['id']);
+            else
+                $output = $this->_roles['Member']['id'];
+        }
+        return $output;
     }
 
     public function link($name, $url = array(), $htmlOption = array()) {
