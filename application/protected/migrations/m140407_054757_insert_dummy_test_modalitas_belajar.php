@@ -4,16 +4,16 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Modalitas Belajar');
+        $slug = Type::slugify('Modalitas Belajar');
         $typeModel = Type::model()->findBySlug($slug);
 
-        $visualSlug = Variable::model()->slugify('Visual');
+        $visualSlug = Variable::slugify('Visual');
         $visualModel = Variable::model()->findBySlug($slug . '-' . $visualSlug);
 
-        $auditorySlug = Variable::model()->slugify('Auditory');
+        $auditorySlug = Variable::slugify('Auditory');
         $auditoryModel = Variable::model()->findBySlug($slug . '-' . $auditorySlug);
 
-        $kinestheticSlug = Variable::model()->slugify('Kinesthetic');
+        $kinestheticSlug = Variable::slugify('Kinesthetic');
         $kinestheticModel = Variable::model()->findBySlug($slug . '-' . $kinestheticSlug);
         $row = array(
             /**
@@ -22,7 +22,7 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
              * $kinestheticModel->id - Kinesthetic
              */
             array(
-                'slug' => Test::model()->slugify('Modalitas Belajar'),
+                'slug' => Test::slugify('Modalitas Belajar'),
                 'name' => 'Modalitas Belajar',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PRIVATE),
@@ -1326,7 +1326,7 @@ class m140407_054757_insert_dummy_test_modalitas_belajar extends CDbMigration {
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Modalitas Belajar');
+        $testSlug = Test::slugify('Modalitas Belajar');
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }

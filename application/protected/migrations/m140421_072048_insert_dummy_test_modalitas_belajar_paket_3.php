@@ -4,16 +4,16 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Modalitas Belajar');
+        $slug = Type::slugify('Modalitas Belajar');
         $typeModel = Type::model()->findBySlug($slug);
 
-        $visualSlug = Variable::model()->slugify('Visual');
+        $visualSlug = Variable::slugify('Visual');
         $visualModel = Variable::model()->findBySlug($slug . '-' . $visualSlug);
 
-        $auditorySlug = Variable::model()->slugify('Auditory');
+        $auditorySlug = Variable::slugify('Auditory');
         $auditoryModel = Variable::model()->findBySlug($slug . '-' . $auditorySlug);
 
-        $kinestheticSlug = Variable::model()->slugify('Kinesthetic');
+        $kinestheticSlug = Variable::slugify('Kinesthetic');
         $kinestheticModel = Variable::model()->findBySlug($slug . '-' . $kinestheticSlug);
         $row = array(
             /**
@@ -22,7 +22,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
              * $kinestheticModel->id - Kinesthetic
              */
             array(
-                'slug' => Test::model()->slugify('Modalitas Belajar Paket 3'),
+                'slug' => Test::slugify('Modalitas Belajar Paket 3'),
                 'name' => 'Modalitas Belajar Paket 3',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PUBLIC),
@@ -526,7 +526,7 @@ class m140421_072048_insert_dummy_test_modalitas_belajar_paket_3 extends CDbMigr
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Modalitas Belajar Paket 3');
+        $testSlug = Test::slugify('Modalitas Belajar Paket 3');
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }

@@ -8,6 +8,7 @@ class m140319_170241_create_accesses_table extends CDbMigration {
             'slug' => 'integer NOT NULL',
             'name' => 'string NOT NULL',
             'url' => 'string NOT NULL',
+            'params' => 'text',
             'status_id' => 'integer NOT NULL',
             'created_by' => 'integer',
             'updated_by' => 'integer',

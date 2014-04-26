@@ -19,7 +19,7 @@ class AccessWebUser extends CWebUser {
     }
 
     public function checkUserAccess() {
-        $slug = Access::model()->slugify($this->_url);
+        $slug = Access::slugify($this->_url);
         if (isset($this->_url[$slug])) {
             $params = explode(';', $this->_url[$slug]['params']);
             foreach ($params as $param) {

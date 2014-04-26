@@ -4,19 +4,19 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Kepribadian');
+        $slug = Type::slugify('Kepribadian');
         $typeModel = Type::model()->findBySlug($slug);
 
-        $sanguinisSlug = Variable::model()->slugify('Sanguinis');
+        $sanguinisSlug = Variable::slugify('Sanguinis');
         $sanguinisModel = Variable::model()->findBySlug($slug . '-' . $sanguinisSlug);
 
-        $kolerisSlug = Variable::model()->slugify('Koleris');
+        $kolerisSlug = Variable::slugify('Koleris');
         $kolerisModel = Variable::model()->findBySlug($slug . '-' . $kolerisSlug);
 
-        $melankolisSlug = Variable::model()->slugify('Melankolis');
+        $melankolisSlug = Variable::slugify('Melankolis');
         $melankolisModel = Variable::model()->findBySlug($slug . '-' . $melankolisSlug);
 
-        $plegmatisSlug = Variable::model()->slugify('Plegmatis');
+        $plegmatisSlug = Variable::slugify('Plegmatis');
         $plegmatisModel = Variable::model()->findBySlug($slug . '-' . $plegmatisSlug);
         $row = array(
             /**
@@ -26,7 +26,7 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
              * $plegmatisModel->id - Plegmatis
              */
             array(
-                'slug' => Test::model()->slugify('Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)'),
+                'slug' => Test::slugify('Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)'),
                 'name' => 'Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)',
                 'description' => 'Tes Kepribadian digunakan untuk menentukan kepribadian seseorang.',
                 'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PRIVATE),
@@ -1080,7 +1080,7 @@ class m140419_115903_insert_dummy_data_test_kepribadian extends CDbMigration {
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)');
+        $testSlug = Test::slugify('Kepribadian (Sanguinis, Koleris, Melankolis dan Plegmatis)');
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }

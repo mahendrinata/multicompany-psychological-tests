@@ -4,7 +4,7 @@ class m140328_214556_insert_dummy_data_type_otak_kanan_otak_kiri extends CDbMigr
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
+        $slug = Type::slugify('Otak Kanan Otak Kiri');
 
         $type = array(
             'slug' => $slug,
@@ -33,7 +33,7 @@ class m140328_214556_insert_dummy_data_type_otak_kanan_otak_kiri extends CDbMigr
         );
 
         foreach ($row as $column) {
-            $column['slug'] = $typeModel->slug . '-' . Variable::model()->slugify($column['name']);
+            $column['slug'] = $typeModel->slug . '-' . Variable::slugify($column['name']);
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['type_id'] = $typeModel->id;
             $column['expert_id'] = 1;
@@ -45,7 +45,7 @@ class m140328_214556_insert_dummy_data_type_otak_kanan_otak_kiri extends CDbMigr
     }
 
     public function down() {
-        $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
+        $slug = Type::slugify('Otak Kanan Otak Kiri');
         $typeModel = Type::model()->findBySlug($slug);
         Variable::model()->deleteAllByAttributes(array('type_id' => $typeModel->id));
         $typeModel->delete();

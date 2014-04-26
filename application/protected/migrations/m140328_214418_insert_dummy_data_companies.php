@@ -3,9 +3,10 @@
 class m140328_214418_insert_dummy_data_companies extends CDbMigration {
 
     public function up() {
-        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
+        $user = User::model()->findByAttributes(array('username' => 'admin'));
         $row = array(
             array(
+                'slug' => Company::slugify('CV. Madain'),
                 'name' => 'CV. Madain',
                 'address' => 'Jl. Penyu No.40 Bandung',
                 'phone' => '085721821555',
@@ -18,7 +19,7 @@ class m140328_214418_insert_dummy_data_companies extends CDbMigration {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
 
             $this->insert('companies', $column);
-            
+
             $position = Position::model()->findBySlug(Role::COMPANY . '-' . Position::OWNER);
             $this->insert('company_users', array(
                 'company_id' => 1,

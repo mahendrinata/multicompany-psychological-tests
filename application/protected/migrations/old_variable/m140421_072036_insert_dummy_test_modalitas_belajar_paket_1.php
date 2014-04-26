@@ -10,7 +10,7 @@ class m140421_072036_insert_dummy_test_modalitas_belajar_paket_1 extends CDbMigr
              * 46 - Kinesthetic
              */
             array(
-                'slug' => Test::model()->slugify('Modalitas Belajar Paket 1'),
+                'slug' => Test::slugify('Modalitas Belajar Paket 1'),
                 'name' => 'Modalitas Belajar Paket 1',
                 'description' => 'Tes Modalitas Belajar digunakan untuk menentukan gaya belajar anak pada siswa Sekolah Belajar (SD) atau Sekolah Menengah Pertama (SMP).',
                 'is_expert' => true,

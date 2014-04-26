@@ -4,12 +4,12 @@ class m140411_033056_insert_dummy_variable_detail_test_otak_kanan_otak_kiri exte
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
+        $slug = Type::slugify('Otak Kanan Otak Kiri');
 
-        $kananSlug = Variable::model()->slugify('Otak Kanan');
+        $kananSlug = Variable::slugify('Otak Kanan');
         $kananModel = Variable::model()->findBySlug($slug . '-' . $kananSlug);
 
-        $kiriSlug = Variable::model()->slugify('Otak Kiri');
+        $kiriSlug = Variable::slugify('Otak Kiri');
         $kiriModel = Variable::model()->findBySlug($slug . '-' . $kiriSlug);
 
         $row = array(

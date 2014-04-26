@@ -17,7 +17,7 @@ abstract class AppActiveRecord extends CActiveRecord {
         ));
     }
 
-    static public function slugify($string) {
+    public static function slugify($string) {
         $string = preg_replace('~[^\\pL\d]+~u', '-', $string);
         $string = trim($string, '-');
         if (function_exists('iconv')) {

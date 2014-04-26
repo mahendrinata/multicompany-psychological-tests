@@ -42,7 +42,7 @@ class m140402_093542_insert_dummy_data_tags extends CDbMigration {
     public function insertTag($name = NULL, $parent_id = NULL) {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
         $this->insert('tags', array(
-            'slug' => Tag::model()->slugify($name),
+            'slug' => Tag::slugify($name),
             'name' => $name,
             'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE),
             'expert_id' => 1,

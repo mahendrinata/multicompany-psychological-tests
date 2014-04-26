@@ -9,7 +9,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
              * 48 - Otak Kiri
              */
             array(
-                'slug' => Test::model()->slugify('Otak Kanan Otak Kiri'),
+                'slug' => Test::slugify('Otak Kanan Otak Kiri'),
                 'name' => 'Otak Kanan Otak Kiri',
                 'description' => 'Tes Otak Kanan Otak Kiri digunakan untuk menentukan kecenderungan otak untuk berfikir atau melakukan aktivitasnya.',
                 'is_expert' => true,

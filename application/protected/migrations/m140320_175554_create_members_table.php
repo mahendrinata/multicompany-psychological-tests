@@ -5,6 +5,7 @@ class m140320_175554_create_members_table extends CDbMigration {
     public function up() {
         $this->createTable('members', array(
             'id' => 'pk',
+            'slug' => 'string NOT NULL',
             'first_name' => 'string NOT NULL',
             'last_name' => 'string',
             'gender' => 'boolean NOT NULL',
@@ -20,6 +21,7 @@ class m140320_175554_create_members_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
+        $this->createIndex('slug_members_unique', 'members', 'slug');
         $this->createIndex('status_id_members_index', 'members', 'status_id');
         $this->createIndex('user_id_members_index', 'members', 'user_id');
         $this->createIndex('position_id_members_index', 'members', 'position_id');

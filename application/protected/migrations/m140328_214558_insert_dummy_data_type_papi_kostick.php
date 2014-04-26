@@ -4,7 +4,7 @@ class m140328_214558_insert_dummy_data_type_papi_kostick extends CDbMigration {
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('papi-kostick');
+        $slug = Type::slugify('papi-kostick');
 
         $type = array(
             'slug' => $slug,
@@ -25,7 +25,7 @@ class m140328_214558_insert_dummy_data_type_papi_kostick extends CDbMigration {
         );
 
         foreach ($row as $column) {
-            $column['slug'] = $typeModel->slug . '-' . Variable::model()->slugify($column['name']);
+            $column['slug'] = $typeModel->slug . '-' . Variable::slugify($column['name']);
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['type_id'] = $typeModel->id;
             $column['expert_id'] = 1;
@@ -37,7 +37,7 @@ class m140328_214558_insert_dummy_data_type_papi_kostick extends CDbMigration {
     }
 
     public function down() {
-        $slug = Type::model()->slugify('papi-kostick');
+        $slug = Type::slugify('papi-kostick');
         $typeModel = Type::model()->findBySlug($slug);
         Variable::model()->deleteAllByAttributes(array('type_id' => $typeModel->id));
         $typeModel->delete();

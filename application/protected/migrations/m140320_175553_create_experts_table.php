@@ -5,6 +5,7 @@ class m140320_175553_create_experts_table extends CDbMigration {
     public function up() {
         $this->createTable('experts', array(
             'id' => 'pk',
+            'slug' => 'string NOT NULL',
             'name' => 'string NOT NULL',
             'address' => 'text NOT NULL',
             'phone' => 'string NOT NULL',
@@ -16,6 +17,7 @@ class m140320_175553_create_experts_table extends CDbMigration {
             'updated_at' => 'datetime',
         ));
 
+        $this->createIndex('slug_experts_unique', 'experts', 'slug');
         $this->createIndex('status_id_experts_index', 'experts', 'status_id');
         $this->createIndex('created_by_experts_index', 'experts', 'created_by');
         $this->createIndex('updated_by_experts_index', 'experts', 'updated_by');

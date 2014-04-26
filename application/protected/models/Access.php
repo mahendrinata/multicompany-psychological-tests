@@ -8,6 +8,7 @@
  * @property integer $slug
  * @property string $name
  * @property string $url
+ * @property string $params 
  * @property integer $status_id
  * @property integer $created_by
  * @property integer $updated_by
@@ -36,7 +37,7 @@ class Access extends AppActiveRecord {
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, slug, name, url, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, slug, name, url, params, status_id, created_by, updated_by, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -64,6 +65,7 @@ class Access extends AppActiveRecord {
             'slug' => 'Slug',
             'name' => 'Name',
             'url' => 'Url',
+            'params' => 'Params',
             'status_id' => 'Status',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
@@ -96,6 +98,8 @@ class Access extends AppActiveRecord {
         $criteria->compare('name', $this->name, true);
 
         $criteria->compare('url', $this->url, true);
+
+        $criteria->compare('params', $this->params);
 
         $criteria->compare('status_id', $this->status_id);
 

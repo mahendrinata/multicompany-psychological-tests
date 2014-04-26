@@ -3,9 +3,10 @@
 class m140328_214417_insert_dummy_data_experts extends CDbMigration {
 
     public function up() {
-        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
+        $user = User::model()->findByAttributes(array('username' => 'admin'));
         $row = array(
             array(
+                'slug' => Expert::slugify('PT. Psikolog Nasional'),
                 'name' => 'PT. Psikolog Nasional',
                 'address' => 'Jl. Penyu No.40 Bandung',
                 'phone' => '085721821555',

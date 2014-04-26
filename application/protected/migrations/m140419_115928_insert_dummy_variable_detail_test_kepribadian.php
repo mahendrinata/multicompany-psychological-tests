@@ -4,18 +4,18 @@ class m140419_115928_insert_dummy_variable_detail_test_kepribadian extends CDbMi
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Kepribadian');
+        $slug = Type::slugify('Kepribadian');
 
-        $sanguinisSlug = Variable::model()->slugify('Sanguinis');
+        $sanguinisSlug = Variable::slugify('Sanguinis');
         $sanguinisModel = Variable::model()->findBySlug($slug . '-' . $sanguinisSlug);
 
-        $kolerisSlug = Variable::model()->slugify('Koleris');
+        $kolerisSlug = Variable::slugify('Koleris');
         $kolerisModel = Variable::model()->findBySlug($slug . '-' . $kolerisSlug);
 
-        $melankolisSlug = Variable::model()->slugify('Melankolis');
+        $melankolisSlug = Variable::slugify('Melankolis');
         $melankolisModel = Variable::model()->findBySlug($slug . '-' . $melankolisSlug);
 
-        $plegmatisSlug = Variable::model()->slugify('Plegmatis');
+        $plegmatisSlug = Variable::slugify('Plegmatis');
         $plegmatisModel = Variable::model()->findBySlug($slug . '-' . $plegmatisSlug);
         $row = array(
             array(

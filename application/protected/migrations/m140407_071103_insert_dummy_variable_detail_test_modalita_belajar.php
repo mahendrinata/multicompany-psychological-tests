@@ -4,15 +4,15 @@ class m140407_071103_insert_dummy_variable_detail_test_modalita_belajar extends 
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Modalitas Belajar');
+        $slug = Type::slugify('Modalitas Belajar');
 
-        $visualSlug = Variable::model()->slugify('Visual');
+        $visualSlug = Variable::slugify('Visual');
         $visualModel = Variable::model()->findBySlug($slug . '-' . $visualSlug);
 
-        $auditorySlug = Variable::model()->slugify('Auditory');
+        $auditorySlug = Variable::slugify('Auditory');
         $auditoryModel = Variable::model()->findBySlug($slug . '-' . $auditorySlug);
 
-        $kinestheticSlug = Variable::model()->slugify('Kinesthetic');
+        $kinestheticSlug = Variable::slugify('Kinesthetic');
         $kinestheticModel = Variable::model()->findBySlug($slug . '-' . $kinestheticSlug);
         $row = array(
             array(

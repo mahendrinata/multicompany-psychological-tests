@@ -4,13 +4,13 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Otak Kanan Otak Kiri');
+        $slug = Type::slugify('Otak Kanan Otak Kiri');
         $typeModel = Type::model()->findBySlug($slug);
 
-        $kananSlug = Variable::model()->slugify('Otak Kanan');
+        $kananSlug = Variable::slugify('Otak Kanan');
         $kananModel = Variable::model()->findBySlug($slug . '-' . $kananSlug);
 
-        $kiriSlug = Variable::model()->slugify('Otak Kiri');
+        $kiriSlug = Variable::slugify('Otak Kiri');
         $kiriModel = Variable::model()->findBySlug($slug . '-' . $kiriSlug);
         $row = array(
             /**
@@ -18,7 +18,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
              * $kiriModel->id - Otak Kiri
              */
             array(
-                'slug' => Test::model()->slugify('Otak Kanan Otak Kiri'),
+                'slug' => Test::slugify('Otak Kanan Otak Kiri'),
                 'name' => 'Otak Kanan Otak Kiri',
                 'description' => 'Tes Otak Kanan Otak Kiri digunakan untuk menentukan kecenderungan otak untuk berfikir atau melakukan aktivitasnya.',
                 'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PRIVATE),
@@ -612,7 +612,7 @@ class m140411_033025_insert_dummy_test_otak_kanan_otak_kiri extends CDbMigration
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('Otak Kanan Otak Kiri');
+        $testSlug = Test::slugify('Otak Kanan Otak Kiri');
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }

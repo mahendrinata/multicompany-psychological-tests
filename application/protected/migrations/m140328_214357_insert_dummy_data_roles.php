@@ -3,7 +3,7 @@
 class m140328_214357_insert_dummy_data_roles extends CDbMigration {
 
     public function up() {
-        $user = User::model()->findByAttributes(array('username' => 'mahendri'));
+        $user = User::model()->findByAttributes(array('username' => 'admin'));
         $row = array(
             array(
                 'slug' => Role::ADMIN,

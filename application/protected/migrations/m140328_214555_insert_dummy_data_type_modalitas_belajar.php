@@ -4,7 +4,7 @@ class m140328_214555_insert_dummy_data_type_modalitas_belajar extends CDbMigrati
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('Modalitas Belajar');
+        $slug = Type::slugify('Modalitas Belajar');
 
         $type = array(
             'slug' => $slug,
@@ -37,7 +37,7 @@ class m140328_214555_insert_dummy_data_type_modalitas_belajar extends CDbMigrati
         );
 
         foreach ($row as $column) {
-            $column['slug'] = $typeModel->slug . '-' . Variable::model()->slugify($column['name']);
+            $column['slug'] = $typeModel->slug . '-' . Variable::slugify($column['name']);
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
             $column['type_id'] = $typeModel->id;
             $column['expert_id'] = 1;
@@ -49,7 +49,7 @@ class m140328_214555_insert_dummy_data_type_modalitas_belajar extends CDbMigrati
     }
 
     public function down() {
-        $slug = Type::model()->slugify('Modalitas Belajar');
+        $slug = Type::slugify('Modalitas Belajar');
         $typeModel = Type::model()->findBySlug($slug);
         Variable::model()->deleteAllByAttributes(array('type_id' => $typeModel->id));
         $typeModel->delete();

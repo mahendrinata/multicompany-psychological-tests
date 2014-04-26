@@ -4,35 +4,35 @@ class m140422_220519_insert_dummy_test_mbti extends CDbMigration {
 
     public function up() {
         $user = User::model()->findByAttributes(array('username' => 'mahendri'));
-        $slug = Type::model()->slugify('mbti');
+        $slug = Type::slugify('mbti');
         $typeModel = Type::model()->findBySlug($slug);
 
-        $extrovertSlug = Variable::model()->slugify('Extrovert');
+        $extrovertSlug = Variable::slugify('Extrovert');
         $extrovertModel = Variable::model()->findBySlug($slug . '-' . $extrovertSlug);
 
-        $introvertSlug = Variable::model()->slugify('Introvert');
+        $introvertSlug = Variable::slugify('Introvert');
         $introvertModel = Variable::model()->findBySlug($slug . '-' . $introvertSlug);
 
-        $sensingSlug = Variable::model()->slugify('Sensing');
+        $sensingSlug = Variable::slugify('Sensing');
         $sensingModel = Variable::model()->findBySlug($slug . '-' . $sensingSlug);
 
-        $intuitiveSlug = Variable::model()->slugify('Intuitive');
+        $intuitiveSlug = Variable::slugify('Intuitive');
         $intuitiveModel = Variable::model()->findBySlug($slug . '-' . $intuitiveSlug);
 
-        $thingkingSlug = Variable::model()->slugify('Thinking');
+        $thingkingSlug = Variable::slugify('Thinking');
         $thingkingModel = Variable::model()->findBySlug($slug . '-' . $thingkingSlug);
 
-        $feelingSlug = Variable::model()->slugify('Feeling');
+        $feelingSlug = Variable::slugify('Feeling');
         $feelingModel = Variable::model()->findBySlug($slug . '-' . $feelingSlug);
 
-        $judgingSlug = Variable::model()->slugify('Judging');
+        $judgingSlug = Variable::slugify('Judging');
         $judgingModel = Variable::model()->findBySlug($slug . '-' . $judgingSlug);
 
-        $perceivingSlug = Variable::model()->slugify('Perceiving');
+        $perceivingSlug = Variable::slugify('Perceiving');
         $perceivingModel = Variable::model()->findBySlug($slug . '-' . $perceivingSlug);
         $row = array(
             array(
-                'slug' => Test::model()->slugify('MBTI Nafis Mudrika'),
+                'slug' => Test::slugify('MBTI Nafis Mudrika'),
                 'name' => 'MBTI Nafis Mudrika',
                 'description' => 'MBTI sangat berguna di dunia pendidikan dan pengembangan karier. MBTI bisa digunakan sebagai  panduan  untuk  memilih  jurusan  kuliah  sampai dengan  profesi  yang  cocok  dengan kepribadian.',
                 'publication_id' => Test::model()->getPublicationIdBySlug(Test::STATUS_PRIVATE),
@@ -986,7 +986,7 @@ class m140422_220519_insert_dummy_test_mbti extends CDbMigration {
     }
 
     public function down() {
-        $testSlug = Test::model()->slugify('MBTI Nafis Mudrika');
+        $testSlug = Test::slugify('MBTI Nafis Mudrika');
         $testModel = Test::model()->findBySlug($testSlug);
         Test::model()->deleteWithQuestionAndAnswer($testModel->id);
     }
