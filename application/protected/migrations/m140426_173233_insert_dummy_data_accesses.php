@@ -48,9 +48,9 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'url' => 'admin/dashboard',
                 'params' => 'id:true',
                 'Positions' => array(
-                    $positions[Role::ADMIN.'-'.Position::ADMIN],
-                    $positions[Role::EXPERT.'-'.Position::OWNER],
-                    $positions[Role::COMPANY.'-'.Position::OWNER],
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
                     $positions[Role::MEMBER . '-' . Position::MEMBER],
                 )
             ),
@@ -59,9 +59,9 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'name' => 'Dasboard Index',
                 'url' => 'admin/dashboard/index',
                 'Positions' => array(
-                    $positions[Role::ADMIN.'-'.Position::ADMIN],
-                    $positions[Role::EXPERT.'-'.Position::OWNER],
-                    $positions[Role::COMPANY.'-'.Position::OWNER],
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                    $positions[Role::EXPERT . '-' . Position::OWNER],
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
                     $positions[Role::MEMBER . '-' . Position::MEMBER],
                 )
             ),
@@ -261,6 +261,58 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                 'params' => 'id:true',
                 'Positions' => array(
                     $positions[Role::EXPERT . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/viewcompany'),
+                'name' => 'View Company Test',
+                'url' => 'admin/test/viewcompany',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/updatecompany'),
+                'name' => 'Update Company Test',
+                'url' => 'admin/test/updatecompany',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/deletecompany'),
+                'name' => 'Delete Company Test',
+                'url' => 'admin/test/deletecompany',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/company'),
+                'name' => 'Company Test Index',
+                'url' => 'admin/test/company',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/active'),
+                'name' => 'Company Active Test',
+                'url' => 'admin/test/active',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/test/generate'),
+                'name' => 'Generate Company Test',
+                'url' => 'admin/test/generate',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::COMPANY . '-' . Position::OWNER],
                 )
             ),
         );
