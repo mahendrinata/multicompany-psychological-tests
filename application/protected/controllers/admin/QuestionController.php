@@ -2,18 +2,6 @@
 
 class QuestionController extends AdminController {
 
-    public function accessRules() {
-        return array(
-            array('allow',
-                'actions' => array('create', 'update', 'delete'),
-                'roles' => array(RolePrivilege::EXPERT),
-            ),
-            array('deny',
-                'users' => array('*'),
-            ),
-        );
-    }
-
     public function loadModel() {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {

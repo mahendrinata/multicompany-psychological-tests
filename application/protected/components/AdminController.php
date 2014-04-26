@@ -15,8 +15,9 @@ class AdminController extends Controller {
 
         AccessWebUser::call()->checkUserAccess();
 
+        $this->_userId = Yii::app()->user->getId();
         if (empty($this->_userId)) {
-            $this->redirect(array('site/login'));
+            $this->redirect(array('user/login'));
         } else {
             $this->_userId = Yii::app()->user->getId();
         }
@@ -42,12 +43,6 @@ class AdminController extends Controller {
         Yii::app()->user->setState('roles', $roles);
         Yii::app()->user->setState('user_profiles', $profiles);
         Yii::app()->user->setState('unregisters', $unregisters);
-    }
-
-    public function filters() {
-        return array(
-//            'accessControl',
-        );
     }
 
     public function validateGetRequest($ids = 'id') {

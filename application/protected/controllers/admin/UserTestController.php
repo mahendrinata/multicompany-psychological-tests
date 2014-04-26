@@ -2,26 +2,6 @@
 
 class UserTestController extends AdminController {
 
-    public function accessRules() {
-        return array(
-            array('allow',
-                'actions' => array('validation', 'savevalidationanswer', 'setvalidationspenttime', 'validationview', 'validationdelete', 'publictest', 'publicresult'),
-                'roles' => array(RolePrivilege::EXPERT),
-            ),
-            array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'membertest', 'result', 'settestvariable'),
-                'roles' => array(RolePrivilege::COMPANY),
-            ),
-            array('allow',
-                'actions' => array('member', 'test', 'savetestanswer', 'setspenttime', 'memberresult', 'generate', 'viewmember'),
-                'roles' => array(RolePrivilege::MEMBER),
-            ),
-            array('deny',
-                'users' => array('*'),
-            ),
-        );
-    }
-
     public function loadModelCompany($void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id']))

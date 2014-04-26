@@ -2,18 +2,6 @@
 
 class VariableDetailController extends AdminController {
 
-    public function accessRules() {
-        return array(
-            array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete'),
-                'roles' => array(RolePrivilege::EXPERT),
-            ),
-            array('deny',
-                'users' => array('*'),
-            ),
-        );
-    }
-
     public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {

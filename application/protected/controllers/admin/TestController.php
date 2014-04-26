@@ -2,26 +2,6 @@
 
 class TestController extends AdminController {
 
-    public function accessRules() {
-        return array(
-            array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'generatevalidation', 'result'),
-                'roles' => array(RolePrivilege::EXPERT),
-            ),
-            array('allow',
-                'actions' => array('viewcompany', 'updatecompany', 'deletecompany', 'company', 'active', 'generate'),
-                'roles' => array(RolePrivilege::COMPANY)
-            ),
-            array('allow',
-                'actions' => array('public'),
-                'roles' => array(RolePrivilege::MEMBER)
-            ),
-            array('deny',
-                'users' => array('*'),
-            ),
-        );
-    }
-
     public function loadModel($role = null, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
