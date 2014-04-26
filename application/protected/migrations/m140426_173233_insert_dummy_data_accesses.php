@@ -562,6 +562,65 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                     $positions[Role::COMPANY . '-' . Position::OWNER],
                 )
             ),
+            array(
+                'slug' => Access::slugify('admin/usertest/member'),
+                'name' => 'Member User Test Index',
+                'url' => 'admin/usertest/member',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/test'),
+                'name' => 'Member Test User Test',
+                'url' => 'admin/usertest/test',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/savetestanswer'),
+                'name' => 'Member Set Test Answer User Test',
+                'url' => 'admin/usertest/savetestanswer',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/setspenttime'),
+                'name' => 'Member Set Spent Time User Test',
+                'url' => 'admin/usertest/setspenttime',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/memberresult'),
+                'name' => 'Member User Test Result',
+                'url' => 'admin/usertest/memberresult',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/generate'),
+                'name' => 'Member Generate User Test',
+                'url' => 'admin/usertest/generate',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/usertest/viewmember'),
+                'name' => 'Member View User Test',
+                'url' => 'admin/usertest/viewmember',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
         );
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
