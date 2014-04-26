@@ -315,6 +315,14 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                     $positions[Role::COMPANY . '-' . Position::OWNER],
                 )
             ),
+            array(
+                'slug' => Access::slugify('admin/test/public'),
+                'name' => 'Member Public Test',
+                'url' => 'admin/test/public',
+                'Positions' => array(
+                    $positions[Role::MEMBER . '-' . Position::MEMBER],
+                )
+            ),
         );
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
