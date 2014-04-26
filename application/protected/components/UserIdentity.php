@@ -5,6 +5,8 @@ class UserIdentity extends CUserIdentity {
     private $_id;
     private $_roles;
     private $_accesses;
+    private $_companyAccesses;
+    private $_expertAccesses;
 
     public function authenticate() {
         $user = User::model()->getActiveUserByUsername($this->username);
@@ -46,7 +48,7 @@ class UserIdentity extends CUserIdentity {
 
                 foreach ($companyUser->Position->PositionAccesses as $positionAccess) {
                     if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                        $this->_accesses[$positionAccess->Access->slug] = array(
+                        $this->_companyAccesses[$companyUser->Position->id][$positionAccess->Access->slug] = $this->_accesses[$positionAccess->Access->slug] = array(
                             'slug' => $positionAccess->Access->slug,
                             'name' => $positionAccess->Access->name,
                             'url' => $positionAccess->Access->url,
@@ -72,7 +74,7 @@ class UserIdentity extends CUserIdentity {
 
                 foreach ($expertUser->Position->PositionAccesses as $positionAccess) {
                     if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                        $this->_accesses[$positionAccess->Access->slug] = array(
+                        $this->_expertAccesses[$expertUser->Position->id][$positionAccess->Access->slug] = $this->_accesses[$positionAccess->Access->slug] = array(
                             'slug' => $positionAccess->Access->slug,
                             'name' => $positionAccess->Access->name,
                             'url' => $positionAccess->Access->url,
@@ -111,6 +113,8 @@ class UserIdentity extends CUserIdentity {
 
         $this->setState('roles', $this->_roles);
         $this->setState('accesses', $this->_accesses);
+        $this->setState('companyAccesses', $this->_companyAccesses);
+        $this->setState('expertAccesses', $this->_expertAccesses);
 
         $this->errorCode = self::ERROR_NONE;
     }

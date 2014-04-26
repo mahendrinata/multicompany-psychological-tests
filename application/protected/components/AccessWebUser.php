@@ -4,6 +4,8 @@ class AccessWebUser extends CWebUser {
 
     private $_roles;
     private $_accesses;
+    private $_companyAccesses;
+    private $_expertAccesses;
     private $_url;
 
     public static function call($className = __CLASS__) {
@@ -15,6 +17,8 @@ class AccessWebUser extends CWebUser {
     private function _init() {
         $this->_roles = Yii::app()->user->getState('roles');
         $this->_accesses = Yii::app()->user->getState('accesses');
+        $this->_companyAccesses = Yii::app()->user->getState('companyAccesses');
+        $this->_expertAccesses = Yii::app()->user->getState('expertAccesses');
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
 
