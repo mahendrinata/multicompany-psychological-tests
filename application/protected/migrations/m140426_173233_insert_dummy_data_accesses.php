@@ -374,6 +374,57 @@ class m140426_173233_insert_dummy_data_accesses extends CDbMigration {
                     $positions[Role::EXPERT . '-' . Position::OWNER],
                 )
             ),
+            array(
+                'slug' => Access::slugify('admin/user'),
+                'name' => 'User Index',
+                'url' => 'admin/user',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/user/index'),
+                'name' => 'User Index',
+                'url' => 'admin/user/index',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/user/view'),
+                'name' => 'View User',
+                'url' => 'admin/user/view',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/user/create'),
+                'name' => 'Create User',
+                'url' => 'admin/user/create',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/user/update'),
+                'name' => 'Update User',
+                'url' => 'admin/user/update',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
+            array(
+                'slug' => Access::slugify('admin/user/delete'),
+                'name' => 'Delete User',
+                'url' => 'admin/user/delete',
+                'params' => 'id:true',
+                'Positions' => array(
+                    $positions[Role::ADMIN . '-' . Position::ADMIN],
+                )
+            ),
         );
         foreach ($row as $column) {
             $column['status_id'] = Status::model()->getStatusIdBySlug(Status::ACTIVE);
