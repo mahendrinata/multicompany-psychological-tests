@@ -188,7 +188,7 @@ class User extends AppActiveRecord {
     public function beforeSave() {
         switch ($this->scenario) {
             case 'insert':
-                $this->status = Status::ACTIVE;
+                $this->status_id = Status::model()->getStatusIdBySlug(Status::ACTIVE);
                 $this->password = $this->hashPassword($this->password);
                 break;
             case 'update':
@@ -205,7 +205,7 @@ class User extends AppActiveRecord {
     public function getActiveUserByUsername($username = NULL) {
         return $this->findByAttributes(array(
                 'username' => $username,
-                'status' => Status::ACTIVE));
+                'status_id' => Status::model()->getStatusIdBySlug(Status::ACTIVE)));
     }
 
     public function afterLogin($user) {
