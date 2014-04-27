@@ -49,7 +49,8 @@ class Tag extends AppActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'TagVariables' => array(self::HAS_MANY, 'TagVariable', 'tag_id'),
+            'TagVariables' => array(self::MANY_MANY, 'VariableDetail', 'TagVariables(tag_id, variable_detail_id)'),
+//            'TagVariables' => array(self::HAS_MANY, 'TagVariable', 'tag_id'),
             'UpdatedBy' => array(self::BELONGS_TO, 'User', 'updated_by'),
             'CreatedBy' => array(self::BELONGS_TO, 'User', 'created_by'),
             'Expert' => array(self::BELONGS_TO, 'Expert', 'expert_id'),

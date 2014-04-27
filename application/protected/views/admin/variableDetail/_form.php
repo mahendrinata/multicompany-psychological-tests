@@ -26,13 +26,13 @@ Yii::app()->clientScript->registerScript('search', "
     Fields with <span class="required">*</span> are <a class="alert-link" href="javascript:void(0)">required</a>.
 </div>
 
-<?php // echo $form->errorSummary($model);  ?>
+<?php echo $form->errorSummary($model);  ?>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'combinations', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'Combinations', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-5 col-sm-10 col-xs-12">
-        <?php echo $form->dropDownList($model, 'combinations', Type::model()->getTypeVariableList(), array('id' => 'combination', 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable', 'multiple' => 'multiple')); ?>
-        <?php echo $form->error($model, 'combinations', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'Combinations', Type::model()->getTypeVariableList(), array('id' => 'combination', 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Variable', 'multiple' => 'multiple')); ?>
+        <?php echo $form->error($model, 'Combinations', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
@@ -69,20 +69,41 @@ Yii::app()->clientScript->registerScript('search', "
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'status_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-5 col-xs-12">
-        <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
-        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'status_id', Status::model()->getListStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
+        <?php echo $form->error($model, 'status_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'tag_variables', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'TagVariables', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-5 col-sm-10 col-xs-12">
-        <?php echo $form->dropDownList($model, 'tag_variables', Tag::model()->getTagList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Tag', 'multiple' => 'multiple')); ?>
-        <?php echo $form->error($model, 'tag_variables', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'TagVariables', Tag::model()->getTagList(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Tag', 'multiple' => 'multiple')); ?>
+        <?php echo $form->error($model, 'TagVariables', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
+
+<?php
+if ($model->isNewRecord) {
+    $experts = AccessWebUser::call()->getActiveExpertList();
+    if (count($experts) > 1) {
+        ?>
+        <div class="form-group">
+            <?php echo $form->label($model, 'expert_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+            <div class="col-lg-2 col-sm-5 col-xs-12">
+                <?php echo $form->dropDownList($model, 'expert_id', $experts, array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Expert')); ?>
+                <?php echo $form->error($model, 'expert_id', array('class' => 'help-block alert-danger')); ?>
+            </div>
+        </div>
+        <?php
+    } else {
+        foreach ($experts as $key => $expert) {
+            echo $form->hiddenField($model, 'expert_id', array('readonly' => 'readonly', 'value' => $key));
+        }
+    }
+}
+?>
 
 <div class="form-group">
     <label class="col-lg-2 col-sm-2 control-label"></label>

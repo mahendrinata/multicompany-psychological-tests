@@ -135,11 +135,11 @@ class Type extends AppActiveRecord {
     }
 
     public function getTypeVariableList() {
-        $types = $this->with('variables')->findAll();
+        $types = $this->findAll();
         $output = array();
         $iterator = 0;
         foreach ($types as $type) {
-            foreach ($type->Variable as $variable) {
+            foreach ($type->Variables as $variable) {
                 $output[$iterator][$type->name][$variable->id] = $variable->name;
             }
             $iterator++;

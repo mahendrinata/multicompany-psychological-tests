@@ -5,18 +5,10 @@ class VariableDetailController extends AdminController {
     public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
-                if ($expert) {
-                    $this->_model = VariableDetail::model()->findByAttributes(array(
-                        'id' => $_GET['id'],
-                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
-                    ));
-                } else {
-                    $this->_model = VariableDetail::model()->findbyPk($_GET['id']);
-                }
+                $expertIds = ($expert) ? AccessWebUser::call()->getExpertIds() : false;
+                $this->_model = VariableDetail::model()->findByPkAndExpertIds($_GET['id'], $expertIds, $void);
             }
             if ($this->_model === null)
-                throw new CHttpException(404, 'The requested page does not exist.');
-            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -36,15 +28,15 @@ class VariableDetailController extends AdminController {
         if (isset($_POST['VariableDetail'])) {
             $model->attributes = $_POST['VariableDetail'];
 
-            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+            $model->created_by = $this->_userId;
 
-            if (isset($_POST['VariableDetail']['combinations']) && !empty($_POST['VariableDetail']['combinations']))
-                $model->combinations = $_POST['VariableDetail']['combinations'];
+            if (isset($_POST['VariableDetail']['Combinations']) && !empty($_POST['VariableDetail']['Combinations']))
+                $model->Combinations = $_POST['VariableDetail']['Combinations'];
 
-            if (isset($_POST['VariableDetail']['tag_variables']) && !empty($_POST['VariableDetail']['tag_variables']))
-                $model->tag_variables = $_POST['VariableDetail']['tag_variables'];
+            if (isset($_POST['VariableDetail']['TagVariables']) && !empty($_POST['VariableDetail']['TagVariables']))
+                $model->TagVariables = $_POST['VariableDetail']['TagVariables'];
 
-            if ($model->saveWithRelated(array('combinations', 'tag_variables')))
+            if ($model->withRelated->save(array('Combinations', 'TagVariables')))
                 $this->redirect(array('admin/variabledetail/index'));
         }
 
@@ -60,6 +52,7 @@ class VariableDetailController extends AdminController {
 
         if (isset($_POST['VariableDetail'])) {
             $model->attributes = $_POST['VariableDetail'];
+            $model->updated_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/variabledetail/index'));
         }
@@ -72,8 +65,12 @@ class VariableDetailController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(true, true);
-            $model->status = Status::VOID;
-            $model->save();
+            if (!empty($model->ResultDetails)) {
+                $model->status_id = Status::model()->getStatusIdBySlug(Status::VOID);
+                $model->save();
+            } else {
+                $model->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/variabledetail/index'));
