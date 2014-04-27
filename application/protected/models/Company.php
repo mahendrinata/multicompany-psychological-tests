@@ -107,7 +107,7 @@ class Company extends AppActiveRecord {
 
         $criteria->compare('photo', $this->photo, true);
 
-        $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('created_by', $this->created_by);
 

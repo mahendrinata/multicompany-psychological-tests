@@ -88,11 +88,11 @@ class PositionAccess extends CActiveRecord {
 
         $criteria->compare('id', $this->id);
 
-        $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
-        $criteria->addInCondition('access_id', $this->access_id);
+        $criteria->compare('access_id', $this->access_id);
 
-        $criteria->addInCondition('position_id', $this->position_id);
+        $criteria->compare('position_id', $this->position_id);
 
         $criteria->compare('created_by', $this->created_by);
 

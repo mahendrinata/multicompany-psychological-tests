@@ -105,17 +105,13 @@ class Type extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        if (!empty($this->status_id))
-            $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
-        if (!empty($this->conclusion_id))
-            $criteria->addInCondition('conclusion_id', $this->conclusion_id);
+        $criteria->compare('conclusion_id', $this->conclusion_id);
 
-        if (!empty($this->template_test_id))
-            $criteria->addInCondition('template_test_id', $this->template_test_id);
+        $criteria->compare('template_test_id', $this->template_test_id);
 
-        if (!empty($this->expert_id))
-            $criteria->addInCondition('expert_id', $this->expert_id);
+        $criteria->compare('expert_id', $this->expert_id);
 
         $criteria->compare('created_by', $this->created_by);
 

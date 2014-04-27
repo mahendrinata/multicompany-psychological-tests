@@ -102,7 +102,7 @@ class Access extends AppActiveRecord {
 
         $criteria->compare('params', $this->params);
         
-        $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('created_by', $this->created_by);
 

@@ -103,7 +103,7 @@ class Role extends AppActiveRecord {
 
         $criteria->compare('description', $this->description, true);
 
-        $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('created_by', $this->created_by);
 
