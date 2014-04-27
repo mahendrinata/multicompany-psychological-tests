@@ -160,16 +160,21 @@ class Status extends AppActiveRecord {
         }
         return $map;
     }
+    
+    public function getStatusName($status){
+        $statuses = $this->getListStatus();
+        return $statuses[$status];
+    }
 
     public function getLabelClassStatus($status) {
         $label = array(
-            self::DRAFT => 'label-default',
-            self::ACTIVE => 'label-success',
-            self::INACTIVE => 'label-warning',
-            self::FINISH => 'label-info',
-            self::VOID => 'label-danger',
+            $this->getStatusIdBySlug(self::DRAFT) => 'label-default',
+            $this->getStatusIdBySlug(self::ACTIVE) => 'label-success',
+            $this->getStatusIdBySlug(self::INACTIVE) => 'label-warning',
+            $this->getStatusIdBySlug(self::FINISH) => 'label-info',
+            $this->getStatusIdBySlug(self::VOID) => 'label-danger',
         );
-        if (in_array($status, $this->getListStatus())) {
+        if (array_key_exists($status, $this->getListStatus())) {
             return $label[$status];
         } else {
             return null;
@@ -177,7 +182,7 @@ class Status extends AppActiveRecord {
     }
 
     public function getLabelStatus($status) {
-        return CHtml::tag("span", array("class" => "label " . $this->getLabelClassStatus($status)), $status);
+        return CHtml::tag("span", array("class" => "label " . $this->getLabelClassStatus($status)), $this->getStatusName($status));
     }
 
 }

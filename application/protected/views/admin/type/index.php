@@ -65,50 +65,50 @@ $('.search-form form').submit(function(){
                     'header' => 'ID',
                     'filterHtmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
                     'htmlOptions' => array('style' => 'max-width: 50px;', 'class' => 'text-right'),
-                    'filter' => CHtml::activeTelField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
+                    'filter' => CHtml::activeTextField($model, 'id', array('id' => false, 'class' => 'form-control text-right'))
                 ),
                 array(
                     'name' => 'slug',
-                    'filter' => CHtml::activeTelField($model, 'slug', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTextField($model, 'slug', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'name',
-                    'filter' => CHtml::activeTelField($model, 'name', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTextField($model, 'name', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
                     'name' => 'description',
-                    'filter' => CHtml::activeTelField($model, 'description', array('id' => false, 'class' => 'form-control'))
+                    'filter' => CHtml::activeTextField($model, 'description', array('id' => false, 'class' => 'form-control'))
                 ),
                 array(
-                    'name' => 'status',
-                    'filter' => CHtml::activeDropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')),
+                    'name' => 'status_id',
+                    'filter' => CHtml::activeDropDownList($model, 'status_id', Status::model()->getListStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'multiple' => 'multiple', 'data-placeholder' => 'Status')),
                     'type' => 'raw',
-                    'value' => 'Status::get_tag_label($data->status)',
+                    'value' => 'Status::model()->getLabelStatus($data->status_id)',
                     'htmlOptions' => array('class' => 'text-center'),
                 ),
                 array(
-                    'name' => 'user_profile_id',
-                    'filter' => CHtml::activeDropDownList($model, 'user_profile_id', CHtml::listData(UserProfile::model()->getUserProfilesByRole(RolePrivilege::EXPERT), 'id', 'first_name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Expert Name')),
-                    'value' => '$data->user_profile->first_name',
+                    'name' => 'expert_id',
+                    'filter' => CHtml::activeDropDownList($model, 'expert_id', CHtml::listData(Expert::model()->findAll(), 'id', 'name'), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'multiple' => 'multiple', 'data-placeholder' => 'Expert Name')),
+                    'value' => '$data->Expert->name',
                     'header' => 'Expert Name'
                 ),
                 array(
                     'name' => 'created_at',
-                    'filter' => CHtml::activeTelField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+                    'filter' => CHtml::activeTextField($model, 'created_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'name' => 'updated_at',
-                    'filter' => CHtml::activeTelField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
+                    'filter' => CHtml::activeTextField($model, 'updated_at', array('id' => false, 'class' => 'form-control input-datepicker'))
                 ),
                 array(
                     'class' => 'CButtonColumn',
                     'filterHtmlOptions' => array('style' => 'width: 80px;'),
                     'buttons' => array(
                         'update' => array(
-                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ' && $data->status != "' . Status::VOID . '") ? true : false',
+                            'visible' => '(AccessWebUser::call()->checkAccessAndExpertId("admin/type/update", $data->expert_id) && $data->status_id != "' . Status::model()->getStatusIdBySlug(Status::VOID) . '") ? true : false',
                         ),
                         'delete' => array(
-                            'visible' => '($data->user_profile_id == ' . $this->profiles[RolePrivilege::EXPERT] . ' && $data->status != "' . Status::VOID . '") ? true : false',
+                            'visible' => '(AccessWebUser::call()->checkAccessAndExpertId("admin/type/update", $data->expert_id) && $data->status_id != "' . Status::model()->getStatusIdBySlug(Status::VOID) . '") ? true : false',
                         ),
                     )
                 ),

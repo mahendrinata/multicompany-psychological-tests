@@ -17,9 +17,17 @@ class AccessWebUser extends CWebUser {
         $this->_accesses = Yii::app()->user->getState('accesses');
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
+    
+    public function __call($name, $parameters) {
+        parent::__call($name, $parameters);
+    }
+    
+    public function slugifyUrl($url){
+        return implode('-', array_slice(explode('-', Access::slugify($url)), 0, 3));
+    }
 
     public function checkUserAccess() {
-        $slug = Access::slugify($this->_url);
+        $slug = $this->slugifyUrl($this->_url);
         if (isset($this->_accesses[$slug])) {
             $params = explode(';', $this->_accesses[$slug]['params']);
             foreach ($params as $param) {
@@ -106,6 +114,31 @@ class AccessWebUser extends CWebUser {
         return $output;
     }
 
+    public function getExpertIdsFromAccess($access) {
+        $access = $this->slugifyUrl($access);
+        return (isset($this->_accesses[$access]['Experts'])) ? $this->_accesses[$access]['Experts'] : array();
+    }
+
+    public function getCompanyIdsFromAccess($access) {
+        $access = $this->slugifyUrl($access);
+        return (isset($this->_accesses[$access]['Company'])) ? $this->_accesses[$access]['Experts'] : array();
+    }
+
+    public function getMemberIdFromAccess($access) {
+        $access = $this->slugifyUrl($access);
+        return (isset($this->_accesses[$access]['Experts'])) ? $this->_accesses[$access]['Experts'] : null;
+    }
+
+    public function checkAccessAndExpertId($access, $experId) {
+        $access = $this->slugifyUrl($access);
+        return (isset($this->_accesses[$access]['Experts'][$experId])) ? $this->_accesses[$access]['Experts'][$experId] : false;
+    }
+
+    public function checkAccessAndCompanyId($access, $companyId) {
+        $access = $this->slugifyUrl($access);
+        return (isset($this->_accesses[$access]['Copanies'][$companyId])) ? $this->_accesses[$access]['Experts'][$companyId] : false;
+    }
+    
     public function link($name, $url = array(), $htmlOption = array()) {
         if (isset($url[0]) && isset($this->_accesses[$url[0]])) {
             return CHtml::link($name, $url, $htmlOption);

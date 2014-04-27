@@ -8,7 +8,7 @@ class TypeController extends AdminController {
                 if ($expert) {
                     $this->_model = Type::model()->findByAttributes(array(
                         'id' => $_GET['id'],
-                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
+                        'expert_id' => $this->profiles[RolePrivilege::EXPERT]
                     ));
                 } else {
                     $this->_model = Type::model()->findbyPk($_GET['id']);
