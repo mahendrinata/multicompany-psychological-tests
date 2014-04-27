@@ -25,6 +25,10 @@ abstract class Template {
         return $map;
     }
 
+    public static function getTemplateIdBySlug($slug) {
+        return array_search($slug, self::getListTemplate());
+    }
+
     public static function getTemplateFileName($template = NULL, $folder = NULL) {
         return $folder . '_' . strtolower(str_replace('-', '_', $template));
     }

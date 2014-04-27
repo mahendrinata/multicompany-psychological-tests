@@ -29,6 +29,10 @@ class Conclusion {
         return $map;
     }
 
+    public static function getConclusionIdBySlug($slug) {
+        return array_search($slug, self::getListConclusion());
+    }
+
 }
 
 ?>
