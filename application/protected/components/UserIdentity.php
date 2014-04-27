@@ -32,17 +32,11 @@ class UserIdentity extends CUserIdentity {
 
         foreach ($user->CompanyUsers as $key => $companyUser) {
             if ($companyUser->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                $this->_roles['CompanyUsers'][$key] = array(
-                    'Company' => array(
-                        'id' => $companyUser->Company->id,
-                        'name' => $companyUser->Company->name,
-                        'Position' => array(
-                            'id' => $companyUser->Position->id,
-                            'slug' => $companyUser->Position->slug,
-                            'name' => $companyUser->Position->name
-                        )
-                    ),
-                );
+                $this->_roles['Companies'][$companyUser->Company->id]['id'] = $companyUser->Company->id;
+                $this->_roles['Companies'][$companyUser->Company->id]['name'] = $companyUser->Company->name;
+                $this->_roles['Companies'][$companyUser->Company->id]['Positions'][$companyUser->Position->id]['id'] = $companyUser->Position->id;
+                $this->_roles['Companies'][$companyUser->Company->id]['Positions'][$companyUser->Position->id]['slug'] = $companyUser->Position->slug;
+                $this->_roles['Companies'][$companyUser->Company->id]['Positions'][$companyUser->Position->id]['name'] = $companyUser->Position->name;
 
                 foreach ($companyUser->Position->PositionAccesses as $positionAccess) {
                     if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {     
@@ -58,18 +52,12 @@ class UserIdentity extends CUserIdentity {
 
         foreach ($user->ExpertUsers as $key => $expertUser) {
             if ($expertUser->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                $this->_roles['ExpertUsers'][$key] = array(
-                    'Expert' => array(
-                        'id' => $expertUser->Expert->id,
-                        'name' => $expertUser->Expert->name,
-                        'Position' => array(
-                            'id' => $expertUser->Position->id,
-                            'slug' => $expertUser->Position->slug,
-                            'name' => $expertUser->Position->name
-                        )
-                    ),
-                );
-
+                $this->_roles['Experts'][$expertUser->Expert->id]['id'] = $expertUser->Expert->id;
+                $this->_roles['Experts'][$expertUser->Expert->id]['name'] = $expertUser->Expert->name;
+                $this->_roles['Experts'][$expertUser->Expert->id]['Positions'][$expertUser->Position->id]['id'] = $expertUser->Position->id;
+                $this->_roles['Experts'][$expertUser->Expert->id]['Positions'][$expertUser->Position->id]['slug'] = $expertUser->Position->slug;
+                $this->_roles['Experts'][$expertUser->Expert->id]['Positions'][$expertUser->Position->id]['name'] = $expertUser->Position->name;
+                
                 foreach ($expertUser->Position->PositionAccesses as $positionAccess) {
                     if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
                         $this->_accesses[$positionAccess->Access->slug]['slug'] = $positionAccess->Access->slug;

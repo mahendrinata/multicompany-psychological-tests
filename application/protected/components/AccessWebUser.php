@@ -37,11 +37,11 @@ class AccessWebUser extends CWebUser {
     }
 
     public function checkCompanyAccess() {
-        return (!isset($this->_roles['CompanyUsers']) || empty($this->_roles['CompanyUsers'])) ? false : true;
+        return (!isset($this->_roles['Companies']) || empty($this->_roles['Companies'])) ? false : true;
     }
 
     public function checkExpertAccess() {
-        return (!isset($this->_roles['ExpertUsers']) || empty($this->_roles['ExpertUsers'])) ? false : true;
+        return (!isset($this->_roles['Experts']) || empty($this->_roles['Experts'])) ? false : true;
     }
 
     public function checkMemberAccess() {
@@ -54,22 +54,32 @@ class AccessWebUser extends CWebUser {
 
     public function getCompanyIds($position = false) {
         $output = array();
-        foreach ($this->_roles['CompanyUsers'] as $companyUser) {
-            if ($position)
-                $output[] = array('company_id' => $companyUser['id'], 'position_id' => $companyUser['Position']['id']);
-            else
-                $output[] = $companyUser['id'];
+        foreach ($this->_roles['Companies'] as $company) {
+            if ($position) {
+                $pos = array();
+                foreach ($company['Positions'] as $val) {
+                    $pos[] = $val['id'];
+                }
+                $output[] = array('company_id' => $company['id'], 'position_id' => $pos);
+            } else {
+                $output[] = $company['id'];
+            }
         }
         return $output;
     }
 
     public function getExpertIds($position = false) {
         $output = array();
-        foreach ($this->_roles['ExpertUsers'] as $expertUser) {
-            if ($position)
-                $output[] = array('expert_id' => $expertUser['id'], 'position_id' => $expertUser['Position']['id']);
-            else
-                $output[] = $expertUser['id'];
+        foreach ($this->_roles['Experts'] as $expert) {
+            if ($position) {
+                $pos = array();
+                foreach ($expert['Positions'] as $val) {
+                    $pos[] = $val['id'];
+                }
+                $output[] = array('expert_id' => $expert['id'], 'position_id' => $pos);
+            } else {
+                $output[] = $expert['id'];
+            }
         }
         return $output;
     }
