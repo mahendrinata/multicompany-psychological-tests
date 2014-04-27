@@ -5,18 +5,10 @@ class TypeController extends AdminController {
     public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
-                if ($expert) {
-                    $this->_model = Type::model()->findByAttributes(array(
-                        'id' => $_GET['id'],
-                        'expert_id' => $this->profiles[RolePrivilege::EXPERT]
-                    ));
-                } else {
-                    $this->_model = Type::model()->findbyPk($_GET['id']);
-                }
+                $expertIds = ($expert) ? AccessWebUser::call()->getExpertIds() : false;
+                $this->_model = Type::model()->findByPkAndExpertIds($_GET['id'], $expertIds, $void);
             }
             if ($this->_model === null)
-                throw new CHttpException(404, 'The requested page does not exist.');
-            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -35,7 +27,7 @@ class TypeController extends AdminController {
 
         if (isset($_POST['Type'])) {
             $model->attributes = $_POST['Type'];
-            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+            $model->created_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/type/index'));
         }
@@ -52,6 +44,7 @@ class TypeController extends AdminController {
 
         if (isset($_POST['Type'])) {
             $model->attributes = $_POST['Type'];
+            $model->updated_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/type/index'));
         }
@@ -65,7 +58,8 @@ class TypeController extends AdminController {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(true, true);
             if (!empty($model->tests)) {
-                $model->status = Status::VOID;
+                $model->status_id = Status::model()->getStatusIdBySlug(Status::VOID);
+                $model->updated_by = $this->_userId;
                 $model->save();
             } else {
                 $model->delete();

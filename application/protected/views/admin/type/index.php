@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
             <button class="btn btn-primary search-button">
                 <i class="icon-search"></i> Advanced Search
             </button>
-            <?php echo CHtml::link('<i class="icon-plus"></i> New Type', array('admin/type/create'), array('class' => 'btn btn-success')); ?>
+            <?php echo AccessWebUser::call()->link('<i class="icon-plus"></i> New Type', array('admin/type/create'), array('class' => 'btn btn-success')); ?>
         </div>
     </div>
     <div class="search-form" style="display:none">

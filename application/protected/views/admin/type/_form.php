@@ -44,26 +44,47 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'status_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-5 col-xs-12">
-        <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
-        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'status_id', Status::model()->getListStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
+        <?php echo $form->error($model, 'status_id', array('class' => 'help-block alert-danger')); ?>
+    </div>
+</div>
+
+<?php
+if ($model->isNewRecord) {
+    $experts = AccessWebUser::call()->getActiveExpertList();
+    if (count($experts) > 1) {
+        ?>
+        <div class="form-group">
+            <?php echo $form->label($model, 'expert_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+            <div class="col-lg-2 col-sm-5 col-xs-12">
+                <?php echo $form->dropDownList($model, 'expert_id', $experts, array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Expert')); ?>
+                <?php echo $form->error($model, 'expert_id', array('class' => 'help-block alert-danger')); ?>
+            </div>
+        </div>
+        <?php
+    } else {
+        foreach ($experts as $key => $expert) {
+            echo $form->hiddenField($model, 'expert_id', array('readonly' => 'readonly', 'value' => $key));
+        }
+    }
+}
+?>
+
+<div class="form-group">
+    <?php echo $form->label($model, 'template_test_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <div class="col-lg-2 col-sm-5 col-xs-12">
+        <?php echo $form->dropDownList($model, 'template_test_id', Template::getListTemplate(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Test Template')); ?>
+        <?php echo $form->error($model, 'template_test_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'template', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'conclusion_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-5 col-xs-12">
-        <?php echo $form->dropDownList($model, 'template', Template::getMap(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Test Template')); ?>
-        <?php echo $form->error($model, 'template', array('class' => 'help-block alert-danger')); ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <?php echo $form->label($model, 'conclusion', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
-    <div class="col-lg-2 col-sm-5 col-xs-12">
-        <?php echo $form->dropDownList($model, 'conclusion', Conclusion::getMap(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Conclusion')); ?>
-        <?php echo $form->error($model, 'conclusion', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'conclusion_id', Conclusion::getListConclusion(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Conclusion')); ?>
+        <?php echo $form->error($model, 'conclusion_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 

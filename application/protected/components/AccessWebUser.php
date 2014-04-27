@@ -17,12 +17,12 @@ class AccessWebUser extends CWebUser {
         $this->_accesses = Yii::app()->user->getState('accesses');
         $this->_url = Yii::app()->urlManager->parseUrl(Yii::app()->request);
     }
-    
+
     public function __call($name, $parameters) {
         parent::__call($name, $parameters);
     }
-    
-    public function slugifyUrl($url){
+
+    public function slugifyUrl($url) {
         return implode('-', array_slice(explode('-', Access::slugify($url)), 0, 3));
     }
 
@@ -40,7 +40,8 @@ class AccessWebUser extends CWebUser {
                 }
             }
         } else {
-            throw new CHttpException(404, 'The requested page does not exist.');
+            if (!empty($this->_accesses))
+                throw new CHttpException(404, 'The requested page does not exist.');
         }
     }
 
@@ -76,6 +77,14 @@ class AccessWebUser extends CWebUser {
         return $output;
     }
 
+    public function getActiveCompanyList() {
+        $output = array();
+        foreach ($this->_roles['Companies'] as $company) {
+            $output[$company['id']] = $company['name'];
+        }
+        return $output;
+    }
+
     public function getExpertIds($position = false) {
         $output = array();
         foreach ($this->_roles['Experts'] as $expert) {
@@ -88,6 +97,14 @@ class AccessWebUser extends CWebUser {
             } else {
                 $output[] = $expert['id'];
             }
+        }
+        return $output;
+    }
+
+    public function getActiveExpertList() {
+        $output = array();
+        foreach ($this->_roles['Experts'] as $expert) {
+            $output[$expert['id']] = $expert['name'];
         }
         return $output;
     }
@@ -138,10 +155,13 @@ class AccessWebUser extends CWebUser {
         $access = $this->slugifyUrl($access);
         return (isset($this->_accesses[$access]['Copanies'][$companyId])) ? $this->_accesses[$access]['Experts'][$companyId] : false;
     }
-    
+
     public function link($name, $url = array(), $htmlOption = array()) {
-        if (isset($url[0]) && isset($this->_accesses[$url[0]])) {
-            return CHtml::link($name, $url, $htmlOption);
+        if (isset($url[0])) {
+            $access = $this->slugifyUrl($url[0]);
+            if (isset($this->_accesses[$access])) {
+                return CHtml::link($name, $url, $htmlOption);
+            }
         }
         return null;
     }

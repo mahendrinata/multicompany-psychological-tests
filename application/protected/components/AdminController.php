@@ -17,9 +17,7 @@ class AdminController extends Controller {
 
         $this->_userId = Yii::app()->user->getId();
         if (empty($this->_userId)) {
-            $this->redirect(array('user/login'));
-        } else {
-            $this->_userId = Yii::app()->user->getId();
+            $this->redirect(array('user/logout'));
         }
 
         Yii::app()->theme = 'proui';

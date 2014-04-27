@@ -39,4 +39,48 @@ abstract class AppActiveRecord extends CActiveRecord {
         return $this->findAllByAttributes(array('status' => Status::ACTIVE));
     }
 
+    public function findByPkAndExpertIds($pk, $expertIds = false, $void = false) {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $pk);
+
+        if ($expertIds) {
+            $criteria->compare('expert_id', $expertIds);
+        }
+
+        if ($void)
+            $criteria->compare('status_id', '<>' . Status::model()->getStatusIdBySlug(Status::VOID));
+        return $this->find($criteria);
+    }
+
+    public function findByPkAndCompanyIds($pk, $companyIds = false, $void = false) {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $pk);
+
+        if ($companyIds) {
+            $criteria->compare('company_id', $companyIds);
+        }
+
+        if ($void)
+            $criteria->compare('status_id', '<>' . Status::model()->getStatusIdBySlug(Status::VOID));
+
+        return $this->find($criteria);
+    }
+
+    public function findByPkAndMemberId($pk, $memberId = false, $void = false) {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $pk);
+
+        if ($memberId) {
+            $criteria->compare('member_id', $memberId);
+        }
+
+        if ($void)
+            $criteria->compare('status_id', '<>' . Status::model()->getStatusIdBySlug(Status::VOID));
+
+        return $this->find($criteria);
+    }
+
 }
