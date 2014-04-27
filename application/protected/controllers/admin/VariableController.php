@@ -5,18 +5,10 @@ class VariableController extends AdminController {
     public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
-                if ($expert) {
-                    $this->_model = Variable::model()->findByAttributes(array(
-                        'id' => $_GET['id'],
-                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
-                    ));
-                } else {
-                    $this->_model = Variable::model()->findbyPk($_GET['id']);
-                }
+                $expertIds = ($expert) ? AccessWebUser::call()->getExpertIds() : false;
+                $this->_model = Variable::model()->findByPkAndExpertIds($_GET['id'], $expertIds, $void);
             }
             if ($this->_model === null)
-                throw new CHttpException(404, 'The requested page does not exist.');
-            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -35,7 +27,7 @@ class VariableController extends AdminController {
 
         if (isset($_POST['Variable'])) {
             $model->attributes = $_POST['Variable'];
-            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+            $model->created_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/variable/index'));
         }
@@ -52,6 +44,7 @@ class VariableController extends AdminController {
 
         if (isset($_POST['Variable'])) {
             $model->attributes = $_POST['Variable'];
+            $model->updated_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/variable/index'));
         }
@@ -64,8 +57,12 @@ class VariableController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(true, true);
-            $model->status = Status::VOID;
-            $model->save();
+            if (!empty($model->Questions)) {
+                $model->status_id = Status::model()->getStatusIdBySlug(Status::VOID);
+                $model->save();
+            } else {
+                $model->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/variable/index'));
