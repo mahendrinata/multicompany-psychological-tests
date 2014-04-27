@@ -5,8 +5,6 @@ class UserIdentity extends CUserIdentity {
     private $_id;
     private $_roles;
     private $_accesses;
-    private $_companyAccesses;
-    private $_expertAccesses;
 
     public function authenticate() {
         $user = User::model()->getActiveUserByUsername($this->username);
@@ -47,12 +45,12 @@ class UserIdentity extends CUserIdentity {
                 );
 
                 foreach ($companyUser->Position->PositionAccesses as $positionAccess) {
-                    if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                        $this->_companyAccesses[$companyUser->Position->id][$positionAccess->Access->slug] = $this->_accesses[$positionAccess->Access->slug] = array(
-                            'slug' => $positionAccess->Access->slug,
-                            'name' => $positionAccess->Access->name,
-                            'url' => $positionAccess->Access->url,
-                            'params' => $positionAccess->Access->params);
+                    if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {     
+                        $this->_accesses[$positionAccess->Access->slug]['slug'] = $positionAccess->Access->slug;
+                        $this->_accesses[$positionAccess->Access->slug]['name'] = $positionAccess->Access->name;
+                        $this->_accesses[$positionAccess->Access->slug]['url'] = $positionAccess->Access->url;
+                        $this->_accesses[$positionAccess->Access->slug]['params'] = $positionAccess->Access->params;
+                        $this->_accesses[$positionAccess->Access->slug]['Companies'][$companyUser->Company->id] = $companyUser->Company->id;
                     }
                 }
             }
@@ -74,11 +72,11 @@ class UserIdentity extends CUserIdentity {
 
                 foreach ($expertUser->Position->PositionAccesses as $positionAccess) {
                     if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                        $this->_expertAccesses[$expertUser->Position->id][$positionAccess->Access->slug] = $this->_accesses[$positionAccess->Access->slug] = array(
-                            'slug' => $positionAccess->Access->slug,
-                            'name' => $positionAccess->Access->name,
-                            'url' => $positionAccess->Access->url,
-                            'params' => $positionAccess->Access->params);
+                        $this->_accesses[$positionAccess->Access->slug]['slug'] = $positionAccess->Access->slug;
+                        $this->_accesses[$positionAccess->Access->slug]['name'] = $positionAccess->Access->name;
+                        $this->_accesses[$positionAccess->Access->slug]['url'] = $positionAccess->Access->url;
+                        $this->_accesses[$positionAccess->Access->slug]['params'] = $positionAccess->Access->params;
+                        $this->_accesses[$positionAccess->Access->slug]['Experts'][$expertUser->Expert->id] = $expertUser->Expert->id;
                     }
                 }
             }
@@ -102,19 +100,17 @@ class UserIdentity extends CUserIdentity {
             );
             foreach ($user->Member->Position->PositionAccesses as $positionAccess) {
                 if ($positionAccess->status_id == Status::model()->getStatusIdBySlug(Status::ACTIVE)) {
-                    $this->_accesses[$positionAccess->Access->slug] = array(
-                        'slug' => $positionAccess->Access->slug,
-                        'name' => $positionAccess->Access->name,
-                        'url' => $positionAccess->Access->url,
-                        'params' => $positionAccess->Access->params);
+                        $this->_accesses[$positionAccess->Access->slug]['slug'] = $positionAccess->Access->slug;
+                        $this->_accesses[$positionAccess->Access->slug]['name'] = $positionAccess->Access->name;
+                        $this->_accesses[$positionAccess->Access->slug]['url'] = $positionAccess->Access->url;
+                        $this->_accesses[$positionAccess->Access->slug]['params'] = $positionAccess->Access->params;
+                        $this->_accesses[$positionAccess->Access->slug]['Member'] = $user->Member->id;
                 }
             }
         }
 
         $this->setState('roles', $this->_roles);
         $this->setState('accesses', $this->_accesses);
-        $this->setState('companyAccesses', $this->_companyAccesses);
-        $this->setState('expertAccesses', $this->_expertAccesses);
 
         $this->errorCode = self::ERROR_NONE;
     }
