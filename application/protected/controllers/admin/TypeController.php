@@ -57,7 +57,7 @@ class TypeController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(true, true);
-            if (!empty($model->tests)) {
+            if (!empty($model->Tests)) {
                 $model->status_id = Status::model()->getStatusIdBySlug(Status::VOID);
                 $model->updated_by = $this->_userId;
                 $model->save();

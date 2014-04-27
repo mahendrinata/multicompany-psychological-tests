@@ -19,7 +19,16 @@ $this->breadcrumbs = array(
             'name',
             'description:html',
             'status',
-            'user_profile.first_name',
+            array(
+                'name' => 'status_id',
+                'type' => 'html',
+                'value' => Status::model()->getLabelStatus($model->status_id),
+            ),
+            array(
+                'name' => 'Expert.name',
+                'value' => $model->Expert->name,
+                'label' => 'Expert Name'
+            ),
             'created_at',
             'updated_at',
         ),

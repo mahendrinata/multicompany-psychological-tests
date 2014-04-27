@@ -30,18 +30,39 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->label($model, 'name', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-3 col-sm-6 col-xs-12">
-        <?php echo $form->textField($model, 'name', array('placeholder' => 'Name', 'class' => 'form-control')); ?>
+        <?php echo $form->textField($model, 'name', array('placeholder' => 'Name', 'class' => 'form-control', 'onKeyUp' => 'slugify(this, ".slugify")')); ?>
         <?php echo $form->error($model, 'name', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
 
 <div class="form-group">
-    <?php echo $form->label($model, 'status', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+    <?php echo $form->label($model, 'status_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
     <div class="col-lg-2 col-sm-5 col-xs-12">
-        <?php echo $form->dropDownList($model, 'status', Status::get_map(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
-        <?php echo $form->error($model, 'status', array('class' => 'help-block alert-danger')); ?>
+        <?php echo $form->dropDownList($model, 'status_id', Status::model()->getListStatus(), array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Status')); ?>
+        <?php echo $form->error($model, 'status_id', array('class' => 'help-block alert-danger')); ?>
     </div>
 </div>
+
+<?php
+if ($model->isNewRecord) {
+    $experts = AccessWebUser::call()->getActiveExpertList();
+    if (count($experts) > 1) {
+        ?>
+        <div class="form-group">
+            <?php echo $form->label($model, 'expert_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
+            <div class="col-lg-2 col-sm-5 col-xs-12">
+                <?php echo $form->dropDownList($model, 'expert_id', $experts, array('id' => false, 'prompt' => '', 'class' => 'select-chosen', 'data-placeholder' => 'Expert')); ?>
+                <?php echo $form->error($model, 'expert_id', array('class' => 'help-block alert-danger')); ?>
+            </div>
+        </div>
+        <?php
+    } else {
+        foreach ($experts as $key => $expert) {
+            echo $form->hiddenField($model, 'expert_id', array('readonly' => 'readonly', 'value' => $key));
+        }
+    }
+}
+?>
 
 <div class="form-group">
     <?php echo $form->label($model, 'parent_id', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>

@@ -5,18 +5,10 @@ class TagController extends AdminController {
     public function loadModel($expert = false, $void = false) {
         if ($this->_model === null) {
             if (isset($_GET['id'])) {
-                if ($expert) {
-                    $this->_model = Tag::model()->findByAttributes(array(
-                        'id' => $_GET['id'],
-                        'user_profile_id' => $this->profiles[RolePrivilege::EXPERT]
-                    ));
-                } else {
-                    $this->_model = Tag::model()->findbyPk($_GET['id']);
-                }
+                $expertIds = ($expert) ? AccessWebUser::call()->getExpertIds() : false;
+                $this->_model = Tag::model()->findByPkAndExpertIds($_GET['id'], $expertIds, $void);
             }
             if ($this->_model === null)
-                throw new CHttpException(404, 'The requested page does not exist.');
-            if ($void && $this->_model->status == Status::VOID)
                 throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $this->_model;
@@ -35,7 +27,7 @@ class TagController extends AdminController {
 
         if (isset($_POST['Tag'])) {
             $model->attributes = $_POST['Tag'];
-            $model->user_profile_id = $this->profiles[RolePrivilege::EXPERT];
+            $model->created_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/tag/index'));
         }
@@ -52,6 +44,7 @@ class TagController extends AdminController {
 
         if (isset($_POST['Tag'])) {
             $model->attributes = $_POST['Tag'];
+            $model->updated_by = $this->_userId;
             if ($model->save())
                 $this->redirect(array('admin/tag/index'));
         }
@@ -64,8 +57,13 @@ class TagController extends AdminController {
     public function actionDelete() {
         if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel(true, true);
-            $model->status = Status::VOID;
-            $model->save();
+            if (!empty($model->Combinations)) {
+                $model->status_id = Status::model()->getStatusIdBySlug(Status::VOID);
+                $model->updated_by = $this->_userId;
+                $model->save();
+            } else {
+                $model->delete();
+            }
 
             if (!isset($_GET['ajax']))
                 $this->redirect(array('admin/tag/index'));

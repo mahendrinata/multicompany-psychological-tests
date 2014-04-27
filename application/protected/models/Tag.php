@@ -101,7 +101,7 @@ class Tag extends AppActiveRecord {
 
         $criteria->compare('name', $this->name, true);
 
-        $criteria->addInCondition('status_id', $this->status_id);
+        $criteria->compare('status_id', $this->status_id);
 
         $criteria->compare('parent_id', $this->parent_id);
 
